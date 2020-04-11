@@ -1,0 +1,23 @@
+<!--============================================================================
+=
+= Copyright (c) 2020 Dominus Iniquitatis <zerosaiko@gmail.com>
+=
+= See LICENSE file for the licensing information
+=
+=============================================================================-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="278" height="355">
+    <g fill="none" stroke="rgb(40, 40, 40)" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke-width="10">
+            <path d="M 39 57 L 39 30 L 160 30 L 160 322 M 70 322 L 254 322" />
+        </g>
+        <g stroke-width="4">
+            <circle cx="39" cy="91" r="31" />
+        </g>
+        <g stroke-width="6">
+            <path d="M 39 123 L 39 212" />
+        </g>
+        <g stroke-width="5">
+            <path d="M 39 139 L 5 174 M 39 139 L 71 175 M 39 212 L 5 280" />
+        </g>
+    </g>
+</svg>

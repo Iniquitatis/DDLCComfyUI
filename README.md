@@ -56,7 +56,7 @@ Download the latest release archive, then extract it to the _game_ directory of 
 
 Unfortunately, nothing is perfect in this world.
 
-Pretty much every bug of this mod exists because not each UI element can be styled without changing original codebase.
+Pretty much every bug of this mod exists because not each UI element can be styled without making changes to the original codebase.
 
 ... Or I don't know how to do it for the time being.
 

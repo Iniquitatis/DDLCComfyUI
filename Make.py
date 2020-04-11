@@ -118,8 +118,22 @@ vector_images = [
     "mod_assets/frames/selector_top_frame_selected_d",
     "mod_assets/frames/trans_pink2pxborder100",
     "mod_assets/frames/trans_pink2pxborder100_d",
+    "mod_assets/games/hangman/hm_0",
+    "mod_assets/games/hangman/hm_1",
+    "mod_assets/games/hangman/hm_2",
+    "mod_assets/games/hangman/hm_3",
+    "mod_assets/games/hangman/hm_4",
+    "mod_assets/games/hangman/hm_5",
+    "mod_assets/games/hangman/hm_6",
     "mod_assets/games/hangman/hm_frame",
     "mod_assets/games/hangman/hm_frame_d",
+    "mod_assets/games/hangman/hm_sm_0",
+    "mod_assets/games/hangman/hm_sm_1",
+    "mod_assets/games/hangman/hm_sm_2",
+    "mod_assets/games/hangman/hm_sm_3",
+    "mod_assets/games/hangman/hm_sm_4",
+    "mod_assets/games/hangman/hm_sm_5",
+    "mod_assets/games/hangman/hm_sm_6",
 ]
 
 ################################################################################
