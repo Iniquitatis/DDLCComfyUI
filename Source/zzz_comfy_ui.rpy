@@ -5,8 +5,6 @@
 # See LICENSE file for the licensing information
 #
 ################################################################################
-# FIXME: temporary
-define config.developer = True
 
 ################################################################################
 # Configuration variables
