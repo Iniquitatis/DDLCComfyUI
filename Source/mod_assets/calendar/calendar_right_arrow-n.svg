@@ -1,0 +1,22 @@
+<!--============================================================================
+=
+= Copyright (c) 2020 Dominus Iniquitatis <zerosaiko@gmail.com>
+=
+= See LICENSE file for the licensing information
+=
+=============================================================================-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20">
+    <defs>
+        <linearGradient id="borderGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" style="stop-color: rgb(119, 52, 94)" />
+            <stop offset="100%" style="stop-color: rgb(119, 52, 94)" />
+        </linearGradient>
+        <linearGradient id="fillGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" style="stop-color: rgb(109, 42, 84)" />
+            <stop offset="100%" style="stop-color: rgb(109, 42, 84)" />
+        </linearGradient>
+    </defs>
+    <g fill="url(#fillGradient)" stroke="url(#borderGradient)" stroke-linejoin="round" stroke-width="2">
+        <polygon points="18,10 2,2 2,18" />
+    </g>
+</svg>
