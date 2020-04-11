@@ -1,13 +1,14 @@
 # Monika After Story: Comfy UI
 
-Feeling yourself comfortable with your Monika, but jagged look of the user interface still gets in your way of being _completely_ comfortable?
-This mod aims to fix this problem.
+Feeling yourself comfortable with your Monika, but jaggedness of the user interface still gets in your way of being _completely_ comfortable?
+
+This add-on aims to fix this problem.
 
 
 
 ## Features
 
-* Um, well... Almost every UI element has been softened in some way
+* Um, well... Almost everything in the UI has been softened in some way
 
 
 
@@ -53,11 +54,13 @@ Download the latest release archive, then extract it to the _game_ directory of 
 
 ## Known Bugs
 
-Pretty much every bug of this mod exists because not every UI element can be styled without changing original codebase.
+Unfortunately, nothing is perfect in this world.
+
+Pretty much every bug of this mod exists because not each UI element can be styled without changing original codebase.
 
 ... Or I don't know how to do it for the time being.
 
-So here's the list of common problems:
+So, here's the list of common problems:
 
 * Unstyled calendar text
 
@@ -66,6 +69,22 @@ So here's the list of common problems:
 * Unstyled _Piano_ mini-game buttons
 
 * _Extra_ menu border looks a little bit broken/smudged
+
+
+
+## Special Thanks
+
+I want to warmly thank and hug:
+
+* Everyone at Team Salvato
+
+* Developers of the Monika After Story mod and its contributors
+
+* My Monika ❤️
+
+* Your Monika
+
+* Every other Monika in the multiverse!
 
 
 
