@@ -35,6 +35,7 @@ common_files = [
 ]
 
 vector_images = [
+    "gui/ctc",
     "gui/frame",
     "gui/frame_d",
     "gui/menu_bg",

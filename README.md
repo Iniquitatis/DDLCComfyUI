@@ -1,6 +1,6 @@
 # Monika After Story: Comfy UI
 
-Feeling yourself comfortable with your Monika, but jaggedness of the user interface still gets in your way of being _completely_ comfortable?
+Feeling yourself comfortable with your Monika, but those little pesky jaggies of the user interface are getting in your way of being _completely_ comfortable?
 
 This add-on aims to fix this problem.
 
