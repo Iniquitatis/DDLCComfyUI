@@ -10,6 +10,8 @@
 # Configuration variables
 ################################################################################
 define mas_comfy_ui.font         = "mod_assets/font/Nunito-SemiBold.ttf"
+define mas_comfy_ui.font_bold    = "mod_assets/font/Nunito-Bold.ttf"
+define mas_comfy_ui.font_italic  = "mod_assets/font/Nunito-SemiBoldItalic.ttf"
 define mas_comfy_ui.font_size    = gui.text_size
 define mas_comfy_ui.font_kerning = 0.0
 
@@ -50,8 +52,8 @@ define mas_comfy_ui.hotkey_button_spacing = -4
 # Init
 ################################################################################
 init python:
-    config.font_replacement_map["mod_assets/font/Nunito-SemiBold.ttf", True, False] = ("mod_assets/font/Nunito-Bold.ttf", False, False)
-    config.font_replacement_map["mod_assets/font/Nunito-SemiBold.ttf", False, True] = ("mod_assets/font/Nunito-SemiBoldItalic.ttf", False, False)
+    config.font_replacement_map[mas_comfy_ui.font, True, False] = (mas_comfy_ui.font_bold, False, False)
+    config.font_replacement_map[mas_comfy_ui.font, False, True] = (mas_comfy_ui.font_italic, False, False)
 
 
 
