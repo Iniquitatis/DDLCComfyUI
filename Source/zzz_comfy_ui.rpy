@@ -12,11 +12,11 @@
 define mas_comfy_ui.font = "mod_assets/font/Nunito-SemiBold.ttf"
 define mas_comfy_ui.font_size = gui.text_size
 define mas_comfy_ui.dialogue_text_color = "#f8f8f8"
-define mas_comfy_ui.dialogue_text_outlines = [(2, "#444444", 0, 0)]
-define mas_comfy_ui.button_text_idle_color = "#484848"
+define mas_comfy_ui.dialogue_text_outlines = [(2, "#404040", 0, 0)]
+define mas_comfy_ui.button_text_idle_color = "#404040"
 define mas_comfy_ui.button_text_outlines = []
 define mas_comfy_ui.button_spacing = 6
-define mas_comfy_ui.talk_button_spacing = 12
+define mas_comfy_ui.talk_button_spacing = 13
 define mas_comfy_ui.hotkey_button_spacing = -4
 
 
@@ -49,10 +49,14 @@ style quick_dark_button_text:
 # Name
 style history_name_text:
     font mas_comfy_ui.font
+    color mas_comfy_ui.dialogue_text_color
+    outlines mas_comfy_ui.dialogue_text_outlines
 
 # Text
 style history_text:
     font mas_comfy_ui.font
+    color mas_comfy_ui.dialogue_text_color
+    outlines mas_comfy_ui.dialogue_text_outlines
 
 
 
