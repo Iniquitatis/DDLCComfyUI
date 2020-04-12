@@ -7,14 +7,6 @@
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="816" height="146">
     <defs>
-        <linearGradient id="borderGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(27, 27, 27)" />
-            <stop offset="100%" style="stop-color: rgb(27, 27, 27)" />
-        </linearGradient>
-        <linearGradient id="fillGradient" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop offset="0%" style="stop-color: rgb(192, 75, 122)" />
-            <stop offset="100%" style="stop-color: rgb(192, 75, 122)" />
-        </linearGradient>
         <linearGradient id="backgroundFadeGradient" x1="50%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" style="stop-color: rgb(255, 255, 255); stop-opacity: 1.0" />
             <stop offset="100%" style="stop-color: rgb(255, 255, 255); stop-opacity: 0.675" />
@@ -40,7 +32,7 @@
             </g>
         </pattern>
         <pattern id="backgroundMain" width="816" height="146" patternUnits="userSpaceOnUse">
-            <rect width="816" height="146" fill="url(#fillGradient)" />
+            <rect width="816" height="146" fill="rgb(192, 75, 122)" />
             <rect width="816" height="146" fill="url(#dots)" />
             <circle cx="408" cy="2338" r="2250" fill="url(#circleGradient)" mask="url(#circleFadeMask)" />
         </pattern>
@@ -48,7 +40,7 @@
             <rect width="816" height="146" fill="url(#backgroundMain)" mask="url(#backgroundFadeMask)" />
         </pattern>
     </defs>
-    <g fill="url(#backgroundFinal)" stroke="url(#borderGradient)" stroke-width="3">
+    <g fill="url(#backgroundFinal)" stroke="rgb(27, 27, 27)" stroke-width="3">
         <rect x="1.5" y="1.5" width="813" height="143" rx="12" />
     </g>
 </svg>

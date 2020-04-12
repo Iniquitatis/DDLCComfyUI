@@ -6,17 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="18" height="18">
-    <defs>
-        <linearGradient id="borderGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(248, 248, 248)" />
-            <stop offset="100%" style="stop-color: rgb(248, 248, 248)" />
-        </linearGradient>
-        <linearGradient id="fillGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(255, 255, 255)" />
-            <stop offset="100%" style="stop-color: rgb(255, 255, 255)" />
-        </linearGradient>
-    </defs>
-    <g fill="url(#fillGradient)" stroke="url(#borderGradient)" stroke-linejoin="round" stroke-width="2">
+    <g fill="rgb(255, 255, 255)" stroke="rgb(248, 248, 248)" stroke-linejoin="round" stroke-width="2">
         <polygon points="16,10 2,2 2,16" />
     </g>
 </svg>
