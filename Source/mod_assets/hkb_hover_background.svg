@@ -6,17 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="120" height="35">
-    <defs>
-        <linearGradient id="borderGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(255, 189, 225)" />
-            <stop offset="100%" style="stop-color: rgb(255, 189, 225)" />
-        </linearGradient>
-        <linearGradient id="fillGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(255, 255, 255)" />
-            <stop offset="100%" style="stop-color: rgb(255, 255, 255)" />
-        </linearGradient>
-    </defs>
-    <g fill="url(#fillGradient)" stroke="url(#borderGradient)" stroke-width="3">
+    <g fill="rgb(255, 255, 255)" stroke="rgb(255, 189, 225)" stroke-width="3">
         <rect x="1.5" y="1.5" width="117" height="32" rx="$COMFY_UI_BUTTON_ROUNDING$" />
     </g>
 </svg>
