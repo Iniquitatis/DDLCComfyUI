@@ -9,6 +9,8 @@
 ################################################################################
 # Configuration variables
 ################################################################################
+dpi_scale = 1
+
 preprocessing_tokens = [
     [ "$COMFY_UI_BUTTON_ROUNDING$", 4 ],
     [ "$COMFY_UI_FRAME_ROUNDING$" , 4 ],
@@ -152,7 +154,7 @@ glitched_boxes = [
 ]
 
 glitch_regions = [
-#       X    Y    W    H   DX   DY
+    #   X    Y    W    H   DX   DY
     [  42,   5, 144,  15, -25,   0 ],
     [  42,  36,  41,  10,  25,   0 ],
     [  42,  62,  91,   5, -25,   0 ],
@@ -222,6 +224,12 @@ def Glitch(image_name):
     with Image.open(image_name) as image:
         pixel_data = image.load()
         for x, y, w, h, dx, dy in glitch_regions:
+            x  *= dpi_scale
+            y  *= dpi_scale
+            w  *= dpi_scale
+            h  *= dpi_scale
+            dx *= dpi_scale
+            dy *= dpi_scale
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
         image.save(image_name)
 
@@ -246,10 +254,10 @@ def Build(build_dir):
         print("Converting file %s.svg..." % image_name)
         PreprocessSVG("Source/%s.svg" % image_name, "Temporary.svg")
         os.system("inkscape "
-                    "--export-dpi=\"96\" "
+                    "--export-dpi=\"%i\" "
                     "--export-type=\"png\" "
                     "--export-file=\"%s/%s.png\" "
-                    "Temporary.svg" % (build_dir, image_name))
+                    "Temporary.svg" % (96 * dpi_scale, build_dir, image_name))
 
     for image_name in glitched_boxes:
         print("Glitching image %s.png..." % image_name)
