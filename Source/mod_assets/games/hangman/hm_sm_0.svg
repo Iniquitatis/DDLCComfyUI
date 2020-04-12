@@ -6,17 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="278" height="355">
-    <defs>
-        <linearGradient id="borderGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(40, 40, 40)" />
-            <stop offset="100%" style="stop-color: rgb(40, 40, 40)" />
-        </linearGradient>
-        <linearGradient id="fillGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(40, 40, 40)" />
-            <stop offset="100%" style="stop-color: rgb(40, 40, 40)" />
-        </linearGradient>
-    </defs>
-    <g fill="url(#fillGradient)" font-family="Nunito" font-size="46px" stroke="url(#borderGradient)" stroke-width="0" text-anchor="middle">
+    <g fill="rgb(40, 40, 40)" font-family="Nunito" font-size="46px" text-anchor="middle">
         <text x="139" y="165">REMAINING</text>
         <text x="139" y="225">GUESSES: 0</text>
     </g>
