@@ -33,7 +33,9 @@ dir_structure = [
 
 common_files = [
     "zzz_comfy_ui.rpy",
+    "mod_assets/font/Nunito-Bold.ttf",
     "mod_assets/font/Nunito-SemiBold.ttf",
+    "mod_assets/font/Nunito-SemiBoldItalic.ttf",
     "mod_assets/font/OFL.txt",
 ]
 

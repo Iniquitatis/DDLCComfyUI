@@ -47,6 +47,15 @@ define mas_comfy_ui.hotkey_button_spacing = -4
 
 
 ################################################################################
+# Init
+################################################################################
+init python:
+    config.font_replacement_map["mod_assets/font/Nunito-SemiBold.ttf", True, False] = ("mod_assets/font/Nunito-Bold.ttf", False, False)
+    config.font_replacement_map["mod_assets/font/Nunito-SemiBold.ttf", False, True] = ("mod_assets/font/Nunito-SemiBoldItalic.ttf", False, False)
+
+
+
+################################################################################
 # Dialogue
 ################################################################################
 
