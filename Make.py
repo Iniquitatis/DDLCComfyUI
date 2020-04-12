@@ -10,8 +10,8 @@
 # Configuration variables
 ################################################################################
 preprocessing_tokens = [
-    [ "$COMFY_UI_BUTTON_ROUNDING$", str(4) ],
-    [ "$COMFY_UI_FRAME_ROUNDING$" , str(4) ],
+    [ "$COMFY_UI_BUTTON_ROUNDING$", 4 ],
+    [ "$COMFY_UI_FRAME_ROUNDING$" , 4 ],
 ]
 
 dir_structure = [
@@ -137,11 +137,48 @@ vector_images = [
     "mod_assets/games/hangman/hm_sm_6",
 ]
 
+glitched_boxes = [
+    "gui/textbox_monika",
+    "gui/textbox_monika_d",
+]
+
+glitch_regions = [
+#       X    Y    W    H   DX   DY
+    [  42,   5, 144,  15, -25,   0 ],
+    [  42,  36,  41,  10,  25,   0 ],
+    [  42,  62,  91,   5, -25,   0 ],
+    [  42,  92,  87,   7, -25,   0 ],
+    [  42, 108,  30,   4,  25,   0 ],
+    [ 123, 115, 183,  20,  25,   0 ],
+    [ 183,  77, 129,  22, -26,   0 ],
+    [ 225,  40,  99,  20, -25,   0 ],
+    [ 273,  15, 136,  11,  25,   0 ],
+    [ 309,  86,  58,   1, -25,   0 ],
+    [ 336,  87, 147,  28, -26,   0 ],
+    [ 372,  54, 213,   4,  25,   0 ],
+    [ 408,  20,  80,   3, -26,   0 ],
+    [ 444,  72, 159,   6, -25,   0 ],
+    [ 448, 127,  83,   9, -25,   0 ],
+    [ 516,  35, 116,   6, -33,   0 ],
+    [ 564,  93, 128,   3, -26,   0 ],
+    [ 575, 103,  95,   1,  25,   0 ],
+    [ 625,  36, 108,   8, -25,   0 ],
+    [ 670, 101, 156,  12, -25,   0 ],
+    [ 675,  67, 135,   9, -26,   0 ],
+    [ 802,  45,  56,   2,  25,   0 ],
+    [ 810,  64,  48,  15,  25,   0 ],
+    [ 817,  19,  41,   2, -25,   0 ],
+    [ 827,  43,  31,   6, -25,   0 ],
+    [ 834, 122,  24,   7,  25,   0 ],
+]
+
 ################################################################################
 # Script itself
 ################################################################################
 import os
 import shutil
+
+from PIL import Image
 
 def PreprocessSVG(input_name, output_name):
     text = ""
@@ -149,11 +186,35 @@ def PreprocessSVG(input_name, output_name):
     with open(input_name, "r") as file:
         text = file.read()
 
-    for token, string in preprocessing_tokens:
-        text = text.replace(token, string)
+    for token, value in preprocessing_tokens:
+        text = text.replace(token, str(value))
 
     with open(output_name, "w") as file:
         file.write(text)
+
+def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
+    region_data = []
+    for ix in range(0, w):
+        region_data.append([])
+        for ix in range(0, h):
+            region_data[-1].append((0, 0, 0, 0))
+
+    for ix in range(0, w):
+        for iy in range(0, h):
+            region_data[ix][iy] = pixel_data[x + ix, y + iy]
+            pixel_data[x + ix, y + iy] = (0, 0, 0, 0)
+
+    for ix in range(0, w):
+        for iy in range(0, h):
+            # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
+            pixel_data[x + dx + ix, y + dy + iy] = region_data[ix][iy]
+
+def Glitch(image_name):
+    with Image.open(image_name) as image:
+        pixel_data = image.load()
+        for x, y, w, h, dx, dy in glitch_regions:
+            ShiftRegion(pixel_data, x, y, w, h, dx, dy)
+        image.save(image_name)
 
 def Build(build_dir):
     if os.path.exists(build_dir):
@@ -180,6 +241,10 @@ def Build(build_dir):
                     "--export-type=\"png\" "
                     "--export-file=\"%s/%s.png\" "
                     "Temporary.svg" % (build_dir, image_name))
+
+    for image_name in glitched_boxes:
+        print("Glitching image %s.png..." % image_name)
+        Glitch("%s/%s.png" % (build_dir, image_name))
 
     print("Cleaning up...")
     os.remove("Temporary.svg")
