@@ -15,30 +15,30 @@ define mas_comfy_ui.font_italic  = "mod_assets/font/Nunito-SemiBoldItalic.ttf"
 define mas_comfy_ui.font_size    = gui.text_size
 define mas_comfy_ui.font_kerning = 0.0
 
-define mas_comfy_ui.dialogue_text_color    = "#f8f8f8"
-define mas_comfy_ui.dialogue_text_outlines = [(2, "#404040", 0, 0)]
+define mas_comfy_ui.dialogue_text_color    = "#f8f8f8ff"
+define mas_comfy_ui.dialogue_text_outlines = [(2, "#404040ff", 0, 0)]
 
-define mas_comfy_ui.light.quick_button_text_idle_color        = "#522"
-define mas_comfy_ui.light.quick_button_text_hover_color       = "#fcc"
-define mas_comfy_ui.light.quick_button_text_selected_color    = "#ffffff"
-define mas_comfy_ui.light.quick_button_text_insensitive_color = "#a66"
+define mas_comfy_ui.light.quick_button_text_idle_color        = "#552222ff"
+define mas_comfy_ui.light.quick_button_text_hover_color       = "#ffccccff"
+define mas_comfy_ui.light.quick_button_text_selected_color    = "#ffffffff"
+define mas_comfy_ui.light.quick_button_text_insensitive_color = "#aa6666ff"
 define mas_comfy_ui.light.quick_button_text_outlines          = []
 
-define mas_comfy_ui.dark.quick_button_text_idle_color        = "#ffaa99"
-define mas_comfy_ui.dark.quick_button_text_hover_color       = "#ffd4cc"
-define mas_comfy_ui.dark.quick_button_text_selected_color    = "#ffeeeb"
-define mas_comfy_ui.dark.quick_button_text_insensitive_color = "#a66"
+define mas_comfy_ui.dark.quick_button_text_idle_color        = "#ffaa99ff"
+define mas_comfy_ui.dark.quick_button_text_hover_color       = "#ffd4ccff"
+define mas_comfy_ui.dark.quick_button_text_selected_color    = "#ffeeebff"
+define mas_comfy_ui.dark.quick_button_text_insensitive_color = "#aa6666ff"
 define mas_comfy_ui.dark.quick_button_text_outlines          = []
 
-define mas_comfy_ui.light.button_text_idle_color        = "#404040"
-define mas_comfy_ui.light.button_text_hover_color       = "#fa9"
-define mas_comfy_ui.light.button_text_selected_color    = "#bb5588"
+define mas_comfy_ui.light.button_text_idle_color        = "#404040ff"
+define mas_comfy_ui.light.button_text_hover_color       = "#ffaa99ff"
+define mas_comfy_ui.light.button_text_selected_color    = "#bb5588ff"
 define mas_comfy_ui.light.button_text_insensitive_color = "#aaaaaa7f"
 define mas_comfy_ui.light.button_text_outlines          = []
 
-define mas_comfy_ui.dark.button_text_idle_color        = "#fd5ba2"
-define mas_comfy_ui.dark.button_text_hover_color       = "#ffabd8"
-define mas_comfy_ui.dark.button_text_selected_color    = "#bb5588"
+define mas_comfy_ui.dark.button_text_idle_color        = "#fd5ba2ff"
+define mas_comfy_ui.dark.button_text_hover_color       = "#ffabd8ff"
+define mas_comfy_ui.dark.button_text_selected_color    = "#bb5588ff"
 define mas_comfy_ui.dark.button_text_insensitive_color = "#aaaaaa7f"
 define mas_comfy_ui.dark.button_text_outlines          = []
 

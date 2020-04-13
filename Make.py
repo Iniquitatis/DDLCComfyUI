@@ -207,7 +207,7 @@ import shutil
 from PIL import Image
 from hsluv import *
 
-def ModulateColorByRegexMatch(match, scheme):
+def ModulateSVGColorByRegexMatch(match, scheme):
     r = float(match.group(1)) / 255.0
     g = float(match.group(2)) / 255.0
     b = float(match.group(3)) / 255.0
@@ -216,6 +216,18 @@ def ModulateColorByRegexMatch(match, scheme):
     return "rgb(%i, %i, %i)" % (int(r * 255.0),
                                 int(g * 255.0),
                                 int(b * 255.0))
+
+def ModulateRPYColorByRegexMatch(match, scheme):
+    r = float(int(match.group(1), 16)) / 255.0
+    g = float(int(match.group(2), 16)) / 255.0
+    b = float(int(match.group(3), 16)) / 255.0
+    a = float(int(match.group(4), 16)) / 255.0
+    h, s, l = rgb_to_hsluv([r, g, b])
+    r, g, b = hsluv_to_rgb([scheme["hue"], s * scheme["saturation_mul"], l])
+    return "#%x%x%x%x" % (int(r * 255.0),
+                          int(g * 255.0),
+                          int(b * 255.0),
+                          int(a * 255.0))
 
 def PreprocessSVG(input_path, output_path, scheme):
     text = ""
@@ -228,7 +240,20 @@ def PreprocessSVG(input_path, output_path, scheme):
 
     if scheme["hue"] != None:
         text = re.sub("rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)",
-                      lambda match : ModulateColorByRegexMatch(match, scheme), text)
+                      lambda match : ModulateSVGColorByRegexMatch(match, scheme), text)
+
+    with open(output_path, "w") as file:
+        file.write(text)
+
+def PreprocessRPY(input_path, output_path, scheme):
+    text = ""
+
+    with open(input_path, "r") as file:
+        text = file.read()
+
+    if scheme["hue"] != None:
+        text = re.sub("#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})",
+                      lambda match : ModulateRPYColorByRegexMatch(match, scheme), text)
 
     with open(output_path, "w") as file:
         file.write(text)
@@ -286,6 +311,9 @@ def Build(build_dir):
         for file_path in common_files:
             print("Copying file %s..." % file_path)
             shutil.copyfile("Source/%s" % file_path, "%s/%s" % (scheme_dir, file_path))
+
+        # FIXME: define name of the script in the top section of this file
+        PreprocessRPY("%s/zzz_comfy_ui.rpy" % scheme_dir, "%s/zzz_comfy_ui.rpy" % scheme_dir, scheme)
 
         for image_path in vector_images:
             print("Converting file %s.svg..." % image_path)
