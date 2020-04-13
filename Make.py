@@ -11,6 +11,18 @@
 ################################################################################
 dpi_scale = 1
 
+color_schemes = [
+    { "name": "default", "hue": None, "saturation_mul": 1.0 },
+    { "name": "gray"   , "hue": 0   , "saturation_mul": 0.0 },
+    { "name": "red"    , "hue": 0   , "saturation_mul": 1.0 },
+    { "name": "peach"  , "hue": 30  , "saturation_mul": 0.6 },
+    { "name": "yellow" , "hue": 55  , "saturation_mul": 1.0 },
+    { "name": "green"  , "hue": 120 , "saturation_mul": 0.7 },
+    { "name": "cyan"   , "hue": 188 , "saturation_mul": 0.8 },
+    { "name": "blue"   , "hue": 240 , "saturation_mul": 1.0 },
+    { "name": "purple" , "hue": 300 , "saturation_mul": 1.0 },
+]
+
 preprocessing_tokens = [
     [ "$COMFY_UI_BUTTON_ROUNDING$", 4 ],
     [ "$COMFY_UI_FRAME_ROUNDING$" , 4 ],
@@ -189,27 +201,43 @@ glitch_regions = [
 # Script itself
 ################################################################################
 import os
+import re
 import shutil
 
 from PIL import Image
+from hsluv import *
 
-def PreprocessSVG(input_name, output_name):
+def ModulateColorByRegexMatch(match, scheme):
+    r = float(match.group(1)) / 255.0
+    g = float(match.group(2)) / 255.0
+    b = float(match.group(3)) / 255.0
+    h, s, l = rgb_to_hsluv([r, g, b])
+    r, g, b = hsluv_to_rgb([scheme["hue"], s * scheme["saturation_mul"], l])
+    return "rgb(%i, %i, %i)" % (int(r * 255.0),
+                                int(g * 255.0),
+                                int(b * 255.0))
+
+def PreprocessSVG(input_path, output_path, scheme):
     text = ""
 
-    with open(input_name, "r") as file:
+    with open(input_path, "r") as file:
         text = file.read()
 
     for token, value in preprocessing_tokens:
         text = text.replace(token, str(value))
 
-    with open(output_name, "w") as file:
+    if scheme["hue"] != None:
+        text = re.sub("rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)",
+                      lambda match : ModulateColorByRegexMatch(match, scheme), text)
+
+    with open(output_path, "w") as file:
         file.write(text)
 
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
     region_data = []
     for ix in range(0, w):
         region_data.append([])
-        for ix in range(0, h):
+        for iy in range(0, h):
             region_data[-1].append((0, 0, 0, 0))
 
     for ix in range(0, w):
@@ -222,8 +250,8 @@ def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
             # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
             pixel_data[x + dx + ix, y + dy + iy] = region_data[ix][iy]
 
-def Glitch(image_name):
-    with Image.open(image_name) as image:
+def Glitch(image_path):
+    with Image.open(image_path) as image:
         pixel_data = image.load()
         for x, y, w, h, dx, dy in glitch_regions:
             x  *= dpi_scale
@@ -233,7 +261,7 @@ def Glitch(image_name):
             dx *= dpi_scale
             dy *= dpi_scale
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
-        image.save(image_name)
+        image.save(image_path)
 
 def Build(build_dir):
     if os.path.exists(build_dir):
@@ -243,30 +271,35 @@ def Build(build_dir):
     print("Creating directory %s..." % build_dir)
     os.mkdir(build_dir)
 
-    for dir_name in dir_structure:
-        if not os.path.exists("%s/%s" % (build_dir, dir_name)):
-            print("Creating directory %s/%s..." % (build_dir, dir_name))
-            os.mkdir("%s/%s" % (build_dir, dir_name))
+    for scheme in color_schemes:
+        scheme_dir = "%s/%s" % (build_dir, scheme["name"])
+        if not os.path.exists(scheme_dir):
+            print("Creating directory %s..." % (scheme_dir))
+            os.mkdir(scheme_dir)
 
-    for file_name in common_files:
-        print("Copying file %s..." % file_name)
-        shutil.copyfile("Source/%s" % file_name, "%s/%s" % (build_dir, file_name))
+        for dir_path in dir_structure:
+            dir_full_path = ("%s/%s") % (scheme_dir, dir_path)
+            if not os.path.exists(dir_full_path):
+                print("Creating directory %s..." % (dir_full_path))
+                os.mkdir(dir_full_path)
 
-    for image_name in vector_images:
-        print("Converting file %s.svg..." % image_name)
-        PreprocessSVG("Source/%s.svg" % image_name, "Temporary.svg")
-        os.system("inkscape "
-                    "--export-dpi=\"%i\" "
-                    "--export-type=\"png\" "
-                    "--export-file=\"%s/%s.png\" "
-                    "Temporary.svg" % (96 * dpi_scale, build_dir, image_name))
+        for file_path in common_files:
+            print("Copying file %s..." % file_path)
+            shutil.copyfile("Source/%s" % file_path, "%s/%s" % (scheme_dir, file_path))
 
-    for image_name in glitched_boxes:
-        print("Glitching image %s.png..." % image_name)
-        Glitch("%s/%s.png" % (build_dir, image_name))
+        for image_path in vector_images:
+            print("Converting file %s.svg..." % image_path)
+            PreprocessSVG("Source/%s.svg" % image_path, "Temporary.svg", scheme)
+            os.system("inkscape "
+                        "--export-dpi=\"%i\" "
+                        "--export-type=\"png\" "
+                        "--export-file=\"%s/%s.png\" "
+                        "Temporary.svg" % (96 * dpi_scale, scheme_dir, image_path))
+            os.remove("Temporary.svg")
 
-    print("Cleaning up...")
-    os.remove("Temporary.svg")
+        for image_path in glitched_boxes:
+            print("Glitching image %s.png..." % image_path)
+            Glitch("%s/%s.png" % (scheme_dir, image_path))
 
     print("Finished!")
 
