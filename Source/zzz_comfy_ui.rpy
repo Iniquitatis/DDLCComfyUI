@@ -9,88 +9,88 @@
 ################################################################################
 # Configuration variables
 ################################################################################
-define mas_comfy_ui.common.font         = "$CUI_MAIN_FONT$"
-define mas_comfy_ui.common.font_bold    = "$CUI_MAIN_FONT_BOLD$"
-define mas_comfy_ui.common.font_italic  = "$CUI_MAIN_FONT_ITALIC$"
+define mas_comfy_ui.common.font         = "CUI_MAIN_FONT()"
+define mas_comfy_ui.common.font_bold    = "CUI_MAIN_FONT_BOLD()"
+define mas_comfy_ui.common.font_italic  = "CUI_MAIN_FONT_ITALIC()"
 define mas_comfy_ui.common.font_kerning = 0.0
 define mas_comfy_ui.common.font_size    = 24
 
-define mas_comfy_ui.menu_font         = "$CUI_MENU_FONT$"
+define mas_comfy_ui.menu_font         = "CUI_MENU_FONT()"
 define mas_comfy_ui.menu_font_kerning = 0.0
 
 define mas_comfy_ui.menu_title.font_size      = 38
-define mas_comfy_ui.menu_title.light.color    = "CUI_SCD_COLOR(#ffffffff)"
-define mas_comfy_ui.menu_title.light.outlines = [(6, "CUI_SCD_COLOR(#bb5599ff)", 0, 0), (3, "CUI_SCD_COLOR(#bb5599ff)", 2, 2)]
-define mas_comfy_ui.menu_title.dark.color     = "CUI_SCD_COLOR(#ffd9e8ff)"
-define mas_comfy_ui.menu_title.dark.outlines  = [(6, "CUI_SCD_COLOR(#de367eff)", 0, 0), (3, "CUI_SCD_COLOR(#de367eff)", 2, 2)]
+define mas_comfy_ui.menu_title.light.color    = "CUI_SCD_COLOR(255, 255, 255)"
+define mas_comfy_ui.menu_title.light.outlines = [(6, "CUI_SCD_COLOR(187, 85, 153)", 0, 0), (3, "CUI_SCD_COLOR(187, 85, 153)", 2, 2)]
+define mas_comfy_ui.menu_title.dark.color     = "CUI_SCD_COLOR(255, 217, 232)"
+define mas_comfy_ui.menu_title.dark.outlines  = [(6, "CUI_SCD_COLOR(222, 54, 126)", 0, 0), (3, "CUI_SCD_COLOR(222, 54, 126)", 2, 2)]
 
 define mas_comfy_ui.menu_button_text.font_size                  = 24
-define mas_comfy_ui.menu_button_text.light.color                = "CUI_SCD_COLOR(#ffffffff)"
-define mas_comfy_ui.menu_button_text.light.idle_outlines        = [(4, "CUI_SCD_COLOR(#bb5599ff)", 0, 0), (2, "CUI_SCD_COLOR(#bb5599ff)", 2, 2)]
-define mas_comfy_ui.menu_button_text.light.hover_outlines       = [(4, "CUI_SCD_COLOR(#ffaaccff)", 0, 0), (2, "CUI_SCD_COLOR(#ffaaccff)", 2, 2)]
-define mas_comfy_ui.menu_button_text.light.insensitive_outlines = [(4, "CUI_SCD_COLOR(#ffcceeff)", 0, 0), (2, "CUI_SCD_COLOR(#ffcceeff)", 2, 2)]
-define mas_comfy_ui.menu_button_text.dark.color                 = "CUI_SCD_COLOR(#ffd9e8ff)"
-define mas_comfy_ui.menu_button_text.dark.idle_outlines         = [(4, "CUI_SCD_COLOR(#de367eff)", 0, 0), (2, "CUI_SCD_COLOR(#de367eff)", 2, 2)]
-define mas_comfy_ui.menu_button_text.dark.hover_outlines        = [(4, "CUI_SCD_COLOR(#ff80b7ff)", 0, 0), (2, "CUI_SCD_COLOR(#ff80b7ff)", 2, 2)]
-define mas_comfy_ui.menu_button_text.dark.insensitive_outlines  = [(4, "CUI_SCD_COLOR(#ffb2d4ff)", 0, 0), (2, "CUI_SCD_COLOR(#ffb2d4ff)", 2, 2)]
+define mas_comfy_ui.menu_button_text.light.color                = "CUI_SCD_COLOR(255, 255, 255)"
+define mas_comfy_ui.menu_button_text.light.idle_outlines        = [(4, "CUI_SCD_COLOR(187, 85, 153)", 0, 0), (2, "CUI_SCD_COLOR(187, 85, 153)", 2, 2)]
+define mas_comfy_ui.menu_button_text.light.hover_outlines       = [(4, "CUI_SCD_COLOR(255, 170, 204)", 0, 0), (2, "CUI_SCD_COLOR(255, 170, 204)", 2, 2)]
+define mas_comfy_ui.menu_button_text.light.insensitive_outlines = [(4, "CUI_SCD_COLOR(255, 204, 238)", 0, 0), (2, "CUI_SCD_COLOR(255, 204, 238)", 2, 2)]
+define mas_comfy_ui.menu_button_text.dark.color                 = "CUI_SCD_COLOR(255, 217, 232)"
+define mas_comfy_ui.menu_button_text.dark.idle_outlines         = [(4, "CUI_SCD_COLOR(222, 54, 126)", 0, 0), (2, "CUI_SCD_COLOR(222, 54, 126)", 2, 2)]
+define mas_comfy_ui.menu_button_text.dark.hover_outlines        = [(4, "CUI_SCD_COLOR(255, 128, 183)", 0, 0), (2, "CUI_SCD_COLOR(255, 128, 183)", 2, 2)]
+define mas_comfy_ui.menu_button_text.dark.insensitive_outlines  = [(4, "CUI_SCD_COLOR(255, 178, 212)", 0, 0), (2, "CUI_SCD_COLOR(255, 178, 212)", 2, 2)]
 
-define mas_comfy_ui.check_button_text.font                    = "$CUI_OPTION_FONT$"
+define mas_comfy_ui.check_button_text.font                    = "CUI_OPTION_FONT()"
 define mas_comfy_ui.check_button_text.font_kerning            = 0.0
 define mas_comfy_ui.check_button_text.font_size               = 24
-define mas_comfy_ui.check_button_text.light.idle_color        = "CUI_SCD_COLOR(#aaaaaaff)"
-define mas_comfy_ui.check_button_text.light.hover_color       = "CUI_SCD_COLOR(#cc6699ff)"
-define mas_comfy_ui.check_button_text.light.selected_color    = "CUI_SCD_COLOR(#bb5588ff)"
-define mas_comfy_ui.check_button_text.light.insensitive_color = "CUI_SCD_COLOR(#aaaaaa7f)"
-define mas_comfy_ui.check_button_text.dark.idle_color         = "CUI_SCD_COLOR(#aaaaaaff)"
-define mas_comfy_ui.check_button_text.dark.hover_color        = "CUI_SCD_COLOR(#ff80b7ff)"
-define mas_comfy_ui.check_button_text.dark.selected_color     = "CUI_SCD_COLOR(#de367eff)"
-define mas_comfy_ui.check_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(#aaaaaa7f)"
+define mas_comfy_ui.check_button_text.light.idle_color        = "CUI_SCD_COLOR(170, 170, 170)"
+define mas_comfy_ui.check_button_text.light.hover_color       = "CUI_SCD_COLOR(204, 102, 153)"
+define mas_comfy_ui.check_button_text.light.selected_color    = "CUI_SCD_COLOR(187, 85, 136)"
+define mas_comfy_ui.check_button_text.light.insensitive_color = "CUI_SCD_COLOR(170, 170, 170, 127)"
+define mas_comfy_ui.check_button_text.dark.idle_color         = "CUI_SCD_COLOR(170, 170, 170)"
+define mas_comfy_ui.check_button_text.dark.hover_color        = "CUI_SCD_COLOR(255, 128, 183)"
+define mas_comfy_ui.check_button_text.dark.selected_color     = "CUI_SCD_COLOR(222, 54, 126)"
+define mas_comfy_ui.check_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(170, 170, 170, 127)"
 
 define mas_comfy_ui.menu_label.font_size      = 24
-define mas_comfy_ui.menu_label.light.color    = "CUI_SCD_COLOR(#ffffffff)"
-define mas_comfy_ui.menu_label.light.outlines = [(3, "CUI_SCD_COLOR(#bb5599ff)", 0, 0), (1, "CUI_SCD_COLOR(#bb5599ff)", 1, 1)]
-define mas_comfy_ui.menu_label.dark.color     = "CUI_SCD_COLOR(#ffd9e8ff)"
-define mas_comfy_ui.menu_label.dark.outlines  = [(3, "CUI_SCD_COLOR(#de367eff)", 0, 0), (1, "CUI_SCD_COLOR(#de367eff)", 1, 1)]
+define mas_comfy_ui.menu_label.light.color    = "CUI_SCD_COLOR(255, 255, 255)"
+define mas_comfy_ui.menu_label.light.outlines = [(3, "CUI_SCD_COLOR(187, 85, 153)", 0, 0), (1, "CUI_SCD_COLOR(187, 85, 153)", 1, 1)]
+define mas_comfy_ui.menu_label.dark.color     = "CUI_SCD_COLOR(255, 217, 232)"
+define mas_comfy_ui.menu_label.dark.outlines  = [(3, "CUI_SCD_COLOR(222, 54, 126)", 0, 0), (1, "CUI_SCD_COLOR(222, 54, 126)", 1, 1)]
 
 define mas_comfy_ui.music_menu_button_text.font                       = "mod_assets/font/mplus-2p-regular.ttf"
 define mas_comfy_ui.music_menu_button_text.font_kerning               = 0.0
 define mas_comfy_ui.music_menu_button_text.font_size                  = 24
-define mas_comfy_ui.music_menu_button_text.light.color                = "CUI_SCD_COLOR(#ffffffff)"
-define mas_comfy_ui.music_menu_button_text.light.idle_outlines        = [(3, "CUI_SCD_COLOR(#bb5599ff)", 0, 0), (1, "CUI_SCD_COLOR(#bb5599ff)", 1, 1)]
-define mas_comfy_ui.music_menu_button_text.light.hover_outlines       = [(3, "CUI_SCD_COLOR(#ffaaccff)", 0, 0), (1, "CUI_SCD_COLOR(#ffaaccff)", 1, 1)]
-define mas_comfy_ui.music_menu_button_text.light.insensitive_outlines = [(3, "CUI_SCD_COLOR(#ffcceeff)", 0, 0), (1, "CUI_SCD_COLOR(#ffcceeff)", 1, 1)]
-define mas_comfy_ui.music_menu_button_text.dark.color                 = "CUI_SCD_COLOR(#ffd9e8ff)"
-define mas_comfy_ui.music_menu_button_text.dark.idle_outlines         = [(3, "CUI_SCD_COLOR(#de367eff)", 0, 0), (1, "CUI_SCD_COLOR(#de367eff)", 1, 1)]
-define mas_comfy_ui.music_menu_button_text.dark.hover_outlines        = [(3, "CUI_SCD_COLOR(#ff80b7ff)", 0, 0), (1, "CUI_SCD_COLOR(#ff80b7ff)", 1, 1)]
-define mas_comfy_ui.music_menu_button_text.dark.insensitive_outlines  = [(3, "CUI_SCD_COLOR(#ffb2d4ff)", 0, 0), (1, "CUI_SCD_COLOR(#ffb2d4ff)", 1, 1)]
+define mas_comfy_ui.music_menu_button_text.light.color                = "CUI_SCD_COLOR(255, 255, 255)"
+define mas_comfy_ui.music_menu_button_text.light.idle_outlines        = [(3, "CUI_SCD_COLOR(187, 85, 153)", 0, 0), (1, "CUI_SCD_COLOR(187, 85, 153)", 1, 1)]
+define mas_comfy_ui.music_menu_button_text.light.hover_outlines       = [(3, "CUI_SCD_COLOR(255, 170, 204)", 0, 0), (1, "CUI_SCD_COLOR(255, 170, 204)", 1, 1)]
+define mas_comfy_ui.music_menu_button_text.light.insensitive_outlines = [(3, "CUI_SCD_COLOR(255, 204, 238)", 0, 0), (1, "CUI_SCD_COLOR(255, 204, 238)", 1, 1)]
+define mas_comfy_ui.music_menu_button_text.dark.color                 = "CUI_SCD_COLOR(255, 217, 232)"
+define mas_comfy_ui.music_menu_button_text.dark.idle_outlines         = [(3, "CUI_SCD_COLOR(222, 54, 126)", 0, 0), (1, "CUI_SCD_COLOR(222, 54, 126)", 1, 1)]
+define mas_comfy_ui.music_menu_button_text.dark.hover_outlines        = [(3, "CUI_SCD_COLOR(255, 128, 183)", 0, 0), (1, "CUI_SCD_COLOR(255, 128, 183)", 1, 1)]
+define mas_comfy_ui.music_menu_button_text.dark.insensitive_outlines  = [(3, "CUI_SCD_COLOR(255, 178, 212)", 0, 0), (1, "CUI_SCD_COLOR(255, 178, 212)", 1, 1)]
 
-define mas_comfy_ui.confirm_prompt_text.light.color = "CUI_PRM_COLOR(#404040ff)"
-define mas_comfy_ui.confirm_prompt_text.dark.color  = "CUI_PRM_COLOR(#fd5ba2ff)"
+define mas_comfy_ui.confirm_prompt_text.light.color = "CUI_PRM_COLOR(64, 64, 64)"
+define mas_comfy_ui.confirm_prompt_text.dark.color  = "CUI_PRM_COLOR(253, 91, 162)"
 
-define mas_comfy_ui.dialogue_text.color    = "CUI_PRM_COLOR(#f8f8f8ff)"
-define mas_comfy_ui.dialogue_text.outlines = [(2, "CUI_PRM_COLOR(#404040ff)", 0, 0)]
+define mas_comfy_ui.dialogue_text.color    = "CUI_PRM_COLOR(248, 248, 248)"
+define mas_comfy_ui.dialogue_text.outlines = [(2, "CUI_PRM_COLOR(64, 64, 64)", 0, 0)]
 
 define mas_comfy_ui.quick_button_text.font_size               = 14
-define mas_comfy_ui.quick_button_text.light.idle_color        = "CUI_SCD_COLOR(#552222ff)"
-define mas_comfy_ui.quick_button_text.light.hover_color       = "CUI_SCD_COLOR(#ffccccff)"
-define mas_comfy_ui.quick_button_text.light.selected_color    = "CUI_SCD_COLOR(#ffffffff)"
-define mas_comfy_ui.quick_button_text.light.insensitive_color = "CUI_SCD_COLOR(#aa6666ff)"
+define mas_comfy_ui.quick_button_text.light.idle_color        = "CUI_SCD_COLOR(85, 34, 34)"
+define mas_comfy_ui.quick_button_text.light.hover_color       = "CUI_SCD_COLOR(255, 204, 204)"
+define mas_comfy_ui.quick_button_text.light.selected_color    = "CUI_SCD_COLOR(255, 255, 255)"
+define mas_comfy_ui.quick_button_text.light.insensitive_color = "CUI_SCD_COLOR(170, 102, 102)"
 define mas_comfy_ui.quick_button_text.light.outlines          = []
-define mas_comfy_ui.quick_button_text.dark.idle_color         = "CUI_SCD_COLOR(#ffaa99ff)"
-define mas_comfy_ui.quick_button_text.dark.hover_color        = "CUI_SCD_COLOR(#ffd4ccff)"
-define mas_comfy_ui.quick_button_text.dark.selected_color     = "CUI_SCD_COLOR(#ffeeebff)"
-define mas_comfy_ui.quick_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(#aa6666ff)"
+define mas_comfy_ui.quick_button_text.dark.idle_color         = "CUI_SCD_COLOR(255, 170, 153)"
+define mas_comfy_ui.quick_button_text.dark.hover_color        = "CUI_SCD_COLOR(255, 212, 204)"
+define mas_comfy_ui.quick_button_text.dark.selected_color     = "CUI_SCD_COLOR(255, 238, 235)"
+define mas_comfy_ui.quick_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(170, 102, 102)"
 define mas_comfy_ui.quick_button_text.dark.outlines           = []
 
-define mas_comfy_ui.button_text.light.idle_color        = "CUI_PRM_COLOR(#404040ff)"
-define mas_comfy_ui.button_text.light.hover_color       = "CUI_PRM_COLOR(#ffaa99ff)"
-define mas_comfy_ui.button_text.light.selected_color    = "CUI_PRM_COLOR(#bb5588ff)"
-define mas_comfy_ui.button_text.light.insensitive_color = "CUI_PRM_COLOR(#aaaaaa7f)"
+define mas_comfy_ui.button_text.light.idle_color        = "CUI_PRM_COLOR(64, 64, 64)"
+define mas_comfy_ui.button_text.light.hover_color       = "CUI_PRM_COLOR(255, 170, 153)"
+define mas_comfy_ui.button_text.light.selected_color    = "CUI_PRM_COLOR(187, 85, 136)"
+define mas_comfy_ui.button_text.light.insensitive_color = "CUI_PRM_COLOR(170, 170, 170, 127)"
 define mas_comfy_ui.button_text.light.outlines          = []
-define mas_comfy_ui.button_text.dark.idle_color         = "CUI_PRM_COLOR(#fd5ba2ff)"
-define mas_comfy_ui.button_text.dark.hover_color        = "CUI_PRM_COLOR(#ffabd8ff)"
-define mas_comfy_ui.button_text.dark.selected_color     = "CUI_PRM_COLOR(#bb5588ff)"
-define mas_comfy_ui.button_text.dark.insensitive_color  = "CUI_PRM_COLOR(#aaaaaa7f)"
+define mas_comfy_ui.button_text.dark.idle_color         = "CUI_PRM_COLOR(253, 91, 162)"
+define mas_comfy_ui.button_text.dark.hover_color        = "CUI_PRM_COLOR(255, 171, 216)"
+define mas_comfy_ui.button_text.dark.selected_color     = "CUI_PRM_COLOR(187, 85, 136)"
+define mas_comfy_ui.button_text.dark.insensitive_color  = "CUI_PRM_COLOR(170, 170, 170, 127)"
 define mas_comfy_ui.button_text.dark.outlines           = []
 
 define mas_comfy_ui.button_spacing        = 6

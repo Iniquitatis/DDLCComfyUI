@@ -201,51 +201,73 @@ from hsluv import *
 themes = []
 
 # Text file preprocessing
-def ModulateRGBColorByRegexMatch(match, h, s):
-    if h == None or s == None:
-        return "rgb(%i, %i, %i)" % (match.group(1),
-                                    match.group(2),
-                                    match.group(3))
+def FormatRGBHexString(r, g, b):
+    return "#%02x%02x%02x" % (int(r), int(g), int(b))
 
-    r = float(match.group(1)) / 255.0
-    g = float(match.group(2)) / 255.0
-    b = float(match.group(3)) / 255.0
+def FormatRGBAHexString(r, g, b, a):
+    return "#%02x%02x%02x%02x" % (int(r), int(g), int(b), int(a))
+
+def ModulateRGBColor(r, g, b, h, s):
+    r = float(r) / 255.0
+    g = float(g) / 255.0
+    b = float(b) / 255.0
+
     ch, cs, cl = rgb_to_hsluv([r, g, b])
     r, g, b = hsluv_to_rgb([h, cs * s, cl])
-    return "rgb(%i, %i, %i)" % (int(r * 255.0),
-                                int(g * 255.0),
-                                int(b * 255.0))
 
-def ModulateHexColorByRegexMatch(match, h, s):
-    if h == None or s == None:
-        return "#%x%x%x%x" % (match.group(1),
-                              match.group(2),
-                              match.group(3),
-                              match.group(4))
+    return (int(r * 255.0),
+            int(g * 255.0),
+            int(b * 255.0))
 
-    r = float(int(match.group(1), 16)) / 255.0
-    g = float(int(match.group(2), 16)) / 255.0
-    b = float(int(match.group(3), 16)) / 255.0
-    a = float(int(match.group(4), 16)) / 255.0
+def ModulateRGBAColor(r, g, b, a, h, s):
+    r = float(r) / 255.0
+    g = float(b) / 255.0
+    b = float(b) / 255.0
+    a = float(a) / 255.0
+
     ch, cs, cl = rgb_to_hsluv([r, g, b])
     r, g, b = hsluv_to_rgb([h, cs * s, cl])
-    return "#%x%x%x%x" % (int(r * 255.0),
-                          int(g * 255.0),
-                          int(b * 255.0),
-                          int(a * 255.0))
 
-def ModulateColorsByRegexMatch(match, h, s):
-    text = match.group(1)
+    return (int(r * 255.0),
+            int(g * 255.0),
+            int(b * 255.0),
+            int(a * 255.0))
 
-    if h == None or s == None:
-        return text
+def GetThemeParameter(macro_args, method_args):
+    return str(method_args)
 
-    text = re.sub("rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)",
-                  lambda match: ModulateRGBColorByRegexMatch(match, h, s), text)
-    text = re.sub("#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})",
-                  lambda match: ModulateHexColorByRegexMatch(match, h, s), text)
+def ModulateColors(macro_args, method_args):
+    h, s = method_args
 
-    return text
+    if len(macro_args) == 3:
+        r, g, b = macro_args
+        if h == None or s == None:
+            return FormatRGBHexString(r, g, b)
+        r, g, b = ModulateRGBColor(int(r), int(g), int(b), float(h), float(s))
+        return FormatRGBHexString(r, g, b)
+    elif len(macro_args) == 4:
+        r, g, b, a = macro_args
+        if h == None or s == None:
+            return FormatRGBAHexString(r, g, b, a)
+        r, g, b, a = ModulateRGBAColor(int(r), int(g), int(b), int(a), float(h), float(s))
+        return FormatRGBAHexString(r, g, b, a)
+
+    return "#baadf00d"
+
+def ParseMacroArguments(match):
+    if match.lastindex == None or match.lastindex == 0:
+        # No arguments has been passed to the macro
+        return []
+
+    args_string = match.group(1)
+
+    query = ""
+    for i in range(0, 4):
+        query += "\s*([A-Za-z0-9_\-.]+)\s*"
+        result = re.findall(query, args_string)
+        if len(result) > 0:
+            return result
+        query += ","
 
 def PreprocessTextFile(in_path, out_path, theme):
     text = ""
@@ -253,29 +275,22 @@ def PreprocessTextFile(in_path, out_path, theme):
     with open(in_path, "r") as file:
         text = file.read()
 
-    preprocessing_tokens = [
-        [ "$CUI_BTN_ROUNDING$"    , theme["button_rounding"]     ],
-        [ "$CUI_FRM_ROUNDING$"    , theme["frame_rounding"]      ],
-        [ "$CUI_DLG_ROUNDING$"    , theme["dialog_rounding"]     ],
-        [ "$CUI_MAIN_FONT$"       , theme["main_font"]["normal"] ],
-        [ "$CUI_MAIN_FONT_BOLD$"  , theme["main_font"]["bold"]   ],
-        [ "$CUI_MAIN_FONT_ITALIC$", theme["main_font"]["italic"] ],
-        [ "$CUI_MENU_FONT$"       , theme["menu_font"]           ],
-        [ "$CUI_OPTION_FONT$"     , theme["option_font"]         ],
+    macros = [
+        [ "CUI_BTN_ROUNDING"    , GetThemeParameter, (theme["button_rounding"])                              ],
+        [ "CUI_FRM_ROUNDING"    , GetThemeParameter, (theme["frame_rounding"])                               ],
+        [ "CUI_DLG_ROUNDING"    , GetThemeParameter, (theme["dialog_rounding"])                              ],
+        [ "CUI_MAIN_FONT"       , GetThemeParameter, (theme["main_font"]["normal"])                          ],
+        [ "CUI_MAIN_FONT_BOLD"  , GetThemeParameter, (theme["main_font"]["bold"])                            ],
+        [ "CUI_MAIN_FONT_ITALIC", GetThemeParameter, (theme["main_font"]["italic"])                          ],
+        [ "CUI_MENU_FONT"       , GetThemeParameter, (theme["menu_font"])                                    ],
+        [ "CUI_OPTION_FONT"     , GetThemeParameter, (theme["option_font"])                                  ],
+        [ "CUI_PRM_COLOR"       , ModulateColors   , (theme["primary_hue"], theme["primary_saturation"])     ],
+        [ "CUI_SCD_COLOR"       , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"]) ],
     ]
 
-    for token, value in preprocessing_tokens:
-        text = text.replace(token, str(value))
-
-    h1 = theme["primary_hue"]
-    s1 = theme["primary_saturation"]
-    h2 = theme["secondary_hue"]
-    s2 = theme["secondary_saturation"]
-
-    text = re.sub("CUI_PRM_COLOR\(([A-Za-z0-9#,\(\) ]+)\)",
-                  lambda match: ModulateColorsByRegexMatch(match, h1, s1), text)
-    text = re.sub("CUI_SCD_COLOR\(([A-Za-z0-9#,\(\) ]+)\)",
-                  lambda match: ModulateColorsByRegexMatch(match, h2, s2), text)
+    for macro_name, method, method_args in macros:
+        query = macro_name + "\(([A-Za-z0-9_\-,. ]*)\)"
+        text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
 
     with open(out_path, "w") as file:
         file.write(text)
@@ -346,10 +361,11 @@ def Build():
             shutil.copyfile("%s/%s" % (source_dir, file_path), "%s/%s" % (theme_dir, file_path))
 
         for script_path in scripts:
+            Log("Processing file %s..." % script_path)
             PreprocessTextFile("%s/%s" % (source_dir, script_path), "%s/%s" % (theme_dir, script_path), theme)
 
         for image_path in vector_images:
-            Log("Converting file %s.svg..." % image_path)
+            Log("Rendering file %s.svg..." % image_path)
             PreprocessTextFile("%s/%s.svg" % (source_dir, image_path), "Temporary.svg", theme)
             os.system("inkscape "
                         "--batch-process "

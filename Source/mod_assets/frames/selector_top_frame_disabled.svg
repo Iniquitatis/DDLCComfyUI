@@ -6,8 +6,8 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="180" height="38">
-    <g fill="CUI_PRM_COLOR(rgb(219, 219, 219))" stroke="CUI_PRM_COLOR(rgb(191, 191, 191))" stroke-width="3">
-        <rect x="1.5" y="1.5" width="177" height="48" rx="$CUI_FRM_ROUNDING$" />
+    <g fill="CUI_PRM_COLOR(219, 219, 219)" stroke="CUI_PRM_COLOR(191, 191, 191)" stroke-width="3">
+        <rect x="1.5" y="1.5" width="177" height="48" rx="CUI_FRM_ROUNDING()" />
     </g>
-    <line x1="3" y1="36.5" x2="177" y2="36.5" stroke="CUI_PRM_COLOR(rgb(0, 0, 0))" stroke-width="3" />
+    <line x1="3" y1="36.5" x2="177" y2="36.5" stroke="CUI_PRM_COLOR(0, 0, 0)" stroke-width="3" />
 </svg>

@@ -6,7 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="35" height="35">
-    <g fill="CUI_PRM_COLOR(rgb(255, 230, 244))" stroke="CUI_PRM_COLOR(rgb(255, 189, 225))" stroke-width="3">
-        <rect x="1.5" y="1.5" width="32" height="32" rx="$CUI_BTN_ROUNDING$" />
+    <g fill="CUI_PRM_COLOR(255, 230, 244)" stroke="CUI_PRM_COLOR(255, 189, 225)" stroke-width="3">
+        <rect x="1.5" y="1.5" width="32" height="32" rx="CUI_BTN_ROUNDING()" />
     </g>
 </svg>
