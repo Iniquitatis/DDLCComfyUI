@@ -1,0 +1,19 @@
+{
+    "name": "Mint",
+    "asset_directory": "mint",
+    "button_rounding": 3,
+    "frame_rounding": 3,
+    "dialog_rounding": 9,
+    "main_font":
+    {
+        "normal": "mod_assets/font/Nunito-SemiBold.ttf",
+        "bold": "mod_assets/font/Nunito-Bold.ttf",
+        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf"
+    },
+    "menu_font": "gui/font/RifficFree-Bold.ttf",
+    "option_font": "gui/font/Halogen.ttf",
+    "primary_hue": 150,
+    "primary_saturation": 0.33,
+    "secondary_hue": 138,
+    "secondary_saturation": 0.58
+}

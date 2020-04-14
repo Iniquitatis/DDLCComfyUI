@@ -1,0 +1,19 @@
+{
+    "name": "Default",
+    "asset_directory": "default",
+    "button_rounding": 4,
+    "frame_rounding": 4,
+    "dialog_rounding": 10,
+    "main_font":
+    {
+        "normal": "mod_assets/font/Nunito-SemiBold.ttf",
+        "bold": "mod_assets/font/Nunito-Bold.ttf",
+        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf"
+    },
+    "menu_font": "gui/font/RifficFree-Bold.ttf",
+    "option_font": "gui/font/Halogen.ttf",
+    "primary_hue": null,
+    "primary_saturation": null,
+    "secondary_hue": null,
+    "secondary_saturation": null
+}

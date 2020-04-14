@@ -6,7 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="400" height="35">
-    <g fill="rgb(27, 27, 27)" stroke="rgb(140, 140, 140)" stroke-width="3">
-        <rect x="1.5" y="1.5" width="397" height="32" rx="$COMFY_UI_BUTTON_ROUNDING$" />
+    <g fill="CUI_PRM_COLOR(27, 27, 27)" stroke="CUI_PRM_COLOR(140, 140, 140)" stroke-width="3">
+        <rect x="1.5" y="1.5" width="397" height="32" rx="CUI_BTN_ROUNDING()" />
     </g>
 </svg>

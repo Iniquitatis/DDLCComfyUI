@@ -8,9 +8,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="168" height="39">
     <defs>
         <linearGradient id="fillGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color: rgb(255, 238, 246)" />
-            <stop offset="82.5%" style="stop-color: rgb(255, 238, 246)" />
-            <stop offset="100%" style="stop-color: rgb(211, 197, 204)" />
+            <stop offset="0%" style="stop-color: CUI_PRM_COLOR(255, 238, 246)" />
+            <stop offset="82.5%" style="stop-color: CUI_PRM_COLOR(255, 238, 246)" />
+            <stop offset="100%" style="stop-color: CUI_PRM_COLOR(211, 197, 204)" />
         </linearGradient>
     </defs>
     <g fill="url(#fillGradient)" fill-opacity="0.9">

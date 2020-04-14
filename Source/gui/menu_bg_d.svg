@@ -8,12 +8,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1380" height="1320">
     <defs>
         <pattern id="dots" x="-40" y="-140" width="200" height="200" patternUnits="userSpaceOnUse">
-            <g fill="rgb(206, 74, 126)">
+            <g fill="CUI_PRM_COLOR(206, 74, 126)">
                 <circle cx="40" cy="40" r="40" />
                 <circle cx="140" cy="140" r="40" />
             </g>
         </pattern>
     </defs>
-    <rect x="0" y="0" width="1380" height="1320" fill="rgb(27, 27, 27)" />
+    <rect x="0" y="0" width="1380" height="1320" fill="CUI_PRM_COLOR(27, 27, 27)" />
     <rect x="0" y="0" width="1680" height="1620" fill="url(#dots)" />
 </svg>

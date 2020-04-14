@@ -11,10 +11,9 @@
 ################################################################################
 dpi_scale = 1
 
-preprocessing_tokens = [
-    [ "$COMFY_UI_BUTTON_ROUNDING$", 4 ],
-    [ "$COMFY_UI_FRAME_ROUNDING$" , 4 ],
-]
+theme_dir  = "Themes"
+source_dir = "Source"
+build_dir  = "Build"
 
 dir_structure = [
     "gui",
@@ -32,11 +31,14 @@ dir_structure = [
 ]
 
 common_files = [
-    "zzz_comfy_ui.rpy",
     "mod_assets/font/Nunito-Bold.ttf",
     "mod_assets/font/Nunito-SemiBold.ttf",
     "mod_assets/font/Nunito-SemiBoldItalic.ttf",
     "mod_assets/font/OFL.txt",
+]
+
+scripts = [
+    "zzz_comfy_ui.rpy",
 ]
 
 vector_images = [
@@ -188,28 +190,117 @@ glitch_regions = [
 ################################################################################
 # Script itself
 ################################################################################
+import json
 import os
+import re
 import shutil
 
 from PIL import Image
+from hsluv import *
 
-def PreprocessSVG(input_name, output_name):
+themes = []
+
+# Text file preprocessing
+def FormatRGBHexString(r, g, b):
+    return "#%02x%02x%02x" % (int(r), int(g), int(b))
+
+def FormatRGBAHexString(r, g, b, a):
+    return "#%02x%02x%02x%02x" % (int(r), int(g), int(b), int(a))
+
+def ModulateRGBColor(r, g, b, h, s):
+    r = float(r) / 255.0
+    g = float(g) / 255.0
+    b = float(b) / 255.0
+
+    ch, cs, cl = rgb_to_hsluv([r, g, b])
+    r, g, b = hsluv_to_rgb([h, cs * s, cl])
+
+    return (int(r * 255.0),
+            int(g * 255.0),
+            int(b * 255.0))
+
+def ModulateRGBAColor(r, g, b, a, h, s):
+    r = float(r) / 255.0
+    g = float(b) / 255.0
+    b = float(b) / 255.0
+    a = float(a) / 255.0
+
+    ch, cs, cl = rgb_to_hsluv([r, g, b])
+    r, g, b = hsluv_to_rgb([h, cs * s, cl])
+
+    return (int(r * 255.0),
+            int(g * 255.0),
+            int(b * 255.0),
+            int(a * 255.0))
+
+def GetThemeParameter(macro_args, method_args):
+    return str(method_args)
+
+def ModulateColors(macro_args, method_args):
+    h, s = method_args
+
+    if len(macro_args) == 3:
+        r, g, b = macro_args
+        if h == None or s == None:
+            return FormatRGBHexString(r, g, b)
+        r, g, b = ModulateRGBColor(int(r), int(g), int(b), float(h), float(s))
+        return FormatRGBHexString(r, g, b)
+    elif len(macro_args) == 4:
+        r, g, b, a = macro_args
+        if h == None or s == None:
+            return FormatRGBAHexString(r, g, b, a)
+        r, g, b, a = ModulateRGBAColor(int(r), int(g), int(b), int(a), float(h), float(s))
+        return FormatRGBAHexString(r, g, b, a)
+
+    return "#baadf00d"
+
+def ParseMacroArguments(match):
+    if match.lastindex == None or match.lastindex == 0:
+        # No arguments has been passed to the macro
+        return []
+
+    args_string = match.group(1)
+
+    query = ""
+    for i in range(0, 4):
+        query += "\s*([A-Za-z0-9_\-.]+)\s*"
+        result = re.findall(query, args_string)
+        if len(result) > 0:
+            return result
+        query += ","
+
+def PreprocessTextFile(in_path, out_path, theme):
     text = ""
 
-    with open(input_name, "r") as file:
+    with open(in_path, "r") as file:
         text = file.read()
 
-    for token, value in preprocessing_tokens:
-        text = text.replace(token, str(value))
+    macros = [
+        [ "CUI_BTN_ROUNDING"    , GetThemeParameter, (theme["button_rounding"])                              ],
+        [ "CUI_FRM_ROUNDING"    , GetThemeParameter, (theme["frame_rounding"])                               ],
+        [ "CUI_DLG_ROUNDING"    , GetThemeParameter, (theme["dialog_rounding"])                              ],
+        [ "CUI_MAIN_FONT"       , GetThemeParameter, (theme["main_font"]["normal"])                          ],
+        [ "CUI_MAIN_FONT_BOLD"  , GetThemeParameter, (theme["main_font"]["bold"])                            ],
+        [ "CUI_MAIN_FONT_ITALIC", GetThemeParameter, (theme["main_font"]["italic"])                          ],
+        [ "CUI_MENU_FONT"       , GetThemeParameter, (theme["menu_font"])                                    ],
+        [ "CUI_OPTION_FONT"     , GetThemeParameter, (theme["option_font"])                                  ],
+        [ "CUI_PRM_COLOR"       , ModulateColors   , (theme["primary_hue"], theme["primary_saturation"])     ],
+        [ "CUI_SCD_COLOR"       , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"]) ],
+    ]
 
-    with open(output_name, "w") as file:
+    for macro_name, method, method_args in macros:
+        query = macro_name + "\(([A-Za-z0-9_\-,. ]*)\)"
+        text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
+
+    with open(out_path, "w") as file:
         file.write(text)
 
+# Image glitching
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
     region_data = []
     for ix in range(0, w):
         region_data.append([])
-        for ix in range(0, h):
+        for iy in range(0, h):
             region_data[-1].append((0, 0, 0, 0))
 
     for ix in range(0, w):
@@ -222,8 +313,8 @@ def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
             # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
             pixel_data[x + dx + ix, y + dy + iy] = region_data[ix][iy]
 
-def Glitch(image_name):
-    with Image.open(image_name) as image:
+def Glitch(image_path):
+    with Image.open(image_path) as image:
         pixel_data = image.load()
         for x, y, w, h, dx, dy in glitch_regions:
             x  *= dpi_scale
@@ -233,41 +324,63 @@ def Glitch(image_name):
             dx *= dpi_scale
             dy *= dpi_scale
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
-        image.save(image_name)
+        image.save(image_path)
 
-def Build(build_dir):
+# Theme loading
+def PreloadThemes():
+    for base_path, dirs, files in os.walk(theme_dir):
+        for file_path in files:
+            with open(os.path.join(base_path, file_path), "r") as json_file:
+                json_data = json.load(json_file)
+                themes.append(json_data)
+
+# Build chain
+def Log(message):
+    print("BUILD: %s" % message)
+
+def Build():
     if os.path.exists(build_dir):
-        print("Cleaning up previous build...")
+        Log("Cleaning up previous build...")
         shutil.rmtree(build_dir)
 
-    print("Creating directory %s..." % build_dir)
+    Log("Creating directory %s..." % build_dir)
     os.mkdir(build_dir)
 
-    for dir_name in dir_structure:
-        if not os.path.exists("%s/%s" % (build_dir, dir_name)):
-            print("Creating directory %s/%s..." % (build_dir, dir_name))
-            os.mkdir("%s/%s" % (build_dir, dir_name))
+    for theme in themes:
+        theme_dir = "%s/%s" % (build_dir, theme["asset_directory"])
+        Log("Creating directory %s..." % (theme_dir))
+        os.mkdir(theme_dir)
 
-    for file_name in common_files:
-        print("Copying file %s..." % file_name)
-        shutil.copyfile("Source/%s" % file_name, "%s/%s" % (build_dir, file_name))
+        for dir_path in dir_structure:
+            dir_full_path = ("%s/%s") % (theme_dir, dir_path)
+            Log("Creating directory %s..." % (dir_full_path))
+            os.mkdir(dir_full_path)
 
-    for image_name in vector_images:
-        print("Converting file %s.svg..." % image_name)
-        PreprocessSVG("Source/%s.svg" % image_name, "Temporary.svg")
-        os.system("inkscape "
-                    "--export-dpi=\"%i\" "
-                    "--export-type=\"png\" "
-                    "--export-file=\"%s/%s.png\" "
-                    "Temporary.svg" % (96 * dpi_scale, build_dir, image_name))
+        for file_path in common_files:
+            Log("Copying file %s..." % file_path)
+            shutil.copyfile("%s/%s" % (source_dir, file_path), "%s/%s" % (theme_dir, file_path))
 
-    for image_name in glitched_boxes:
-        print("Glitching image %s.png..." % image_name)
-        Glitch("%s/%s.png" % (build_dir, image_name))
+        for script_path in scripts:
+            Log("Processing file %s..." % script_path)
+            PreprocessTextFile("%s/%s" % (source_dir, script_path), "%s/%s" % (theme_dir, script_path), theme)
 
-    print("Cleaning up...")
-    os.remove("Temporary.svg")
+        for image_path in vector_images:
+            Log("Rendering file %s.svg..." % image_path)
+            PreprocessTextFile("%s/%s.svg" % (source_dir, image_path), "Temporary.svg", theme)
+            os.system("inkscape "
+                        "--batch-process "
+                        "--export-dpi=\"%i\" "
+                        "--export-filename=\"%s/%s.png\" "
+                        "--export-overwrite "
+                        "--export-type=\"png\" "
+                        "Temporary.svg" % (96 * dpi_scale, theme_dir, image_path))
+            os.remove("Temporary.svg")
 
-    print("Finished!")
+        for image_path in glitched_boxes:
+            Log("Glitching image %s.png..." % image_path)
+            Glitch("%s/%s.png" % (theme_dir, image_path))
 
-Build("Build")
+    Log("Finished!")
+
+PreloadThemes()
+Build()

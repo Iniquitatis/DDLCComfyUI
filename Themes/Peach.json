@@ -1,0 +1,19 @@
+{
+    "name": "Peach",
+    "asset_directory": "peach",
+    "button_rounding": 5,
+    "frame_rounding": 5,
+    "dialog_rounding": 12,
+    "main_font":
+    {
+        "normal": "mod_assets/font/Nunito-SemiBold.ttf",
+        "bold": "mod_assets/font/Nunito-Bold.ttf",
+        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf"
+    },
+    "menu_font": "gui/font/RifficFree-Bold.ttf",
+    "option_font": "gui/font/Halogen.ttf",
+    "primary_hue": 30,
+    "primary_saturation": 0.5,
+    "secondary_hue": 15,
+    "secondary_saturation": 0.8
+}

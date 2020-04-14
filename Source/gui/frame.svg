@@ -6,7 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="600" height="250">
-    <g fill="rgb(255, 230, 244)" stroke="rgb(255, 189, 225)" stroke-width="3">
-        <rect x="1.5" y="1.5" width="597" height="247" rx="$COMFY_UI_FRAME_ROUNDING$" />
+    <g fill="CUI_PRM_COLOR(255, 230, 244)" stroke="CUI_PRM_COLOR(255, 189, 225)" stroke-width="3">
+        <rect x="1.5" y="1.5" width="597" height="247" rx="CUI_FRM_ROUNDING()" />
     </g>
 </svg>
