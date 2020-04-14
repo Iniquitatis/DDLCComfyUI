@@ -1,0 +1,19 @@
+{
+    "name": "Classic",
+    "asset_directory": "classic",
+    "button_rounding": 0,
+    "frame_rounding": 0,
+    "dialog_rounding": 12,
+    "main_font":
+    {
+        "normal": "gui/font/Aller_Rg.ttf",
+        "bold": "gui/font/Aller_Rg.ttf",
+        "italic": "gui/font/Aller_Rg.ttf"
+    },
+    "menu_font": "gui/font/RifficFree-Bold.ttf",
+    "option_font": "gui/font/Halogen.ttf",
+    "primary_hue": null,
+    "primary_saturation": null,
+    "secondary_hue": null,
+    "secondary_saturation": null
+}

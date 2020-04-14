@@ -1,0 +1,19 @@
+{
+    "name": "Strawberry",
+    "asset_directory": "strawberry",
+    "button_rounding": 4,
+    "frame_rounding": 4,
+    "dialog_rounding": 9,
+    "main_font":
+    {
+        "normal": "mod_assets/font/Nunito-SemiBold.ttf",
+        "bold": "mod_assets/font/Nunito-Bold.ttf",
+        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf"
+    },
+    "menu_font": "gui/font/RifficFree-Bold.ttf",
+    "option_font": "gui/font/Halogen.ttf",
+    "primary_hue": 3,
+    "primary_saturation": 0.85,
+    "secondary_hue": 142,
+    "secondary_saturation": 0.75
+}

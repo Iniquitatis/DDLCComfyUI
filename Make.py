@@ -11,22 +11,9 @@
 ################################################################################
 dpi_scale = 1
 
-color_schemes = [
-    { "name": "default", "hue": None, "saturation_mul": 1.0 },
-    { "name": "gray"   , "hue": 0   , "saturation_mul": 0.0 },
-    { "name": "red"    , "hue": 0   , "saturation_mul": 1.0 },
-    { "name": "peach"  , "hue": 30  , "saturation_mul": 0.6 },
-    { "name": "yellow" , "hue": 55  , "saturation_mul": 1.0 },
-    { "name": "green"  , "hue": 120 , "saturation_mul": 0.7 },
-    { "name": "cyan"   , "hue": 188 , "saturation_mul": 0.8 },
-    { "name": "blue"   , "hue": 240 , "saturation_mul": 1.0 },
-    { "name": "purple" , "hue": 300 , "saturation_mul": 1.0 },
-]
-
-preprocessing_tokens = [
-    [ "$COMFY_UI_BUTTON_ROUNDING$", 4 ],
-    [ "$COMFY_UI_FRAME_ROUNDING$" , 4 ],
-]
+theme_dir  = "Themes"
+source_dir = "Source"
+build_dir  = "Build"
 
 dir_structure = [
     "gui",
@@ -44,11 +31,14 @@ dir_structure = [
 ]
 
 common_files = [
-    "zzz_comfy_ui.rpy",
     "mod_assets/font/Nunito-Bold.ttf",
     "mod_assets/font/Nunito-SemiBold.ttf",
     "mod_assets/font/Nunito-SemiBoldItalic.ttf",
     "mod_assets/font/OFL.txt",
+]
+
+scripts = [
+    "zzz_comfy_ui.rpy",
 ]
 
 vector_images = [
@@ -200,6 +190,7 @@ glitch_regions = [
 ################################################################################
 # Script itself
 ################################################################################
+import json
 import os
 import re
 import shutil
@@ -207,57 +198,89 @@ import shutil
 from PIL import Image
 from hsluv import *
 
-def ModulateSVGColorByRegexMatch(match, scheme):
+themes = []
+
+# Text file preprocessing
+def ModulateRGBColorByRegexMatch(match, h, s):
+    if h == None or s == None:
+        return "rgb(%i, %i, %i)" % (match.group(1),
+                                    match.group(2),
+                                    match.group(3))
+
     r = float(match.group(1)) / 255.0
     g = float(match.group(2)) / 255.0
     b = float(match.group(3)) / 255.0
-    h, s, l = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([scheme["hue"], s * scheme["saturation_mul"], l])
+    ch, cs, cl = rgb_to_hsluv([r, g, b])
+    r, g, b = hsluv_to_rgb([h, cs * s, cl])
     return "rgb(%i, %i, %i)" % (int(r * 255.0),
                                 int(g * 255.0),
                                 int(b * 255.0))
 
-def ModulateRPYColorByRegexMatch(match, scheme):
+def ModulateHexColorByRegexMatch(match, h, s):
+    if h == None or s == None:
+        return "#%x%x%x%x" % (match.group(1),
+                              match.group(2),
+                              match.group(3),
+                              match.group(4))
+
     r = float(int(match.group(1), 16)) / 255.0
     g = float(int(match.group(2), 16)) / 255.0
     b = float(int(match.group(3), 16)) / 255.0
     a = float(int(match.group(4), 16)) / 255.0
-    h, s, l = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([scheme["hue"], s * scheme["saturation_mul"], l])
+    ch, cs, cl = rgb_to_hsluv([r, g, b])
+    r, g, b = hsluv_to_rgb([h, cs * s, cl])
     return "#%x%x%x%x" % (int(r * 255.0),
                           int(g * 255.0),
                           int(b * 255.0),
                           int(a * 255.0))
 
-def PreprocessSVG(input_path, output_path, scheme):
+def ModulateColorsByRegexMatch(match, h, s):
+    text = match.group(1)
+
+    if h == None or s == None:
+        return text
+
+    text = re.sub("rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)",
+                  lambda match: ModulateRGBColorByRegexMatch(match, h, s), text)
+    text = re.sub("#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})",
+                  lambda match: ModulateHexColorByRegexMatch(match, h, s), text)
+
+    return text
+
+def PreprocessTextFile(in_path, out_path, theme):
     text = ""
 
-    with open(input_path, "r") as file:
+    with open(in_path, "r") as file:
         text = file.read()
+
+    preprocessing_tokens = [
+        [ "$CUI_BTN_ROUNDING$"    , theme["button_rounding"]     ],
+        [ "$CUI_FRM_ROUNDING$"    , theme["frame_rounding"]      ],
+        [ "$CUI_DLG_ROUNDING$"    , theme["dialog_rounding"]     ],
+        [ "$CUI_MAIN_FONT$"       , theme["main_font"]["normal"] ],
+        [ "$CUI_MAIN_FONT_BOLD$"  , theme["main_font"]["bold"]   ],
+        [ "$CUI_MAIN_FONT_ITALIC$", theme["main_font"]["italic"] ],
+        [ "$CUI_MENU_FONT$"       , theme["menu_font"]           ],
+        [ "$CUI_OPTION_FONT$"     , theme["option_font"]         ],
+    ]
 
     for token, value in preprocessing_tokens:
         text = text.replace(token, str(value))
 
-    if scheme["hue"] != None:
-        text = re.sub("rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)",
-                      lambda match : ModulateSVGColorByRegexMatch(match, scheme), text)
+    h1 = theme["primary_hue"]
+    s1 = theme["primary_saturation"]
+    h2 = theme["secondary_hue"]
+    s2 = theme["secondary_saturation"]
 
-    with open(output_path, "w") as file:
+    text = re.sub("CUI_PRM_COLOR\(([A-Za-z0-9#,\(\) ]+)\)",
+                  lambda match: ModulateColorsByRegexMatch(match, h1, s1), text)
+    text = re.sub("CUI_SCD_COLOR\(([A-Za-z0-9#,\(\) ]+)\)",
+                  lambda match: ModulateColorsByRegexMatch(match, h2, s2), text)
+
+    with open(out_path, "w") as file:
         file.write(text)
 
-def PreprocessRPY(input_path, output_path, scheme):
-    text = ""
-
-    with open(input_path, "r") as file:
-        text = file.read()
-
-    if scheme["hue"] != None:
-        text = re.sub("#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})",
-                      lambda match : ModulateRPYColorByRegexMatch(match, scheme), text)
-
-    with open(output_path, "w") as file:
-        file.write(text)
-
+# Image glitching
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
     region_data = []
     for ix in range(0, w):
@@ -288,47 +311,60 @@ def Glitch(image_path):
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
         image.save(image_path)
 
-def Build(build_dir):
+# Theme loading
+def PreloadThemes():
+    for base_path, dirs, files in os.walk(theme_dir):
+        for file_path in files:
+            with open(os.path.join(base_path, file_path), "r") as json_file:
+                json_data = json.load(json_file)
+                themes.append(json_data)
+
+# Build chain
+def Log(message):
+    print("BUILD: %s" % message)
+
+def Build():
     if os.path.exists(build_dir):
-        print("Cleaning up previous build...")
+        Log("Cleaning up previous build...")
         shutil.rmtree(build_dir)
 
-    print("Creating directory %s..." % build_dir)
+    Log("Creating directory %s..." % build_dir)
     os.mkdir(build_dir)
 
-    for scheme in color_schemes:
-        scheme_dir = "%s/%s" % (build_dir, scheme["name"])
-        if not os.path.exists(scheme_dir):
-            print("Creating directory %s..." % (scheme_dir))
-            os.mkdir(scheme_dir)
+    for theme in themes:
+        theme_dir = "%s/%s" % (build_dir, theme["asset_directory"])
+        Log("Creating directory %s..." % (theme_dir))
+        os.mkdir(theme_dir)
 
         for dir_path in dir_structure:
-            dir_full_path = ("%s/%s") % (scheme_dir, dir_path)
-            if not os.path.exists(dir_full_path):
-                print("Creating directory %s..." % (dir_full_path))
-                os.mkdir(dir_full_path)
+            dir_full_path = ("%s/%s") % (theme_dir, dir_path)
+            Log("Creating directory %s..." % (dir_full_path))
+            os.mkdir(dir_full_path)
 
         for file_path in common_files:
-            print("Copying file %s..." % file_path)
-            shutil.copyfile("Source/%s" % file_path, "%s/%s" % (scheme_dir, file_path))
+            Log("Copying file %s..." % file_path)
+            shutil.copyfile("%s/%s" % (source_dir, file_path), "%s/%s" % (theme_dir, file_path))
 
-        # FIXME: define name of the script in the top section of this file
-        PreprocessRPY("%s/zzz_comfy_ui.rpy" % scheme_dir, "%s/zzz_comfy_ui.rpy" % scheme_dir, scheme)
+        for script_path in scripts:
+            PreprocessTextFile("%s/%s" % (source_dir, script_path), "%s/%s" % (theme_dir, script_path), theme)
 
         for image_path in vector_images:
-            print("Converting file %s.svg..." % image_path)
-            PreprocessSVG("Source/%s.svg" % image_path, "Temporary.svg", scheme)
+            Log("Converting file %s.svg..." % image_path)
+            PreprocessTextFile("%s/%s.svg" % (source_dir, image_path), "Temporary.svg", theme)
             os.system("inkscape "
+                        "--batch-process "
                         "--export-dpi=\"%i\" "
+                        "--export-filename=\"%s/%s.png\" "
+                        "--export-overwrite "
                         "--export-type=\"png\" "
-                        "--export-file=\"%s/%s.png\" "
-                        "Temporary.svg" % (96 * dpi_scale, scheme_dir, image_path))
+                        "Temporary.svg" % (96 * dpi_scale, theme_dir, image_path))
             os.remove("Temporary.svg")
 
         for image_path in glitched_boxes:
-            print("Glitching image %s.png..." % image_path)
-            Glitch("%s/%s.png" % (scheme_dir, image_path))
+            Log("Glitching image %s.png..." % image_path)
+            Glitch("%s/%s.png" % (theme_dir, image_path))
 
-    print("Finished!")
+    Log("Finished!")
 
-Build("Build")
+PreloadThemes()
+Build()

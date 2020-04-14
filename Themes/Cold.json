@@ -1,0 +1,19 @@
+{
+    "name": "Cold",
+    "asset_directory": "cold",
+    "button_rounding": 2,
+    "frame_rounding": 2,
+    "dialog_rounding": 6,
+    "main_font":
+    {
+        "normal": "mod_assets/font/Nunito-SemiBold.ttf",
+        "bold": "mod_assets/font/Nunito-Bold.ttf",
+        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf"
+    },
+    "menu_font": "gui/font/RifficFree-Bold.ttf",
+    "option_font": "gui/font/Halogen.ttf",
+    "primary_hue": 245,
+    "primary_saturation": 0.13,
+    "secondary_hue": 225,
+    "secondary_saturation": 0.6
+}
