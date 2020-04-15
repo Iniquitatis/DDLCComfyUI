@@ -261,13 +261,13 @@ def ParseMacroArguments(match):
 
     args_string = match.group(1)
 
-    query = ""
+    query = r""
     for i in range(0, 4):
-        query += "\s*([A-Za-z0-9_\-.]+)\s*"
+        query += r"\s*([A-Za-z0-9_\-.]+)\s*"
         result = re.findall(query, args_string)
         if len(result) > 0:
             return result
-        query += ","
+        query += r","
 
 def PreprocessTextFile(in_path, out_path, theme):
     text = ""
@@ -289,7 +289,7 @@ def PreprocessTextFile(in_path, out_path, theme):
     ]
 
     for macro_name, method, method_args in macros:
-        query = macro_name + "\(([A-Za-z0-9_\-,. ]*)\)"
+        query = macro_name + r"\(([A-Za-z0-9_\-,. ]*)\)"
         text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
 
     with open(out_path, "w") as file:

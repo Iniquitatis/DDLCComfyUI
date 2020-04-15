@@ -34,23 +34,29 @@ define mas_comfy_ui.menu_button_text.dark.idle_outlines         = [(4, "CUI_SCD_
 define mas_comfy_ui.menu_button_text.dark.hover_outlines        = [(4, "CUI_SCD_COLOR(255, 128, 183)", 0, 0), (2, "CUI_SCD_COLOR(255, 128, 183)", 2, 2)]
 define mas_comfy_ui.menu_button_text.dark.insensitive_outlines  = [(4, "CUI_SCD_COLOR(255, 178, 212)", 0, 0), (2, "CUI_SCD_COLOR(255, 178, 212)", 2, 2)]
 
-define mas_comfy_ui.check_button_text.font                    = "CUI_OPTION_FONT()"
-define mas_comfy_ui.check_button_text.font_kerning            = 0.0
-define mas_comfy_ui.check_button_text.font_size               = 24
-define mas_comfy_ui.check_button_text.light.idle_color        = "CUI_SCD_COLOR(170, 170, 170)"
-define mas_comfy_ui.check_button_text.light.hover_color       = "CUI_SCD_COLOR(204, 102, 153)"
-define mas_comfy_ui.check_button_text.light.selected_color    = "CUI_SCD_COLOR(187, 85, 136)"
-define mas_comfy_ui.check_button_text.light.insensitive_color = "CUI_SCD_COLOR(170, 170, 170, 127)"
-define mas_comfy_ui.check_button_text.dark.idle_color         = "CUI_SCD_COLOR(170, 170, 170)"
-define mas_comfy_ui.check_button_text.dark.hover_color        = "CUI_SCD_COLOR(255, 128, 183)"
-define mas_comfy_ui.check_button_text.dark.selected_color     = "CUI_SCD_COLOR(222, 54, 126)"
-define mas_comfy_ui.check_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(170, 170, 170, 127)"
+define mas_comfy_ui.option_button_text.font                    = "CUI_OPTION_FONT()"
+define mas_comfy_ui.option_button_text.font_kerning            = 0.0
+define mas_comfy_ui.option_button_text.font_size               = 24
+define mas_comfy_ui.option_button_text.light.idle_color        = "CUI_SCD_COLOR(170, 170, 170)"
+define mas_comfy_ui.option_button_text.light.hover_color       = "CUI_SCD_COLOR(204, 102, 153)"
+define mas_comfy_ui.option_button_text.light.selected_color    = "CUI_SCD_COLOR(187, 85, 136)"
+define mas_comfy_ui.option_button_text.light.insensitive_color = "CUI_SCD_COLOR(170, 170, 170, 127)"
+define mas_comfy_ui.option_button_text.dark.idle_color         = "CUI_SCD_COLOR(170, 170, 170)"
+define mas_comfy_ui.option_button_text.dark.hover_color        = "CUI_SCD_COLOR(255, 128, 183)"
+define mas_comfy_ui.option_button_text.dark.selected_color     = "CUI_SCD_COLOR(222, 54, 126)"
+define mas_comfy_ui.option_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(170, 170, 170, 127)"
 
 define mas_comfy_ui.menu_label.font_size      = 24
 define mas_comfy_ui.menu_label.light.color    = "CUI_SCD_COLOR(255, 255, 255)"
 define mas_comfy_ui.menu_label.light.outlines = [(3, "CUI_SCD_COLOR(187, 85, 153)", 0, 0), (1, "CUI_SCD_COLOR(187, 85, 153)", 1, 1)]
 define mas_comfy_ui.menu_label.dark.color     = "CUI_SCD_COLOR(255, 217, 232)"
 define mas_comfy_ui.menu_label.dark.outlines  = [(3, "CUI_SCD_COLOR(222, 54, 126)", 0, 0), (1, "CUI_SCD_COLOR(222, 54, 126)", 1, 1)]
+
+define mas_comfy_ui.version_label.font_size      = 16
+define mas_comfy_ui.version_label.light.color    = "CUI_SCD_COLOR(64, 64, 64)"
+define mas_comfy_ui.version_label.light.outlines = []
+define mas_comfy_ui.version_label.dark.color     = "CUI_SCD_COLOR(253, 91, 162)"
+define mas_comfy_ui.version_label.dark.outlines  = []
 
 define mas_comfy_ui.music_menu_button_text.font                       = "mod_assets/font/mplus-2p-regular.ttf"
 define mas_comfy_ui.music_menu_button_text.font_kerning               = 0.0
@@ -64,8 +70,10 @@ define mas_comfy_ui.music_menu_button_text.dark.idle_outlines         = [(3, "CU
 define mas_comfy_ui.music_menu_button_text.dark.hover_outlines        = [(3, "CUI_SCD_COLOR(255, 128, 183)", 0, 0), (1, "CUI_SCD_COLOR(255, 128, 183)", 1, 1)]
 define mas_comfy_ui.music_menu_button_text.dark.insensitive_outlines  = [(3, "CUI_SCD_COLOR(255, 178, 212)", 0, 0), (1, "CUI_SCD_COLOR(255, 178, 212)", 1, 1)]
 
-define mas_comfy_ui.confirm_prompt_text.light.color = "CUI_PRM_COLOR(64, 64, 64)"
-define mas_comfy_ui.confirm_prompt_text.dark.color  = "CUI_PRM_COLOR(253, 91, 162)"
+define mas_comfy_ui.confirm_prompt_text.light.color    = "CUI_PRM_COLOR(64, 64, 64)"
+define mas_comfy_ui.confirm_prompt_text.light.outlines = []
+define mas_comfy_ui.confirm_prompt_text.dark.color     = "CUI_PRM_COLOR(253, 91, 162)"
+define mas_comfy_ui.confirm_prompt_text.dark.outlines  = []
 
 define mas_comfy_ui.dialogue_text.color    = "CUI_PRM_COLOR(248, 248, 248)"
 define mas_comfy_ui.dialogue_text.outlines = [(2, "CUI_PRM_COLOR(64, 64, 64)", 0, 0)]
@@ -150,59 +158,59 @@ style navigation_dark_button_text:
 
 # Check button
 style check_button_text:
-    font              mas_comfy_ui.check_button_text.font
-    kerning           mas_comfy_ui.check_button_text.font_kerning
-    size              mas_comfy_ui.check_button_text.font_size
-    idle_color        mas_comfy_ui.check_button_text.light.idle_color
-    hover_color       mas_comfy_ui.check_button_text.light.hover_color
-    selected_color    mas_comfy_ui.check_button_text.light.selected_color
-    insensitive_color mas_comfy_ui.check_button_text.light.insensitive_color
+    font              mas_comfy_ui.option_button_text.font
+    kerning           mas_comfy_ui.option_button_text.font_kerning
+    size              mas_comfy_ui.option_button_text.font_size
+    idle_color        mas_comfy_ui.option_button_text.light.idle_color
+    hover_color       mas_comfy_ui.option_button_text.light.hover_color
+    selected_color    mas_comfy_ui.option_button_text.light.selected_color
+    insensitive_color mas_comfy_ui.option_button_text.light.insensitive_color
 
 # Check button (dark)
 style check_dark_button_text:
-    font              mas_comfy_ui.check_button_text.font
-    kerning           mas_comfy_ui.check_button_text.font_kerning
-    size              mas_comfy_ui.check_button_text.font_size
-    idle_color        mas_comfy_ui.check_button_text.dark.idle_color
-    hover_color       mas_comfy_ui.check_button_text.dark.hover_color
-    selected_color    mas_comfy_ui.check_button_text.dark.selected_color
-    insensitive_color mas_comfy_ui.check_button_text.dark.insensitive_color
+    font              mas_comfy_ui.option_button_text.font
+    kerning           mas_comfy_ui.option_button_text.font_kerning
+    size              mas_comfy_ui.option_button_text.font_size
+    idle_color        mas_comfy_ui.option_button_text.dark.idle_color
+    hover_color       mas_comfy_ui.option_button_text.dark.hover_color
+    selected_color    mas_comfy_ui.option_button_text.dark.selected_color
+    insensitive_color mas_comfy_ui.option_button_text.dark.insensitive_color
 
 # Radio button
 style radio_button_text:
-    font              mas_comfy_ui.check_button_text.font
-    kerning           mas_comfy_ui.check_button_text.font_kerning
-    size              mas_comfy_ui.check_button_text.font_size
-    idle_color        mas_comfy_ui.check_button_text.light.idle_color
-    hover_color       mas_comfy_ui.check_button_text.light.hover_color
-    selected_color    mas_comfy_ui.check_button_text.light.selected_color
-    insensitive_color mas_comfy_ui.check_button_text.light.insensitive_color
+    font              mas_comfy_ui.option_button_text.font
+    kerning           mas_comfy_ui.option_button_text.font_kerning
+    size              mas_comfy_ui.option_button_text.font_size
+    idle_color        mas_comfy_ui.option_button_text.light.idle_color
+    hover_color       mas_comfy_ui.option_button_text.light.hover_color
+    selected_color    mas_comfy_ui.option_button_text.light.selected_color
+    insensitive_color mas_comfy_ui.option_button_text.light.insensitive_color
 
 # Radio button (dark)
 style radio_dark_button_text:
-    font              mas_comfy_ui.check_button_text.font
-    kerning           mas_comfy_ui.check_button_text.font_kerning
-    size              mas_comfy_ui.check_button_text.font_size
-    idle_color        mas_comfy_ui.check_button_text.dark.idle_color
-    hover_color       mas_comfy_ui.check_button_text.dark.hover_color
-    selected_color    mas_comfy_ui.check_button_text.dark.selected_color
-    insensitive_color mas_comfy_ui.check_button_text.dark.insensitive_color
+    font              mas_comfy_ui.option_button_text.font
+    kerning           mas_comfy_ui.option_button_text.font_kerning
+    size              mas_comfy_ui.option_button_text.font_size
+    idle_color        mas_comfy_ui.option_button_text.dark.idle_color
+    hover_color       mas_comfy_ui.option_button_text.dark.hover_color
+    selected_color    mas_comfy_ui.option_button_text.dark.selected_color
+    insensitive_color mas_comfy_ui.option_button_text.dark.insensitive_color
 
 # Main menu version text
 style main_menu_version_def:
     font     mas_comfy_ui.common.font
     kerning  mas_comfy_ui.common.font_kerning
-    size     16
-    color    mas_comfy_ui.menu_label.light.color
-    outlines []
+    size     mas_comfy_ui.version_label.font_size
+    color    mas_comfy_ui.version_label.light.color
+    outlines mas_comfy_ui.version_label.light.outlines
 
 # Main menu version text (dark)
 style main_menu_version_dark:
     font     mas_comfy_ui.common.font
     kerning  mas_comfy_ui.common.font_kerning
-    size     16
-    color    mas_comfy_ui.menu_label.dark.color
-    outlines []
+    size     mas_comfy_ui.version_label.font_size
+    color    mas_comfy_ui.version_label.dark.color
+    outlines mas_comfy_ui.version_label.dark.outlines
 
 # Music menu button
 style music_menu_button_text:
@@ -246,7 +254,7 @@ style confirm_prompt_text_def:
     kerning  mas_comfy_ui.common.font_kerning
     size     mas_comfy_ui.common.font_size
     color    mas_comfy_ui.confirm_prompt_text.light.color
-    outlines []
+    outlines mas_comfy_ui.confirm_prompt_text.light.outlines
 
 # Confirm prompt (dark)
 style confirm_prompt_text_dark:
@@ -254,7 +262,7 @@ style confirm_prompt_text_dark:
     kerning  mas_comfy_ui.common.font_kerning
     size     mas_comfy_ui.common.font_size
     color    mas_comfy_ui.confirm_prompt_text.dark.color
-    outlines []
+    outlines mas_comfy_ui.confirm_prompt_text.dark.outlines
 
 
 
