@@ -9,4 +9,7 @@
     <g fill="CUI_PRM_COLOR(255, 255, 255)" stroke="CUI_PRM_COLOR(255, 189, 225)" stroke-width="3">
         <rect x="1.5" y="1.5" width="117" height="32" rx="CUI_BTN_ROUNDING()" />
     </g>
+    <g fill="none" stroke="CUI_PRM_COLOR(255, 225, 241)" stroke-width="1">
+        <rect x="2.5" y="2.5" width="115" height="30" rx="CUI_BTN_ROUNDING()" />
+    </g>
 </svg>

@@ -6,7 +6,10 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="600" height="250">
-    <g fill="CUI_PRM_COLOR(27, 27, 27)" stroke="CUI_PRM_COLOR(206, 74, 126)" stroke-width="3">
-        <rect x="1.5" y="1.5" width="597" height="247" rx="CUI_FRM_ROUNDING()" />
+    <g fill="CUI_PRM_COLOR(27, 27, 27)" stroke="CUI_PRM_COLOR(206, 74, 126)" stroke-width="4">
+        <rect x="2" y="2" width="596" height="246" rx="CUI_FRM_ROUNDING()" />
+    </g>
+    <g fill="none" stroke="CUI_PRM_COLOR(85, 44, 61)" stroke-width="1">
+        <rect x="3.5" y="3.5" width="593" height="243" rx="CUI_FRM_ROUNDING()" />
     </g>
 </svg>

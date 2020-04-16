@@ -3,15 +3,17 @@
     "asset_directory": "strawberry",
     "button_rounding": 4,
     "frame_rounding": 4,
-    "dialog_rounding": 9,
+    "dialogue_rounding": 9,
     "main_font":
     {
         "normal": "mod_assets/font/Nunito-SemiBold.ttf",
+        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf",
         "bold": "mod_assets/font/Nunito-Bold.ttf",
-        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf"
+        "bold_italic": "mod_assets/font/Nunito-BoldItalic.ttf"
     },
     "menu_font": "gui/font/RifficFree-Bold.ttf",
     "option_font": "gui/font/Halogen.ttf",
+    "dialogue_vertical_offset": -3,
     "primary_hue": 3,
     "primary_saturation": 0.85,
     "secondary_hue": 142,

@@ -3,15 +3,17 @@
     "asset_directory": "classic",
     "button_rounding": 0,
     "frame_rounding": 0,
-    "dialog_rounding": 12,
+    "dialogue_rounding": 12,
     "main_font":
     {
-        "normal": "gui/font/Aller_Rg.ttf",
-        "bold": "gui/font/Aller_Rg.ttf",
-        "italic": "gui/font/Aller_Rg.ttf"
+        "normal": "mod_assets/font/Aller_Rg.ttf",
+        "italic": "mod_assets/font/Aller_It.ttf",
+        "bold": "mod_assets/font/Aller_Bd.ttf",
+        "bold_italic": "mod_assets/font/Aller_BdIt.ttf"
     },
     "menu_font": "gui/font/RifficFree-Bold.ttf",
     "option_font": "gui/font/Halogen.ttf",
+    "dialogue_vertical_offset": 0,
     "primary_hue": null,
     "primary_saturation": null,
     "secondary_hue": null,

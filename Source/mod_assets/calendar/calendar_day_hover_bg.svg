@@ -6,7 +6,10 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="128" height="65">
-    <g fill="rgb(255, 255, 255)" fill-opacity="0.7" stroke="rgb(250, 153, 228)" stroke-opacity="0.8" stroke-width="1">
+    <g fill="none" stroke="rgb(250, 153, 228)" stroke-opacity="0.86" stroke-width="1">
         <rect x="0.5" y="0.5" width="127" height="64" rx="0" />
+    </g>
+    <g fill="rgb(255, 255, 255)" fill-opacity="0.66" stroke="rgb(255, 253, 254)" stroke-opacity="0.9" stroke-width="1">
+        <rect x="1.5" y="1.5" width="125" height="62" rx="0" />
     </g>
 </svg>
