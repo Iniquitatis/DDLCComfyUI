@@ -39,8 +39,11 @@ This add-on aims to fix this problem.
 ## Installation
 0. _If you're unfamiliar with this add-on, backup the game installation directory, because some of the stock assets will be replaced_;
 1. Download the latest release archive;
-2. Extract it to the `game` subdirectory of the DDLC installation directory;
-3. Overwrite everything that gets in the way.
+2. Extract it to some empty directory;
+3. Open the directory with the theme you want (such as `classic`, `default`, etc.);
+4. Make sure it contains `comfy_ui`, `gui`, `mod_assets` and `zzz_comfy_ui.rpy`;
+5. Copy its contents to the `game` subdirectory of the DDLC installation directory;
+6. Overwrite _everything_ that gets in the way.
 
 
 
