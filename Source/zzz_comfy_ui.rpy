@@ -67,6 +67,7 @@ define comfy_ui.confirm_prompt_text.dark.color     = "CUI_PRM_COLOR(253, 91, 162
 define comfy_ui.confirm_prompt_text.dark.outlines  = []
 
 define comfy_ui.dialogue_text.vertical_offset = CUI_DLG_VERT_OFFSET()
+define comfy_ui.dialogue_text.line_spacing    = CUI_DLG_LINE_SPACING()
 define comfy_ui.dialogue_text.color           = "CUI_PRM_COLOR(248, 248, 248)"
 define comfy_ui.dialogue_text.outlines        = [(2, "CUI_PRM_COLOR(48, 48, 48)", 0, 0)]
 
@@ -389,11 +390,12 @@ style say_label_dark:
 
 # Text
 style normal:
-    font     comfy_ui.common.font
-    kerning  comfy_ui.common.font_kerning
-    yoffset  comfy_ui.dialogue_text.vertical_offset
-    color    comfy_ui.dialogue_text.color
-    outlines comfy_ui.dialogue_text.outlines
+    font         comfy_ui.common.font
+    kerning      comfy_ui.common.font_kerning
+    yoffset      comfy_ui.dialogue_text.vertical_offset
+    line_spacing comfy_ui.dialogue_text.line_spacing
+    color        comfy_ui.dialogue_text.color
+    outlines     comfy_ui.dialogue_text.outlines
 
 # Quick button
 style quick_button_text:

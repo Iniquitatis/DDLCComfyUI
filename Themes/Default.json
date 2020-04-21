@@ -15,6 +15,7 @@
     "option_font": "gui/font/Halogen.ttf",
     "main_font_kerning": 0.0,
     "dialogue_vertical_offset": -3,
+    "dialogue_line_spacing": -1,
     "primary_hue": null,
     "primary_saturation": null,
     "secondary_hue": null,

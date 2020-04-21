@@ -245,6 +245,7 @@ def PreprocessTextFile(in_path, out_path, theme):
         [ "CUI_OPTION_FONT"          , GetThemeParameter, (theme["option_font"])                                  ],
         [ "CUI_MAIN_FONT_KERNING"    , GetThemeParameter, (theme["main_font_kerning"])                            ],
         [ "CUI_DLG_VERT_OFFSET"      , GetThemeParameter, (theme["dialogue_vertical_offset"])                     ],
+        [ "CUI_DLG_LINE_SPACING"     , GetThemeParameter, (theme["dialogue_line_spacing"])                        ],
         [ "CUI_PRM_COLOR"            , ModulateColors   , (theme["primary_hue"], theme["primary_saturation"])     ],
         [ "CUI_SCD_COLOR"            , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"]) ],
     ]
