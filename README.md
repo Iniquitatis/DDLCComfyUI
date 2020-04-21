@@ -13,35 +13,28 @@ This add-on aims to fix this problem.
 
 ## Screenshots
 
-### Before
-![Talk (before)](Screenshots/TalkBefore.png)
-
-### After
-![Talk (after)](Screenshots/TalkAfter.png)
-
----
-
-### Before
-![Tip #4 (before)](Screenshots/Tip4Before.png)
-
-### After
-![Tip #4 (after)](Screenshots/Tip4After.png)
-
----
-
-### Before
-![Hey (before)](Screenshots/HeyBefore.png)
-
-### After
-![Hey (after)](Screenshots/HeyAfter.png)
-
----
-
-### Before
-![Tie (before)](Screenshots/TieBefore.png)
-
-### After
-![Tie (after)](Screenshots/TieAfter.png)
+<table>
+  <tr>
+    <th>Before</th>
+    <th>After</th>
+  </tr>
+  <tr>
+    <td><img src="Screenshots/TalkBefore.png" width="320"></td>
+    <td><img src="Screenshots/TalkAfter.png" width="320"></td>
+  </tr>
+  <tr>
+    <td><img src="Screenshots/Tip4Before.png" width="320"></td>
+    <td><img src="Screenshots/Tip4After.png" width="320"></td>
+  </tr>
+  <tr>
+    <td><img src="Screenshots/HeyBefore.png" width="320"></td>
+    <td><img src="Screenshots/HeyAfter.png" width="320"></td>
+  </tr>
+  <tr>
+    <td><img src="Screenshots/TieBefore.png" width="320"></td>
+    <td><img src="Screenshots/TieAfter.png" width="320"></td>
+  </tr>
+</table>
 
 
 
@@ -61,7 +54,7 @@ Let's pretend that there's already some questions:
 
 **Q:** It looks out of place.
 
-**A:** Well, we're talking about a mod for the game with all those pink things, polka dots, etc., which emphasizes romantic relationships with anime-styled girl. So, in my humble opinion, there's nothing wrong with this kind of changes.
+**A:** Well, we're talking about a mod for the game with all those pink things, polka dots, etc., which emphasizes romantic relationships with anime-styled girl. So, in my humble opinion, there's nothing wrong with this kind of changes.  
 Oh, and also, Monika in MAS is not some kind of crazy yandere/killer thing, but she's much more emotional and... cute?
 
 
@@ -71,17 +64,11 @@ Oh, and also, Monika in MAS is not some kind of crazy yandere/killer thing, but 
 Unfortunately, nothing is perfect in this world.  
 Pretty much every bug of this mod exists because not each UI element can be styled without making changes to the original codebase.
 
-... Or I don't know how to do it for the time being.
-
 So, here's the list of common problems:
 
-* Unstyled calendar text
-
-* Unstyled text in the _Appearance_ menus
-
-* Unstyled _Piano_ mini-game buttons
-
 * _Extra_ menu border looks a little bit broken/smudged
+
+* Jumping buttons in the _Appearance_ menus
 
 
 
