@@ -221,6 +221,58 @@ style generic_option_button_text_dk is generic_option_button_text_base:
 
 
 ################################################################################
+# Option buttons
+################################################################################
+
+# Check button
+style check_button is generic_option_button_lt:
+    clear
+
+style check_dark_button is generic_option_button_dk:
+    clear
+
+style check_button_text is generic_option_button_text_lt:
+    clear
+
+style check_dark_button_text is generic_option_button_text_dk:
+    clear
+
+# Radio button
+style radio_button is generic_option_button_lt:
+    clear
+
+style radio_dark_button is generic_option_button_dk:
+    clear
+
+style radio_button_text is generic_option_button_text_lt:
+    clear
+
+style radio_dark_button_text is generic_option_button_text_dk:
+    clear
+
+# Outfit check button
+# NOTE or FIXME: its text has different color from the standard check button
+style outfit_check_button is generic_option_button_lt:
+    clear
+
+style outfit_check_dark_button is generic_option_button_dk:
+    clear
+
+style outfit_check_button_text is generic_option_button_text_lt:
+    clear
+    color          "#bfbfbf"
+    hover_color    "#ffaa99"
+    selected_color "#ffeeeb"
+
+style outfit_check_dark_button_text is generic_option_button_text_dk:
+    clear
+    color          "#bfbfbf"
+    hover_color    "#ffaa99"
+    selected_color "#ffeeeb"
+
+
+
+################################################################################
 # Game menu
 ################################################################################
 
