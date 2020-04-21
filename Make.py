@@ -9,201 +9,146 @@
 ################################################################################
 # Configuration variables
 ################################################################################
+release_mode = False
 dpi_scale = 1
 
 theme_dir  = "Themes"
 source_dir = "Source"
 build_dir  = "Build"
 
-dir_structure = [
+files = [
     # Default
-    "gui",
-    "gui/button",
-    "gui/overlay",
-    "mod_assets",
-    "mod_assets/buttons",
-    "mod_assets/buttons/squares",
-    "mod_assets/calendar",
-    "mod_assets/console",
-    "mod_assets/font",
-    "mod_assets/frames",
-    "mod_assets/games",
-    "mod_assets/games/hangman",
+    "gui/ctc.svg",
+    "gui/frame.svg",
+    "gui/frame_d.svg",
+    "gui/menu_bg.svg",
+    "gui/menu_bg_d.svg",
+    "gui/namebox.svg",
+    "gui/namebox_d.svg",
+    "gui/textbox.svg",
+    "gui/textbox_d.svg",
+    "gui/textbox_monika.svg",
+    "gui/textbox_monika_d.svg",
+    "gui/button/choice_idle_background.svg",
+    "gui/button/choice_hover_background.svg",
+    "gui/button/choice_dark_idle_background.svg",
+    "gui/button/choice_dark_hover_background.svg",
+    "gui/button/scrollable_menu_idle_background.svg",
+    "gui/button/scrollable_menu_hover_background.svg",
+    "gui/button/scrollable_menu_disable_background.svg",
+    "gui/button/scrollable_menu_dark_idle_background.svg",
+    "gui/button/scrollable_menu_dark_hover_background.svg",
+    "gui/button/scrollable_menu_dark_disable_background.svg",
+    "gui/button/twopane_scrollable_menu_idle_background.svg",
+    "gui/button/twopane_scrollable_menu_hover_background.svg",
+    "gui/button/twopane_scrollable_menu_dark_idle_background.svg",
+    "gui/button/twopane_scrollable_menu_dark_hover_background.svg",
+    "gui/overlay/confirm.svg",
+    "gui/overlay/confirm_d.svg",
+    "gui/overlay/game_menu.svg",
+    "gui/overlay/game_menu_d.svg",
+    "gui/overlay/main_menu.svg",
+    "gui/overlay/main_menu_d.svg",
+    "mod_assets/hkb_idle_background.svg",
+    "mod_assets/hkb_idle_background_d.svg",
+    "mod_assets/hkb_hover_background.svg",
+    "mod_assets/hkb_hover_background_d.svg",
+    "mod_assets/hkb_disabled_background.svg",
+    "mod_assets/hkb_disabled_background_d.svg",
+    "mod_assets/island_idle_background.svg",
+    "mod_assets/island_idle_background_d.svg",
+    "mod_assets/island_hover_background.svg",
+    "mod_assets/island_hover_background_d.svg",
+    "mod_assets/music_menu.svg",
+    "mod_assets/music_menu_d.svg",
+    "mod_assets/buttons/squares/square_idle.svg",
+    "mod_assets/buttons/squares/square_idle_d.svg",
+    "mod_assets/buttons/squares/square_hover.svg",
+    "mod_assets/buttons/squares/square_hover_d.svg",
+    "mod_assets/buttons/squares/square_disabled.svg",
+    "mod_assets/buttons/squares/square_disabled_d.svg",
+    "mod_assets/calendar/calendar_bg.svg",
+    "mod_assets/calendar/calendar_bg-n.svg",
+    "mod_assets/calendar/calendar_close.svg",
+    "mod_assets/calendar/calendar_close-n.svg",
+    "mod_assets/calendar/calendar_close_hover.svg",
+    "mod_assets/calendar/calendar_close_hover-n.svg",
+    "mod_assets/calendar/calendar_day_bg.svg",
+    "mod_assets/calendar/calendar_day_bg-n.svg",
+    "mod_assets/calendar/calendar_day_hover_bg.svg",
+    "mod_assets/calendar/calendar_day_hover_bg-n.svg",
+    "mod_assets/calendar/calendar_day_disabled_bg.svg",
+    "mod_assets/calendar/calendar_day_disabled_bg-n.svg",
+    "mod_assets/calendar/calendar_day_name_bg.svg",
+    "mod_assets/calendar/calendar_day_name_bg-n.svg",
+    "mod_assets/calendar/calendar_left_arrow.svg",
+    "mod_assets/calendar/calendar_left_arrow-n.svg",
+    "mod_assets/calendar/calendar_left_arrow_hover.svg",
+    "mod_assets/calendar/calendar_left_arrow_hover-n.svg",
+    "mod_assets/calendar/calendar_right_arrow.svg",
+    "mod_assets/calendar/calendar_right_arrow-n.svg",
+    "mod_assets/calendar/calendar_right_arrow_hover.svg",
+    "mod_assets/calendar/calendar_right_arrow_hover-n.svg",
+    "mod_assets/console/cn_frame.svg",
+    "mod_assets/frames/black70_pinkborder100.svg",
+    "mod_assets/frames/black70_pinkborder100_d.svg",
+    "mod_assets/frames/black70_pinkborder100_2px.svg",
+    "mod_assets/frames/black70_pinkborder100_2px_d.svg",
+    "mod_assets/frames/black70_pinkborder100_5px.svg",
+    "mod_assets/frames/black70_pinkborder100_5px_d.svg",
+    "mod_assets/frames/modebar.svg",
+    "mod_assets/frames/modebar_d.svg",
+    "mod_assets/frames/selector_overlay.svg",
+    "mod_assets/frames/selector_overlay_d.svg",
+    "mod_assets/frames/selector_overlay_disabled.svg",
+    "mod_assets/frames/selector_overlay_disabled_d.svg",
+    "mod_assets/frames/selector_top_frame.svg",
+    "mod_assets/frames/selector_top_frame_d.svg",
+    "mod_assets/frames/selector_top_frame_selected.svg",
+    "mod_assets/frames/selector_top_frame_selected_d.svg",
+    "mod_assets/frames/selector_top_frame_disabled.svg",
+    "mod_assets/frames/selector_top_frame_disabled_d.svg",
+    "mod_assets/frames/trans_pink2pxborder100.svg",
+    "mod_assets/frames/trans_pink2pxborder100_d.svg",
+    "mod_assets/games/hangman/hm_0.svg",
+    "mod_assets/games/hangman/hm_1.svg",
+    "mod_assets/games/hangman/hm_2.svg",
+    "mod_assets/games/hangman/hm_3.svg",
+    "mod_assets/games/hangman/hm_4.svg",
+    "mod_assets/games/hangman/hm_5.svg",
+    "mod_assets/games/hangman/hm_6.svg",
+    "mod_assets/games/hangman/hm_frame.svg",
+    "mod_assets/games/hangman/hm_frame_d.svg",
+    "mod_assets/games/hangman/hm_sm_0.svg",
+    "mod_assets/games/hangman/hm_sm_1.svg",
+    "mod_assets/games/hangman/hm_sm_2.svg",
+    "mod_assets/games/hangman/hm_sm_3.svg",
+    "mod_assets/games/hangman/hm_sm_4.svg",
+    "mod_assets/games/hangman/hm_sm_5.svg",
+    "mod_assets/games/hangman/hm_sm_6.svg",
 
     # Custom
-    "mod_assets/comfy_ui",
-    "mod_assets/comfy_ui/button",
-]
-
-common_files = [
-    "mod_assets/font/Aller_Bd.ttf",
-    "mod_assets/font/Aller_BdIt.ttf",
-    "mod_assets/font/Aller_It.ttf",
-    "mod_assets/font/Aller_Rg.ttf",
-    "mod_assets/font/Nunito-Bold.ttf",
-    "mod_assets/font/Nunito-BoldItalic.ttf",
-    "mod_assets/font/Nunito-SemiBold.ttf",
-    "mod_assets/font/Nunito-SemiBoldItalic.ttf",
-    "mod_assets/font/OFL.txt",
-]
-
-scripts = [
     "zzz_comfy_ui.rpy",
-]
-
-vector_images = [
-    # Default
-    "gui/ctc",
-    "gui/frame",
-    "gui/frame_d",
-    "gui/menu_bg",
-    "gui/menu_bg_d",
-    "gui/namebox",
-    "gui/namebox_d",
-    "gui/textbox",
-    "gui/textbox_d",
-    "gui/textbox_monika",
-    "gui/textbox_monika_d",
-    "gui/button/choice_idle_background",
-    "gui/button/choice_hover_background",
-    "gui/button/choice_dark_idle_background",
-    "gui/button/choice_dark_hover_background",
-    "gui/button/scrollable_menu_idle_background",
-    "gui/button/scrollable_menu_hover_background",
-    "gui/button/scrollable_menu_disable_background",
-    "gui/button/scrollable_menu_dark_idle_background",
-    "gui/button/scrollable_menu_dark_hover_background",
-    "gui/button/scrollable_menu_dark_disable_background",
-    "gui/button/twopane_scrollable_menu_idle_background",
-    "gui/button/twopane_scrollable_menu_hover_background",
-    "gui/button/twopane_scrollable_menu_dark_idle_background",
-    "gui/button/twopane_scrollable_menu_dark_hover_background",
-    "gui/overlay/confirm",
-    "gui/overlay/confirm_d",
-    "gui/overlay/game_menu",
-    "gui/overlay/game_menu_d",
-    "gui/overlay/main_menu",
-    "gui/overlay/main_menu_d",
-    "mod_assets/hkb_idle_background",
-    "mod_assets/hkb_idle_background_d",
-    "mod_assets/hkb_hover_background",
-    "mod_assets/hkb_hover_background_d",
-    "mod_assets/hkb_disabled_background",
-    "mod_assets/hkb_disabled_background_d",
-    "mod_assets/island_idle_background",
-    "mod_assets/island_idle_background_d",
-    "mod_assets/island_hover_background",
-    "mod_assets/island_hover_background_d",
-    "mod_assets/music_menu",
-    "mod_assets/music_menu_d",
-    "mod_assets/buttons/squares/square_idle",
-    "mod_assets/buttons/squares/square_idle_d",
-    "mod_assets/buttons/squares/square_hover",
-    "mod_assets/buttons/squares/square_hover_d",
-    "mod_assets/buttons/squares/square_disabled",
-    "mod_assets/buttons/squares/square_disabled_d",
-    "mod_assets/calendar/calendar_bg",
-    "mod_assets/calendar/calendar_bg-n",
-    "mod_assets/calendar/calendar_close",
-    "mod_assets/calendar/calendar_close-n",
-    "mod_assets/calendar/calendar_close_hover",
-    "mod_assets/calendar/calendar_close_hover-n",
-    "mod_assets/calendar/calendar_day_bg",
-    "mod_assets/calendar/calendar_day_bg-n",
-    "mod_assets/calendar/calendar_day_hover_bg",
-    "mod_assets/calendar/calendar_day_hover_bg-n",
-    "mod_assets/calendar/calendar_day_disabled_bg",
-    "mod_assets/calendar/calendar_day_disabled_bg-n",
-    "mod_assets/calendar/calendar_day_name_bg",
-    "mod_assets/calendar/calendar_day_name_bg-n",
-    "mod_assets/calendar/calendar_left_arrow",
-    "mod_assets/calendar/calendar_left_arrow-n",
-    "mod_assets/calendar/calendar_left_arrow_hover",
-    "mod_assets/calendar/calendar_left_arrow_hover-n",
-    "mod_assets/calendar/calendar_right_arrow",
-    "mod_assets/calendar/calendar_right_arrow-n",
-    "mod_assets/calendar/calendar_right_arrow_hover",
-    "mod_assets/calendar/calendar_right_arrow_hover-n",
-    "mod_assets/console/cn_frame",
-    "mod_assets/frames/black70_pinkborder100",
-    "mod_assets/frames/black70_pinkborder100_d",
-    "mod_assets/frames/black70_pinkborder100_2px",
-    "mod_assets/frames/black70_pinkborder100_2px_d",
-    "mod_assets/frames/black70_pinkborder100_5px",
-    "mod_assets/frames/black70_pinkborder100_5px_d",
-    "mod_assets/frames/modebar",
-    "mod_assets/frames/modebar_d",
-    "mod_assets/frames/selector_overlay",
-    "mod_assets/frames/selector_overlay_d",
-    "mod_assets/frames/selector_overlay_disabled",
-    "mod_assets/frames/selector_overlay_disabled_d",
-    "mod_assets/frames/selector_top_frame",
-    "mod_assets/frames/selector_top_frame_d",
-    "mod_assets/frames/selector_top_frame_selected",
-    "mod_assets/frames/selector_top_frame_selected_d",
-    "mod_assets/frames/selector_top_frame_disabled",
-    "mod_assets/frames/selector_top_frame_disabled_d",
-    "mod_assets/frames/trans_pink2pxborder100",
-    "mod_assets/frames/trans_pink2pxborder100_d",
-    "mod_assets/games/hangman/hm_0",
-    "mod_assets/games/hangman/hm_1",
-    "mod_assets/games/hangman/hm_2",
-    "mod_assets/games/hangman/hm_3",
-    "mod_assets/games/hangman/hm_4",
-    "mod_assets/games/hangman/hm_5",
-    "mod_assets/games/hangman/hm_6",
-    "mod_assets/games/hangman/hm_frame",
-    "mod_assets/games/hangman/hm_frame_d",
-    "mod_assets/games/hangman/hm_sm_0",
-    "mod_assets/games/hangman/hm_sm_1",
-    "mod_assets/games/hangman/hm_sm_2",
-    "mod_assets/games/hangman/hm_sm_3",
-    "mod_assets/games/hangman/hm_sm_4",
-    "mod_assets/games/hangman/hm_sm_5",
-    "mod_assets/games/hangman/hm_sm_6",
-
-    # Custom
-    "mod_assets/comfy_ui/button/idle_bg_lt",
-    "mod_assets/comfy_ui/button/idle_bg_dk",
-    "mod_assets/comfy_ui/button/hover_bg_lt",
-    "mod_assets/comfy_ui/button/hover_bg_dk",
-    "mod_assets/comfy_ui/button/insensitive_bg_lt",
-    "mod_assets/comfy_ui/button/insensitive_bg_dk",
+    "comfy_ui/button/idle_bg_lt.svg",
+    "comfy_ui/button/idle_bg_dk.svg",
+    "comfy_ui/button/hover_bg_lt.svg",
+    "comfy_ui/button/hover_bg_dk.svg",
+    "comfy_ui/button/insensitive_bg_lt.svg",
+    "comfy_ui/button/insensitive_bg_dk.svg",
+    "comfy_ui/fonts/Aller_Bd.ttf",
+    "comfy_ui/fonts/Aller_BdIt.ttf",
+    "comfy_ui/fonts/Aller_It.ttf",
+    "comfy_ui/fonts/Aller_Rg.ttf",
+    "comfy_ui/fonts/Nunito-Bold.ttf",
+    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
+    "comfy_ui/fonts/Nunito-SemiBold.ttf",
+    "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
+    "comfy_ui/fonts/OFL.txt",
 ]
 
 glitched_boxes = [
-    "gui/textbox_monika",
-    "gui/textbox_monika_d",
-]
-
-glitch_regions = [
-    #   X    Y    W    H   DX   DY
-    [  42,   5, 144,  15, -25,   0 ],
-    [  42,  36,  41,  10,  25,   0 ],
-    [  42,  62,  91,   5, -25,   0 ],
-    [  42,  92,  87,   7, -25,   0 ],
-    [  42, 108,  30,   4,  25,   0 ],
-    [ 123, 115, 183,  20,  25,   0 ],
-    [ 183,  77, 129,  22, -26,   0 ],
-    [ 225,  40,  99,  20, -25,   0 ],
-    [ 273,  15, 136,  11,  25,   0 ],
-    [ 309,  86,  58,   1, -25,   0 ],
-    [ 336,  87, 147,  28, -26,   0 ],
-    [ 372,  54, 213,   4,  25,   0 ],
-    [ 408,  20,  80,   3, -26,   0 ],
-    [ 444,  72, 159,   6, -25,   0 ],
-    [ 448, 127,  83,   9, -25,   0 ],
-    [ 516,  35, 116,   6, -33,   0 ],
-    [ 564,  93, 128,   3, -26,   0 ],
-    [ 575, 103,  95,   1,  25,   0 ],
-    [ 625,  36, 108,   8, -25,   0 ],
-    [ 670, 101, 156,  12, -25,   0 ],
-    [ 675,  67, 135,   9, -26,   0 ],
-    [ 802,  45,  56,   2,  25,   0 ],
-    [ 810,  64,  48,  15,  25,   0 ],
-    [ 817,  19,  41,   2, -25,   0 ],
-    [ 827,  43,  31,   6, -25,   0 ],
-    [ 834, 122,  24,   7,  25,   0 ],
+    "gui/textbox_monika.png",
+    "gui/textbox_monika_d.png",
 ]
 
 ################################################################################
@@ -216,8 +161,6 @@ import shutil
 
 from PIL import Image
 from hsluv import *
-
-themes = []
 
 # Text file preprocessing
 def FormatRGBHexString(r, g, b):
@@ -289,16 +232,12 @@ def ParseMacroArguments(match):
         query += r","
 
 def PreprocessTextFile(in_path, out_path, theme):
-    text = ""
-
-    with open(in_path, "r") as file:
-        text = file.read()
-
     macros = [
+        # Name                       | Method           | Arguments
         [ "CUI_BTN_ROUNDING"         , GetThemeParameter, (theme["button_rounding"])                              ],
         [ "CUI_FRM_ROUNDING"         , GetThemeParameter, (theme["frame_rounding"])                               ],
         [ "CUI_DLG_ROUNDING"         , GetThemeParameter, (theme["dialogue_rounding"])                            ],
-        [ "CUI_MAIN_FONT"            , GetThemeParameter, (theme["main_font"]["normal"])                          ],
+        [ "CUI_MAIN_FONT_REGULAR"    , GetThemeParameter, (theme["main_font"]["regular"])                         ],
         [ "CUI_MAIN_FONT_ITALIC"     , GetThemeParameter, (theme["main_font"]["italic"])                          ],
         [ "CUI_MAIN_FONT_BOLD"       , GetThemeParameter, (theme["main_font"]["bold"])                            ],
         [ "CUI_MAIN_FONT_BOLD_ITALIC", GetThemeParameter, (theme["main_font"]["bold_italic"])                     ],
@@ -309,12 +248,34 @@ def PreprocessTextFile(in_path, out_path, theme):
         [ "CUI_SCD_COLOR"            , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"]) ],
     ]
 
+    text = ""
+
+    with open(in_path, "r") as file:
+        text = file.read()
+
     for macro_name, method, method_args in macros:
         query = macro_name + r"\(([A-Za-z0-9_\-,. ]*)\)"
         text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
 
     with open(out_path, "w") as file:
         file.write(text)
+
+# Image rendering
+def RenderImage(in_path, out_path):
+    if release_mode == True:
+        os.system("inkscape "
+                 "--batch-process "
+                 "--export-dpi=\"%i\" "
+                 "--export-filename=\"%s\" "
+                 "--export-overwrite "
+                 "--export-type=\"png\" "
+                 "\"%s\"" % (96 * dpi_scale, out_path, in_path))
+    else:
+        os.system("magick "
+                  "-background \"none\" "
+                  "-density \"%i\" "
+                  "\"%s\" "
+                  "\"%s\"" % (96 * dpi_scale, in_path, out_path))
 
 # Image glitching
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
@@ -335,6 +296,36 @@ def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
             pixel_data[x + dx + ix, y + dy + iy] = region_data[ix][iy]
 
 def Glitch(image_path):
+    glitch_regions = [
+        # X  | Y  | W  | H  | DX | DY
+        [  42,   5, 144,  15, -25,   0 ],
+        [  42,  36,  41,  10,  25,   0 ],
+        [  42,  62,  91,   5, -25,   0 ],
+        [  42,  92,  87,   7, -25,   0 ],
+        [  42, 108,  30,   4,  25,   0 ],
+        [ 123, 115, 183,  20,  25,   0 ],
+        [ 183,  77, 129,  22, -26,   0 ],
+        [ 225,  40,  99,  20, -25,   0 ],
+        [ 273,  15, 136,  11,  25,   0 ],
+        [ 309,  86,  58,   1, -25,   0 ],
+        [ 336,  87, 147,  28, -26,   0 ],
+        [ 372,  54, 213,   4,  25,   0 ],
+        [ 408,  20,  80,   3, -26,   0 ],
+        [ 444,  72, 159,   6, -25,   0 ],
+        [ 448, 127,  83,   9, -25,   0 ],
+        [ 516,  35, 116,   6, -33,   0 ],
+        [ 564,  93, 128,   3, -26,   0 ],
+        [ 575, 103,  95,   1,  25,   0 ],
+        [ 625,  36, 108,   8, -25,   0 ],
+        [ 670, 101, 156,  12, -25,   0 ],
+        [ 675,  67, 135,   9, -26,   0 ],
+        [ 802,  45,  56,   2,  25,   0 ],
+        [ 810,  64,  48,  15,  25,   0 ],
+        [ 817,  19,  41,   2, -25,   0 ],
+        [ 827,  43,  31,   6, -25,   0 ],
+        [ 834, 122,  24,   7,  25,   0 ],
+    ]
+
     with Image.open(image_path) as image:
         pixel_data = image.load()
         for x, y, w, h, dx, dy in glitch_regions:
@@ -349,11 +340,15 @@ def Glitch(image_path):
 
 # Theme loading
 def PreloadThemes():
+    result = []
+
     for base_path, dirs, files in os.walk(theme_dir):
         for file_path in files:
             with open(os.path.join(base_path, file_path), "r") as json_file:
                 json_data = json.load(json_file)
-                themes.append(json_data)
+                result.append(json_data)
+
+    return result
 
 # Build chain
 def Log(message):
@@ -364,42 +359,39 @@ def Build():
         Log("Cleaning up previous build...")
         shutil.rmtree(build_dir)
 
-    Log("Creating directory %s..." % build_dir)
-    os.mkdir(build_dir)
+    themes = PreloadThemes()
 
     for theme in themes:
-        theme_dir = "%s/%s" % (build_dir, theme["asset_directory"])
-        Log("Creating directory %s..." % (theme_dir))
-        os.mkdir(theme_dir)
+        asset_dir = "%s/%s" % (build_dir, theme["asset_directory"])
 
-        for dir_path in dir_structure:
-            dir_full_path = ("%s/%s") % (theme_dir, dir_path)
-            Log("Creating directory %s..." % (dir_full_path))
-            os.mkdir(dir_full_path)
+        # Replicate directory structure
+        for file_path in files:
+            dir_path = os.path.dirname(file_path)
+            dir_full_path = "%s/%s" % (asset_dir, dir_path)
 
-        for file_path in common_files:
-            Log("Copying file %s..." % file_path)
-            shutil.copyfile("%s/%s" % (source_dir, file_path), "%s/%s" % (theme_dir, file_path))
+            if not os.path.exists(dir_full_path):
+                Log("Creating directory %s..." % (dir_full_path))
+                os.makedirs(dir_full_path)
 
-        for script_path in scripts:
-            Log("Processing file %s..." % script_path)
-            PreprocessTextFile("%s/%s" % (source_dir, script_path), "%s/%s" % (theme_dir, script_path), theme)
+        for file_path in files:
+            (file_name, file_ext) = os.path.splitext(file_path)
 
-        for image_path in vector_images:
-            Log("Rendering file %s.svg..." % image_path)
-            PreprocessTextFile("%s/%s.svg" % (source_dir, image_path), "Temporary.svg", theme)
-            os.system("inkscape "
-                        "--batch-process "
-                        "--export-dpi=\"%i\" "
-                        "--export-filename=\"%s/%s.png\" "
-                        "--export-overwrite "
-                        "--export-type=\"png\" "
-                        "Temporary.svg" % (96 * dpi_scale, theme_dir, image_path))
-            os.remove("Temporary.svg")
+            if file_ext == ".svg":
+                Log("Rendering image %s..." % file_path)
+                temp_file_path = os.path.join(build_dir, "Temporary.svg")
+                PreprocessTextFile("%s/%s" % (source_dir, file_path), temp_file_path, theme)
+                RenderImage(temp_file_path, "%s/%s.png" % (asset_dir, file_name))
+                os.remove(temp_file_path)
+            elif file_ext == ".rpy":
+                Log("Processing script %s..." % file_path)
+                PreprocessTextFile("%s/%s" % (source_dir, file_path), "%s/%s" % (asset_dir, file_path), theme)
+            else:
+                Log("Copying file %s..." % file_path)
+                shutil.copyfile("%s/%s" % (source_dir, file_path), "%s/%s" % (asset_dir, file_path))
 
         for image_path in glitched_boxes:
-            Log("Glitching image %s.png..." % image_path)
-            Glitch("%s/%s.png" % (theme_dir, image_path))
+            Log("Glitching image %s..." % image_path)
+            Glitch("%s/%s" % (asset_dir, image_path))
 
     Log("Finished!")
 

@@ -1,15 +1,15 @@
 {
     "name": "Default",
     "asset_directory": "default",
-    "button_rounding": 4,
-    "frame_rounding": 4,
+    "button_rounding": 3,
+    "frame_rounding": 3,
     "dialogue_rounding": 10,
     "main_font":
     {
-        "normal": "mod_assets/font/Nunito-SemiBold.ttf",
-        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf",
-        "bold": "mod_assets/font/Nunito-Bold.ttf",
-        "bold_italic": "mod_assets/font/Nunito-BoldItalic.ttf"
+        "regular": "comfy_ui/fonts/Nunito-SemiBold.ttf",
+        "italic": "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
+        "bold": "comfy_ui/fonts/Nunito-Bold.ttf",
+        "bold_italic": "comfy_ui/fonts/Nunito-BoldItalic.ttf"
     },
     "menu_font": "gui/font/RifficFree-Bold.ttf",
     "option_font": "gui/font/Halogen.ttf",

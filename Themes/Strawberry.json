@@ -6,16 +6,16 @@
     "dialogue_rounding": 9,
     "main_font":
     {
-        "normal": "mod_assets/font/Nunito-SemiBold.ttf",
-        "italic": "mod_assets/font/Nunito-SemiBoldItalic.ttf",
-        "bold": "mod_assets/font/Nunito-Bold.ttf",
-        "bold_italic": "mod_assets/font/Nunito-BoldItalic.ttf"
+        "regular": "comfy_ui/fonts/Nunito-SemiBold.ttf",
+        "italic": "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
+        "bold": "comfy_ui/fonts/Nunito-Bold.ttf",
+        "bold_italic": "comfy_ui/fonts/Nunito-BoldItalic.ttf"
     },
     "menu_font": "gui/font/RifficFree-Bold.ttf",
     "option_font": "gui/font/Halogen.ttf",
     "dialogue_vertical_offset": -3,
     "primary_hue": 3,
     "primary_saturation": 0.85,
-    "secondary_hue": 142,
+    "secondary_hue": 124,
     "secondary_saturation": 0.75
 }

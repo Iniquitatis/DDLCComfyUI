@@ -9,10 +9,12 @@
 ################################################################################
 # Configuration variables
 ################################################################################
-define comfy_ui.common.font             = "CUI_MAIN_FONT()"
+define comfy_ui.common.font_regular     = "CUI_MAIN_FONT_REGULAR()"
 define comfy_ui.common.font_italic      = "CUI_MAIN_FONT_ITALIC()"
 define comfy_ui.common.font_bold        = "CUI_MAIN_FONT_BOLD()"
 define comfy_ui.common.font_bold_italic = "CUI_MAIN_FONT_BOLD_ITALIC()"
+# FIXME: hack to prevent the control symbols from appearing in the calendar cells (\t)
+define comfy_ui.common.font             = FontGroup().add(comfy_ui.common.font_regular, 0x0020, 0x00ff).add("gui/font/Aller_Rg.ttf", 0x0000, 0xffff)
 define comfy_ui.common.font_kerning     = 0.0
 define comfy_ui.common.font_size        = 24
 
@@ -103,10 +105,9 @@ define comfy_ui.option_button_text.dark.hover_color        = "CUI_SCD_COLOR(255,
 define comfy_ui.option_button_text.dark.selected_color     = "CUI_SCD_COLOR(222, 54, 126)"
 define comfy_ui.option_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(170, 170, 170, 127)"
 
-define comfy_ui.button_spacing        = 6
-define comfy_ui.choice_button_spacing = 12
-define comfy_ui.talk_button_spacing   = 16
-define comfy_ui.hotkey_button_spacing = 5
+define comfy_ui.scrollable_menu_button_spacing = 6
+define comfy_ui.choice_button_spacing          = 12
+define comfy_ui.talk_button_spacing            = 16
 
 
 
@@ -114,17 +115,116 @@ define comfy_ui.hotkey_button_spacing = 5
 # Init
 ################################################################################
 init python:
-    config.font_replacement_map[comfy_ui.common.font, False, True] = (comfy_ui.common.font_italic, False, False)
-    config.font_replacement_map[comfy_ui.common.font, True, False] = (comfy_ui.common.font_bold, False, False)
-    config.font_replacement_map[comfy_ui.common.font, True, True] = (comfy_ui.common.font_bold_italic, False, False)
+    config.font_replacement_map[comfy_ui.common.font_regular, False, True] = (comfy_ui.common.font_italic, False, False)
+    config.font_replacement_map[comfy_ui.common.font_regular, True, False] = (comfy_ui.common.font_bold, False, False)
+    config.font_replacement_map[comfy_ui.common.font_regular, True, True] = (comfy_ui.common.font_bold_italic, False, False)
 
 
 
 ################################################################################
-# Labels
+# Definitions
+# FIXME: eventually all these stuff needs to be removed
+################################################################################
+define gui.default_font                           = comfy_ui.common.font
+define mas_ui.light_button_text_idle_color        = comfy_ui.button_text.light.idle_color
+define mas_ui.light_button_text_hover_color       = comfy_ui.button_text.light.hover_color
+define mas_ui.light_button_text_insensitive_color = comfy_ui.button_text.light.insensitive_color
+define mas_ui.dark_button_text_idle_color         = comfy_ui.button_text.dark.idle_color
+define mas_ui.dark_button_text_hover_color        = comfy_ui.button_text.dark.hover_color
+define mas_ui.dark_button_text_insensitive_color  = comfy_ui.button_text.dark.insensitive_color
+
+
+
+################################################################################
+# Generic styles
 ################################################################################
 
-# Menu title
+# Button
+style generic_button_base:
+    padding        (5, 5, 5, 5)
+    hover_sound    gui.hover_sound
+    activate_sound gui.activate_sound
+
+style generic_button_lt is generic_button_base:
+    background Frame("comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
+
+style generic_button_dk is generic_button_base:
+    background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
+
+style generic_button_text_base:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
+    align   (0.5, 0.5)
+
+style generic_button_text_lt is generic_button_text_base:
+    idle_color        comfy_ui.button_text.light.idle_color
+    hover_color       comfy_ui.button_text.light.hover_color
+    selected_color    comfy_ui.button_text.light.selected_color
+    insensitive_color comfy_ui.button_text.light.insensitive_color
+    outlines          comfy_ui.button_text.light.outlines
+
+style generic_button_text_dk is generic_button_text_base:
+    idle_color        comfy_ui.button_text.dark.idle_color
+    hover_color       comfy_ui.button_text.dark.hover_color
+    selected_color    comfy_ui.button_text.dark.selected_color
+    insensitive_color comfy_ui.button_text.dark.insensitive_color
+    outlines          comfy_ui.button_text.dark.outlines
+
+# Inactive button
+# FIXME: the following styles are just a bunch of hacks (mostly for "hkbd_" styles)
+style generic_inactive_button_base is generic_button_base
+
+style generic_inactive_button_lt is generic_inactive_button_base:
+    background Frame("comfy_ui/button/insensitive_bg_lt.png", Borders(5, 5, 5, 5))
+
+style generic_inactive_button_dk is generic_inactive_button_base:
+    background Frame("comfy_ui/button/insensitive_bg_dk.png", Borders(5, 5, 5, 5))
+
+style generic_inactive_button_text_base is generic_button_text_base
+
+style generic_inactive_button_text_lt is generic_inactive_button_text_base:
+    color comfy_ui.button_text.light.insensitive_color
+
+style generic_inactive_button_text_dk is generic_inactive_button_text_base:
+    color comfy_ui.button_text.dark.insensitive_color
+
+# Option button
+style generic_option_button_base
+
+style generic_option_button_lt is generic_option_button_base:
+    foreground "gui/button/check_[prefix_]foreground.png"
+    padding    (28, 4, 4, 4)
+
+style generic_option_button_dk is generic_option_button_base:
+    foreground "gui/button/check_[prefix_]foreground_d.png"
+    padding    (28, 4, 4, 4)
+
+style generic_option_button_text_base:
+    font     comfy_ui.option_button_text.font
+    kerning  comfy_ui.option_button_text.font_kerning
+    size     comfy_ui.option_button_text.font_size
+    outlines []
+
+style generic_option_button_text_lt is generic_option_button_text_base:
+    idle_color        comfy_ui.option_button_text.light.idle_color
+    hover_color       comfy_ui.option_button_text.light.hover_color
+    selected_color    comfy_ui.option_button_text.light.selected_color
+    insensitive_color comfy_ui.option_button_text.light.insensitive_color
+
+style generic_option_button_text_dk is generic_option_button_text_base:
+    idle_color        comfy_ui.option_button_text.dark.idle_color
+    hover_color       comfy_ui.option_button_text.dark.hover_color
+    selected_color    comfy_ui.option_button_text.dark.selected_color
+    insensitive_color comfy_ui.option_button_text.dark.insensitive_color
+
+
+
+################################################################################
+# Game menu
+################################################################################
+
+# Title
 style game_menu_label_text:
     font     comfy_ui.menu_font
     kerning  comfy_ui.menu_font_kerning
@@ -154,7 +254,7 @@ style pref_dark_label_text:
     color    comfy_ui.menu_label.dark.color
     outlines comfy_ui.menu_label.dark.outlines
 
-# Main menu version text
+# Version text
 # NOTE: this style is also used for the tooltips at the bottom of the menu screen
 style main_menu_version_def:
     font     comfy_ui.common.font
@@ -188,6 +288,12 @@ style navigation_dark_button_text:
     outlines             comfy_ui.menu_button_text.dark.idle_outlines
     hover_outlines       comfy_ui.menu_button_text.dark.hover_outlines
     insensitive_outlines comfy_ui.menu_button_text.dark.insensitive_outlines
+
+
+
+################################################################################
+# Music menu
+################################################################################
 
 # Music menu button
 style music_menu_button_text:
@@ -311,102 +417,14 @@ style confirm_prompt_text_dark:
 
 
 ################################################################################
-# Containers
-# NOTE: none of them can be inherited from base style for now
+# Choice menu
 ################################################################################
-
-# Choice box
 style choice_vbox:
     spacing comfy_ui.choice_button_spacing
 
 style choice_dark_vbox:
     spacing comfy_ui.choice_button_spacing
 
-# Scrollable menu box
-style scrollable_menu_vbox:
-    spacing comfy_ui.button_spacing
-
-style scrollable_menu_dark_vbox:
-    spacing comfy_ui.button_spacing
-
-# Two-pane scrollable menu box
-style twopane_scrollable_menu_vbox:
-    spacing comfy_ui.button_spacing
-
-style twopane_scrollable_menu_dark_vbox:
-    spacing comfy_ui.button_spacing
-
-# Talk choice box
-style talk_choice_vbox:
-    spacing comfy_ui.talk_button_spacing
-
-style talk_choice_dark_vbox:
-    spacing comfy_ui.talk_button_spacing
-
-# Hotkey button box
-style hkb_vbox:
-    spacing comfy_ui.hotkey_button_spacing
-
-style hkb_dark_vbox:
-    spacing comfy_ui.hotkey_button_spacing
-
-
-
-################################################################################
-# Buttons
-################################################################################
-
-# Generic button
-style generic_button_base:
-    padding        (5, 5, 5, 5)
-    hover_sound    gui.hover_sound
-    activate_sound gui.activate_sound
-
-style generic_button_lt is generic_button_base:
-    background Frame("mod_assets/comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
-
-style generic_button_dk is generic_button_base:
-    background Frame("mod_assets/comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
-
-style generic_button_text_base:
-    font    comfy_ui.common.font
-    kerning comfy_ui.common.font_kerning
-    size    comfy_ui.common.font_size
-    align   (0.5, 0.5)
-
-style generic_button_text_lt is generic_button_text_base:
-    idle_color        comfy_ui.button_text.light.idle_color
-    hover_color       comfy_ui.button_text.light.hover_color
-    selected_color    comfy_ui.button_text.light.selected_color
-    insensitive_color comfy_ui.button_text.light.insensitive_color
-    outlines          comfy_ui.button_text.light.outlines
-
-style generic_button_text_dk is generic_button_text_base:
-    idle_color        comfy_ui.button_text.dark.idle_color
-    hover_color       comfy_ui.button_text.dark.hover_color
-    selected_color    comfy_ui.button_text.dark.selected_color
-    insensitive_color comfy_ui.button_text.dark.insensitive_color
-    outlines          comfy_ui.button_text.dark.outlines
-
-# Generic inactive button
-# FIXME: the following styles are just a bunch of hacks (mostly for "hkbd_" styles)
-style generic_inactive_button_base is generic_button_base
-
-style generic_inactive_button_lt is generic_inactive_button_base:
-    background Frame("mod_assets/comfy_ui/button/insensitive_bg_lt.png", Borders(5, 5, 5, 5))
-
-style generic_inactive_button_dk is generic_inactive_button_base:
-    background Frame("mod_assets/comfy_ui/button/insensitive_bg_dk.png", Borders(5, 5, 5, 5))
-
-style generic_inactive_button_text_base is generic_button_text_base
-
-style generic_inactive_button_text_lt is generic_inactive_button_text_base:
-    color comfy_ui.button_text.light.insensitive_color
-
-style generic_inactive_button_text_dk is generic_inactive_button_text_base:
-    color comfy_ui.button_text.dark.insensitive_color
-
-# Choice button
 style choice_button is generic_button_lt:
     clear
     xysize  (420, None)
@@ -423,7 +441,17 @@ style choice_button_text is generic_button_text_lt:
 style choice_dark_button_text is generic_button_text_dk:
     clear
 
-# Scrollable menu button 
+
+
+################################################################################
+# Scrollable menu
+################################################################################
+style scrollable_menu_vbox:
+    spacing comfy_ui.scrollable_menu_button_spacing
+
+style scrollable_menu_dark_vbox:
+    spacing comfy_ui.scrollable_menu_button_spacing
+
 style scrollable_menu_button is generic_button_lt:
     clear
     xysize  (560, None)
@@ -442,7 +470,17 @@ style scrollable_menu_dark_button_text is generic_button_text_dk:
     clear
     align (0.0, 0.0)
 
-# Two-pane scrollable menu button
+
+
+################################################################################
+# Two-pane scrollable menu
+################################################################################
+style twopane_scrollable_menu_vbox:
+    spacing comfy_ui.scrollable_menu_button_spacing
+
+style twopane_scrollable_menu_dark_vbox:
+    spacing comfy_ui.scrollable_menu_button_spacing
+
 style twopane_scrollable_menu_button is generic_button_lt:
     clear
     xysize  (250, None)
@@ -461,7 +499,17 @@ style twopane_scrollable_menu_dark_button_text is generic_button_text_dk:
     clear
     align (0.0, 0.0)
 
-# Talk choice button
+
+
+################################################################################
+# Talk choice menu
+################################################################################
+style talk_choice_vbox:
+    spacing comfy_ui.talk_button_spacing
+
+style talk_choice_dark_vbox:
+    spacing comfy_ui.talk_button_spacing
+
 style talk_choice_button is choice_button:
     clear
 
@@ -474,14 +522,28 @@ style talk_choice_button_text is choice_button_text:
 style talk_choice_dark_button_text is choice_dark_button_text:
     clear
 
-# Hotkey button (generic)
+
+
+################################################################################
+# Hotkey button menu
+# FIXME: everything in this section is a bit broken (will be fixed in the next
+#  MAS release)
+################################################################################
+style hkb_vbox:
+    spacing 0
+
+style hkb_dark_vbox:
+    spacing 0
+
 style hkb_frame is generic_button_lt:
     clear
-    xysize (120, 35)
+    xysize (120, 35 + 4)
+    bottom_margin 4
 
 style hkb_dark_frame is generic_button_dk:
     clear
-    xysize (120, 35)
+    xysize (120, 35 + 4)
+    bottom_margin 4
 
 style hkb_text is generic_button_text_lt:
     clear
@@ -489,14 +551,15 @@ style hkb_text is generic_button_text_lt:
 style hkb_dark_text is generic_button_text_dk:
     clear
 
-# Hotkey button (active)
 style hkb_button is generic_button_lt:
     clear
-    xysize (120, 35)
+    xysize (120, 35 + 4)
+    bottom_margin 4
 
 style hkb_dark_button is generic_button_dk:
     clear
-    xysize (120, 35)
+    xysize (120, 35 + 4)
+    bottom_margin 4
 
 style hkb_button_text is generic_button_text_lt:
     clear
@@ -504,14 +567,15 @@ style hkb_button_text is generic_button_text_lt:
 style hkb_dark_button_text is generic_button_text_dk:
     clear
 
-# Hotkey button (inactive)
 style hkbd_button is generic_inactive_button_lt:
     clear
-    xysize (120, 35)
+    xysize (120, 35 + 4)
+    bottom_margin 4
 
 style hkbd_button is generic_inactive_button_dk:
     clear
-    xysize (120, 35)
+    xysize (120, 35 + 4)
+    bottom_margin 4
 
 style hkbd_button_text is generic_inactive_button_text_lt:
     clear
@@ -519,7 +583,11 @@ style hkbd_button_text is generic_inactive_button_text_lt:
 style hkbd_dark_button_text is generic_inactive_button_text_dk:
     clear
 
-# Adjustable button
+
+
+################################################################################
+# Extras menu
+################################################################################
 style mas_adjustable_button_def is generic_button_lt:
     clear
     xysize (None, None)
@@ -533,84 +601,3 @@ style mas_adjustable_button_text_def is generic_button_text_lt:
 
 style mas_adjustable_button_text_dark is generic_button_text_dk:
     clear
-
-
-
-################################################################################
-# Option buttons
-################################################################################
-
-# Generic option button
-style generic_option_button_base
-
-style generic_option_button_lt is generic_option_button_base:
-    foreground "gui/button/check_[prefix_]foreground.png"
-    padding    (28, 4, 4, 4)
-
-style generic_option_button_dk is generic_option_button_base:
-    foreground "gui/button/check_[prefix_]foreground_d.png"
-    padding    (28, 4, 4, 4)
-
-style generic_option_button_text_base:
-    font     comfy_ui.option_button_text.font
-    kerning  comfy_ui.option_button_text.font_kerning
-    size     comfy_ui.option_button_text.font_size
-    outlines []
-
-style generic_option_button_text_lt is generic_option_button_text_base:
-    idle_color        comfy_ui.option_button_text.light.idle_color
-    hover_color       comfy_ui.option_button_text.light.hover_color
-    selected_color    comfy_ui.option_button_text.light.selected_color
-    insensitive_color comfy_ui.option_button_text.light.insensitive_color
-
-style generic_option_button_text_dk is generic_option_button_text_base:
-    idle_color        comfy_ui.option_button_text.dark.idle_color
-    hover_color       comfy_ui.option_button_text.dark.hover_color
-    selected_color    comfy_ui.option_button_text.dark.selected_color
-    insensitive_color comfy_ui.option_button_text.dark.insensitive_color
-
-# Check button
-style check_button is generic_option_button_lt:
-    clear
-
-style check_dark_button is generic_option_button_dk:
-    clear
-
-style check_button_text is generic_option_button_text_lt:
-    clear
-
-style check_dark_button_text is generic_option_button_text_dk:
-    clear
-
-# Radio button
-style radio_button is generic_option_button_lt:
-    clear
-
-style radio_dark_button is generic_option_button_dk:
-    clear
-
-style radio_button_text is generic_option_button_text_lt:
-    clear
-
-style radio_dark_button_text is generic_option_button_text_dk:
-    clear
-
-# Outfit check button
-# NOTE or FIXME: its text has different color from the standard check button
-style outfit_check_button is generic_option_button_lt:
-    clear
-
-style outfit_check_dark_button is generic_option_button_dk:
-    clear
-
-style outfit_check_button_text is generic_option_button_text_lt:
-    clear
-    color          "#bfbfbf"
-    hover_color    "#ffaa99"
-    selected_color "#ffeeeb"
-
-style outfit_check_dark_button_text is generic_option_button_text_dk:
-    clear
-    color          "#bfbfbf"
-    hover_color    "#ffaa99"
-    selected_color "#ffeeeb"
