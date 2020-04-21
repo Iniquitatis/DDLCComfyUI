@@ -1,9 +1,9 @@
 {
-    "name": "Classic",
-    "asset_directory": "classic",
-    "button_rounding": 0,
-    "frame_rounding": 0,
-    "dialogue_rounding": 12,
+    "name": "Mystique",
+    "asset_directory": "mystique",
+    "button_rounding": 2,
+    "frame_rounding": 2,
+    "dialogue_rounding": 5,
     "main_font":
     {
         "regular": "comfy_ui/fonts/Asap-Medium.ttf",
@@ -14,9 +14,9 @@
     "menu_font": "gui/font/RifficFree-Bold.ttf",
     "option_font": "gui/font/Halogen.ttf",
     "main_font_kerning": 0.0,
-    "dialogue_vertical_offset": 0,
-    "primary_hue": null,
-    "primary_saturation": null,
-    "secondary_hue": null,
-    "secondary_saturation": null
+    "dialogue_vertical_offset": -3,
+    "primary_hue": 285,
+    "primary_saturation": 0.6,
+    "secondary_hue": 270,
+    "secondary_saturation": 1.0
 }

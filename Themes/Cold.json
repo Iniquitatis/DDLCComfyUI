@@ -13,6 +13,7 @@
     },
     "menu_font": "gui/font/RifficFree-Bold.ttf",
     "option_font": "gui/font/Halogen.ttf",
+    "main_font_kerning": 0.0,
     "dialogue_vertical_offset": -3,
     "primary_hue": 245,
     "primary_saturation": 0.13,

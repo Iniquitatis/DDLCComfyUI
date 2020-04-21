@@ -15,7 +15,7 @@ define comfy_ui.common.font_bold        = "CUI_MAIN_FONT_BOLD()"
 define comfy_ui.common.font_bold_italic = "CUI_MAIN_FONT_BOLD_ITALIC()"
 # FIXME: hack to prevent the control symbols from appearing in the calendar cells (\t)
 define comfy_ui.common.font             = FontGroup().add(comfy_ui.common.font_regular, 0x0020, 0x00ff).add("gui/font/Aller_Rg.ttf", 0x0000, 0xffff)
-define comfy_ui.common.font_kerning     = 0.0
+define comfy_ui.common.font_kerning     = CUI_MAIN_FONT_KERNING()
 define comfy_ui.common.font_size        = 24
 
 define comfy_ui.menu_font         = "CUI_MENU_FONT()"
