@@ -15,24 +15,24 @@ This add-on aims to fix this problem.
 
 <table>
   <tr>
-    <th>Before</th>
-    <th>After</th>
+    <th>MAS</th>
+    <th>Default</th>
+    <th>Cold</th>
+    <th>Mint</th>
+    <th>Peach</th>
+    <th>Strawberry</th>
+    <th>Classic</th>
+    <th>Mystique</th>
   </tr>
   <tr>
-    <td><img src="Screenshots/TalkBefore.png" width="320"></td>
-    <td><img src="Screenshots/TalkAfter.png" width="320"></td>
-  </tr>
-  <tr>
-    <td><img src="Screenshots/Tip4Before.png" width="320"></td>
-    <td><img src="Screenshots/Tip4After.png" width="320"></td>
-  </tr>
-  <tr>
-    <td><img src="Screenshots/HeyBefore.png" width="320"></td>
-    <td><img src="Screenshots/HeyAfter.png" width="320"></td>
-  </tr>
-  <tr>
-    <td><img src="Screenshots/TieBefore.png" width="320"></td>
-    <td><img src="Screenshots/TieAfter.png" width="320"></td>
+    <td><img src="Screenshots/MAS.png" width="320"></td>
+    <td><img src="Screenshots/Default.png" width="320"></td>
+    <td><img src="Screenshots/Cold.png" width="320"></td>
+    <td><img src="Screenshots/Mint.png" width="320"></td>
+    <td><img src="Screenshots/Peach.png" width="320"></td>
+    <td><img src="Screenshots/Strawberry.png" width="320"></td>
+    <td><img src="Screenshots/Classic.png" width="320"></td>
+    <td><img src="Screenshots/Mystique.png" width="320"></td>
   </tr>
 </table>
 
