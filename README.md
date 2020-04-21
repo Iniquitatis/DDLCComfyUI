@@ -15,7 +15,7 @@ This add-on aims to fix this problem.
 
 <table>
   <tr>
-    <th>MAS</th>
+    <th>Unmodded</th>
     <th>Default</th>
     <th>Cold</th>
     <th>Mint</th>
@@ -25,14 +25,14 @@ This add-on aims to fix this problem.
     <th>Mystique</th>
   </tr>
   <tr>
-    <td><img src="Screenshots/MAS.png" width="320"></td>
-    <td><img src="Screenshots/Default.png" width="320"></td>
-    <td><img src="Screenshots/Cold.png" width="320"></td>
-    <td><img src="Screenshots/Mint.png" width="320"></td>
-    <td><img src="Screenshots/Peach.png" width="320"></td>
-    <td><img src="Screenshots/Strawberry.png" width="320"></td>
-    <td><img src="Screenshots/Classic.png" width="320"></td>
-    <td><img src="Screenshots/Mystique.png" width="320"></td>
+    <td><img src="Screenshots/Unmodded.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/Default.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/Cold.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/Mint.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/Peach.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/Strawberry.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/Classic.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/Mystique.png?raw=true" width="320"></td>
   </tr>
 </table>
 
