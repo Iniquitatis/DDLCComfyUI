@@ -264,7 +264,7 @@ def PreprocessTextFile(in_path, out_path, theme):
 
 # Image rendering
 def RenderImage(in_path, out_path):
-    if release_mode == True:
+    if release_mode:
         os.system("inkscape "
                  "--batch-process "
                  "--export-dpi=\"%i\" "
@@ -394,6 +394,11 @@ def Build():
         for image_path in glitched_boxes:
             Log("Glitching image %s..." % image_path)
             Glitch("%s/%s" % (asset_dir, image_path))
+
+    if release_mode:
+        Log("Creating release archive...")
+        shutil.make_archive("Release", "zip", build_dir)
+        shutil.rmtree(build_dir)
 
     Log("Finished!")
 
