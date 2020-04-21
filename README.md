@@ -41,7 +41,7 @@ This add-on aims to solve this problem.
     <td><img src="Screenshots/Classic.png?raw=true" width="640"></td>
   </tr>
   <tr>
-  </tr>
+  <tr>
     <td>Mystique</td>
     <td><img src="Screenshots/Mystique.png?raw=true" width="640"></td>
   </tr>
