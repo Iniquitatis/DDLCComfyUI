@@ -50,12 +50,19 @@ This add-on aims to solve this problem.
 
 ## Installation
 0. _If you're unfamiliar with this add-on, backup the game installation directory, because some of the stock assets will be replaced_;
-1. Download the latest release archive;
+1. Download the [latest release archive](https://github.com/Iniquitatis/MonikaComfyUI/releases/download/colorful_update/MonikaComfyUI_ColorfulUpdate.zip);
 2. Extract it to some empty directory;
 3. Open the directory with the theme you want (e.g., `classic`, `default`, etc.);
 4. Make sure it contains `comfy_ui`, `gui`, `mod_assets` and `zzz_comfy_ui.rpy`;
 5. Copy its contents to the `game` subdirectory of the DDLC installation directory;
 6. Overwrite _everything_ that gets in the way.
+
+
+
+## Uninstallation
+If you haven't backed up the game folder, you still can revert to the original UI theme:
+1. Install the `classic` theme;
+2. Remove the `zzz_comfy_ui.rpy` and `zzz_comfy_ui.rpyc` from the `game` subdirectory of the DDLC installation directory.
 
 
 
