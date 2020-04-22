@@ -1,6 +1,6 @@
 {
     "name": "Default",
-    "asset_directory": "default",
+    "id": "default",
     "button_rounding": 3,
     "frame_rounding": 3,
     "dialogue_rounding": 10,

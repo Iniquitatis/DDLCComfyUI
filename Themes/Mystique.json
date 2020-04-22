@@ -1,6 +1,6 @@
 {
     "name": "Mystique",
-    "asset_directory": "mystique",
+    "id": "mystique",
     "button_rounding": 2,
     "frame_rounding": 2,
     "dialogue_rounding": 5,

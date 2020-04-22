@@ -1,6 +1,6 @@
 {
     "name": "Cold",
-    "asset_directory": "cold",
+    "id": "cold",
     "button_rounding": 2,
     "frame_rounding": 2,
     "dialogue_rounding": 6,

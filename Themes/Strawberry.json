@@ -1,6 +1,6 @@
 {
     "name": "Strawberry",
-    "asset_directory": "strawberry",
+    "id": "strawberry",
     "button_rounding": 4,
     "frame_rounding": 4,
     "dialogue_rounding": 9,

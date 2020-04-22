@@ -1,6 +1,6 @@
 {
     "name": "Mint",
-    "asset_directory": "mint",
+    "id": "mint",
     "button_rounding": 3,
     "frame_rounding": 3,
     "dialogue_rounding": 9,

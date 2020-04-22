@@ -12,11 +12,16 @@
 release_mode = False
 dpi_scale = 1
 
-theme_dir  = "Themes"
-source_dir = "Source"
-build_dir  = "Build"
+theme_dir        = "Themes"
+source_dir       = "Source"
+asset_source_dir = "Source/Assets"
+build_dir        = "Build"
 
-files = [
+common_files = [
+    "comfy_ui.rpy",
+]
+
+theme_files = [
     # Default
     "gui/ctc.svg",
     "gui/frame.svg",
@@ -128,6 +133,7 @@ files = [
     "mod_assets/games/hangman/hm_sm_6.svg",
 
     # Custom
+    "info.json",
     "zzz_comfy_ui.rpy",
     "comfy_ui/button/idle_bg_lt.svg",
     "comfy_ui/button/idle_bg_dk.svg",
@@ -234,6 +240,7 @@ def ParseMacroArguments(match):
 def PreprocessTextFile(in_path, out_path, theme):
     macros = [
         # Name                       | Method           | Arguments
+        [ "CUI_THEME_NAME"           , GetThemeParameter, (theme["name"])                                         ],
         [ "CUI_BTN_ROUNDING"         , GetThemeParameter, (theme["button_rounding"])                              ],
         [ "CUI_FRM_ROUNDING"         , GetThemeParameter, (theme["frame_rounding"])                               ],
         [ "CUI_DLG_ROUNDING"         , GetThemeParameter, (theme["dialogue_rounding"])                            ],
@@ -346,9 +353,9 @@ def PreloadThemes():
 
     for base_path, dirs, files in os.walk(theme_dir):
         for file_path in files:
-            with open(os.path.join(base_path, file_path), "r") as json_file:
-                json_data = json.load(json_file)
-                result.append(json_data)
+            with open(os.path.join(base_path, file_path), "r") as theme_file:
+                theme = json.load(theme_file)
+                result.append(theme)
 
     return result
 
@@ -357,44 +364,66 @@ def Log(message):
     print("BUILD: %s" % message)
 
 def Build():
+    # Clear previous build
     if os.path.exists(build_dir):
         Log("Cleaning up previous build...")
         shutil.rmtree(build_dir)
 
+    # Create build directory
+    Log("Creating build directory...")
+    os.mkdir(build_dir)
+
+    # Copy common files
+    for file_path in common_files:
+        Log("Copying file %s..." % file_path)
+        shutil.copyfile(os.path.join(source_dir, file_path), os.path.join(build_dir, file_path))
+
+    # Make themes
     themes = PreloadThemes()
 
     for theme in themes:
-        asset_dir = "%s/%s" % (build_dir, theme["asset_directory"])
+        target_dir = os.path.join(build_dir, "comfy_meta", theme["id"])
 
         # Replicate directory structure
-        for file_path in files:
+        for file_path in theme_files:
             dir_path = os.path.dirname(file_path)
-            dir_full_path = "%s/%s" % (asset_dir, dir_path)
+            dir_full_path = os.path.join(target_dir, dir_path)
 
             if not os.path.exists(dir_full_path):
-                Log("Creating directory %s..." % (dir_full_path))
+                Log("Creating directory %s..." % dir_full_path)
                 os.makedirs(dir_full_path)
 
-        for file_path in files:
+        # Process source files
+        for file_path in theme_files:
             (file_name, file_ext) = os.path.splitext(file_path)
 
             if file_ext == ".svg":
                 Log("Rendering image %s..." % file_path)
                 temp_file_path = os.path.join(build_dir, "Temporary.svg")
-                PreprocessTextFile("%s/%s" % (source_dir, file_path), temp_file_path, theme)
-                RenderImage(temp_file_path, "%s/%s.png" % (asset_dir, file_name))
+                PreprocessTextFile(os.path.join(asset_source_dir, file_path), temp_file_path, theme)
+                RenderImage(temp_file_path, os.path.join(target_dir, "%s.png" % file_name))
                 os.remove(temp_file_path)
             elif file_ext == ".rpy":
                 Log("Processing script %s..." % file_path)
-                PreprocessTextFile("%s/%s" % (source_dir, file_path), "%s/%s" % (asset_dir, file_path), theme)
+                PreprocessTextFile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path), theme)
+            elif file_ext == ".json":
+                Log("Processing JSON %s..." % file_path)
+                PreprocessTextFile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path), theme)
             else:
                 Log("Copying file %s..." % file_path)
-                shutil.copyfile("%s/%s" % (source_dir, file_path), "%s/%s" % (asset_dir, file_path))
+                shutil.copyfile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path))
 
         for image_path in glitched_boxes:
             Log("Glitching image %s..." % image_path)
-            Glitch("%s/%s" % (asset_dir, image_path))
+            Glitch(os.path.join(target_dir, image_path))
 
+        # Pack assets
+        Log("Creating archive for theme %s..." % theme["name"])
+        shutil.make_archive(target_dir, "zip", target_dir)
+        os.rename("%s.zip" % target_dir, "%s.arc" % target_dir)
+        shutil.rmtree(target_dir)
+
+    # Create release archive if needed
     if release_mode:
         Log("Creating release archive...")
         shutil.make_archive("Release", "zip", build_dir)

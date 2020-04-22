@@ -1,6 +1,6 @@
 {
     "name": "Classic",
-    "asset_directory": "classic",
+    "id": "classic",
     "button_rounding": 0,
     "frame_rounding": 0,
     "dialogue_rounding": 12,

@@ -1,6 +1,6 @@
 {
     "name": "Peach",
-    "asset_directory": "peach",
+    "id": "peach",
     "button_rounding": 5,
     "frame_rounding": 5,
     "dialogue_rounding": 12,
