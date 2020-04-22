@@ -11,12 +11,12 @@
 ################################################################################
 init -990 python in mas_submod_utils:
     Submod(
-        author = "Dominus Iniquitatis",
-        name = "Comfy UI",
-        description = "Smooth and customizable UI add-on.",
-        version = "1.2.0",
-        dependencies = {},
-        settings_pane = "comfy_ui_settings_pane",
+        author          = "Dominus Iniquitatis",
+        name            = "Comfy UI",
+        description     = "Smooth and customizable UI add-on.",
+        version         = "1.2.0",
+        dependencies    = {},
+        settings_pane   = "comfy_ui_settings_pane",
         version_updates = {}
     )
 
@@ -26,7 +26,8 @@ init -990 python in mas_submod_utils:
 init -2 python in comfy_ui:
     import json
     import os
-    import zipfile
+
+    from zipfile import ZipFile
 
     game_dir = "game"
     meta_dir = os.path.join(game_dir, "comfy_meta")
@@ -37,14 +38,11 @@ init -2 python in comfy_ui:
         "selected_theme_index": 0
     }
 
-    def get_current_theme_name():
-        index = 0
-        for theme in themes:
-            if index == settings["selected_theme_index"]:
-                return theme["name"]
-            index += 1
+    def get_current_theme():
+        return themes[settings["selected_theme_index"]]
 
-        return "None"
+    def get_current_theme_name():
+        return get_current_theme()["name"]
 
     def get_theme_count():
         return len(themes)
@@ -54,11 +52,7 @@ init -2 python in comfy_ui:
         load_settings()
 
     def install():
-        index = 0
-        for theme in themes:
-            if index == settings["selected_theme_index"]:
-                _install_theme(theme)
-            index += 1
+        _install_theme(get_current_theme())
 
     def load_settings():
         if not os.path.exists(config_path):
@@ -82,15 +76,15 @@ init -2 python in comfy_ui:
             "path": file_path
         }
 
-        with zipfile.ZipFile(file_path, "r") as theme_arc:
-            with theme_arc.open("info.json") as info_json:
+        with ZipFile(file_path, "r") as theme_arc:
+            with theme_arc.open("info.json", "r") as info_json:
                 result.update(json.load(info_json))
 
         return result
 
     def _install_theme(theme):
         log = open(os.path.join(meta_dir, "install.log"), "w")
-        theme_arc = zipfile.ZipFile(theme["path"], "r")
+        theme_arc = ZipFile(theme["path"], "r")
 
         for file_path in theme_arc.namelist():
             if os.path.basename(file_path) == "info.json":
@@ -118,20 +112,31 @@ label comfy_ui_apply:
 
 screen comfy_ui_settings_pane():
     vbox:
-        box_wrap False
         xfill True
-        xmaximum 1000
-        ypos 20
+        ypos 10
 
-        $ theme_name = comfy_ui.get_current_theme_name()
         $ theme_count = comfy_ui.get_theme_count()
 
-        label _("Theme: " + theme_name)
+        if theme_count > 0:
+            $ theme_name = comfy_ui.get_current_theme_name()
 
-        bar:
-            value DictValue(comfy_ui.settings, "selected_theme_index", range = theme_count - 1, style = "slider")
-            xmaximum 240
+            vbox:
+                style_prefix store.mas_ui.sld_style_prefix
+                xmaximum 240
 
-        textbutton _("Apply"):
-            ypos 10
-            action Jump("comfy_ui_apply")
+                label _("Theme: " + theme_name)
+
+                bar:
+                    value DictValue(
+                        comfy_ui.settings,
+                        "selected_theme_index",
+                        range=theme_count - 1,
+                        style="slider"
+                    )
+
+            textbutton _("Apply"):
+                style store.mas_ui.nm_button_style
+                ypos 20
+                action Jump("comfy_ui_apply")
+        else:
+            label _("No themes available.")

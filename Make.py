@@ -224,7 +224,7 @@ def ModulateColors(macro_args, method_args):
 
 def ParseMacroArguments(match):
     if match.lastindex == None or match.lastindex == 0:
-        # No arguments has been passed to the macro
+        # No arguments have been passed to the macro
         return []
 
     args_string = match.group(1)
