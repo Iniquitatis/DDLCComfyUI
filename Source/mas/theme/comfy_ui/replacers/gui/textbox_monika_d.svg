@@ -41,13 +41,17 @@
             <path d="M 0.5 0.05 l 0.1469463 0.29774575 l 0.32858195 0.0477458 l -0.23776413 0.23176273 l 0.0561285 0.32725426 l -0.29389262 -0.15450851 l -0.29389264 0.15450849 l 0.0561285 -0.32725424 l -0.23776412 -0.23176276 l 0.32858194 -0.0477457 Z" />
         </svg>
         <pattern id="pattern" x="-10" y="-10" width="46.5" height="46.5" patternUnits="userSpaceOnUse">
-            <g fill="CUI_PRM_COLOR(161, 45, 101)" stroke-linejoin="round">
+            <g fill="CUI_PRM_COLOR(127, 52, 84)" stroke-linejoin="round">
                 <use xlink:href="#CUI_DLG_PTSHAPE()" transform="translate(2 2) scale(18.5)" />
                 <use xlink:href="#CUI_DLG_PTSHAPE()" transform="translate(25.25 25.25) scale(18.5)" />
             </g>
         </pattern>
+        <linearGradient id="backgroundGradient" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color: CUI_PRM_COLOR(147, 67, 102)" />
+            <stop offset="100%" style="stop-color: CUI_PRM_COLOR(140, 64, 97)" />
+        </linearGradient>
         <pattern id="backgroundMain" width="816" height="146" patternUnits="userSpaceOnUse">
-            <rect width="816" height="146" fill="CUI_PRM_COLOR(192, 75, 122)" />
+            <rect width="816" height="146" fill="url(#backgroundGradient)" />
             <rect width="816" height="146" fill="url(#pattern)" />
             <circle cx="408" cy="2338" r="2250" fill="url(#shineGradient)" mask="url(#shineFadeMask)" />
         </pattern>
@@ -55,7 +59,7 @@
             <rect width="816" height="146" fill="url(#backgroundMain)" mask="url(#backgroundFadeMask)" />
         </pattern>
     </defs>
-    <g fill="url(#backgroundFinal)" stroke="CUI_PRM_COLOR(27, 27, 27)" stroke-width="3" transform="translate(42 0)">
+    <g fill="url(#backgroundFinal)" stroke="CUI_PRM_COLOR(43, 23, 32)" stroke-width="3" transform="translate(42 0)">
         <rect x="1.5" y="1.5" width="813" height="143" rx="CUI_DLG_ROUNDING()" />
     </g>
 </svg>
