@@ -79,12 +79,7 @@ Oh, and also Monika in MAS is not some kind of crazy yandere/murderer thing, but
 
 
 ## Known Bugs
-Unfortunately, nothing is perfect in this world.  
-Pretty much every bug in this mod exists because the visual appearance of some UI elements cannot be modified without making changes to the original codebase.
-
-So, here's the list of common problems:
-* _Extra_ menu looks a bit smudged
-* Buttons in the _Appearance_ menus can become misaligned by a few pixels from time to time
+None at the moment.
 
 
 
