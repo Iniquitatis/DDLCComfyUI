@@ -5,8 +5,8 @@
 = See LICENSE file for the licensing information
 =
 =============================================================================-->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="180" height="38">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="17" height="16">
     <g fill="CUI_PRM_COLOR(255, 230, 244)" stroke="CUI_PRM_COLOR(255, 189, 225)" stroke-width="3">
-        <rect x="1.5" y="1.5" width="177" height="48" rx="CUI_FRM_ROUNDING()" />
+        <rect x="1.5" y="1.5" width="14" height="13" rx="CUI_BTN_ROUNDING()" />
     </g>
 </svg>

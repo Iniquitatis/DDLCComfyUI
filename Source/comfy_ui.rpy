@@ -123,7 +123,7 @@ screen comfy_ui_settings_pane():
             $ theme_name = comfy_ui.get_current_theme_name()
 
             vbox:
-                style_prefix store.mas_ui.sld_style_prefix
+                style_prefix "slider"
                 xmaximum 240
 
                 label _("Theme: " + theme_name)
@@ -137,7 +137,7 @@ screen comfy_ui_settings_pane():
                     )
 
             textbutton _("Apply"):
-                style store.mas_ui.nm_button_style
+                style "navigation_button"
                 ypos 20
                 action Jump("comfy_ui_apply")
         else:
