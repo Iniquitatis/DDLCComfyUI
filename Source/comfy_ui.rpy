@@ -71,6 +71,8 @@ init -2 python in comfy_ui:
             if extension == ".arc":
                 themes.append(_get_theme_info(os.path.join(meta_dir, file_path)))
 
+        themes.sort(cmp=lambda x, y: cmp(x["name"], y["name"]))
+
     def _get_theme_info(file_path):
         result = {
             "path": file_path
