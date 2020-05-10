@@ -278,6 +278,8 @@ def PreprocessTextFile(in_path, out_path, theme):
         [ "CUI_BTN_ROUNDING"         , GetThemeParameter, (theme["button_rounding"])                              ],
         [ "CUI_FRM_ROUNDING"         , GetThemeParameter, (theme["frame_rounding"])                               ],
         [ "CUI_DLG_ROUNDING"         , GetThemeParameter, (theme["dialogue_rounding"])                            ],
+        [ "CUI_MNU_PTSHAPE"          , GetThemeParameter, (theme["menu_pattern_shape"])                           ],
+        [ "CUI_DLG_PTSHAPE"          , GetThemeParameter, (theme["dialogue_pattern_shape"])                       ],
         [ "CUI_MAIN_FONT_REGULAR"    , GetThemeParameter, (theme["main_font"]["regular"])                         ],
         [ "CUI_MAIN_FONT_ITALIC"     , GetThemeParameter, (theme["main_font"]["italic"])                          ],
         [ "CUI_MAIN_FONT_BOLD"       , GetThemeParameter, (theme["main_font"]["bold"])                            ],

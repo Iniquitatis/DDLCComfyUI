@@ -4,6 +4,8 @@
     "button_rounding": 4,
     "frame_rounding": 4,
     "dialogue_rounding": 9,
+    "menu_pattern_shape": "dot",
+    "dialogue_pattern_shape": "dot",
     "main_font":
     {
         "regular": "comfy_ui/fonts/Nunito-SemiBold.ttf",
