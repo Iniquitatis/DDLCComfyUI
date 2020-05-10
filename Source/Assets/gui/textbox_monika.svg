@@ -14,16 +14,16 @@
         <mask id="backgroundFadeMask">
             <rect width="100%" height="100%" fill="url(#backgroundFadeGradient)" />
         </mask>
-        <radialGradient id="circleGradient">
+        <radialGradient id="shineGradient">
             <stop offset="98%" style="stop-color: CUI_PRM_COLOR(255, 255, 255); stop-opacity: 0.0" />
             <stop offset="100%" style="stop-color: CUI_PRM_COLOR(255, 255, 255); stop-opacity: 0.65" />
         </radialGradient>
-        <linearGradient id="circleFadeGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
+        <linearGradient id="shineFadeGradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse">
             <stop offset="50%" style="stop-color: CUI_PRM_COLOR(255, 255, 255); stop-opacity: 1.0" />
             <stop offset="80%" style="stop-color: CUI_PRM_COLOR(255, 255, 255); stop-opacity: 0.2" />
         </linearGradient>
-        <mask id="circleFadeMask">
-            <rect width="100%" height="100%" fill="url(#circleFadeGradient)" />
+        <mask id="shineFadeMask">
+            <rect width="100%" height="100%" fill="url(#shineFadeGradient)" />
         </mask>
         <svg id="dot" width="1" height="1">
             <circle cx="0.5" cy="0.5" r="0.5" />
@@ -49,7 +49,7 @@
         <pattern id="backgroundMain" width="816" height="146" patternUnits="userSpaceOnUse">
             <rect width="816" height="146" fill="CUI_PRM_COLOR(255, 168, 210)" />
             <rect width="816" height="146" fill="url(#pattern)" />
-            <circle cx="408" cy="2338" r="2250" fill="url(#circleGradient)" mask="url(#circleFadeMask)" />
+            <circle cx="408" cy="2338" r="2250" fill="url(#shineGradient)" mask="url(#shineFadeMask)" />
         </pattern>
         <pattern id="backgroundFinal" width="816" height="146" patternUnits="userSpaceOnUse">
             <rect width="816" height="146" fill="url(#backgroundMain)" mask="url(#backgroundFadeMask)" />
