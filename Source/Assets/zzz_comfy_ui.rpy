@@ -73,7 +73,13 @@ define comfy_ui.confirm_prompt_text.dark.outlines  = []
 define comfy_ui.dialogue_text.vertical_offset = CUI_DLG_VERT_OFFSET()
 define comfy_ui.dialogue_text.line_spacing    = CUI_DLG_LINE_SPACING()
 define comfy_ui.dialogue_text.color           = "CUI_PRM_COLOR(248, 248, 248)"
-define comfy_ui.dialogue_text.outlines        = [(2, "CUI_PRM_COLOR(48, 48, 48)", 0, 0)]
+define comfy_ui.dialogue_text.outlines        = [(2, "CUI_PRM_COLOR(40, 40, 40)", 0, 0)]
+
+define comfy_ui.history_name.color    = "CUI_PRM_COLOR(248, 248, 248)"
+define comfy_ui.history_name.outlines = [(2, "CUI_PRM_COLOR(40, 40, 40)", 0, 0)]
+
+define comfy_ui.history_text.color    = "CUI_PRM_COLOR(255, 255, 255)"
+define comfy_ui.history_text.outlines = [(2, "CUI_PRM_COLOR(40, 40, 40)", 0, 0)]
 
 define comfy_ui.quick_button_text.font_size               = 14
 define comfy_ui.quick_button_text.light.idle_color        = "CUI_SCD_COLOR(85, 34, 34)"
@@ -490,17 +496,25 @@ style quick_button_text_dark:
 
 # Name
 style history_name_text:
+    xpos     0
+    ypos     5
     font     comfy_ui.common.font
     kerning  comfy_ui.common.font_kerning
-    color    comfy_ui.dialogue_text.color
-    outlines comfy_ui.dialogue_text.outlines
+    size     comfy_ui.common.font_size
+    bold     True
+    color    comfy_ui.history_name.color
+    outlines comfy_ui.history_name.outlines
 
 # Text
 style history_text:
+    xpos     165
+    ypos     5
     font     comfy_ui.common.font
     kerning  comfy_ui.common.font_kerning
-    color    comfy_ui.dialogue_text.color
-    outlines comfy_ui.dialogue_text.outlines
+    size     comfy_ui.common.font_size
+    bold     False
+    color    comfy_ui.history_text.color
+    outlines comfy_ui.history_text.outlines
 
 
 
@@ -645,6 +659,24 @@ style hkb_button_text is generic_button_text_lt:
 
 style hkb_button_text_dark is generic_button_text_dk:
     clear
+
+
+
+################################################################################
+# Island buttons
+################################################################################
+style island_hbox:
+    spacing 5
+
+style island_button is generic_button_lt:
+    xysize (205, 35)
+
+style island_button_dark is generic_button_dk:
+    xysize (205, 35)
+
+style island_button_text is generic_button_text_lt
+
+style island_button_text_dark is generic_button_text_dk
 
 
 
