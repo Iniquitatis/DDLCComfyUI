@@ -4,6 +4,8 @@
     "button_rounding": 2,
     "frame_rounding": 2,
     "dialogue_rounding": 6,
+    "menu_pattern_shape": "rhombus",
+    "dialogue_pattern_shape": "rhombus",
     "main_font":
     {
         "regular": "comfy_ui/fonts/Nunito-SemiBold.ttf",

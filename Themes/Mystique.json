@@ -4,6 +4,8 @@
     "button_rounding": 2,
     "frame_rounding": 2,
     "dialogue_rounding": 5,
+    "menu_pattern_shape": "sparkle",
+    "dialogue_pattern_shape": "sparkle",
     "main_font":
     {
         "regular": "comfy_ui/fonts/Asap-Medium.ttf",
