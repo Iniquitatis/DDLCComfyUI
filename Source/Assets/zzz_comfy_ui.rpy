@@ -318,6 +318,34 @@ style mas_selector_sidebar_vbar_dark is generic_vertical_scrollbar_dk:
 # Game menu
 ################################################################################
 
+# Images
+image menu_bg:
+    topleft
+    ConditionSwitch(
+        "not mas_globals.dark_mode", Transform("gui/menu_bg.png", zoom=CUI_SCALE_INV()),
+        "mas_globals.dark_mode", Transform("gui/menu_bg_d.png", zoom=CUI_SCALE_INV()))
+    menu_bg_move
+
+image game_menu_bg:
+    topleft
+    ConditionSwitch(
+        "not mas_globals.dark_mode", Transform("gui/menu_bg.png", zoom=CUI_SCALE_INV()),
+        "mas_globals.dark_mode", Transform("gui/menu_bg_d.png", zoom=CUI_SCALE_INV()))
+    menu_bg_loop
+
+image menu_nav:
+    ConditionSwitch(
+        "not mas_globals.dark_mode", Transform("gui/overlay/main_menu.png", zoom=CUI_SCALE_INV()),
+        "mas_globals.dark_mode", Transform("gui/overlay/main_menu_d.png", zoom=CUI_SCALE_INV()))
+    menu_nav_move
+
+# Frame
+style game_menu_outer_frame:
+    background Transform("gui/overlay/game_menu.png", zoom=CUI_SCALE_INV())
+
+style game_menu_outer_frame_dark:
+    background Transform("gui/overlay/game_menu_d.png", zoom=CUI_SCALE_INV())
+
 # Title
 style game_menu_label_text:
     font     comfy_ui.menu_font
@@ -418,6 +446,13 @@ style page_button_text_dark is generic_button_text_dk
 # Music menu
 ################################################################################
 
+# Frame
+style music_menu_outer_frame:
+    background Transform("mod_assets/music_menu.png", zoom=CUI_SCALE_INV())
+
+style music_menu_outer_frame_dark:
+    background Transform("mod_assets/music_menu_d.png", zoom=CUI_SCALE_INV())
+
 # Music menu button
 style music_menu_button_text:
     font                 comfy_ui.music_menu_button_text.font
@@ -487,6 +522,19 @@ style normal:
     color        comfy_ui.dialogue_text.color
     outlines     comfy_ui.dialogue_text.outlines
 
+# CTC
+image ctc:
+    xalign 0.81
+    yalign 0.98
+    xoffset -5
+    alpha 0.0
+    subpixel True
+    Transform("gui/ctc.png", zoom=CUI_SCALE_INV())
+    block:
+        easeout 0.75 alpha 1.0 xoffset 0
+        easein 0.75 alpha 0.5 xoffset -5
+        repeat
+
 # Quick button
 style quick_button_text:
     font              comfy_ui.common.font
@@ -545,8 +593,24 @@ style history_text:
 # Frame
 define gui.frame_borders = Borders(5, 5, 5, 5, -1, -1, -1, -1)
 
+style frame:
+    background Frame(Transform("gui/frame.png", zoom=CUI_SCALE_INV()), gui.frame_borders, tile=gui.frame_tile)
+    padding    gui.frame_borders.padding
+
+style frame_dark:
+    background Frame(Transform("gui/frame_d.png", zoom=CUI_SCALE_INV()), gui.frame_borders, tile=gui.frame_tile)
+    padding    gui.frame_borders.padding
+
 # Confirm frame
 define gui.confirm_frame_borders = Borders(40, 40, 40, 40)
+
+style confirm_frame:
+    background Frame(Transform("gui/frame.png", zoom=CUI_SCALE_INV()), gui.confirm_frame_borders, tile=gui.frame_tile)
+    padding    gui.confirm_frame_borders.padding
+
+style confirm_frame_dark:
+    background Frame(Transform("gui/frame_d.png", zoom=CUI_SCALE_INV()), gui.confirm_frame_borders, tile=gui.frame_tile)
+    padding    gui.confirm_frame_borders.padding
 
 style confirm_prompt_text:
     font     comfy_ui.common.font
@@ -717,14 +781,14 @@ style mas_extra_menu_label_text_dark:
 
 style mas_adjust_vbar:
     xsize        18
-    base_bar     Frame("comfy_ui/scrollbar/vertical_bar_lt.png", Borders(4, 4, 4, 4))
-    thumb        "comfy_ui/slider/vertical_[prefix_]thumb_lt.png"
+    base_bar     Frame(Transform("comfy_ui/scrollbar/vertical_bar_lt.png", zoom=CUI_SCALE_INV()), Borders(4, 4, 4, 4))
+    thumb        Transform("comfy_ui/slider/vertical_[prefix_]thumb_lt.png", zoom=CUI_SCALE_INV())
     bar_vertical True
 
 style mas_adjust_vbar_dark:
     xsize        18
-    base_bar     Frame("comfy_ui/scrollbar/vertical_bar_dk.png", Borders(4, 4, 4, 4))
-    thumb        "comfy_ui/slider/vertical_[prefix_]thumb_dk.png"
+    base_bar     Frame(Transform("comfy_ui/scrollbar/vertical_bar_dk.png", zoom=CUI_SCALE_INV()), Borders(4, 4, 4, 4))
+    thumb        Transform("comfy_ui/slider/vertical_[prefix_]thumb_dk.png", zoom=CUI_SCALE_INV())
     bar_vertical True
 
 style mas_adjustable_button is generic_button_lt:
