@@ -10,7 +10,7 @@
 # Configuration variables
 ################################################################################
 release_mode = False
-dpi_scale = 1
+dpi_scale = 2
 
 theme_dir        = "Themes"
 source_dir       = "Source"
@@ -28,12 +28,12 @@ theme_files = [
     "gui/frame_d.svg",
     "gui/menu_bg.svg",
     "gui/menu_bg_d.svg",
-    "gui/namebox.svg",
-    "gui/namebox_d.svg",
-    "gui/textbox.svg",
-    "gui/textbox_d.svg",
-    "gui/textbox_monika.svg",
-    "gui/textbox_monika_d.svg",
+    "gui/namebox.svgr",
+    "gui/namebox_d.svgr",
+    "gui/textbox.svgr",
+    "gui/textbox_d.svgr",
+    "gui/textbox_monika.svgr",
+    "gui/textbox_monika_d.svgr",
     "gui/button/choice_idle_background.svg",
     "gui/button/choice_hover_background.svg",
     "gui/button/choice_dark_idle_background.svg",
@@ -149,12 +149,12 @@ theme_files = [
     # Custom
     "info.json",
     "zzz_comfy_ui.rpy",
-    "comfy_ui/button/idle_bg_lt.svg",
-    "comfy_ui/button/idle_bg_dk.svg",
-    "comfy_ui/button/hover_bg_lt.svg",
-    "comfy_ui/button/hover_bg_dk.svg",
-    "comfy_ui/button/insensitive_bg_lt.svg",
-    "comfy_ui/button/insensitive_bg_dk.svg",
+    "comfy_ui/button/idle_bg_lt.svgr",
+    "comfy_ui/button/idle_bg_dk.svgr",
+    "comfy_ui/button/hover_bg_lt.svgr",
+    "comfy_ui/button/hover_bg_dk.svgr",
+    "comfy_ui/button/insensitive_bg_lt.svgr",
+    "comfy_ui/button/insensitive_bg_dk.svgr",
     "comfy_ui/fonts/Asap-Medium.ttf",
     "comfy_ui/fonts/Asap-MediumItalic.ttf",
     "comfy_ui/fonts/Asap-Bold.ttf",
@@ -164,26 +164,26 @@ theme_files = [
     "comfy_ui/fonts/Nunito-SemiBold.ttf",
     "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
     "comfy_ui/fonts/OFL.txt",
-    "comfy_ui/scrollbar/horizontal_bar_lt.svg",
-    "comfy_ui/scrollbar/horizontal_bar_dk.svg",
-    "comfy_ui/scrollbar/horizontal_idle_thumb_lt.svg",
-    "comfy_ui/scrollbar/horizontal_idle_thumb_dk.svg",
-    "comfy_ui/scrollbar/horizontal_hover_thumb_lt.svg",
-    "comfy_ui/scrollbar/horizontal_hover_thumb_dk.svg",
-    "comfy_ui/scrollbar/vertical_bar_lt.svg",
-    "comfy_ui/scrollbar/vertical_bar_dk.svg",
-    "comfy_ui/scrollbar/vertical_idle_thumb_lt.svg",
-    "comfy_ui/scrollbar/vertical_idle_thumb_dk.svg",
-    "comfy_ui/scrollbar/vertical_hover_thumb_lt.svg",
-    "comfy_ui/scrollbar/vertical_hover_thumb_dk.svg",
-    "comfy_ui/slider/horizontal_idle_thumb_lt.svg",
-    "comfy_ui/slider/horizontal_idle_thumb_dk.svg",
-    "comfy_ui/slider/horizontal_hover_thumb_lt.svg",
-    "comfy_ui/slider/horizontal_hover_thumb_dk.svg",
-    "comfy_ui/slider/vertical_idle_thumb_lt.svg",
-    "comfy_ui/slider/vertical_idle_thumb_dk.svg",
-    "comfy_ui/slider/vertical_hover_thumb_lt.svg",
-    "comfy_ui/slider/vertical_hover_thumb_dk.svg",
+    "comfy_ui/scrollbar/horizontal_bar_lt.svgr",
+    "comfy_ui/scrollbar/horizontal_bar_dk.svgr",
+    "comfy_ui/scrollbar/horizontal_idle_thumb_lt.svgr",
+    "comfy_ui/scrollbar/horizontal_idle_thumb_dk.svgr",
+    "comfy_ui/scrollbar/horizontal_hover_thumb_lt.svgr",
+    "comfy_ui/scrollbar/horizontal_hover_thumb_dk.svgr",
+    "comfy_ui/scrollbar/vertical_bar_lt.svgr",
+    "comfy_ui/scrollbar/vertical_bar_dk.svgr",
+    "comfy_ui/scrollbar/vertical_idle_thumb_lt.svgr",
+    "comfy_ui/scrollbar/vertical_idle_thumb_dk.svgr",
+    "comfy_ui/scrollbar/vertical_hover_thumb_lt.svgr",
+    "comfy_ui/scrollbar/vertical_hover_thumb_dk.svgr",
+    "comfy_ui/slider/horizontal_idle_thumb_lt.svgr",
+    "comfy_ui/slider/horizontal_idle_thumb_dk.svgr",
+    "comfy_ui/slider/horizontal_hover_thumb_lt.svgr",
+    "comfy_ui/slider/horizontal_hover_thumb_dk.svgr",
+    "comfy_ui/slider/vertical_idle_thumb_lt.svgr",
+    "comfy_ui/slider/vertical_idle_thumb_dk.svgr",
+    "comfy_ui/slider/vertical_hover_thumb_lt.svgr",
+    "comfy_ui/slider/vertical_hover_thumb_dk.svgr",
 ]
 
 glitched_boxes = [
@@ -238,6 +238,12 @@ def ModulateRGBAColor(r, g, b, a, h, s):
 def GetThemeParameter(macro_args, method_args):
     return str(method_args)
 
+def GetUIScale(macro_args, method_args):
+    return str(method_args)
+
+def GetUIScaleInv(macro_args, method_args):
+    return str(1.0 / method_args)
+
 def ModulateColors(macro_args, method_args):
     h, s = method_args
 
@@ -291,6 +297,8 @@ def PreprocessTextFile(in_path, out_path, theme):
         [ "CUI_DLG_LINE_SPACING"     , GetThemeParameter, (theme["dialogue_line_spacing"])                        ],
         [ "CUI_PRM_COLOR"            , ModulateColors   , (theme["primary_hue"], theme["primary_saturation"])     ],
         [ "CUI_SCD_COLOR"            , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"]) ],
+        [ "CUI_SCALE"                , GetUIScale       , (dpi_scale)                                             ],
+        [ "CUI_SCALE_INV"            , GetUIScaleInv    , (dpi_scale)                                             ],
     ]
 
     text = ""
@@ -306,7 +314,7 @@ def PreprocessTextFile(in_path, out_path, theme):
         file.write(text)
 
 # Image rendering
-def RenderImage(in_path, out_path):
+def RenderImage(in_path, out_path, scale):
     if release_mode:
         os.system("inkscape "
                  "--batch-process "
@@ -314,13 +322,13 @@ def RenderImage(in_path, out_path):
                  "--export-filename=\"%s\" "
                  "--export-overwrite "
                  "--export-type=\"png\" "
-                 "\"%s\"" % (96 * dpi_scale, out_path, in_path))
+                 "\"%s\"" % (96 * scale, out_path, in_path))
     else:
         os.system("magick "
                   "-background \"none\" "
                   "-density \"%i\" "
                   "\"%s\" "
-                  "\"%s\"" % (96 * dpi_scale, in_path, out_path))
+                  "\"%s\"" % (96 * scale, in_path, out_path))
 
 # Image glitching
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
@@ -340,7 +348,7 @@ def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
             # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
             pixel_data[x + dx + ix, y + dy + iy] = region_data[ix][iy]
 
-def Glitch(image_path):
+def Glitch(image_path, scale):
     glitch_regions = [
         # X  | Y  | W  | H  | DX | DY
         [  42,   5, 144,  15, -25,   0 ],
@@ -374,12 +382,12 @@ def Glitch(image_path):
     with Image.open(image_path) as image:
         pixel_data = image.load()
         for x, y, w, h, dx, dy in glitch_regions:
-            x  *= dpi_scale
-            y  *= dpi_scale
-            w  *= dpi_scale
-            h  *= dpi_scale
-            dx *= dpi_scale
-            dy *= dpi_scale
+            x  *= scale
+            y  *= scale
+            w  *= scale
+            h  *= scale
+            dx *= scale
+            dy *= scale
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
         image.save(image_path)
 
@@ -433,12 +441,18 @@ def Build():
         for file_path in theme_files:
             (file_name, file_ext) = os.path.splitext(file_path)
 
-            if file_ext == ".svg":
+            if file_ext == ".svg" or file_ext == ".svgr":
                 Log("Rendering image %s..." % file_path)
                 temp_file_path = os.path.join(build_dir, "Temporary.svg")
-                PreprocessTextFile(os.path.join(asset_source_dir, file_path), temp_file_path, theme)
-                RenderImage(temp_file_path, os.path.join(target_dir, "%s.png" % file_name))
+                svg_path = "%s.svg" % file_name
+                png_path = "%s.png" % file_name
+                scale = dpi_scale if file_ext == ".svgr" else 1
+                PreprocessTextFile(os.path.join(asset_source_dir, svg_path), temp_file_path, theme)
+                RenderImage(temp_file_path, os.path.join(target_dir, png_path), scale)
                 os.remove(temp_file_path)
+                if png_path in glitched_boxes:
+                    Log("Glitching image %s..." % png_path)
+                    Glitch(os.path.join(target_dir, png_path), scale)
             elif file_ext == ".rpy":
                 Log("Processing script %s..." % file_path)
                 PreprocessTextFile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path), theme)
@@ -448,10 +462,6 @@ def Build():
             else:
                 Log("Copying file %s..." % file_path)
                 shutil.copyfile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path))
-
-        for image_path in glitched_boxes:
-            Log("Glitching image %s..." % image_path)
-            Glitch(os.path.join(target_dir, image_path))
 
         # Pack assets
         Log("Creating archive for theme %s..." % theme["name"])

@@ -158,10 +158,10 @@ style generic_button_base:
     activate_sound gui.activate_sound
 
 style generic_button_lt is generic_button_base:
-    background Frame("comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
+    background Frame(Transform("comfy_ui/button/[prefix_]bg_lt.png", zoom=CUI_SCALE_INV()), Borders(5, 5, 5, 5))
 
 style generic_button_dk is generic_button_base:
-    background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
+    background Frame(Transform("comfy_ui/button/[prefix_]bg_dk.png", zoom=CUI_SCALE_INV()), Borders(5, 5, 5, 5))
 
 style generic_button_text_base:
     font    comfy_ui.common.font
@@ -219,12 +219,12 @@ style generic_horizontal_scrollbar_base:
     bar_invert   True
 
 style generic_horizontal_scrollbar_lt is generic_horizontal_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/horizontal_bar_lt.png")
-    thumb    Frame("comfy_ui/scrollbar/horizontal_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
+    base_bar Frame(Transform("comfy_ui/scrollbar/horizontal_bar_lt.png", zoom=CUI_SCALE_INV()))
+    thumb    Frame(Transform("comfy_ui/scrollbar/horizontal_[prefix_]thumb_lt.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
 
 style generic_horizontal_scrollbar_dk is generic_horizontal_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/horizontal_bar_dk.png")
-    thumb    Frame("comfy_ui/scrollbar/horizontal_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
+    base_bar Frame(Transform("comfy_ui/scrollbar/horizontal_bar_dk.png", zoom=CUI_SCALE_INV()))
+    thumb    Frame(Transform("comfy_ui/scrollbar/horizontal_[prefix_]thumb_dk.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
 
 style generic_vertical_scrollbar_base:
     xsize        18
@@ -233,12 +233,12 @@ style generic_vertical_scrollbar_base:
     bar_invert   True
 
 style generic_vertical_scrollbar_lt is generic_vertical_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/vertical_bar_lt.png")
-    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
+    base_bar Frame(Transform("comfy_ui/scrollbar/vertical_bar_lt.png", zoom=CUI_SCALE_INV()))
+    thumb    Frame(Transform("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
 
 style generic_vertical_scrollbar_dk is generic_vertical_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/vertical_bar_dk.png")
-    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
+    base_bar Frame(Transform("comfy_ui/scrollbar/vertical_bar_dk.png", zoom=CUI_SCALE_INV()))
+    thumb    Frame(Transform("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
 
 
 
@@ -442,6 +442,26 @@ style music_menu_button_text_dark:
 ################################################################################
 # Dialogue
 ################################################################################
+
+# Name box
+style namebox:
+    background Frame(Transform("gui/namebox.png", zoom=CUI_SCALE_INV()), gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+
+style namebox_dark:
+    background Frame(Transform("gui/namebox_d.png", zoom=CUI_SCALE_INV()), gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+
+# Box
+style window:
+    background Transform(Image("gui/textbox.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
+
+style window_dark:
+    background Transform(Image("gui/textbox_d.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
+
+style window_monika:
+    background Transform(Image("gui/textbox_monika.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
+
+style window_monika_dark:
+    background Transform(Image("gui/textbox_monika_d.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
 
 # Name
 style say_label:
