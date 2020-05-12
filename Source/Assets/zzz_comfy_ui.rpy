@@ -126,6 +126,25 @@ define comfy_ui.hotkey_button_spacing          = 5
 ################################################################################
 # Init
 ################################################################################
+
+# HACK: HiDPI monkey patch
+init -999 python:
+    from renpy.display.im import Image
+    from renpy.display.transform import Transform
+
+    replacement_list = [ CUI_IMAGE_LIST() ]
+
+    def monkey_new(cls, filename, **properties):
+        new_instance = super(Image, cls).__new__(cls, filename, **properties)
+        new_instance.__init__(filename, **properties)
+
+        if filename in replacement_list:
+            return Transform(new_instance, zoom=CUI_SCALE_INV())
+
+        return new_instance
+
+    renpy.display.im.Image.__new__ = staticmethod(monkey_new)
+
 init python:
     config.font_replacement_map[comfy_ui.common.font_regular, False, True] = (comfy_ui.common.font_italic, False, False)
     config.font_replacement_map[comfy_ui.common.font_regular, True, False] = (comfy_ui.common.font_bold, False, False)
@@ -158,10 +177,10 @@ style generic_button_base:
     activate_sound gui.activate_sound
 
 style generic_button_lt is generic_button_base:
-    background Frame(Transform("comfy_ui/button/[prefix_]bg_lt.png", zoom=CUI_SCALE_INV()), Borders(5, 5, 5, 5))
+    background Frame("comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
 
 style generic_button_dk is generic_button_base:
-    background Frame(Transform("comfy_ui/button/[prefix_]bg_dk.png", zoom=CUI_SCALE_INV()), Borders(5, 5, 5, 5))
+    background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
 
 style generic_button_text_base:
     font    comfy_ui.common.font
@@ -219,12 +238,12 @@ style generic_horizontal_scrollbar_base:
     bar_invert   True
 
 style generic_horizontal_scrollbar_lt is generic_horizontal_scrollbar_base:
-    base_bar Frame(Transform("comfy_ui/scrollbar/horizontal_bar_lt.png", zoom=CUI_SCALE_INV()))
-    thumb    Frame(Transform("comfy_ui/scrollbar/horizontal_[prefix_]thumb_lt.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
+    base_bar Frame("comfy_ui/scrollbar/horizontal_bar_lt.png")
+    thumb    Frame("comfy_ui/scrollbar/horizontal_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
 
 style generic_horizontal_scrollbar_dk is generic_horizontal_scrollbar_base:
-    base_bar Frame(Transform("comfy_ui/scrollbar/horizontal_bar_dk.png", zoom=CUI_SCALE_INV()))
-    thumb    Frame(Transform("comfy_ui/scrollbar/horizontal_[prefix_]thumb_dk.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
+    base_bar Frame("comfy_ui/scrollbar/horizontal_bar_dk.png")
+    thumb    Frame("comfy_ui/scrollbar/horizontal_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
 
 style generic_vertical_scrollbar_base:
     xsize        18
@@ -233,12 +252,12 @@ style generic_vertical_scrollbar_base:
     bar_invert   True
 
 style generic_vertical_scrollbar_lt is generic_vertical_scrollbar_base:
-    base_bar Frame(Transform("comfy_ui/scrollbar/vertical_bar_lt.png", zoom=CUI_SCALE_INV()))
-    thumb    Frame(Transform("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
+    base_bar Frame("comfy_ui/scrollbar/vertical_bar_lt.png")
+    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
 
 style generic_vertical_scrollbar_dk is generic_vertical_scrollbar_base:
-    base_bar Frame(Transform("comfy_ui/scrollbar/vertical_bar_dk.png", zoom=CUI_SCALE_INV()))
-    thumb    Frame(Transform("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", zoom=CUI_SCALE_INV()), Borders(6, 6, 6, 6))
+    base_bar Frame("comfy_ui/scrollbar/vertical_bar_dk.png")
+    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
 
 
 
@@ -317,34 +336,6 @@ style mas_selector_sidebar_vbar_dark is generic_vertical_scrollbar_dk:
 ################################################################################
 # Game menu
 ################################################################################
-
-# Images
-image menu_bg:
-    topleft
-    ConditionSwitch(
-        "not mas_globals.dark_mode", Transform("gui/menu_bg.png", zoom=CUI_SCALE_INV()),
-        "mas_globals.dark_mode", Transform("gui/menu_bg_d.png", zoom=CUI_SCALE_INV()))
-    menu_bg_move
-
-image game_menu_bg:
-    topleft
-    ConditionSwitch(
-        "not mas_globals.dark_mode", Transform("gui/menu_bg.png", zoom=CUI_SCALE_INV()),
-        "mas_globals.dark_mode", Transform("gui/menu_bg_d.png", zoom=CUI_SCALE_INV()))
-    menu_bg_loop
-
-image menu_nav:
-    ConditionSwitch(
-        "not mas_globals.dark_mode", Transform("gui/overlay/main_menu.png", zoom=CUI_SCALE_INV()),
-        "mas_globals.dark_mode", Transform("gui/overlay/main_menu_d.png", zoom=CUI_SCALE_INV()))
-    menu_nav_move
-
-# Frame
-style game_menu_outer_frame:
-    background Transform("gui/overlay/game_menu.png", zoom=CUI_SCALE_INV())
-
-style game_menu_outer_frame_dark:
-    background Transform("gui/overlay/game_menu_d.png", zoom=CUI_SCALE_INV())
 
 # Title
 style game_menu_label_text:
@@ -446,13 +437,6 @@ style page_button_text_dark is generic_button_text_dk
 # Music menu
 ################################################################################
 
-# Frame
-style music_menu_outer_frame:
-    background Transform("mod_assets/music_menu.png", zoom=CUI_SCALE_INV())
-
-style music_menu_outer_frame_dark:
-    background Transform("mod_assets/music_menu_d.png", zoom=CUI_SCALE_INV())
-
 # Music menu button
 style music_menu_button_text:
     font                 comfy_ui.music_menu_button_text.font
@@ -478,26 +462,6 @@ style music_menu_button_text_dark:
 # Dialogue
 ################################################################################
 
-# Name box
-style namebox:
-    background Frame(Transform("gui/namebox.png", zoom=CUI_SCALE_INV()), gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
-
-style namebox_dark:
-    background Frame(Transform("gui/namebox_d.png", zoom=CUI_SCALE_INV()), gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
-
-# Box
-style window:
-    background Transform(Image("gui/textbox.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
-
-style window_dark:
-    background Transform(Image("gui/textbox_d.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
-
-style window_monika:
-    background Transform(Image("gui/textbox_monika.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
-
-style window_monika_dark:
-    background Transform(Image("gui/textbox_monika_d.png", xalign=0.5, yalign=1.0), zoom=CUI_SCALE_INV())
-
 # Name
 style say_label:
     font     comfy_ui.menu_font
@@ -521,19 +485,6 @@ style normal:
     line_spacing comfy_ui.dialogue_text.line_spacing
     color        comfy_ui.dialogue_text.color
     outlines     comfy_ui.dialogue_text.outlines
-
-# CTC
-image ctc:
-    xalign 0.81
-    yalign 0.98
-    xoffset -5
-    alpha 0.0
-    subpixel True
-    Transform("gui/ctc.png", zoom=CUI_SCALE_INV())
-    block:
-        easeout 0.75 alpha 1.0 xoffset 0
-        easein 0.75 alpha 0.5 xoffset -5
-        repeat
 
 # Quick button
 style quick_button_text:
@@ -593,24 +544,8 @@ style history_text:
 # Frame
 define gui.frame_borders = Borders(5, 5, 5, 5, -1, -1, -1, -1)
 
-style frame:
-    background Frame(Transform("gui/frame.png", zoom=CUI_SCALE_INV()), gui.frame_borders, tile=gui.frame_tile)
-    padding    gui.frame_borders.padding
-
-style frame_dark:
-    background Frame(Transform("gui/frame_d.png", zoom=CUI_SCALE_INV()), gui.frame_borders, tile=gui.frame_tile)
-    padding    gui.frame_borders.padding
-
 # Confirm frame
 define gui.confirm_frame_borders = Borders(40, 40, 40, 40)
-
-style confirm_frame:
-    background Frame(Transform("gui/frame.png", zoom=CUI_SCALE_INV()), gui.confirm_frame_borders, tile=gui.frame_tile)
-    padding    gui.confirm_frame_borders.padding
-
-style confirm_frame_dark:
-    background Frame(Transform("gui/frame_d.png", zoom=CUI_SCALE_INV()), gui.confirm_frame_borders, tile=gui.frame_tile)
-    padding    gui.confirm_frame_borders.padding
 
 style confirm_prompt_text:
     font     comfy_ui.common.font
@@ -781,14 +716,14 @@ style mas_extra_menu_label_text_dark:
 
 style mas_adjust_vbar:
     xsize        18
-    base_bar     Frame(Transform("comfy_ui/scrollbar/vertical_bar_lt.png", zoom=CUI_SCALE_INV()), Borders(4, 4, 4, 4))
-    thumb        Transform("comfy_ui/slider/vertical_[prefix_]thumb_lt.png", zoom=CUI_SCALE_INV())
+    base_bar     Frame("comfy_ui/scrollbar/vertical_bar_lt.png", Borders(4, 4, 4, 4))
+    thumb        "comfy_ui/slider/vertical_[prefix_]thumb_lt.png"
     bar_vertical True
 
 style mas_adjust_vbar_dark:
     xsize        18
-    base_bar     Frame(Transform("comfy_ui/scrollbar/vertical_bar_dk.png", zoom=CUI_SCALE_INV()), Borders(4, 4, 4, 4))
-    thumb        Transform("comfy_ui/slider/vertical_[prefix_]thumb_dk.png", zoom=CUI_SCALE_INV())
+    base_bar     Frame("comfy_ui/scrollbar/vertical_bar_dk.png", Borders(4, 4, 4, 4))
+    thumb        "comfy_ui/slider/vertical_[prefix_]thumb_dk.png"
     bar_vertical True
 
 style mas_adjustable_button is generic_button_lt:

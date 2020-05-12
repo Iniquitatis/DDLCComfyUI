@@ -23,17 +23,17 @@ common_files = [
 
 theme_files = [
     # Default
-    "gui/ctc.svgr",
-    "gui/frame.svgr",
-    "gui/frame_d.svgr",
-    "gui/menu_bg.svgr",
-    "gui/menu_bg_d.svgr",
-    "gui/namebox.svgr",
-    "gui/namebox_d.svgr",
-    "gui/textbox.svgr",
-    "gui/textbox_d.svgr",
-    "gui/textbox_monika.svgr",
-    "gui/textbox_monika_d.svgr",
+    "gui/ctc.svg",
+    "gui/frame.svg",
+    "gui/frame_d.svg",
+    "gui/menu_bg.svg",
+    "gui/menu_bg_d.svg",
+    "gui/namebox.svg",
+    "gui/namebox_d.svg",
+    "gui/textbox.svg",
+    "gui/textbox_d.svg",
+    "gui/textbox_monika.svg",
+    "gui/textbox_monika_d.svg",
     "gui/button/choice_idle_background.svg",
     "gui/button/choice_hover_background.svg",
     "gui/button/choice_dark_idle_background.svg",
@@ -52,10 +52,10 @@ theme_files = [
     "gui/button/twopane_scrollable_menu_dark_hover_background.svg",
     "gui/overlay/confirm.svg",
     "gui/overlay/confirm_d.svg",
-    "gui/overlay/game_menu.svgr",
-    "gui/overlay/game_menu_d.svgr",
-    "gui/overlay/main_menu.svgr",
-    "gui/overlay/main_menu_d.svgr",
+    "gui/overlay/game_menu.svg",
+    "gui/overlay/game_menu_d.svg",
+    "gui/overlay/main_menu.svg",
+    "gui/overlay/main_menu_d.svg",
     "mod_assets/hkb_idle_background.svg",
     "mod_assets/hkb_idle_background_d.svg",
     "mod_assets/hkb_hover_background.svg",
@@ -66,8 +66,8 @@ theme_files = [
     "mod_assets/island_idle_background_d.svg",
     "mod_assets/island_hover_background.svg",
     "mod_assets/island_hover_background_d.svg",
-    "mod_assets/music_menu.svgr",
-    "mod_assets/music_menu_d.svgr",
+    "mod_assets/music_menu.svg",
+    "mod_assets/music_menu_d.svg",
     "mod_assets/buttons/generic/idle_bg.svg",
     "mod_assets/buttons/generic/idle_bg_d.svg",
     "mod_assets/buttons/generic/hover_bg.svg",
@@ -149,12 +149,12 @@ theme_files = [
     # Custom
     "info.json",
     "zzz_comfy_ui.rpy",
-    "comfy_ui/button/idle_bg_lt.svgr",
-    "comfy_ui/button/idle_bg_dk.svgr",
-    "comfy_ui/button/hover_bg_lt.svgr",
-    "comfy_ui/button/hover_bg_dk.svgr",
-    "comfy_ui/button/insensitive_bg_lt.svgr",
-    "comfy_ui/button/insensitive_bg_dk.svgr",
+    "comfy_ui/button/idle_bg_lt.svg",
+    "comfy_ui/button/idle_bg_dk.svg",
+    "comfy_ui/button/hover_bg_lt.svg",
+    "comfy_ui/button/hover_bg_dk.svg",
+    "comfy_ui/button/insensitive_bg_lt.svg",
+    "comfy_ui/button/insensitive_bg_dk.svg",
     "comfy_ui/fonts/Asap-Medium.ttf",
     "comfy_ui/fonts/Asap-MediumItalic.ttf",
     "comfy_ui/fonts/Asap-Bold.ttf",
@@ -164,26 +164,26 @@ theme_files = [
     "comfy_ui/fonts/Nunito-SemiBold.ttf",
     "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
     "comfy_ui/fonts/OFL.txt",
-    "comfy_ui/scrollbar/horizontal_bar_lt.svgr",
-    "comfy_ui/scrollbar/horizontal_bar_dk.svgr",
-    "comfy_ui/scrollbar/horizontal_idle_thumb_lt.svgr",
-    "comfy_ui/scrollbar/horizontal_idle_thumb_dk.svgr",
-    "comfy_ui/scrollbar/horizontal_hover_thumb_lt.svgr",
-    "comfy_ui/scrollbar/horizontal_hover_thumb_dk.svgr",
-    "comfy_ui/scrollbar/vertical_bar_lt.svgr",
-    "comfy_ui/scrollbar/vertical_bar_dk.svgr",
-    "comfy_ui/scrollbar/vertical_idle_thumb_lt.svgr",
-    "comfy_ui/scrollbar/vertical_idle_thumb_dk.svgr",
-    "comfy_ui/scrollbar/vertical_hover_thumb_lt.svgr",
-    "comfy_ui/scrollbar/vertical_hover_thumb_dk.svgr",
-    "comfy_ui/slider/horizontal_idle_thumb_lt.svgr",
-    "comfy_ui/slider/horizontal_idle_thumb_dk.svgr",
-    "comfy_ui/slider/horizontal_hover_thumb_lt.svgr",
-    "comfy_ui/slider/horizontal_hover_thumb_dk.svgr",
-    "comfy_ui/slider/vertical_idle_thumb_lt.svgr",
-    "comfy_ui/slider/vertical_idle_thumb_dk.svgr",
-    "comfy_ui/slider/vertical_hover_thumb_lt.svgr",
-    "comfy_ui/slider/vertical_hover_thumb_dk.svgr",
+    "comfy_ui/scrollbar/horizontal_bar_lt.svg",
+    "comfy_ui/scrollbar/horizontal_bar_dk.svg",
+    "comfy_ui/scrollbar/horizontal_idle_thumb_lt.svg",
+    "comfy_ui/scrollbar/horizontal_idle_thumb_dk.svg",
+    "comfy_ui/scrollbar/horizontal_hover_thumb_lt.svg",
+    "comfy_ui/scrollbar/horizontal_hover_thumb_dk.svg",
+    "comfy_ui/scrollbar/vertical_bar_lt.svg",
+    "comfy_ui/scrollbar/vertical_bar_dk.svg",
+    "comfy_ui/scrollbar/vertical_idle_thumb_lt.svg",
+    "comfy_ui/scrollbar/vertical_idle_thumb_dk.svg",
+    "comfy_ui/scrollbar/vertical_hover_thumb_lt.svg",
+    "comfy_ui/scrollbar/vertical_hover_thumb_dk.svg",
+    "comfy_ui/slider/horizontal_idle_thumb_lt.svg",
+    "comfy_ui/slider/horizontal_idle_thumb_dk.svg",
+    "comfy_ui/slider/horizontal_hover_thumb_lt.svg",
+    "comfy_ui/slider/horizontal_hover_thumb_dk.svg",
+    "comfy_ui/slider/vertical_idle_thumb_lt.svg",
+    "comfy_ui/slider/vertical_idle_thumb_dk.svg",
+    "comfy_ui/slider/vertical_hover_thumb_lt.svg",
+    "comfy_ui/slider/vertical_hover_thumb_dk.svg",
 ]
 
 glitched_boxes = [
@@ -234,6 +234,14 @@ def ModulateRGBAColor(r, g, b, a, h, s):
             int(g * 255.0),
             int(b * 255.0),
             int(a * 255.0))
+
+def GetImageList(macro_args, method_args):
+    result = ""
+    for file_path in theme_files:
+        (file_name, file_ext) = os.path.splitext(file_path)
+        if file_ext == ".svg":
+            result += "\"%s.png\",\n" % file_name
+    return result
 
 def GetThemeParameter(macro_args, method_args):
     return str(method_args)
@@ -299,6 +307,7 @@ def PreprocessTextFile(in_path, out_path, theme):
         [ "CUI_SCD_COLOR"            , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"]) ],
         [ "CUI_SCALE"                , GetUIScale       , (dpi_scale)                                             ],
         [ "CUI_SCALE_INV"            , GetUIScaleInv    , (dpi_scale)                                             ],
+        [ "CUI_IMAGE_LIST"           , GetImageList     , ()                                                      ],
     ]
 
     text = ""
@@ -441,18 +450,17 @@ def Build():
         for file_path in theme_files:
             (file_name, file_ext) = os.path.splitext(file_path)
 
-            if file_ext == ".svg" or file_ext == ".svgr":
+            if file_ext == ".svg":
                 Log("Rendering image %s..." % file_path)
                 temp_file_path = os.path.join(build_dir, "Temporary.svg")
                 svg_path = "%s.svg" % file_name
                 png_path = "%s.png" % file_name
-                scale = dpi_scale if file_ext == ".svgr" else 1
                 PreprocessTextFile(os.path.join(asset_source_dir, svg_path), temp_file_path, theme)
-                RenderImage(temp_file_path, os.path.join(target_dir, png_path), scale)
+                RenderImage(temp_file_path, os.path.join(target_dir, png_path), dpi_scale)
                 os.remove(temp_file_path)
                 if png_path in glitched_boxes:
                     Log("Glitching image %s..." % png_path)
-                    Glitch(os.path.join(target_dir, png_path), scale)
+                    Glitch(os.path.join(target_dir, png_path), dpi_scale)
             elif file_ext == ".rpy":
                 Log("Processing script %s..." % file_path)
                 PreprocessTextFile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path), theme)
