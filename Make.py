@@ -10,7 +10,6 @@
 # Configuration variables
 ################################################################################
 release_mode = False
-dpi_scale = 1
 
 theme_dir        = "Themes"
 source_dir       = "Source"
@@ -19,6 +18,15 @@ build_dir        = "Build"
 
 common_files = [
     "comfy_ui.rpy",
+    "comfy_ui/fonts/Asap-Medium.ttf",
+    "comfy_ui/fonts/Asap-MediumItalic.ttf",
+    "comfy_ui/fonts/Asap-Bold.ttf",
+    "comfy_ui/fonts/Asap-BoldItalic.ttf",
+    "comfy_ui/fonts/Nunito-SemiBold.ttf",
+    "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
+    "comfy_ui/fonts/Nunito-Bold.ttf",
+    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
+    "comfy_ui/fonts/OFL.txt",
 ]
 
 theme_files = [
@@ -155,15 +163,6 @@ theme_files = [
     "comfy_ui/button/hover_bg_dk.svg",
     "comfy_ui/button/insensitive_bg_lt.svg",
     "comfy_ui/button/insensitive_bg_dk.svg",
-    "comfy_ui/fonts/Asap-Medium.ttf",
-    "comfy_ui/fonts/Asap-MediumItalic.ttf",
-    "comfy_ui/fonts/Asap-Bold.ttf",
-    "comfy_ui/fonts/Asap-BoldItalic.ttf",
-    "comfy_ui/fonts/Nunito-Bold.ttf",
-    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
-    "comfy_ui/fonts/Nunito-SemiBold.ttf",
-    "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
-    "comfy_ui/fonts/OFL.txt",
     "comfy_ui/scrollbar/horizontal_bar_lt.svg",
     "comfy_ui/scrollbar/horizontal_bar_dk.svg",
     "comfy_ui/scrollbar/horizontal_idle_thumb_lt.svg",
@@ -235,8 +234,13 @@ def ModulateRGBAColor(r, g, b, a, h, s):
             int(b * 255.0),
             int(a * 255.0))
 
-def GetThemeParameter(macro_args, method_args):
-    return str(method_args)
+def GetImageList(macro_args, method_args):
+    result = ""
+    for file_path in theme_files:
+        (file_name, file_ext) = os.path.splitext(file_path)
+        if file_ext == ".svg":
+            result += "\"%s.png\",\n" % file_name
+    return result
 
 def ModulateColors(macro_args, method_args):
     h, s = method_args
@@ -256,6 +260,9 @@ def ModulateColors(macro_args, method_args):
 
     return "#baadf00d"
 
+def Stringize(macro_args, method_args):
+    return str(method_args)
+
 def ParseMacroArguments(match):
     if match.lastindex == None or match.lastindex == 0:
         # No arguments have been passed to the macro
@@ -265,32 +272,35 @@ def ParseMacroArguments(match):
 
     query = r""
     for i in range(0, 4):
-        query += r"\s*([A-Za-z0-9_\-.]+)\s*"
+        query += r"\s*([\w\-.]+)\s*"
         result = re.findall(query, args_string)
         if len(result) > 0:
             return result
         query += r","
 
-def PreprocessTextFile(in_path, out_path, theme):
+def PreprocessTextFile(in_path, out_path, theme, scale):
     macros = [
-        # Name                       | Method           | Arguments
-        [ "CUI_THEME_NAME"           , GetThemeParameter, (theme["name"])                                         ],
-        [ "CUI_BTN_ROUNDING"         , GetThemeParameter, (theme["button_rounding"])                              ],
-        [ "CUI_FRM_ROUNDING"         , GetThemeParameter, (theme["frame_rounding"])                               ],
-        [ "CUI_DLG_ROUNDING"         , GetThemeParameter, (theme["dialogue_rounding"])                            ],
-        [ "CUI_MNU_PTSHAPE"          , GetThemeParameter, (theme["menu_pattern_shape"])                           ],
-        [ "CUI_DLG_PTSHAPE"          , GetThemeParameter, (theme["dialogue_pattern_shape"])                       ],
-        [ "CUI_MAIN_FONT_REGULAR"    , GetThemeParameter, (theme["main_font"]["regular"])                         ],
-        [ "CUI_MAIN_FONT_ITALIC"     , GetThemeParameter, (theme["main_font"]["italic"])                          ],
-        [ "CUI_MAIN_FONT_BOLD"       , GetThemeParameter, (theme["main_font"]["bold"])                            ],
-        [ "CUI_MAIN_FONT_BOLD_ITALIC", GetThemeParameter, (theme["main_font"]["bold_italic"])                     ],
-        [ "CUI_MENU_FONT"            , GetThemeParameter, (theme["menu_font"])                                    ],
-        [ "CUI_OPTION_FONT"          , GetThemeParameter, (theme["option_font"])                                  ],
-        [ "CUI_MAIN_FONT_KERNING"    , GetThemeParameter, (theme["main_font_kerning"])                            ],
-        [ "CUI_DLG_VERT_OFFSET"      , GetThemeParameter, (theme["dialogue_vertical_offset"])                     ],
-        [ "CUI_DLG_LINE_SPACING"     , GetThemeParameter, (theme["dialogue_line_spacing"])                        ],
-        [ "CUI_PRM_COLOR"            , ModulateColors   , (theme["primary_hue"], theme["primary_saturation"])     ],
-        [ "CUI_SCD_COLOR"            , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"]) ],
+        # Name                       | Method        | Arguments
+        [ "CUI_THEME_NAME"           , Stringize     , (theme["name"] if scale == 1 else "%s (HiDPI)" % theme["name"]) ],
+        [ "CUI_BTN_ROUNDING"         , Stringize     , (theme["button_rounding"])                                      ],
+        [ "CUI_FRM_ROUNDING"         , Stringize     , (theme["frame_rounding"])                                       ],
+        [ "CUI_DLG_ROUNDING"         , Stringize     , (theme["dialogue_rounding"])                                    ],
+        [ "CUI_MNU_PTSHAPE"          , Stringize     , (theme["menu_pattern_shape"])                                   ],
+        [ "CUI_DLG_PTSHAPE"          , Stringize     , (theme["dialogue_pattern_shape"])                               ],
+        [ "CUI_MAIN_FONT_REGULAR"    , Stringize     , (theme["main_font"]["regular"])                                 ],
+        [ "CUI_MAIN_FONT_ITALIC"     , Stringize     , (theme["main_font"]["italic"])                                  ],
+        [ "CUI_MAIN_FONT_BOLD"       , Stringize     , (theme["main_font"]["bold"])                                    ],
+        [ "CUI_MAIN_FONT_BOLD_ITALIC", Stringize     , (theme["main_font"]["bold_italic"])                             ],
+        [ "CUI_MENU_FONT"            , Stringize     , (theme["menu_font"])                                            ],
+        [ "CUI_OPTION_FONT"          , Stringize     , (theme["option_font"])                                          ],
+        [ "CUI_MAIN_FONT_KERNING"    , Stringize     , (theme["main_font_kerning"])                                    ],
+        [ "CUI_DLG_VERT_OFFSET"      , Stringize     , (theme["dialogue_vertical_offset"])                             ],
+        [ "CUI_DLG_LINE_SPACING"     , Stringize     , (theme["dialogue_line_spacing"])                                ],
+        [ "CUI_PRM_COLOR"            , ModulateColors, (theme["primary_hue"], theme["primary_saturation"])             ],
+        [ "CUI_SCD_COLOR"            , ModulateColors, (theme["secondary_hue"], theme["secondary_saturation"])         ],
+        [ "CUI_SCALE"                , Stringize     , (scale)                                                         ],
+        [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                                   ],
+        [ "CUI_IMAGE_LIST"           , GetImageList  , ()                                                              ],
     ]
 
     text = ""
@@ -299,30 +309,13 @@ def PreprocessTextFile(in_path, out_path, theme):
         text = file.read()
 
     for macro_name, method, method_args in macros:
-        query = macro_name + r"\(([A-Za-z0-9_\-,. ]*)\)"
+        query = macro_name + r"\(([\w\s\-.,]*)\)"
         text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
 
     with open(out_path, "w") as file:
         file.write(text)
 
 # Image rendering
-def RenderImage(in_path, out_path):
-    if release_mode:
-        os.system("inkscape "
-                 "--batch-process "
-                 "--export-dpi=\"%i\" "
-                 "--export-filename=\"%s\" "
-                 "--export-overwrite "
-                 "--export-type=\"png\" "
-                 "\"%s\"" % (96 * dpi_scale, out_path, in_path))
-    else:
-        os.system("magick "
-                  "-background \"none\" "
-                  "-density \"%i\" "
-                  "\"%s\" "
-                  "\"%s\"" % (96 * dpi_scale, in_path, out_path))
-
-# Image glitching
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
     region_data = []
     for ix in range(0, w):
@@ -340,7 +333,7 @@ def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
             # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
             pixel_data[x + dx + ix, y + dy + iy] = region_data[ix][iy]
 
-def Glitch(image_path):
+def Glitch(image_path, scale):
     glitch_regions = [
         # X  | Y  | W  | H  | DX | DY
         [  42,   5, 144,  15, -25,   0 ],
@@ -373,15 +366,29 @@ def Glitch(image_path):
 
     with Image.open(image_path) as image:
         pixel_data = image.load()
-        for x, y, w, h, dx, dy in glitch_regions:
-            x  *= dpi_scale
-            y  *= dpi_scale
-            w  *= dpi_scale
-            h  *= dpi_scale
-            dx *= dpi_scale
-            dy *= dpi_scale
+        for region in glitch_regions:
+            [x, y, w, h, dx, dy] = [i * scale for i in region]
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
         image.save(image_path)
+
+def RenderImage(in_path, out_path, scale, glitched):
+    if release_mode:
+        os.system("inkscape "
+                 "--batch-process "
+                 "--export-dpi=\"%i\" "
+                 "--export-filename=\"%s\" "
+                 "--export-overwrite "
+                 "--export-type=\"png\" "
+                 "\"%s\"" % (96 * scale, out_path, in_path))
+    else:
+        os.system("magick "
+                  "-background \"none\" "
+                  "-density \"%i\" "
+                  "\"%s\" "
+                  "\"%s\"" % (96 * scale, in_path, out_path))
+
+    if glitched:
+        Glitch(out_path, scale)
 
 # Theme loading
 def PreloadThemes():
@@ -399,6 +406,15 @@ def PreloadThemes():
 def Log(message):
     print("BUILD: %s" % message)
 
+def ReplicateDirStructure(path_list, dst_path):
+    for path in path_list:
+        dir_path = os.path.dirname(path)
+        dir_full_path = os.path.join(dst_path, dir_path)
+
+        if not os.path.exists(dir_full_path):
+            Log("Creating directory %s..." % dir_full_path)
+            os.makedirs(dir_full_path)
+
 def Build():
     # Clear previous build
     if os.path.exists(build_dir):
@@ -409,55 +425,61 @@ def Build():
     Log("Creating build directory...")
     os.mkdir(build_dir)
 
+    # Replicate directory structure
+    ReplicateDirStructure(common_files, build_dir)
+
     # Copy common files
     for file_path in common_files:
         Log("Copying file %s..." % file_path)
-        shutil.copyfile(os.path.join(source_dir, file_path), os.path.join(build_dir, file_path))
+        src_path = os.path.join(source_dir, file_path)
+        dst_path = os.path.join(build_dir, file_path)
+        shutil.copyfile(src_path, dst_path)
 
     # Make themes
     themes = PreloadThemes()
 
     for theme in themes:
-        target_dir = os.path.join(build_dir, "comfy_meta", theme["id"])
+        for scale in range(1, 3):
+            target_id = theme["id"] if scale == 1 else "%s_hidpi" % theme["id"]
+            target_dir = os.path.join(build_dir, "comfy_meta", target_id)
 
-        # Replicate directory structure
-        for file_path in theme_files:
-            dir_path = os.path.dirname(file_path)
-            dir_full_path = os.path.join(target_dir, dir_path)
+            # Replicate directory structure
+            ReplicateDirStructure(theme_files, target_dir)
 
-            if not os.path.exists(dir_full_path):
-                Log("Creating directory %s..." % dir_full_path)
-                os.makedirs(dir_full_path)
+            # Process source files
+            for file_path in theme_files:
+                (file_name, file_ext) = os.path.splitext(file_path)
 
-        # Process source files
-        for file_path in theme_files:
-            (file_name, file_ext) = os.path.splitext(file_path)
+                if file_ext == ".svg":
+                    Log("Rendering image %s..." % file_path)
+                    png_path = "%s.png" % file_name
+                    tmp_path = os.path.join(build_dir, "Temporary.svg")
+                    src_path = os.path.join(asset_source_dir, file_path)
+                    dst_path = os.path.join(target_dir, png_path)
+                    PreprocessTextFile(src_path, tmp_path, theme, scale)
+                    RenderImage(tmp_path, dst_path, scale, png_path in glitched_boxes)
+                    os.remove(tmp_path)
+                elif file_ext == ".rpy":
+                    Log("Processing script %s..." % file_path)
+                    src_path = os.path.join(asset_source_dir, file_path)
+                    dst_path = os.path.join(target_dir, file_path)
+                    PreprocessTextFile(src_path, dst_path, theme, scale)
+                elif file_ext == ".json":
+                    Log("Processing JSON %s..." % file_path)
+                    src_path = os.path.join(asset_source_dir, file_path)
+                    dst_path = os.path.join(target_dir, file_path)
+                    PreprocessTextFile(src_path, dst_path, theme, scale)
+                else:
+                    Log("Copying file %s..." % file_path)
+                    src_path = os.path.join(asset_source_dir, file_path)
+                    dst_path = os.path.join(target_dir, file_path)
+                    shutil.copyfile(src_path, dst_path)
 
-            if file_ext == ".svg":
-                Log("Rendering image %s..." % file_path)
-                temp_file_path = os.path.join(build_dir, "Temporary.svg")
-                PreprocessTextFile(os.path.join(asset_source_dir, file_path), temp_file_path, theme)
-                RenderImage(temp_file_path, os.path.join(target_dir, "%s.png" % file_name))
-                os.remove(temp_file_path)
-            elif file_ext == ".rpy":
-                Log("Processing script %s..." % file_path)
-                PreprocessTextFile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path), theme)
-            elif file_ext == ".json":
-                Log("Processing JSON %s..." % file_path)
-                PreprocessTextFile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path), theme)
-            else:
-                Log("Copying file %s..." % file_path)
-                shutil.copyfile(os.path.join(asset_source_dir, file_path), os.path.join(target_dir, file_path))
-
-        for image_path in glitched_boxes:
-            Log("Glitching image %s..." % image_path)
-            Glitch(os.path.join(target_dir, image_path))
-
-        # Pack assets
-        Log("Creating archive for theme %s..." % theme["name"])
-        shutil.make_archive(target_dir, "zip", target_dir)
-        os.rename("%s.zip" % target_dir, "%s.arc" % target_dir)
-        shutil.rmtree(target_dir)
+            # Pack assets
+            Log("Creating archive for %s..." % target_id)
+            shutil.make_archive(target_dir, "zip", target_dir)
+            os.rename("%s.zip" % target_dir, "%s.arc" % target_dir)
+            shutil.rmtree(target_dir)
 
     # Create release archive if needed
     if release_mode:
