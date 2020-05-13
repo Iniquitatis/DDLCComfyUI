@@ -18,6 +18,15 @@ build_dir        = "Build"
 
 common_files = [
     "comfy_ui.rpy",
+    "comfy_ui/fonts/Asap-Medium.ttf",
+    "comfy_ui/fonts/Asap-MediumItalic.ttf",
+    "comfy_ui/fonts/Asap-Bold.ttf",
+    "comfy_ui/fonts/Asap-BoldItalic.ttf",
+    "comfy_ui/fonts/Nunito-Bold.ttf",
+    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
+    "comfy_ui/fonts/Nunito-SemiBold.ttf",
+    "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
+    "comfy_ui/fonts/OFL.txt",
 ]
 
 theme_files = [
@@ -154,15 +163,6 @@ theme_files = [
     "comfy_ui/button/hover_bg_dk.svg",
     "comfy_ui/button/insensitive_bg_lt.svg",
     "comfy_ui/button/insensitive_bg_dk.svg",
-    "comfy_ui/fonts/Asap-Medium.ttf",
-    "comfy_ui/fonts/Asap-MediumItalic.ttf",
-    "comfy_ui/fonts/Asap-Bold.ttf",
-    "comfy_ui/fonts/Asap-BoldItalic.ttf",
-    "comfy_ui/fonts/Nunito-Bold.ttf",
-    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
-    "comfy_ui/fonts/Nunito-SemiBold.ttf",
-    "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
-    "comfy_ui/fonts/OFL.txt",
     "comfy_ui/scrollbar/horizontal_bar_lt.svg",
     "comfy_ui/scrollbar/horizontal_bar_dk.svg",
     "comfy_ui/scrollbar/horizontal_idle_thumb_lt.svg",
@@ -417,6 +417,15 @@ def PreloadThemes():
 def Log(message):
     print("BUILD: %s" % message)
 
+def ReplicateDirStructure(path_list, dst_path):
+    for path in path_list:
+        dir_path = os.path.dirname(path)
+        dir_full_path = os.path.join(dst_path, dir_path)
+
+        if not os.path.exists(dir_full_path):
+            Log("Creating directory %s..." % dir_full_path)
+            os.makedirs(dir_full_path)
+
 def Build():
     # Clear previous build
     if os.path.exists(build_dir):
@@ -426,6 +435,9 @@ def Build():
     # Create build directory
     Log("Creating build directory...")
     os.mkdir(build_dir)
+
+    # Replicate directory structure
+    ReplicateDirStructure(common_files, build_dir)
 
     # Copy common files
     for file_path in common_files:
@@ -443,13 +455,7 @@ def Build():
             target_dir = os.path.join(build_dir, "comfy_meta", target_id)
 
             # Replicate directory structure
-            for file_path in theme_files:
-                dir_path = os.path.dirname(file_path)
-                dir_full_path = os.path.join(target_dir, dir_path)
-
-                if not os.path.exists(dir_full_path):
-                    Log("Creating directory %s..." % dir_full_path)
-                    os.makedirs(dir_full_path)
+            ReplicateDirStructure(theme_files, target_dir)
 
             # Process source files
             for file_path in theme_files:
