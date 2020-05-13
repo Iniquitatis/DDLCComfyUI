@@ -35,7 +35,8 @@ init -2 python in comfy_ui:
 
     themes = []
     settings = {
-        "selected_theme_index": 0
+        "selected_theme_index": 0,
+        "hidpi": False
     }
 
     def get_current_theme():
@@ -52,7 +53,7 @@ init -2 python in comfy_ui:
         load_settings()
 
     def install():
-        _install_theme(get_current_theme())
+        _install_theme(get_current_theme(), settings["hidpi"])
 
     def load_settings():
         if not os.path.exists(config_path):
@@ -68,14 +69,16 @@ init -2 python in comfy_ui:
     def _fetch_themes():
         for file_path in os.listdir(meta_dir):
             file_name, extension = os.path.splitext(file_path)
-            if extension == ".arc":
-                themes.append(_get_theme_info(os.path.join(meta_dir, file_path)))
+            if extension == ".arc" and not file_name.endswith("_hidpi"):
+                themes.append(_get_theme_info(os.path.join(meta_dir, file_path),
+                                              os.path.join(meta_dir, "%s_hidpi.arc" % file_name)))
 
         themes.sort(cmp=lambda x, y: cmp(x["name"], y["name"]))
 
-    def _get_theme_info(file_path):
+    def _get_theme_info(file_path, hidpi_path):
         result = {
-            "path": file_path
+            "path": file_path,
+            "hidpi_path": hidpi_path
         }
 
         with ZipFile(file_path, "r") as theme_arc:
@@ -84,9 +87,9 @@ init -2 python in comfy_ui:
 
         return result
 
-    def _install_theme(theme):
+    def _install_theme(theme, hidpi = False):
         log = open(os.path.join(meta_dir, "install.log"), "w")
-        theme_arc = ZipFile(theme["path"], "r")
+        theme_arc = ZipFile(theme["path"] if not hidpi else theme["hidpi_path"], "r")
 
         for file_path in theme_arc.namelist():
             if os.path.basename(file_path) == "info.json":
@@ -123,22 +126,27 @@ screen comfy_ui_settings_pane():
             $ theme_name = comfy_ui.get_current_theme_name()
 
             vbox:
-                style_prefix "slider"
-                xmaximum 240
+                xmaximum 300
 
-                label _("Theme: " + theme_name)
+                label _("Theme: [theme_name]"):
+                    style "slider_label"
 
                 bar:
+                    style "slider_slider"
                     value DictValue(
                         comfy_ui.settings,
                         "selected_theme_index",
-                        range=theme_count - 1,
-                        style="slider"
+                        range=theme_count - 1
                     )
+
+                textbutton _("HiDPI"):
+                    style "check_button"
+                    action ToggleDict(comfy_ui.settings, "hidpi")
+
+            null height 10
 
             textbutton _("Apply"):
                 style "navigation_button"
-                ypos 20
                 action Jump("comfy_ui_apply")
         else:
             label _("No themes available.")
