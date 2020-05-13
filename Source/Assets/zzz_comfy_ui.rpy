@@ -128,7 +128,7 @@ define comfy_ui.hotkey_button_spacing          = 5
 ################################################################################
 
 # HACK: HiDPI monkey patch
-init -999 python:
+init -999 python in comfy_ui:
     from renpy.display.im import Image
     from renpy.display.transform import Transform
 

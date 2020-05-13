@@ -22,10 +22,10 @@ common_files = [
     "comfy_ui/fonts/Asap-MediumItalic.ttf",
     "comfy_ui/fonts/Asap-Bold.ttf",
     "comfy_ui/fonts/Asap-BoldItalic.ttf",
-    "comfy_ui/fonts/Nunito-Bold.ttf",
-    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
     "comfy_ui/fonts/Nunito-SemiBold.ttf",
     "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
+    "comfy_ui/fonts/Nunito-Bold.ttf",
+    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
     "comfy_ui/fonts/OFL.txt",
 ]
 
@@ -242,15 +242,6 @@ def GetImageList(macro_args, method_args):
             result += "\"%s.png\",\n" % file_name
     return result
 
-def GetThemeParameter(macro_args, method_args):
-    return str(method_args)
-
-def GetUIScale(macro_args, method_args):
-    return str(method_args)
-
-def GetUIScaleInv(macro_args, method_args):
-    return str(1.0 / method_args)
-
 def ModulateColors(macro_args, method_args):
     h, s = method_args
 
@@ -269,6 +260,9 @@ def ModulateColors(macro_args, method_args):
 
     return "#baadf00d"
 
+def Stringize(macro_args, method_args):
+    return str(method_args)
+
 def ParseMacroArguments(match):
     if match.lastindex == None or match.lastindex == 0:
         # No arguments have been passed to the macro
@@ -286,27 +280,27 @@ def ParseMacroArguments(match):
 
 def PreprocessTextFile(in_path, out_path, theme, scale):
     macros = [
-        # Name                       | Method           | Arguments
-        [ "CUI_THEME_NAME"           , GetThemeParameter, (theme["name"] if scale == 1 else "%s (HiDPI)" % theme["name"]) ],
-        [ "CUI_BTN_ROUNDING"         , GetThemeParameter, (theme["button_rounding"])                                      ],
-        [ "CUI_FRM_ROUNDING"         , GetThemeParameter, (theme["frame_rounding"])                                       ],
-        [ "CUI_DLG_ROUNDING"         , GetThemeParameter, (theme["dialogue_rounding"])                                    ],
-        [ "CUI_MNU_PTSHAPE"          , GetThemeParameter, (theme["menu_pattern_shape"])                                   ],
-        [ "CUI_DLG_PTSHAPE"          , GetThemeParameter, (theme["dialogue_pattern_shape"])                               ],
-        [ "CUI_MAIN_FONT_REGULAR"    , GetThemeParameter, (theme["main_font"]["regular"])                                 ],
-        [ "CUI_MAIN_FONT_ITALIC"     , GetThemeParameter, (theme["main_font"]["italic"])                                  ],
-        [ "CUI_MAIN_FONT_BOLD"       , GetThemeParameter, (theme["main_font"]["bold"])                                    ],
-        [ "CUI_MAIN_FONT_BOLD_ITALIC", GetThemeParameter, (theme["main_font"]["bold_italic"])                             ],
-        [ "CUI_MENU_FONT"            , GetThemeParameter, (theme["menu_font"])                                            ],
-        [ "CUI_OPTION_FONT"          , GetThemeParameter, (theme["option_font"])                                          ],
-        [ "CUI_MAIN_FONT_KERNING"    , GetThemeParameter, (theme["main_font_kerning"])                                    ],
-        [ "CUI_DLG_VERT_OFFSET"      , GetThemeParameter, (theme["dialogue_vertical_offset"])                             ],
-        [ "CUI_DLG_LINE_SPACING"     , GetThemeParameter, (theme["dialogue_line_spacing"])                                ],
-        [ "CUI_PRM_COLOR"            , ModulateColors   , (theme["primary_hue"], theme["primary_saturation"])             ],
-        [ "CUI_SCD_COLOR"            , ModulateColors   , (theme["secondary_hue"], theme["secondary_saturation"])         ],
-        [ "CUI_SCALE"                , GetUIScale       , (scale)                                                         ],
-        [ "CUI_SCALE_INV"            , GetUIScaleInv    , (scale)                                                         ],
-        [ "CUI_IMAGE_LIST"           , GetImageList     , ()                                                              ],
+        # Name                       | Method        | Arguments
+        [ "CUI_THEME_NAME"           , Stringize     , (theme["name"] if scale == 1 else "%s (HiDPI)" % theme["name"]) ],
+        [ "CUI_BTN_ROUNDING"         , Stringize     , (theme["button_rounding"])                                      ],
+        [ "CUI_FRM_ROUNDING"         , Stringize     , (theme["frame_rounding"])                                       ],
+        [ "CUI_DLG_ROUNDING"         , Stringize     , (theme["dialogue_rounding"])                                    ],
+        [ "CUI_MNU_PTSHAPE"          , Stringize     , (theme["menu_pattern_shape"])                                   ],
+        [ "CUI_DLG_PTSHAPE"          , Stringize     , (theme["dialogue_pattern_shape"])                               ],
+        [ "CUI_MAIN_FONT_REGULAR"    , Stringize     , (theme["main_font"]["regular"])                                 ],
+        [ "CUI_MAIN_FONT_ITALIC"     , Stringize     , (theme["main_font"]["italic"])                                  ],
+        [ "CUI_MAIN_FONT_BOLD"       , Stringize     , (theme["main_font"]["bold"])                                    ],
+        [ "CUI_MAIN_FONT_BOLD_ITALIC", Stringize     , (theme["main_font"]["bold_italic"])                             ],
+        [ "CUI_MENU_FONT"            , Stringize     , (theme["menu_font"])                                            ],
+        [ "CUI_OPTION_FONT"          , Stringize     , (theme["option_font"])                                          ],
+        [ "CUI_MAIN_FONT_KERNING"    , Stringize     , (theme["main_font_kerning"])                                    ],
+        [ "CUI_DLG_VERT_OFFSET"      , Stringize     , (theme["dialogue_vertical_offset"])                             ],
+        [ "CUI_DLG_LINE_SPACING"     , Stringize     , (theme["dialogue_line_spacing"])                                ],
+        [ "CUI_PRM_COLOR"            , ModulateColors, (theme["primary_hue"], theme["primary_saturation"])             ],
+        [ "CUI_SCD_COLOR"            , ModulateColors, (theme["secondary_hue"], theme["secondary_saturation"])         ],
+        [ "CUI_SCALE"                , Stringize     , (scale)                                                         ],
+        [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                                   ],
+        [ "CUI_IMAGE_LIST"           , GetImageList  , ()                                                              ],
     ]
 
     text = ""
@@ -372,13 +366,8 @@ def Glitch(image_path, scale):
 
     with Image.open(image_path) as image:
         pixel_data = image.load()
-        for x, y, w, h, dx, dy in glitch_regions:
-            x  *= scale
-            y  *= scale
-            w  *= scale
-            h  *= scale
-            dx *= scale
-            dy *= scale
+        for region in glitch_regions:
+            [x, y, w, h, dx, dy] = [i * scale for i in region]
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
         image.save(image_path)
 
