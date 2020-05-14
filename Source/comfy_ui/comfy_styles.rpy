@@ -127,25 +127,24 @@ define comfy_ui.hotkey_button_spacing          = 5
 # Init
 ################################################################################
 
-# HACK: HiDPI monkey patch
+# HACK: monkey patch for handling an image scaling/replacement
 init -999 python in comfy_ui:
     import os
 
     from renpy.display.im import Image
     from renpy.display.transform import Transform
 
-    replacement_list = [ CUI_IMAGE_LIST() ]
-
     def monkey_new(cls, filename, **properties):
-        gotcha = filename in replacement_list and os.path.exists(os.path.join("game", "comfy_repl", filename))
+        has_replacement = os.path.exists(os.path.join("game", "comfy_ui", "replacers", filename))
+        is_comfy_asset = filename.startswith("comfy_ui") or has_replacement
 
-        if gotcha:
-            filename = "comfy_repl/%s" % filename
+        if has_replacement:
+            filename = "comfy_ui/replacers/%s" % filename
 
         new_instance = super(Image, cls).__new__(cls, filename, **properties)
         new_instance.__init__(filename, **properties)
 
-        if gotcha:
+        if is_comfy_asset:
             return Transform(new_instance, zoom=CUI_SCALE_INV())
 
         return new_instance

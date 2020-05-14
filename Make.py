@@ -11,10 +11,9 @@
 ################################################################################
 release_mode = False
 
-theme_dir        = "Themes"
-source_dir       = "Source"
-asset_source_dir = "Source/Assets"
-build_dir        = "Build"
+theme_dir  = "Themes"
+source_dir = "Source"
+build_dir  = "Build"
 
 common_files = [
     "comfy_ui.rpy",
@@ -31,132 +30,132 @@ common_files = [
 
 theme_files = [
     # Default
-    "gui/ctc.svg",
-    "gui/frame.svg",
-    "gui/frame_d.svg",
-    "gui/menu_bg.svg",
-    "gui/menu_bg_d.svg",
-    "gui/namebox.svg",
-    "gui/namebox_d.svg",
-    "gui/textbox.svg",
-    "gui/textbox_d.svg",
-    "gui/textbox_monika.svg",
-    "gui/textbox_monika_d.svg",
-    "gui/button/choice_idle_background.svg",
-    "gui/button/choice_hover_background.svg",
-    "gui/button/choice_dark_idle_background.svg",
-    "gui/button/choice_dark_hover_background.svg",
-    "gui/button/scrollable_menu_idle_background.svg",
-    "gui/button/scrollable_menu_hover_background.svg",
-    "gui/button/scrollable_menu_disable_background.svg",
-    "gui/button/scrollable_menu_dark_idle_background.svg",
-    "gui/button/scrollable_menu_dark_hover_background.svg",
-    "gui/button/scrollable_menu_dark_disable_background.svg",
-    "gui/button/slot_idle_background.svg",
-    "gui/button/slot_hover_background.svg",
-    "gui/button/twopane_scrollable_menu_idle_background.svg",
-    "gui/button/twopane_scrollable_menu_hover_background.svg",
-    "gui/button/twopane_scrollable_menu_dark_idle_background.svg",
-    "gui/button/twopane_scrollable_menu_dark_hover_background.svg",
-    "gui/overlay/confirm.svg",
-    "gui/overlay/confirm_d.svg",
-    "gui/overlay/game_menu.svg",
-    "gui/overlay/game_menu_d.svg",
-    "gui/overlay/main_menu.svg",
-    "gui/overlay/main_menu_d.svg",
-    "mod_assets/hkb_idle_background.svg",
-    "mod_assets/hkb_idle_background_d.svg",
-    "mod_assets/hkb_hover_background.svg",
-    "mod_assets/hkb_hover_background_d.svg",
-    "mod_assets/hkb_disabled_background.svg",
-    "mod_assets/hkb_disabled_background_d.svg",
-    "mod_assets/island_idle_background.svg",
-    "mod_assets/island_idle_background_d.svg",
-    "mod_assets/island_hover_background.svg",
-    "mod_assets/island_hover_background_d.svg",
-    "mod_assets/music_menu.svg",
-    "mod_assets/music_menu_d.svg",
-    "mod_assets/buttons/generic/idle_bg.svg",
-    "mod_assets/buttons/generic/idle_bg_d.svg",
-    "mod_assets/buttons/generic/hover_bg.svg",
-    "mod_assets/buttons/generic/hover_bg_d.svg",
-    "mod_assets/buttons/generic/insensitive_bg.svg",
-    "mod_assets/buttons/generic/insensitive_bg_d.svg",
-    "mod_assets/buttons/squares/square_idle.svg",
-    "mod_assets/buttons/squares/square_idle_d.svg",
-    "mod_assets/buttons/squares/square_hover.svg",
-    "mod_assets/buttons/squares/square_hover_d.svg",
-    "mod_assets/buttons/squares/square_disabled.svg",
-    "mod_assets/buttons/squares/square_disabled_d.svg",
-    "mod_assets/calendar/calendar_bg.svg",
-    "mod_assets/calendar/calendar_bg-n.svg",
-    "mod_assets/calendar/calendar_close.svg",
-    "mod_assets/calendar/calendar_close-n.svg",
-    "mod_assets/calendar/calendar_close_hover.svg",
-    "mod_assets/calendar/calendar_close_hover-n.svg",
-    "mod_assets/calendar/calendar_day_bg.svg",
-    "mod_assets/calendar/calendar_day_bg-n.svg",
-    "mod_assets/calendar/calendar_day_hover_bg.svg",
-    "mod_assets/calendar/calendar_day_hover_bg-n.svg",
-    "mod_assets/calendar/calendar_day_disabled_bg.svg",
-    "mod_assets/calendar/calendar_day_disabled_bg-n.svg",
-    "mod_assets/calendar/calendar_day_name_bg.svg",
-    "mod_assets/calendar/calendar_day_name_bg-n.svg",
-    "mod_assets/calendar/calendar_left_arrow.svg",
-    "mod_assets/calendar/calendar_left_arrow-n.svg",
-    "mod_assets/calendar/calendar_left_arrow_hover.svg",
-    "mod_assets/calendar/calendar_left_arrow_hover-n.svg",
-    "mod_assets/calendar/calendar_right_arrow.svg",
-    "mod_assets/calendar/calendar_right_arrow-n.svg",
-    "mod_assets/calendar/calendar_right_arrow_hover.svg",
-    "mod_assets/calendar/calendar_right_arrow_hover-n.svg",
-    "mod_assets/calendar/calendar_today_bg.svg",
-    "mod_assets/calendar/calendar_today_bg-n.svg",
-    "mod_assets/calendar/calendar_today_hover_bg.svg",
-    "mod_assets/calendar/calendar_today_hover_bg-n.svg",
-    "mod_assets/calendar/calendar_today_disabled_bg.svg",
-    "mod_assets/calendar/calendar_today_disabled_bg-n.svg",
-    "mod_assets/console/cn_frame.svg",
-    "mod_assets/frames/black70_pinkborder100.svg",
-    "mod_assets/frames/black70_pinkborder100_d.svg",
-    "mod_assets/frames/black70_pinkborder100_2px.svg",
-    "mod_assets/frames/black70_pinkborder100_2px_d.svg",
-    "mod_assets/frames/black70_pinkborder100_5px.svg",
-    "mod_assets/frames/black70_pinkborder100_5px_d.svg",
-    "mod_assets/frames/modebar.svg",
-    "mod_assets/frames/modebar_d.svg",
-    "mod_assets/frames/selector_overlay.svg",
-    "mod_assets/frames/selector_overlay_d.svg",
-    "mod_assets/frames/selector_overlay_disabled.svg",
-    "mod_assets/frames/selector_overlay_disabled_d.svg",
-    "mod_assets/frames/selector_top_frame.svg",
-    "mod_assets/frames/selector_top_frame_d.svg",
-    "mod_assets/frames/selector_top_frame_selected.svg",
-    "mod_assets/frames/selector_top_frame_selected_d.svg",
-    "mod_assets/frames/selector_top_frame_disabled.svg",
-    "mod_assets/frames/selector_top_frame_disabled_d.svg",
-    "mod_assets/frames/trans_pink2pxborder100.svg",
-    "mod_assets/frames/trans_pink2pxborder100_d.svg",
-    "mod_assets/games/hangman/hm_0.svg",
-    "mod_assets/games/hangman/hm_1.svg",
-    "mod_assets/games/hangman/hm_2.svg",
-    "mod_assets/games/hangman/hm_3.svg",
-    "mod_assets/games/hangman/hm_4.svg",
-    "mod_assets/games/hangman/hm_5.svg",
-    "mod_assets/games/hangman/hm_6.svg",
-    "mod_assets/games/hangman/hm_frame.svg",
-    "mod_assets/games/hangman/hm_frame_d.svg",
-    "mod_assets/games/hangman/hm_sm_0.svg",
-    "mod_assets/games/hangman/hm_sm_1.svg",
-    "mod_assets/games/hangman/hm_sm_2.svg",
-    "mod_assets/games/hangman/hm_sm_3.svg",
-    "mod_assets/games/hangman/hm_sm_4.svg",
-    "mod_assets/games/hangman/hm_sm_5.svg",
-    "mod_assets/games/hangman/hm_sm_6.svg",
+    "comfy_ui/replacers/gui/ctc.svg",
+    "comfy_ui/replacers/gui/frame.svg",
+    "comfy_ui/replacers/gui/frame_d.svg",
+    "comfy_ui/replacers/gui/menu_bg.svg",
+    "comfy_ui/replacers/gui/menu_bg_d.svg",
+    "comfy_ui/replacers/gui/namebox.svg",
+    "comfy_ui/replacers/gui/namebox_d.svg",
+    "comfy_ui/replacers/gui/textbox.svg",
+    "comfy_ui/replacers/gui/textbox_d.svg",
+    "comfy_ui/replacers/gui/textbox_monika.svg",
+    "comfy_ui/replacers/gui/textbox_monika_d.svg",
+    "comfy_ui/replacers/gui/button/choice_idle_background.svg",
+    "comfy_ui/replacers/gui/button/choice_hover_background.svg",
+    "comfy_ui/replacers/gui/button/choice_dark_idle_background.svg",
+    "comfy_ui/replacers/gui/button/choice_dark_hover_background.svg",
+    "comfy_ui/replacers/gui/button/scrollable_menu_idle_background.svg",
+    "comfy_ui/replacers/gui/button/scrollable_menu_hover_background.svg",
+    "comfy_ui/replacers/gui/button/scrollable_menu_disable_background.svg",
+    "comfy_ui/replacers/gui/button/scrollable_menu_dark_idle_background.svg",
+    "comfy_ui/replacers/gui/button/scrollable_menu_dark_hover_background.svg",
+    "comfy_ui/replacers/gui/button/scrollable_menu_dark_disable_background.svg",
+    "comfy_ui/replacers/gui/button/slot_idle_background.svg",
+    "comfy_ui/replacers/gui/button/slot_hover_background.svg",
+    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_idle_background.svg",
+    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_hover_background.svg",
+    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_dark_idle_background.svg",
+    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_dark_hover_background.svg",
+    "comfy_ui/replacers/gui/overlay/confirm.svg",
+    "comfy_ui/replacers/gui/overlay/confirm_d.svg",
+    "comfy_ui/replacers/gui/overlay/game_menu.svg",
+    "comfy_ui/replacers/gui/overlay/game_menu_d.svg",
+    "comfy_ui/replacers/gui/overlay/main_menu.svg",
+    "comfy_ui/replacers/gui/overlay/main_menu_d.svg",
+    "comfy_ui/replacers/mod_assets/hkb_idle_background.svg",
+    "comfy_ui/replacers/mod_assets/hkb_idle_background_d.svg",
+    "comfy_ui/replacers/mod_assets/hkb_hover_background.svg",
+    "comfy_ui/replacers/mod_assets/hkb_hover_background_d.svg",
+    "comfy_ui/replacers/mod_assets/hkb_disabled_background.svg",
+    "comfy_ui/replacers/mod_assets/hkb_disabled_background_d.svg",
+    "comfy_ui/replacers/mod_assets/island_idle_background.svg",
+    "comfy_ui/replacers/mod_assets/island_idle_background_d.svg",
+    "comfy_ui/replacers/mod_assets/island_hover_background.svg",
+    "comfy_ui/replacers/mod_assets/island_hover_background_d.svg",
+    "comfy_ui/replacers/mod_assets/music_menu.svg",
+    "comfy_ui/replacers/mod_assets/music_menu_d.svg",
+    "comfy_ui/replacers/mod_assets/buttons/generic/idle_bg.svg",
+    "comfy_ui/replacers/mod_assets/buttons/generic/idle_bg_d.svg",
+    "comfy_ui/replacers/mod_assets/buttons/generic/hover_bg.svg",
+    "comfy_ui/replacers/mod_assets/buttons/generic/hover_bg_d.svg",
+    "comfy_ui/replacers/mod_assets/buttons/generic/insensitive_bg.svg",
+    "comfy_ui/replacers/mod_assets/buttons/generic/insensitive_bg_d.svg",
+    "comfy_ui/replacers/mod_assets/buttons/squares/square_idle.svg",
+    "comfy_ui/replacers/mod_assets/buttons/squares/square_idle_d.svg",
+    "comfy_ui/replacers/mod_assets/buttons/squares/square_hover.svg",
+    "comfy_ui/replacers/mod_assets/buttons/squares/square_hover_d.svg",
+    "comfy_ui/replacers/mod_assets/buttons/squares/square_disabled.svg",
+    "comfy_ui/replacers/mod_assets/buttons/squares/square_disabled_d.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_close.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_close-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_close_hover.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_close_hover-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_hover_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_hover_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_disabled_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_disabled_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_name_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_day_name_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow_hover.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow_hover-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow_hover.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow_hover-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_today_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_today_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_today_hover_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_today_hover_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_today_disabled_bg.svg",
+    "comfy_ui/replacers/mod_assets/calendar/calendar_today_disabled_bg-n.svg",
+    "comfy_ui/replacers/mod_assets/console/cn_frame.svg",
+    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100.svg",
+    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_2px.svg",
+    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_2px_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_5px.svg",
+    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_5px_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/modebar.svg",
+    "comfy_ui/replacers/mod_assets/frames/modebar_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_overlay.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_overlay_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_overlay_disabled.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_overlay_disabled_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_top_frame.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_selected.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_selected_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_disabled.svg",
+    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_disabled_d.svg",
+    "comfy_ui/replacers/mod_assets/frames/trans_pink2pxborder100.svg",
+    "comfy_ui/replacers/mod_assets/frames/trans_pink2pxborder100_d.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_0.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_1.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_2.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_3.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_4.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_5.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_6.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_frame.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_frame_d.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_0.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_1.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_2.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_3.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_4.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_5.svg",
+    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_6.svg",
 
     # Custom
     "info.json",
-    "comfy_styles.rpy",
+    "comfy_ui/comfy_styles.rpy",
     "comfy_ui/button/idle_bg_lt.svg",
     "comfy_ui/button/idle_bg_dk.svg",
     "comfy_ui/button/hover_bg_lt.svg",
@@ -186,8 +185,8 @@ theme_files = [
 ]
 
 glitched_boxes = [
-    "gui/textbox_monika.png",
-    "gui/textbox_monika_d.png",
+    "comfy_ui/replacers/gui/textbox_monika.png",
+    "comfy_ui/replacers/gui/textbox_monika_d.png",
 ]
 
 ################################################################################
@@ -233,14 +232,6 @@ def ModulateRGBAColor(r, g, b, a, h, s):
             int(g * 255.0),
             int(b * 255.0),
             int(a * 255.0))
-
-def GetImageList(macro_args, method_args):
-    result = ""
-    for file_path in theme_files:
-        (file_name, file_ext) = os.path.splitext(file_path)
-        if file_ext == ".svg":
-            result += "\"%s.png\",\n" % file_name
-    return result
 
 def ModulateColors(macro_args, method_args):
     h, s = method_args
@@ -300,7 +291,6 @@ def PreprocessTextFile(in_path, out_path, theme, scale):
         [ "CUI_SCD_COLOR"            , ModulateColors, (theme["secondary_hue"], theme["secondary_saturation"])  ],
         [ "CUI_SCALE"                , Stringize     , (scale)                                                  ],
         [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                            ],
-        [ "CUI_IMAGE_LIST"           , GetImageList  , ()                                                       ],
     ]
 
     with open(in_path, "r") as in_file, open(out_path, "w") as out_file:
@@ -446,24 +436,24 @@ def Build():
                     Log("Rendering image %s..." % file_path)
                     png_path = "%s.png" % file_name
                     tmp_path = os.path.join(build_dir, "Temporary.svg")
-                    src_path = os.path.join(asset_source_dir, file_path)
+                    src_path = os.path.join(source_dir, file_path)
                     dst_path = os.path.join(target_dir, png_path)
                     PreprocessTextFile(src_path, tmp_path, theme, scale)
                     RenderImage(tmp_path, dst_path, scale, png_path in glitched_boxes)
                     os.remove(tmp_path)
                 elif file_ext == ".rpy":
                     Log("Processing script %s..." % file_path)
-                    src_path = os.path.join(asset_source_dir, file_path)
+                    src_path = os.path.join(source_dir, file_path)
                     dst_path = os.path.join(target_dir, file_path)
                     PreprocessTextFile(src_path, dst_path, theme, scale)
                 elif file_ext == ".json":
                     Log("Processing JSON %s..." % file_path)
-                    src_path = os.path.join(asset_source_dir, file_path)
+                    src_path = os.path.join(source_dir, file_path)
                     dst_path = os.path.join(target_dir, file_path)
                     PreprocessTextFile(src_path, dst_path, theme, scale)
                 else:
                     Log("Copying file %s..." % file_path)
-                    src_path = os.path.join(asset_source_dir, file_path)
+                    src_path = os.path.join(source_dir, file_path)
                     dst_path = os.path.join(target_dir, file_path)
                     shutil.copyfile(src_path, dst_path)
 

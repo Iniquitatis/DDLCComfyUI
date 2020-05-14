@@ -31,7 +31,6 @@ init -2 python in comfy_ui:
 
     game_dir = "game"
     meta_dir = os.path.join(game_dir, "comfy_meta")
-    repl_dir = os.path.join(game_dir, "comfy_repl")
     config_path = os.path.join(meta_dir, "settings.json")
 
     themes = []
@@ -92,14 +91,11 @@ init -2 python in comfy_ui:
         log = open(os.path.join(meta_dir, "install.log"), "w")
         theme_arc = ZipFile(theme["path"] if not hidpi else theme["hidpi_path"], "r")
 
-        if not os.path.exists(repl_dir):
-            os.mkdir(repl_dir)
-
         for file_path in theme_arc.namelist():
             if os.path.basename(file_path) == "info.json":
                 continue
             log.write("Installing %s...\n" % file_path)
-            theme_arc.extract(file_path, repl_dir)
+            theme_arc.extract(file_path, game_dir)
 
         log.write("Done.\n")
 
