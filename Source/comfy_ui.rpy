@@ -36,8 +36,22 @@ init -2 python in comfy_ui:
     themes = []
     settings = {
         "selected_theme_index": 0,
-        "hidpi": False
+        "hidpi": False,
+        "installed_files": []
     }
+
+    def disable():
+        for file_path in settings["installed_files"]:
+            full_path = os.path.join(game_dir, file_path)
+            if os.path.exists(full_path) and not os.path.isdir(full_path):
+                file_name, extension = os.path.splitext(full_path)
+                os.remove(full_path)
+                if extension == ".rpy":
+                    os.remove("%s.rpyc" % file_name)
+
+        settings["selected_theme_index"] = 0
+        settings["hidpi"] = False
+        settings["installed_files"] = []
 
     def get_current_theme():
         return themes[settings["selected_theme_index"]]
@@ -91,11 +105,14 @@ init -2 python in comfy_ui:
         log = open(os.path.join(meta_dir, "install.log"), "w")
         theme_arc = ZipFile(theme["path"] if not hidpi else theme["hidpi_path"], "r")
 
+        settings["installed_files"] = []
+
         for file_path in theme_arc.namelist():
             if os.path.basename(file_path) == "info.json":
                 continue
             log.write("Installing %s...\n" % file_path)
             theme_arc.extract(file_path, game_dir)
+            settings["installed_files"].append(file_path)
 
         log.write("Done.\n")
 
@@ -112,6 +129,13 @@ label comfy_ui_apply:
     call screen mas_generic_restart
     $ persistent.closed_self = True
     $ comfy_ui.install()
+    $ comfy_ui.save_settings()
+    jump _quit
+
+label comfy_ui_disable:
+    call screen mas_generic_restart
+    $ persistent.closed_self = True
+    $ comfy_ui.disable()
     $ comfy_ui.save_settings()
     jump _quit
 
@@ -145,8 +169,15 @@ screen comfy_ui_settings_pane():
 
             null height 10
 
-            textbutton _("Apply"):
-                style "navigation_button"
-                action Jump("comfy_ui_apply")
+            hbox:
+                textbutton _("Apply"):
+                    style "navigation_button"
+                    xsize 100
+                    action Jump("comfy_ui_apply")
+
+                textbutton _("Disable"):
+                    style "navigation_button"
+                    xsize 100
+                    action Jump("comfy_ui_disable")
         else:
             label _("No themes available.")
