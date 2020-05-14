@@ -156,7 +156,7 @@ theme_files = [
 
     # Custom
     "info.json",
-    "zzz_comfy_ui.rpy",
+    "comfy_styles.rpy",
     "comfy_ui/button/idle_bg_lt.svg",
     "comfy_ui/button/idle_bg_dk.svg",
     "comfy_ui/button/hover_bg_lt.svg",
@@ -281,26 +281,26 @@ def ParseMacroArguments(match):
 def PreprocessTextFile(in_path, out_path, theme, scale):
     macros = [
         # Name                       | Method        | Arguments
-        [ "CUI_THEME_NAME"           , Stringize     , (theme["name"] if scale == 1 else "%s (HiDPI)" % theme["name"]) ],
-        [ "CUI_BTN_ROUNDING"         , Stringize     , (theme["button_rounding"])                                      ],
-        [ "CUI_FRM_ROUNDING"         , Stringize     , (theme["frame_rounding"])                                       ],
-        [ "CUI_DLG_ROUNDING"         , Stringize     , (theme["dialogue_rounding"])                                    ],
-        [ "CUI_MNU_PTSHAPE"          , Stringize     , (theme["menu_pattern_shape"])                                   ],
-        [ "CUI_DLG_PTSHAPE"          , Stringize     , (theme["dialogue_pattern_shape"])                               ],
-        [ "CUI_MAIN_FONT_REGULAR"    , Stringize     , (theme["main_font"]["regular"])                                 ],
-        [ "CUI_MAIN_FONT_ITALIC"     , Stringize     , (theme["main_font"]["italic"])                                  ],
-        [ "CUI_MAIN_FONT_BOLD"       , Stringize     , (theme["main_font"]["bold"])                                    ],
-        [ "CUI_MAIN_FONT_BOLD_ITALIC", Stringize     , (theme["main_font"]["bold_italic"])                             ],
-        [ "CUI_MENU_FONT"            , Stringize     , (theme["menu_font"])                                            ],
-        [ "CUI_OPTION_FONT"          , Stringize     , (theme["option_font"])                                          ],
-        [ "CUI_MAIN_FONT_KERNING"    , Stringize     , (theme["main_font_kerning"])                                    ],
-        [ "CUI_DLG_VERT_OFFSET"      , Stringize     , (theme["dialogue_vertical_offset"])                             ],
-        [ "CUI_DLG_LINE_SPACING"     , Stringize     , (theme["dialogue_line_spacing"])                                ],
-        [ "CUI_PRM_COLOR"            , ModulateColors, (theme["primary_hue"], theme["primary_saturation"])             ],
-        [ "CUI_SCD_COLOR"            , ModulateColors, (theme["secondary_hue"], theme["secondary_saturation"])         ],
-        [ "CUI_SCALE"                , Stringize     , (scale)                                                         ],
-        [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                                   ],
-        [ "CUI_IMAGE_LIST"           , GetImageList  , ()                                                              ],
+        [ "CUI_THEME_NAME"           , Stringize     , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
+        [ "CUI_BTN_ROUNDING"         , Stringize     , (theme["button_rounding"])                               ],
+        [ "CUI_FRM_ROUNDING"         , Stringize     , (theme["frame_rounding"])                                ],
+        [ "CUI_DLG_ROUNDING"         , Stringize     , (theme["dialogue_rounding"])                             ],
+        [ "CUI_MNU_PTSHAPE"          , Stringize     , (theme["menu_pattern_shape"])                            ],
+        [ "CUI_DLG_PTSHAPE"          , Stringize     , (theme["dialogue_pattern_shape"])                        ],
+        [ "CUI_MAIN_FONT_REGULAR"    , Stringize     , (theme["main_font"]["regular"])                          ],
+        [ "CUI_MAIN_FONT_ITALIC"     , Stringize     , (theme["main_font"]["italic"])                           ],
+        [ "CUI_MAIN_FONT_BOLD"       , Stringize     , (theme["main_font"]["bold"])                             ],
+        [ "CUI_MAIN_FONT_BOLD_ITALIC", Stringize     , (theme["main_font"]["bold_italic"])                      ],
+        [ "CUI_MENU_FONT"            , Stringize     , (theme["menu_font"])                                     ],
+        [ "CUI_OPTION_FONT"          , Stringize     , (theme["option_font"])                                   ],
+        [ "CUI_MAIN_FONT_KERNING"    , Stringize     , (theme["main_font_kerning"])                             ],
+        [ "CUI_DLG_VERT_OFFSET"      , Stringize     , (theme["dialogue_vertical_offset"])                      ],
+        [ "CUI_DLG_LINE_SPACING"     , Stringize     , (theme["dialogue_line_spacing"])                         ],
+        [ "CUI_PRM_COLOR"            , ModulateColors, (theme["primary_hue"], theme["primary_saturation"])      ],
+        [ "CUI_SCD_COLOR"            , ModulateColors, (theme["secondary_hue"], theme["secondary_saturation"])  ],
+        [ "CUI_SCALE"                , Stringize     , (scale)                                                  ],
+        [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                            ],
+        [ "CUI_IMAGE_LIST"           , GetImageList  , ()                                                       ],
     ]
 
     with open(in_path, "r") as in_file, open(out_path, "w") as out_file:
@@ -432,7 +432,7 @@ def Build():
 
     for theme in themes:
         for scale in range(1, 3):
-            target_id = theme["id"] if scale == 1 else "%s_hidpi" % theme["id"]
+            target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
             target_dir = os.path.join(build_dir, "comfy_meta", target_id)
 
             # Replicate directory structure
