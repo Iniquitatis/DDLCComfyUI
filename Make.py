@@ -271,7 +271,7 @@ def ParseMacroArguments(match):
     args_string = match.group(1)
 
     query = r""
-    for i in range(0, 4):
+    for i in range(4):
         query += r"\s*([\w\-.]+)\s*"
         result = re.findall(query, args_string)
         if len(result) > 0:
@@ -303,38 +303,30 @@ def PreprocessTextFile(in_path, out_path, theme, scale):
         [ "CUI_IMAGE_LIST"           , GetImageList  , ()                                                              ],
     ]
 
-    text = ""
+    with open(in_path, "r") as in_file, open(out_path, "w") as out_file:
+        text = in_file.read()
 
-    with open(in_path, "r") as file:
-        text = file.read()
+        for macro_name, method, method_args in macros:
+            query = macro_name + r"\(([\w\s\-.,]*)\)"
+            text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
 
-    for macro_name, method, method_args in macros:
-        query = macro_name + r"\(([\w\s\-.,]*)\)"
-        text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
-
-    with open(out_path, "w") as file:
-        file.write(text)
+        out_file.write(text)
 
 # Image rendering
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
-    region_data = []
-    for ix in range(0, w):
-        region_data.append([])
-        for iy in range(0, h):
-            region_data[-1].append((0, 0, 0, 0))
+    region_data = [[pixel_data[x + i, y + j] for j in range(h)] for i in range(w)]
 
-    for ix in range(0, w):
-        for iy in range(0, h):
-            region_data[ix][iy] = pixel_data[x + ix, y + iy]
-            pixel_data[x + ix, y + iy] = (0, 0, 0, 0)
+    for i in range(w):
+        for j in range(h):
+            pixel_data[x + i, y + j] = (0, 0, 0, 0)
 
-    for ix in range(0, w):
-        for iy in range(0, h):
+    for i in range(w):
+        for j in range(h):
             # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
-            pixel_data[x + dx + ix, y + dy + iy] = region_data[ix][iy]
+            pixel_data[x + dx + i, y + dy + j] = region_data[i][j]
 
 def Glitch(image_path, scale):
-    glitch_regions = [
+    regions = [
         # X  | Y  | W  | H  | DX | DY
         [  42,   5, 144,  15, -25,   0 ],
         [  42,  36,  41,  10,  25,   0 ],
@@ -366,7 +358,7 @@ def Glitch(image_path, scale):
 
     with Image.open(image_path) as image:
         pixel_data = image.load()
-        for region in glitch_regions:
+        for region in regions:
             [x, y, w, h, dx, dy] = [i * scale for i in region]
             ShiftRegion(pixel_data, x, y, w, h, dx, dy)
         image.save(image_path)
