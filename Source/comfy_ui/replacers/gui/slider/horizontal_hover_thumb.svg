@@ -1,0 +1,20 @@
+<!--============================================================================
+=
+= Copyright (c) 2020 Dominus Iniquitatis <zerosaiko@gmail.com>
+=
+= See LICENSE file for the licensing information
+=
+=============================================================================-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="17">
+    <defs>
+        <filter id="pencil" style="color-interpolation-filters: sRGB;" width="16" height="17">
+            <feTurbulence baseFrequency="0.15" numOctaves="6" result="turbulenceCoarse" />
+            <feTurbulence baseFrequency="0.45" numOctaves="6" result="turbulenceFine" />
+            <feDisplacementMap in="SourceGraphic" in2="turbulenceCoarse" result="displaceCoarse" scale="1.5" xChannelSelector="R" yChannelSelector="A" />
+            <feDisplacementMap in="displaceCoarse" in2="turbulenceFine" result="displaceFine" scale="2.2" xChannelSelector="R" yChannelSelector="A" />
+        </filter>
+    </defs>
+    <g fill="rgb(255, 255, 255)" filter="url(#pencil)" stroke="rgb(0, 0, 0)" stroke-opacity="0.82" stroke-width="2.5">
+        <rect x="2" y="2" width="11" height="12" rx="1" />
+    </g>
+</svg>
