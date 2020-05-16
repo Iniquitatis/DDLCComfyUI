@@ -6,10 +6,33 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="600" height="438">
-    <g fill="CUI_PRM_COLOR(255, 230, 244)" stroke="CUI_PRM_COLOR(255, 189, 225)" stroke-width="4">
-        <rect x="2" y="2" width="596" height="434" rx="2" />
+    <defs>
+        <filter id="paper" style="color-interpolation-filters: sRGB;" width="600" height="438">
+            <feTurbulence baseFrequency="0.4" numOctaves="6" result="turbulence" />
+            <feTurbulence baseFrequency="0.2" numOctaves="2" result="shape" />
+            <feColorMatrix in="turbulence" result="colored" type="matrix"
+                values="0.1 0 0 0 0.90
+                        0.1 0 0 0 0.89
+                        0.1 0 0 0 0.87
+                        0.0 0 0 0 1.00" />
+            <feDisplacementMap in="colored" in2="shape" result="displaced" scale="5.0" xChannelSelector="R" yChannelSelector="A" />
+        </filter>
+        <filter id="lineShape" style="color-interpolation-filters: sRGB;" width="600" height="438">
+            <feTurbulence baseFrequency="0.008" numOctaves="3" result="turbulenceCoarse" />
+            <feTurbulence baseFrequency="0.8" numOctaves="6" result="turbulenceFine" />
+            <feDisplacementMap in="SourceGraphic" in2="turbulenceCoarse" result="displaceCoarse" scale="1.5" xChannelSelector="R" yChannelSelector="A" />
+            <feDisplacementMap in="displaceCoarse" in2="turbulenceFine" result="displaceFine" scale="1.5" xChannelSelector="R" yChannelSelector="A" />
+        </filter>
+        <pattern id="lines" x="0" y="0" width="600" height="25" patternUnits="userSpaceOnUse">
+            <g stroke="rgb(128, 128, 255)" stroke-opacity="0.25" stroke-width="1">
+                <line x1="0" y1="0.5" x2="600" y2="0.5" />
+            </g>
+        </pattern>
+    </defs>
+    <g filter="url(#paper)">
+        <rect x="0" y="0" width="600" height="438" rx="2" />
     </g>
-    <g fill="none" stroke="CUI_PRM_COLOR(255, 220, 239)" stroke-width="1">
-        <rect x="3.5" y="3.5" width="593" height="431" rx="2" />
+    <g fill="url(#lines)" filter="url(#lineShape)">
+        <rect x="0" y="0" width="600" height="438" rx="2" />
     </g>
 </svg>
