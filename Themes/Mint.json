@@ -18,8 +18,6 @@
     "main_font_kerning": 0.0,
     "dialogue_vertical_offset": -3,
     "dialogue_line_spacing": -1,
-    "primary_hue": 150,
-    "primary_saturation": 0.33,
-    "secondary_hue": 138,
-    "secondary_saturation": 0.58
+    "primary_color": { "h": 150, "s": 0.33, "l": 0.0 },
+    "secondary_color": { "h": 138, "s": 0.58, "l": 0.0 }
 }

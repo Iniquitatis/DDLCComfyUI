@@ -18,8 +18,6 @@
     "main_font_kerning": 0.0,
     "dialogue_vertical_offset": -1,
     "dialogue_line_spacing": 2,
-    "primary_hue": null,
-    "primary_saturation": null,
-    "secondary_hue": null,
-    "secondary_saturation": null
+    "primary_color": { "h": null, "s": null, "l": null },
+    "secondary_color": { "h": null, "s": null, "l": null }
 }

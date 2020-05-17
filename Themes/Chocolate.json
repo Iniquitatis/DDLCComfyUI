@@ -1,11 +1,11 @@
 {
-    "name": "Mystique",
-    "id": "mystique",
+    "name": "Chocolate",
+    "id": "chocolate",
     "button_rounding": 2,
     "frame_rounding": 2,
-    "dialogue_rounding": 5,
-    "menu_pattern_shape": "sparkle",
-    "dialogue_pattern_shape": "sparkle",
+    "dialogue_rounding": 6,
+    "menu_pattern_shape": "rhombus",
+    "dialogue_pattern_shape": "rhombus",
     "main_font":
     {
         "regular": "comfy_ui/fonts/Asap-Medium.ttf",
@@ -18,6 +18,6 @@
     "main_font_kerning": 0.0,
     "dialogue_vertical_offset": -1,
     "dialogue_line_spacing": 2,
-    "primary_color": { "h": 285, "s": 0.6, "l": 0.0 },
-    "secondary_color": { "h": 270, "s": 1.0, "l": 0.0 }
+    "primary_color": { "h": 24, "s": 0.35, "l": 0.0 },
+    "secondary_color": { "h": 24, "s": 0.4, "l": -0.04 }
 }

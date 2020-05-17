@@ -213,32 +213,39 @@ from PIL import Image
 from hsluv import *
 
 # Text file preprocessing
+def Clamp(value, lower, upper):
+    return min(max(value, lower), upper)
+
 def FormatRGBHexString(r, g, b):
     return "#%02x%02x%02x" % (int(r), int(g), int(b))
 
 def FormatRGBAHexString(r, g, b, a):
     return "#%02x%02x%02x%02x" % (int(r), int(g), int(b), int(a))
 
-def ModulateRGBColor(r, g, b, h, s):
+def ModulateRGBColor(r, g, b, h, s, l):
     r = float(r) / 255.0
     g = float(g) / 255.0
     b = float(b) / 255.0
 
     ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([h, cs * s, cl])
+    r, g, b = hsluv_to_rgb([Clamp(h, 0.0, 360.0),
+                            Clamp(cs * s, 0.0, 100.0),
+                            Clamp(cl + l * 100.0, 0.0, 100.0)])
 
     return (int(r * 255.0),
             int(g * 255.0),
             int(b * 255.0))
 
-def ModulateRGBAColor(r, g, b, a, h, s):
+def ModulateRGBAColor(r, g, b, a, h, s, l):
     r = float(r) / 255.0
     g = float(b) / 255.0
     b = float(b) / 255.0
     a = float(a) / 255.0
 
     ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([h, cs * s, cl])
+    r, g, b = hsluv_to_rgb([Clamp(h, 0.0, 360.0),
+                            Clamp(cs * s, 0.0, 100.0),
+                            Clamp(cl + l * 100.0, 0.0, 100.0)])
 
     return (int(r * 255.0),
             int(g * 255.0),
@@ -246,19 +253,17 @@ def ModulateRGBAColor(r, g, b, a, h, s):
             int(a * 255.0))
 
 def ModulateColors(macro_args, method_args):
-    h, s = method_args
+    h, s, l = method_args
 
     if len(macro_args) == 3:
         r, g, b = macro_args
-        if h == None or s == None:
-            return FormatRGBHexString(r, g, b)
-        r, g, b = ModulateRGBColor(int(r), int(g), int(b), float(h), float(s))
+        if h != None and s != None and l != None:
+            r, g, b = ModulateRGBColor(int(r), int(g), int(b), float(h), float(s), float(l))
         return FormatRGBHexString(r, g, b)
     elif len(macro_args) == 4:
         r, g, b, a = macro_args
-        if h == None or s == None:
-            return FormatRGBAHexString(r, g, b, a)
-        r, g, b, a = ModulateRGBAColor(int(r), int(g), int(b), int(a), float(h), float(s))
+        if h != None and s != None and l != None:
+            r, g, b, a = ModulateRGBAColor(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
         return FormatRGBAHexString(r, g, b, a)
 
     return "#baadf00d"
@@ -282,6 +287,9 @@ def ParseMacroArguments(match):
         query += r","
 
 def PreprocessTextFile(in_path, out_path, theme, scale):
+    prm_color = theme["primary_color"]
+    scd_color = theme["secondary_color"]
+
     macros = [
         # Name                       | Method        | Arguments
         [ "CUI_THEME_NAME"           , Stringize     , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
@@ -299,8 +307,8 @@ def PreprocessTextFile(in_path, out_path, theme, scale):
         [ "CUI_MAIN_FONT_KERNING"    , Stringize     , (theme["main_font_kerning"])                             ],
         [ "CUI_DLG_VERT_OFFSET"      , Stringize     , (theme["dialogue_vertical_offset"])                      ],
         [ "CUI_DLG_LINE_SPACING"     , Stringize     , (theme["dialogue_line_spacing"])                         ],
-        [ "CUI_PRM_COLOR"            , ModulateColors, (theme["primary_hue"], theme["primary_saturation"])      ],
-        [ "CUI_SCD_COLOR"            , ModulateColors, (theme["secondary_hue"], theme["secondary_saturation"])  ],
+        [ "CUI_PRM_COLOR"            , ModulateColors, (prm_color["h"], prm_color["s"], prm_color["l"])         ],
+        [ "CUI_SCD_COLOR"            , ModulateColors, (scd_color["h"], scd_color["s"], scd_color["l"])         ],
         [ "CUI_SCALE"                , Stringize     , (scale)                                                  ],
         [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                            ],
     ]
