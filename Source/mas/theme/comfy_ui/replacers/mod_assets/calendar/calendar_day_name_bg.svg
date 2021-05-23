@@ -7,7 +7,7 @@
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="128" height="35">
     <g fill="rgb(255, 255, 255)" fill-opacity="0.0" stroke="rgb(250, 153, 228)" stroke-width="1">
-        <rect x="0.5" y="0.5" width="127" height="34" rx="0" stroke-opacity="0.86" />
-        <rect x="1.5" y="1.5" width="125" height="32" rx="0" stroke-opacity="0.1" />
+        <rect x="-3.5" y="0.5" width="135" height="34" rx="0" stroke-opacity="0.86" />
+        <rect x="-2.5" y="1.5" width="133" height="32" rx="0" stroke-opacity="0.1" />
     </g>
 </svg>
