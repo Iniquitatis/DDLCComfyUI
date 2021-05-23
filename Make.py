@@ -10,10 +10,14 @@
 # Configuration variables
 ################################################################################
 release_mode = False
+modded = True
 
 theme_dir  = "Themes"
 source_dir = "Source"
 build_dir  = "Build"
+
+source_common_dir = "common"
+source_mod_dir = "mas"
 
 common_files = [
     "comfy_ui.rpy",
@@ -417,6 +421,17 @@ def ReplicateDirStructure(path_list, dst_path):
             Log("Creating directory %s..." % dir_full_path)
             os.makedirs(dir_full_path)
 
+def FindFile(path):
+    dirs = [source_mod_dir, source_common_dir] if modded else [source_common_dir]
+
+    for mod_dir in dirs:
+        joined_path = os.path.join(mod_dir, path)
+
+        if os.path.exists(os.path.join(source_dir, joined_path)):
+            return joined_path
+
+    return None
+
 def Build():
     # Clear previous build
     if os.path.exists(build_dir):
@@ -432,8 +447,13 @@ def Build():
 
     # Copy common files
     for file_path in common_files:
-        Log("Copying file %s..." % file_path)
-        src_path = os.path.join(source_dir, file_path)
+        mod_file_path = FindFile(file_path)
+
+        if not mod_file_path:
+            continue
+
+        Log("Copying file %s..." % mod_file_path)
+        src_path = os.path.join(source_dir, mod_file_path)
         dst_path = os.path.join(build_dir, file_path)
         shutil.copyfile(src_path, dst_path)
 
@@ -452,28 +472,33 @@ def Build():
             for file_path in theme_files:
                 (file_name, file_ext) = os.path.splitext(file_path)
 
+                mod_file_path = FindFile(file_path)
+
+                if not mod_file_path:
+                    continue
+
                 if file_ext == ".svg":
-                    Log("Rendering image %s..." % file_path)
+                    Log("Rendering image %s..." % mod_file_path)
                     png_path = "%s.png" % file_name
                     tmp_path = os.path.join(build_dir, "Temporary.svg")
-                    src_path = os.path.join(source_dir, file_path)
+                    src_path = os.path.join(source_dir, mod_file_path)
                     dst_path = os.path.join(target_dir, png_path)
                     PreprocessTextFile(src_path, tmp_path, theme, scale)
                     RenderImage(tmp_path, dst_path, scale, png_path in glitched_boxes)
                     os.remove(tmp_path)
                 elif file_ext == ".rpy":
-                    Log("Processing script %s..." % file_path)
-                    src_path = os.path.join(source_dir, file_path)
+                    Log("Processing script %s..." % mod_file_path)
+                    src_path = os.path.join(source_dir, mod_file_path)
                     dst_path = os.path.join(target_dir, file_path)
                     PreprocessTextFile(src_path, dst_path, theme, scale)
                 elif file_ext == ".json":
-                    Log("Processing JSON %s..." % file_path)
-                    src_path = os.path.join(source_dir, file_path)
+                    Log("Processing JSON %s..." % mod_file_path)
+                    src_path = os.path.join(source_dir, mod_file_path)
                     dst_path = os.path.join(target_dir, file_path)
                     PreprocessTextFile(src_path, dst_path, theme, scale)
                 else:
-                    Log("Copying file %s..." % file_path)
-                    src_path = os.path.join(source_dir, file_path)
+                    Log("Copying file %s..." % mod_file_path)
+                    src_path = os.path.join(source_dir, mod_file_path)
                     dst_path = os.path.join(target_dir, file_path)
                     shutil.copyfile(src_path, dst_path)
 
