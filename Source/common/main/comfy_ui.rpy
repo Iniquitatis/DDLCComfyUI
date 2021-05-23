@@ -22,6 +22,7 @@ init -2 python in comfy_ui:
     themes = []
     settings = {
         "selected_theme_index": 0,
+        "layout": True,
         "hidpi": False,
         "installed_files": []
     }
@@ -36,6 +37,7 @@ init -2 python in comfy_ui:
                     os.remove("%s.rpyc" % file_name)
 
         settings["selected_theme_index"] = 0
+        settings["layout"] = True
         settings["hidpi"] = False
         settings["installed_files"] = []
 
@@ -109,6 +111,16 @@ init -2 python in comfy_ui:
             theme_arc.extract(file_path, game_dir)
             settings["installed_files"].append(file_path)
 
+        if not settings["layout"]:
+            layout_rpy = os.path.join(game_dir, "comfy_ui", "layout.rpy")
+            layout_rpyc = os.path.join(game_dir, "comfy_ui", "layout.rpyc")
+
+            if os.path.exists(layout_rpy):
+                os.remove(layout_rpy)
+
+            if os.path.exists(layout_rpyc):
+                os.remove(layout_rpyc)
+
         log.write("Done.\n")
 
         theme_arc.close()
@@ -157,9 +169,14 @@ screen comfy_ui_settings_pane():
                         range=theme_count - 1
                     )
 
-                textbutton _("HiDPI"):
-                    style "check_button"
-                    action ToggleDict(comfy_ui.settings, "hidpi")
+                hbox:
+                    textbutton _("Layout"):
+                        style "check_button"
+                        action ToggleDict(comfy_ui.settings, "layout")
+
+                    textbutton _("HiDPI"):
+                        style "check_button"
+                        action ToggleDict(comfy_ui.settings, "hidpi")
 
             null height 10
 
