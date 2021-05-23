@@ -21,8 +21,8 @@ mod_dirs = [
 ]
 
 glitched_boxes = [
-    "comfy_ui/replacers/gui/textbox_monika.png",
-    "comfy_ui/replacers/gui/textbox_monika_d.png",
+    "textbox_monika.png",
+    "textbox_monika_d.png",
 ]
 
 ################################################################################
@@ -298,7 +298,7 @@ def Build():
                         tmp_path = os.path.join(build_dir, "Temporary.svg")
                         dst_path = os.path.join(target_dir, png_path)
                         PreprocessTextFile(file_path, tmp_path, theme, scale)
-                        RenderImage(tmp_path, dst_path, scale, png_path in glitched_boxes)
+                        RenderImage(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
                         os.remove(tmp_path)
                     elif file_ext == ".rpy":
                         Log("Processing script %s..." % file_path)
