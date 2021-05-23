@@ -1,0 +1,23 @@
+{
+    "name": "Starry",
+    "id": "starry",
+    "button_rounding": 3,
+    "frame_rounding": 3,
+    "dialogue_rounding": 10,
+    "menu_pattern_shape": "star",
+    "dialogue_pattern_shape": "star",
+    "main_font":
+    {
+        "regular": "comfy_ui/fonts/Nunito-SemiBold.ttf",
+        "italic": "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
+        "bold": "comfy_ui/fonts/Nunito-Bold.ttf",
+        "bold_italic": "comfy_ui/fonts/Nunito-BoldItalic.ttf"
+    },
+    "menu_font": "gui/font/RifficFree-Bold.ttf",
+    "option_font": "gui/font/Halogen.ttf",
+    "main_font_kerning": 0.0,
+    "dialogue_vertical_offset": -3,
+    "dialogue_line_spacing": -1,
+    "primary_color": { "h": 60, "s": 0.82, "l": 0.03 },
+    "secondary_color": { "h": 60, "s": 1.05, "l": 0.02 }
+}

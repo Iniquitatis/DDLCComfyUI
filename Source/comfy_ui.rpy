@@ -87,7 +87,16 @@ init -2 python in comfy_ui:
                 themes.append(_get_theme_info(os.path.join(meta_dir, file_path),
                                               os.path.join(meta_dir, "%s_hidpi.arc" % file_name)))
 
-        themes.sort(cmp=lambda x, y: cmp(x["name"], y["name"]))
+        # FIXME: there should be a better way to put the Default theme above the others
+        def comparator(key):
+            name = key["name"]
+            if name == "Default":
+                return "  %s" % name
+            elif name == "Classic":
+                return " %s" % name
+            return name
+
+        themes.sort(key=comparator)
 
     def _get_theme_info(file_path, hidpi_path):
         result = {
