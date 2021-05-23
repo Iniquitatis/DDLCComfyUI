@@ -75,7 +75,7 @@ define comfy_ui.option_button_text.hover_color       = "CUI_SCD_COLOR(204, 102, 
 define comfy_ui.option_button_text.selected_color    = "CUI_SCD_COLOR(187, 85, 136)"
 define comfy_ui.option_button_text.insensitive_color = "CUI_SCD_COLOR(170, 170, 170, 127)"
 
-define comfy_ui.choice_button_spacing = 12
+define comfy_ui.choice_button_spacing = 22
 
 
 
@@ -105,7 +105,7 @@ init 999 style generic_button:
     padding        (5, 5, 5, 5)
     hover_sound    gui.hover_sound
     activate_sound gui.activate_sound
-    background     Frame("comfy_ui/button/[prefix_]bg.png", Borders(5, 5, 5, 5))
+    background     Frame("gui/button/choice_[prefix_]background.png", Borders(5, 5, 5, 5))
 
 init 999 style generic_button_text:
     font              comfy_ui.common.font
@@ -132,23 +132,6 @@ init 999 style generic_option_button_text:
     selected_color    comfy_ui.option_button_text.selected_color
     insensitive_color comfy_ui.option_button_text.insensitive_color
     outlines          []
-
-# Scrollbars
-init 999 style generic_horizontal_scrollbar:
-    ysize        18
-    unscrollable "hide"
-    bar_vertical False
-    bar_invert   True
-    base_bar     Frame("comfy_ui/scrollbar/horizontal_bar.png")
-    thumb        Frame("comfy_ui/scrollbar/horizontal_[prefix_]thumb.png", Borders(6, 6, 6, 6))
-
-init 999 style generic_vertical_scrollbar:
-    xsize        18
-    unscrollable "hide"
-    bar_vertical True
-    bar_invert   True
-    base_bar     Frame("comfy_ui/scrollbar/vertical_bar.png")
-    thumb        Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb.png", Borders(6, 6, 6, 6))
 
 
 
