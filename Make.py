@@ -15,190 +15,16 @@ theme_dir  = "Themes"
 source_dir = "Source"
 build_dir  = "Build"
 
-common_files = [
-    "comfy_ui.rpy",
-    "comfy_ui/fonts/Asap-Medium.ttf",
-    "comfy_ui/fonts/Asap-MediumItalic.ttf",
-    "comfy_ui/fonts/Asap-Bold.ttf",
-    "comfy_ui/fonts/Asap-BoldItalic.ttf",
-    "comfy_ui/fonts/Nunito-SemiBold.ttf",
-    "comfy_ui/fonts/Nunito-SemiBoldItalic.ttf",
-    "comfy_ui/fonts/Nunito-Bold.ttf",
-    "comfy_ui/fonts/Nunito-BoldItalic.ttf",
-    "comfy_ui/fonts/OFL.txt",
-]
+mod_dirs = [
+    "common",
 
-theme_files = [
-    # Default
-    "info.json",
-    "comfy_ui/styles.rpy",
-    "comfy_ui/button/idle_bg_lt.svg",
-    "comfy_ui/button/idle_bg_dk.svg",
-    "comfy_ui/button/hover_bg_lt.svg",
-    "comfy_ui/button/hover_bg_dk.svg",
-    "comfy_ui/button/insensitive_bg_lt.svg",
-    "comfy_ui/button/insensitive_bg_dk.svg",
-    "comfy_ui/scrollbar/horizontal_bar_lt.svg",
-    "comfy_ui/scrollbar/horizontal_bar_dk.svg",
-    "comfy_ui/scrollbar/horizontal_idle_thumb_lt.svg",
-    "comfy_ui/scrollbar/horizontal_idle_thumb_dk.svg",
-    "comfy_ui/scrollbar/horizontal_hover_thumb_lt.svg",
-    "comfy_ui/scrollbar/horizontal_hover_thumb_dk.svg",
-    "comfy_ui/scrollbar/vertical_bar_lt.svg",
-    "comfy_ui/scrollbar/vertical_bar_dk.svg",
-    "comfy_ui/scrollbar/vertical_idle_thumb_lt.svg",
-    "comfy_ui/scrollbar/vertical_idle_thumb_dk.svg",
-    "comfy_ui/scrollbar/vertical_hover_thumb_lt.svg",
-    "comfy_ui/scrollbar/vertical_hover_thumb_dk.svg",
-    "comfy_ui/slider/horizontal_idle_thumb_lt.svg",
-    "comfy_ui/slider/horizontal_idle_thumb_dk.svg",
-    "comfy_ui/slider/horizontal_hover_thumb_lt.svg",
-    "comfy_ui/slider/horizontal_hover_thumb_dk.svg",
-    "comfy_ui/slider/vertical_idle_thumb_lt.svg",
-    "comfy_ui/slider/vertical_idle_thumb_dk.svg",
-    "comfy_ui/slider/vertical_hover_thumb_lt.svg",
-    "comfy_ui/slider/vertical_hover_thumb_dk.svg",
-
-    # Replacers
-    "comfy_ui/replacers/gui/ctc.svg",
-    "comfy_ui/replacers/gui/frame.svg",
-    "comfy_ui/replacers/gui/frame_d.svg",
-    "comfy_ui/replacers/gui/menu_bg.svg",
-    "comfy_ui/replacers/gui/menu_bg_d.svg",
-    "comfy_ui/replacers/gui/namebox.svg",
-    "comfy_ui/replacers/gui/namebox_d.svg",
-    "comfy_ui/replacers/gui/textbox.svg",
-    "comfy_ui/replacers/gui/textbox_d.svg",
-    "comfy_ui/replacers/gui/textbox_monika.svg",
-    "comfy_ui/replacers/gui/textbox_monika_d.svg",
-    "comfy_ui/replacers/gui/button/check_foreground.svg",
-    "comfy_ui/replacers/gui/button/check_foreground_d.svg",
-    "comfy_ui/replacers/gui/button/check_selected_foreground.svg",
-    "comfy_ui/replacers/gui/button/check_selected_foreground_d.svg",
-    "comfy_ui/replacers/gui/button/choice_idle_background.svg",
-    "comfy_ui/replacers/gui/button/choice_hover_background.svg",
-    "comfy_ui/replacers/gui/button/choice_dark_idle_background.svg",
-    "comfy_ui/replacers/gui/button/choice_dark_hover_background.svg",
-    "comfy_ui/replacers/gui/button/scrollable_menu_idle_background.svg",
-    "comfy_ui/replacers/gui/button/scrollable_menu_hover_background.svg",
-    "comfy_ui/replacers/gui/button/scrollable_menu_disable_background.svg",
-    "comfy_ui/replacers/gui/button/scrollable_menu_dark_idle_background.svg",
-    "comfy_ui/replacers/gui/button/scrollable_menu_dark_hover_background.svg",
-    "comfy_ui/replacers/gui/button/scrollable_menu_dark_disable_background.svg",
-    "comfy_ui/replacers/gui/button/slot_idle_background.svg",
-    "comfy_ui/replacers/gui/button/slot_hover_background.svg",
-    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_idle_background.svg",
-    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_hover_background.svg",
-    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_dark_idle_background.svg",
-    "comfy_ui/replacers/gui/button/twopane_scrollable_menu_dark_hover_background.svg",
-    "comfy_ui/replacers/gui/overlay/confirm.svg",
-    "comfy_ui/replacers/gui/overlay/confirm_d.svg",
-    "comfy_ui/replacers/gui/overlay/game_menu.svg",
-    "comfy_ui/replacers/gui/overlay/game_menu_d.svg",
-    "comfy_ui/replacers/gui/overlay/main_menu.svg",
-    "comfy_ui/replacers/gui/overlay/main_menu_d.svg",
-    "comfy_ui/replacers/gui/scrollbar/horizontal_poem_bar.svg",
-    "comfy_ui/replacers/gui/scrollbar/horizontal_poem_bar_d.svg",
-    "comfy_ui/replacers/gui/scrollbar/horizontal_poem_thumb.svg",
-    "comfy_ui/replacers/gui/scrollbar/vertical_poem_bar.svg",
-    "comfy_ui/replacers/gui/scrollbar/vertical_poem_bar_d.svg",
-    "comfy_ui/replacers/gui/scrollbar/vertical_poem_thumb.svg",
-    "comfy_ui/replacers/gui/slider/horizontal_hover_thumb.svg",
-    "comfy_ui/replacers/gui/slider/vertical_hover_thumb.svg",
-    "comfy_ui/replacers/mod_assets/hkb_idle_background.svg",
-    "comfy_ui/replacers/mod_assets/hkb_idle_background_d.svg",
-    "comfy_ui/replacers/mod_assets/hkb_hover_background.svg",
-    "comfy_ui/replacers/mod_assets/hkb_hover_background_d.svg",
-    "comfy_ui/replacers/mod_assets/hkb_disabled_background.svg",
-    "comfy_ui/replacers/mod_assets/hkb_disabled_background_d.svg",
-    "comfy_ui/replacers/mod_assets/island_idle_background.svg",
-    "comfy_ui/replacers/mod_assets/island_idle_background_d.svg",
-    "comfy_ui/replacers/mod_assets/island_hover_background.svg",
-    "comfy_ui/replacers/mod_assets/island_hover_background_d.svg",
-    "comfy_ui/replacers/mod_assets/music_menu.svg",
-    "comfy_ui/replacers/mod_assets/music_menu_d.svg",
-    "comfy_ui/replacers/mod_assets/buttons/generic/idle_bg.svg",
-    "comfy_ui/replacers/mod_assets/buttons/generic/idle_bg_d.svg",
-    "comfy_ui/replacers/mod_assets/buttons/generic/hover_bg.svg",
-    "comfy_ui/replacers/mod_assets/buttons/generic/hover_bg_d.svg",
-    "comfy_ui/replacers/mod_assets/buttons/generic/insensitive_bg.svg",
-    "comfy_ui/replacers/mod_assets/buttons/generic/insensitive_bg_d.svg",
-    "comfy_ui/replacers/mod_assets/buttons/squares/square_idle.svg",
-    "comfy_ui/replacers/mod_assets/buttons/squares/square_idle_d.svg",
-    "comfy_ui/replacers/mod_assets/buttons/squares/square_hover.svg",
-    "comfy_ui/replacers/mod_assets/buttons/squares/square_hover_d.svg",
-    "comfy_ui/replacers/mod_assets/buttons/squares/square_disabled.svg",
-    "comfy_ui/replacers/mod_assets/buttons/squares/square_disabled_d.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_close.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_close-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_close_hover.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_close_hover-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_hover_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_hover_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_disabled_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_disabled_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_name_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_day_name_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow_hover.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_left_arrow_hover-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow_hover.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_right_arrow_hover-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_today_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_today_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_today_hover_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_today_hover_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_today_disabled_bg.svg",
-    "comfy_ui/replacers/mod_assets/calendar/calendar_today_disabled_bg-n.svg",
-    "comfy_ui/replacers/mod_assets/console/cn_frame.svg",
-    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100.svg",
-    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_2px.svg",
-    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_2px_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_5px.svg",
-    "comfy_ui/replacers/mod_assets/frames/black70_pinkborder100_5px_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/modebar.svg",
-    "comfy_ui/replacers/mod_assets/frames/modebar_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_overlay.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_overlay_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_overlay_disabled.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_overlay_disabled_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_top_frame.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_selected.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_selected_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_disabled.svg",
-    "comfy_ui/replacers/mod_assets/frames/selector_top_frame_disabled_d.svg",
-    "comfy_ui/replacers/mod_assets/frames/trans_pink2pxborder100.svg",
-    "comfy_ui/replacers/mod_assets/frames/trans_pink2pxborder100_d.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_0.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_1.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_2.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_3.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_4.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_5.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_6.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_frame.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_frame_d.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_0.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_1.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_2.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_3.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_4.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_5.svg",
-    "comfy_ui/replacers/mod_assets/games/hangman/hm_sm_6.svg",
+    # NOTE: uncomment for MAS support
+    #"mas",
 ]
 
 glitched_boxes = [
-    "comfy_ui/replacers/gui/textbox_monika.png",
-    "comfy_ui/replacers/gui/textbox_monika_d.png",
+    "textbox_monika.png",
+    "textbox_monika_d.png",
 ]
 
 ################################################################################
@@ -213,65 +39,65 @@ from PIL import Image
 from hsluv import *
 
 # Text file preprocessing
-def Clamp(value, lower, upper):
+def clamp(value, lower, upper):
     return min(max(value, lower), upper)
 
-def FormatRGBHexString(r, g, b):
-    return "#%02x%02x%02x" % (int(r), int(g), int(b))
+def format_rgb_hex_string(r, g, b):
+    return f"#{int(r):02x}{int(g):02x}{int(b):02x}"
 
-def FormatRGBAHexString(r, g, b, a):
-    return "#%02x%02x%02x%02x" % (int(r), int(g), int(b), int(a))
+def format_rgba_hex_string(r, g, b, a):
+    return f"#{int(r):02x}{int(g):02x}{int(b):02x}{int(a):02x}"
 
-def ModulateRGBColor(r, g, b, h, s, l):
+def modulate_rgb_color(r, g, b, h, s, l):
     r = float(r) / 255.0
     g = float(g) / 255.0
     b = float(b) / 255.0
 
     ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([Clamp(h, 0.0, 360.0),
-                            Clamp(cs * s, 0.0, 100.0),
-                            Clamp(cl + l * 100.0, 0.0, 100.0)])
+    r, g, b = hsluv_to_rgb([clamp(h, 0.0, 360.0),
+                            clamp(cs * s, 0.0, 100.0),
+                            clamp(cl + l * 100.0, 0.0, 100.0)])
 
     return (int(r * 255.0),
             int(g * 255.0),
             int(b * 255.0))
 
-def ModulateRGBAColor(r, g, b, a, h, s, l):
+def modulate_rgba_color(r, g, b, a, h, s, l):
     r = float(r) / 255.0
     g = float(b) / 255.0
     b = float(b) / 255.0
     a = float(a) / 255.0
 
     ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([Clamp(h, 0.0, 360.0),
-                            Clamp(cs * s, 0.0, 100.0),
-                            Clamp(cl + l * 100.0, 0.0, 100.0)])
+    r, g, b = hsluv_to_rgb([clamp(h, 0.0, 360.0),
+                            clamp(cs * s, 0.0, 100.0),
+                            clamp(cl + l * 100.0, 0.0, 100.0)])
 
     return (int(r * 255.0),
             int(g * 255.0),
             int(b * 255.0),
             int(a * 255.0))
 
-def ModulateColors(macro_args, method_args):
+def modulate_colors(macro_args, method_args):
     h, s, l = method_args
 
     if len(macro_args) == 3:
         r, g, b = macro_args
         if h != None and s != None and l != None:
-            r, g, b = ModulateRGBColor(int(r), int(g), int(b), float(h), float(s), float(l))
-        return FormatRGBHexString(r, g, b)
+            r, g, b = modulate_rgb_color(int(r), int(g), int(b), float(h), float(s), float(l))
+        return format_rgb_hex_string(r, g, b)
     elif len(macro_args) == 4:
         r, g, b, a = macro_args
         if h != None and s != None and l != None:
-            r, g, b, a = ModulateRGBAColor(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
-        return FormatRGBAHexString(r, g, b, a)
+            r, g, b, a = modulate_rgba_color(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
+        return format_rgba_hex_string(r, g, b, a)
 
     return "#baadf00d"
 
-def Stringize(macro_args, method_args):
+def stringize(macro_args, method_args):
     return str(method_args)
 
-def ParseMacroArguments(match):
+def parse_macro_args(match):
     if match.lastindex == None or match.lastindex == 0:
         # No arguments have been passed to the macro
         return []
@@ -286,31 +112,32 @@ def ParseMacroArguments(match):
             return result
         query += r","
 
-def PreprocessTextFile(in_path, out_path, theme, scale):
+def preprocess_text_file(in_path, out_path, theme, scale):
     prm_color = theme["primary_color"]
     scd_color = theme["secondary_color"]
 
     macros = [
-        # Name                       | Method        | Arguments
-        [ "CUI_THEME_NAME"           , Stringize     , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
-        [ "CUI_BTN_ROUNDING"         , Stringize     , (theme["button_rounding"])                               ],
-        [ "CUI_FRM_ROUNDING"         , Stringize     , (theme["frame_rounding"])                                ],
-        [ "CUI_DLG_ROUNDING"         , Stringize     , (theme["dialogue_rounding"])                             ],
-        [ "CUI_MNU_PTSHAPE"          , Stringize     , (theme["menu_pattern_shape"])                            ],
-        [ "CUI_DLG_PTSHAPE"          , Stringize     , (theme["dialogue_pattern_shape"])                        ],
-        [ "CUI_MAIN_FONT_REGULAR"    , Stringize     , (theme["main_font"]["regular"])                          ],
-        [ "CUI_MAIN_FONT_ITALIC"     , Stringize     , (theme["main_font"]["italic"])                           ],
-        [ "CUI_MAIN_FONT_BOLD"       , Stringize     , (theme["main_font"]["bold"])                             ],
-        [ "CUI_MAIN_FONT_BOLD_ITALIC", Stringize     , (theme["main_font"]["bold_italic"])                      ],
-        [ "CUI_MENU_FONT"            , Stringize     , (theme["menu_font"])                                     ],
-        [ "CUI_OPTION_FONT"          , Stringize     , (theme["option_font"])                                   ],
-        [ "CUI_MAIN_FONT_KERNING"    , Stringize     , (theme["main_font_kerning"])                             ],
-        [ "CUI_DLG_VERT_OFFSET"      , Stringize     , (theme["dialogue_vertical_offset"])                      ],
-        [ "CUI_DLG_LINE_SPACING"     , Stringize     , (theme["dialogue_line_spacing"])                         ],
-        [ "CUI_PRM_COLOR"            , ModulateColors, (prm_color["h"], prm_color["s"], prm_color["l"])         ],
-        [ "CUI_SCD_COLOR"            , ModulateColors, (scd_color["h"], scd_color["s"], scd_color["l"])         ],
-        [ "CUI_SCALE"                , Stringize     , (scale)                                                  ],
-        [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                            ],
+        # Name                       | Method         | Arguments
+        [ "CUI_THEME_ID"             , stringize      , (("%s" if scale == 1 else "%s_hidpi") % theme["id"])     ],
+        [ "CUI_THEME_NAME"           , stringize      , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
+        [ "CUI_BTN_ROUNDING"         , stringize      , (theme["button_rounding"])                               ],
+        [ "CUI_FRM_ROUNDING"         , stringize      , (theme["frame_rounding"])                                ],
+        [ "CUI_DLG_ROUNDING"         , stringize      , (theme["dialogue_rounding"])                             ],
+        [ "CUI_MNU_PTSHAPE"          , stringize      , (theme["menu_pattern_shape"])                            ],
+        [ "CUI_DLG_PTSHAPE"          , stringize      , (theme["dialogue_pattern_shape"])                        ],
+        [ "CUI_MAIN_FONT_REGULAR"    , stringize      , (theme["main_font"]["regular"])                          ],
+        [ "CUI_MAIN_FONT_ITALIC"     , stringize      , (theme["main_font"]["italic"])                           ],
+        [ "CUI_MAIN_FONT_BOLD"       , stringize      , (theme["main_font"]["bold"])                             ],
+        [ "CUI_MAIN_FONT_BOLD_ITALIC", stringize      , (theme["main_font"]["bold_italic"])                      ],
+        [ "CUI_MENU_FONT"            , stringize      , (theme["menu_font"])                                     ],
+        [ "CUI_OPTION_FONT"          , stringize      , (theme["option_font"])                                   ],
+        [ "CUI_MAIN_FONT_KERNING"    , stringize      , (theme["main_font_kerning"])                             ],
+        [ "CUI_DLG_VERT_OFFSET"      , stringize      , (theme["dialogue_vertical_offset"])                      ],
+        [ "CUI_DLG_LINE_SPACING"     , stringize      , (theme["dialogue_line_spacing"])                         ],
+        [ "CUI_PRM_COLOR"            , modulate_colors, (prm_color["h"], prm_color["s"], prm_color["l"])         ],
+        [ "CUI_SCD_COLOR"            , modulate_colors, (scd_color["h"], scd_color["s"], scd_color["l"])         ],
+        [ "CUI_SCALE"                , stringize      , (scale)                                                  ],
+        [ "CUI_SCALE_INV"            , stringize      , (1.0 / scale)                                            ],
     ]
 
     with open(in_path, "r") as in_file, open(out_path, "w") as out_file:
@@ -318,24 +145,33 @@ def PreprocessTextFile(in_path, out_path, theme, scale):
 
         for macro_name, method, method_args in macros:
             query = macro_name + r"\(([\w\s\-.,]*)\)"
-            text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
+            text = re.sub(query, lambda match: method(parse_macro_args(match), method_args), text)
 
         out_file.write(text)
 
 # Image rendering
-def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
+def clear_alpha(p):
+    return (p[0], p[1], p[2], 0)
+
+def mix_pixel_glitched(l, r):
+    a = min(max(int(l[3] * 0.25) + r[3],
+                int(r[3] * 0.25) + l[3]), 255)
+    return (r[0], r[1], r[2], a)
+
+def shift_region(pixel_data, x, y, w, h, dx, dy):
     region_data = [[pixel_data[x + i, y + j] for j in range(h)] for i in range(w)]
 
     for i in range(w):
         for j in range(h):
-            pixel_data[x + i, y + j] = (0, 0, 0, 0)
+            cx, cy = x + i, y + j
+            pixel_data[cx, cy] = clear_alpha(pixel_data[cx, cy])
 
     for i in range(w):
         for j in range(h):
-            # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
-            pixel_data[x + dx + i, y + dy + j] = region_data[i][j]
+            cx, cy = x + dx + i, y + dy + j
+            pixel_data[cx, cy] = mix_pixel_glitched(pixel_data[cx, cy], region_data[i][j])
 
-def Glitch(image_path, scale):
+def glitch(image_path, scale):
     regions = [
         # X  | Y  | W  | H  | DX | DY
         [  42,   5, 144,  15, -25,   0 ],
@@ -345,6 +181,7 @@ def Glitch(image_path, scale):
         [  42, 108,  30,   4,  25,   0 ],
         [ 123, 115, 183,  20,  25,   0 ],
         [ 183,  77, 129,  22, -26,   0 ],
+        [ 215,  86,  50,   1,   1,   0 ],
         [ 225,  40,  99,  20, -25,   0 ],
         [ 273,  15, 136,  11,  25,   0 ],
         [ 309,  86,  58,   1, -25,   0 ],
@@ -353,9 +190,8 @@ def Glitch(image_path, scale):
         [ 408,  20,  80,   3, -26,   0 ],
         [ 444,  72, 159,   6, -25,   0 ],
         [ 448, 127,  83,   9, -25,   0 ],
-        [ 516,  35, 116,   6, -33,   0 ],
+        [ 516,  35, 116,   6, -26,   0 ],
         [ 564,  93, 128,   3, -26,   0 ],
-        [ 575, 103,  95,   1,  25,   0 ],
         [ 625,  36, 108,   8, -25,   0 ],
         [ 670, 101, 156,  12, -25,   0 ],
         [ 675,  67, 135,   9, -26,   0 ],
@@ -364,36 +200,42 @@ def Glitch(image_path, scale):
         [ 817,  19,  41,   2, -25,   0 ],
         [ 827,  43,  31,   6, -25,   0 ],
         [ 834, 122,  24,   7,  25,   0 ],
+        [ 575, 103,  95,   1,  25,   0 ],
     ]
 
     with Image.open(image_path) as image:
         pixel_data = image.load()
         for region in regions:
             [x, y, w, h, dx, dy] = [i * scale for i in region]
-            ShiftRegion(pixel_data, x, y, w, h, dx, dy)
+            shift_region(pixel_data, x, y, w, h, dx, dy)
         image.save(image_path)
 
-def RenderImage(in_path, out_path, scale, glitched):
+def render_image(in_path, out_path, scale, glitched):
     if release_mode:
-        os.system("inkscape "
-                 "--batch-process "
-                 "--export-dpi=\"%i\" "
-                 "--export-filename=\"%s\" "
-                 "--export-overwrite "
-                 "--export-type=\"png\" "
-                 "\"%s\"" % (96 * scale, out_path, in_path))
+        os.system(f"inkscape "
+                  f"--batch-process "
+                  f"--export-dpi=\"{96 * scale}\" "
+                  f"--export-filename=\"{out_path}\" "
+                  f"--export-overwrite "
+                  f"--export-type=\"png\" "
+                  f"\"{in_path}\"")
     else:
-        os.system("magick "
-                  "-background \"none\" "
-                  "-density \"%i\" "
-                  "\"%s\" "
-                  "\"%s\"" % (96 * scale, in_path, out_path))
+        os.system(f"magick "
+                  f"-background \"none\" "
+                  f"-density \"{96 * scale}\" "
+                  f"\"{in_path}\" "
+                  f"\"{out_path}\"")
 
     if glitched:
-        Glitch(out_path, scale)
+        glitch(out_path, scale)
+
+# Preview generation
+def generate_preview(image_path, dst_path):
+    with Image.open(image_path) as image:
+        image.crop((0, 0, 128, 128)).save(dst_path)
 
 # Theme loading
-def PreloadThemes():
+def preload_themes():
     result = []
 
     for base_path, dirs, files in os.walk(theme_dir):
@@ -405,91 +247,107 @@ def PreloadThemes():
     return result
 
 # Build chain
-def Log(message):
-    print("BUILD: %s" % message)
+def log(message):
+    print(f"BUILD: {message}")
 
-def ReplicateDirStructure(path_list, dst_path):
-    for path in path_list:
-        dir_path = os.path.dirname(path)
-        dir_full_path = os.path.join(dst_path, dir_path)
+def replicate_dir_structure(file_path, dst_path):
+    dir_path = os.path.dirname(file_path)
+    dir_full_path = os.path.join(dst_path, dir_path)
 
-        if not os.path.exists(dir_full_path):
-            Log("Creating directory %s..." % dir_full_path)
-            os.makedirs(dir_full_path)
+    if not os.path.exists(dir_full_path):
+        log(f"Creating directory {dir_full_path}...")
+        os.makedirs(dir_full_path)
 
-def Build():
+def list_files_recursive(dir):
+    result = []
+
+    for base_path, dirs, files in os.walk(dir):
+        for file_path in files:
+            full_path = os.path.join(base_path, file_path)
+            result.append(full_path)
+
+    return result
+
+def build():
     # Clear previous build
     if os.path.exists(build_dir):
-        Log("Cleaning up previous build...")
+        log("Cleaning up previous build...")
         shutil.rmtree(build_dir)
 
     # Create build directory
-    Log("Creating build directory...")
+    log("Creating build directory...")
     os.mkdir(build_dir)
 
     # Replicate directory structure
-    ReplicateDirStructure(common_files, build_dir)
+    for mod_dir in mod_dirs:
+        main_src_dir = os.path.join(source_dir, mod_dir, "main")
+        main_files = list_files_recursive(main_src_dir)
 
-    # Copy common files
-    for file_path in common_files:
-        Log("Copying file %s..." % file_path)
-        src_path = os.path.join(source_dir, file_path)
-        dst_path = os.path.join(build_dir, file_path)
-        shutil.copyfile(src_path, dst_path)
+        # Copy common files
+        for file_path in main_files:
+            log(f"Copying file {file_path}...")
+            rel_path = os.path.relpath(file_path, main_src_dir)
+            dst_path = os.path.join(build_dir, rel_path)
+            replicate_dir_structure(rel_path, build_dir)
+            shutil.copyfile(file_path, dst_path)
 
     # Make themes
-    themes = PreloadThemes()
+    themes = preload_themes()
 
     for theme in themes:
         for scale in range(1, 3):
-            target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
-            target_dir = os.path.join(build_dir, "comfy_meta", target_id)
+            for mod_dir in mod_dirs:
+                theme_src_dir = os.path.join(source_dir, mod_dir, "theme")
+                theme_files = list_files_recursive(theme_src_dir)
 
-            # Replicate directory structure
-            ReplicateDirStructure(theme_files, target_dir)
+                target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
+                target_dir = os.path.join(build_dir, "comfy_meta", target_id)
 
-            # Process source files
-            for file_path in theme_files:
-                (file_name, file_ext) = os.path.splitext(file_path)
+                # Process source files
+                for file_path in theme_files:
+                    rel_path = os.path.relpath(file_path, theme_src_dir)
+                    (file_name, file_ext) = os.path.splitext(rel_path)
 
-                if file_ext == ".svg":
-                    Log("Rendering image %s..." % file_path)
-                    png_path = "%s.png" % file_name
-                    tmp_path = os.path.join(build_dir, "Temporary.svg")
-                    src_path = os.path.join(source_dir, file_path)
-                    dst_path = os.path.join(target_dir, png_path)
-                    PreprocessTextFile(src_path, tmp_path, theme, scale)
-                    RenderImage(tmp_path, dst_path, scale, png_path in glitched_boxes)
-                    os.remove(tmp_path)
-                elif file_ext == ".rpy":
-                    Log("Processing script %s..." % file_path)
-                    src_path = os.path.join(source_dir, file_path)
-                    dst_path = os.path.join(target_dir, file_path)
-                    PreprocessTextFile(src_path, dst_path, theme, scale)
-                elif file_ext == ".json":
-                    Log("Processing JSON %s..." % file_path)
-                    src_path = os.path.join(source_dir, file_path)
-                    dst_path = os.path.join(target_dir, file_path)
-                    PreprocessTextFile(src_path, dst_path, theme, scale)
-                else:
-                    Log("Copying file %s..." % file_path)
-                    src_path = os.path.join(source_dir, file_path)
-                    dst_path = os.path.join(target_dir, file_path)
-                    shutil.copyfile(src_path, dst_path)
+                    replicate_dir_structure(rel_path, target_dir)
+
+                    if file_ext == ".svg":
+                        log(f"Rendering image {file_path}...")
+                        png_path = f"{file_name}.png"
+                        tmp_path = os.path.join(build_dir, "Temporary.svg")
+                        dst_path = os.path.join(target_dir, png_path)
+                        preprocess_text_file(file_path, tmp_path, theme, scale)
+                        render_image(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
+                        os.remove(tmp_path)
+                    elif file_ext == ".rpy":
+                        log(f"Processing script {file_path}...")
+                        dst_path = os.path.join(target_dir, rel_path)
+                        preprocess_text_file(file_path, dst_path, theme, scale)
+                    elif file_ext == ".json":
+                        log(f"Processing JSON {file_path}...")
+                        dst_path = os.path.join(target_dir, rel_path)
+                        preprocess_text_file(file_path, dst_path, theme, scale)
+                    else:
+                        log(f"Copying file {file_path}...")
+                        dst_path = os.path.join(target_dir, rel_path)
+                        shutil.copyfile(file_path, dst_path)
+
+            textbox_path = os.path.join(target_dir, "comfy_ui", "replacers", "gui", "textbox.png")
+            preview_path = os.path.join(target_dir, "preview.png")
+            generate_preview(textbox_path, preview_path)
 
             # Pack assets
-            Log("Creating archive for %s..." % target_id)
+            log(f"Creating archive for {target_id}...")
             shutil.make_archive(target_dir, "zip", target_dir)
-            os.rename("%s.zip" % target_dir, "%s.arc" % target_dir)
+            os.rename(f"{target_dir}.zip", f"{target_dir}.arc")
             shutil.rmtree(target_dir)
 
     # Create release archive if needed
     if release_mode:
-        Log("Creating release archive...")
+        log("Creating release archive...")
         shutil.make_archive("Release", "zip", build_dir)
         shutil.rmtree(build_dir)
 
-    Log("Finished!")
+    log("Finished!")
 
-PreloadThemes()
-Build()
+preload_themes()
+build()
