@@ -41,10 +41,10 @@ def Clamp(value, lower, upper):
     return min(max(value, lower), upper)
 
 def FormatRGBHexString(r, g, b):
-    return "#%02x%02x%02x" % (int(r), int(g), int(b))
+    return f"#{int(r):02x}{int(g):02x}{int(b):02x}"
 
 def FormatRGBAHexString(r, g, b, a):
-    return "#%02x%02x%02x%02x" % (int(r), int(g), int(b), int(a))
+    return f"#{int(r):02x}{int(g):02x}{int(b):02x}{int(a):02x}"
 
 def ModulateRGBColor(r, g, b, h, s, l):
     r = float(r) / 255.0
@@ -209,19 +209,19 @@ def Glitch(image_path, scale):
 
 def RenderImage(in_path, out_path, scale, glitched):
     if release_mode:
-        os.system("inkscape "
-                 "--batch-process "
-                 "--export-dpi=\"%i\" "
-                 "--export-filename=\"%s\" "
-                 "--export-overwrite "
-                 "--export-type=\"png\" "
-                 "\"%s\"" % (96 * scale, out_path, in_path))
+        os.system(f"inkscape "
+                  f"--batch-process "
+                  f"--export-dpi=\"{96 * scale}\" "
+                  f"--export-filename=\"{out_path}\" "
+                  f"--export-overwrite "
+                  f"--export-type=\"png\" "
+                  f"\"{in_path}\"")
     else:
-        os.system("magick "
-                  "-background \"none\" "
-                  "-density \"%i\" "
-                  "\"%s\" "
-                  "\"%s\"" % (96 * scale, in_path, out_path))
+        os.system(f"magick "
+                  f"-background \"none\" "
+                  f"-density \"{96 * scale}\" "
+                  f"\"{in_path}\" "
+                  f"\"{out_path}\"")
 
     if glitched:
         Glitch(out_path, scale)
@@ -240,14 +240,14 @@ def PreloadThemes():
 
 # Build chain
 def Log(message):
-    print("BUILD: %s" % message)
+    print(f"BUILD: {message}")
 
 def ReplicateDirStructure(file_path, dst_path):
     dir_path = os.path.dirname(file_path)
     dir_full_path = os.path.join(dst_path, dir_path)
 
     if not os.path.exists(dir_full_path):
-        Log("Creating directory %s..." % dir_full_path)
+        Log(f"Creating directory {dir_full_path}...")
         os.makedirs(dir_full_path)
 
 def ListFilesRecursive(dir):
@@ -277,7 +277,7 @@ def Build():
 
         # Copy common files
         for file_path in main_files:
-            Log("Copying file %s..." % file_path)
+            Log(f"Copying file {file_path}...")
             rel_path = os.path.relpath(file_path, main_src_dir)
             dst_path = os.path.join(build_dir, rel_path)
             ReplicateDirStructure(rel_path, build_dir)
@@ -303,30 +303,30 @@ def Build():
                     ReplicateDirStructure(rel_path, target_dir)
 
                     if file_ext == ".svg":
-                        Log("Rendering image %s..." % file_path)
-                        png_path = "%s.png" % file_name
+                        Log(f"Rendering image {file_path}...")
+                        png_path = f"{file_name}.png"
                         tmp_path = os.path.join(build_dir, "Temporary.svg")
                         dst_path = os.path.join(target_dir, png_path)
                         PreprocessTextFile(file_path, tmp_path, theme, scale)
                         RenderImage(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
                         os.remove(tmp_path)
                     elif file_ext == ".rpy":
-                        Log("Processing script %s..." % file_path)
+                        Log(f"Processing script {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         PreprocessTextFile(file_path, dst_path, theme, scale)
                     elif file_ext == ".json":
-                        Log("Processing JSON %s..." % file_path)
+                        Log(f"Processing JSON {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         PreprocessTextFile(file_path, dst_path, theme, scale)
                     else:
-                        Log("Copying file %s..." % file_path)
+                        Log(f"Copying file {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         shutil.copyfile(file_path, dst_path)
 
             # Pack assets
-            Log("Creating archive for %s..." % target_id)
+            Log(f"Creating archive for {target_id}...")
             shutil.make_archive(target_dir, "zip", target_dir)
-            os.rename("%s.zip" % target_dir, "%s.arc" % target_dir)
+            os.rename(f"{target_dir}.zip", f"{target_dir}.arc")
             shutil.rmtree(target_dir)
 
     # Create release archive if needed
