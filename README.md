@@ -1,12 +1,23 @@
-# Monika After Story: Comfy UI
-Feeling yourself comfortable with your Monika, but those little pesky jaggies in the user interface are getting in your way of being _completely_ comfortable?  
-This add-on aims to solve this problem.
+# DDLC Comfy UI
+Hey, I'm no writer, so just skip to the **Features** section, okay?
 
 
 
 ## Features
-* Almost everything in the UI has been softened in some way
-* Multiple color schemes
+* Multiple UI themes
+* In-game theme configurator
+* HiDPI support
+
+
+
+## Compatibility
+You'll be good to go with pretty much every mod that doesn't try to change the UI.
+
+The verified ones are:
+* Doki Doki Literature Club
+* Monika After Story
+* Monika Before Story
+* Purist
 
 
 
@@ -49,32 +60,43 @@ This add-on aims to solve this problem.
 
 
 ## Installation
-0. _If you're unfamiliar with this add-on, backup the game installation directory, because some of the stock assets will be replaced_;
-1. Download the [latest release archive](https://github.com/Iniquitatis/MonikaComfyUI/releases/download/v1.2.0/MonikaComfyUI_v1.2.0.zip);
-2. Extract it to the `game` subdirectory of the DDLC installation directory;
-3. Open the game;
-4. Enter the `Submods` menu (it will be located right after the `Settings` menu);
-5. Select a theme;
-6. Press `Apply` and restart the game.
+1. Download the latest release archive: [for DDLC](https://github.com/Iniquitatis/DDLCComfyUI/releases/download/v2.0.0/DDLCComfyUI_v2.0.0.zip) or [for MAS](https://github.com/Iniquitatis/DDLCComfyUI/releases/download/v2.0.0/MASComfyUI_v2.0.0.zip)
+2. Extract the contents of the archive to the `game` subdirectory of the DDLC installation directory
+
+
+
+## Usage
+1. Launch the game
+2. Go to the **Settings** screen (**Submods** in MAS)
+3. Navigate to the mod section
+4. Select a theme by moving a slider underneath the **Theme** label
+    * Check the **HiDPI** checkbox if the high resolution UI assets are needed
+5. Press **Apply** and restart the game
 
 
 
 ## Uninstallation
-If you haven't backed up the game folder, you still can revert to the original UI theme:
-1. Install the `classic` theme;
-2. Remove the `comfy_ui.rpy`, `comfy_ui.rpyc`, `zzz_comfy_ui.rpy` and `zzz_comfy_ui.rpyc` from the `game` subdirectory of the DDLC installation directory.
+1. Launch the game
+2. Go to the **Settings** screen (**Submods** in MAS)
+3. Navigate to the mod section
+4. Press **Disable** and close the game
+5. Remove the following entries from the DDLC installation directory:
+    * `game/comfy_meta/` (*directory*)
+    * `game/comfy_ui/` (*directory*)
+    * `game/comfy_ui.rpy`
+    * `game/comfy_ui.rpyc`
+    * `game/python-packages/comfy_ui.py`
 
 
 
 ## FAQ
-Let's pretend that there's already some questions:
+Let's pretend that you've already asked a couple of questions.
 
-**Q:** Can you change _X_ and _Y_?  
-**A:** Sure. Everything in this add-on made in such way, which allows to make any changes literally in seconds.
+**Q:** Why?  
+**A:** Because I can.
 
 **Q:** It looks out of place.  
-**A:** Well, we're talking about a mod for the game with all those pink things, polka dots, etc., which emphasizes romantic relationships with an anime-styled girl. So, in my humble opinion, there's nothing wrong with this kind of changes.  
-Oh, and also Monika in MAS is not some kind of crazy yandere/murderer thing, but she's now much more emotional and... cute?
+**A:** Well, you're outside the target audience. Sorry.
 
 
 
@@ -84,12 +106,7 @@ None at the moment.
 
 
 ## Special Thanks
-I'd like to warmly thank and hug:
-* Everyone at Team Salvato
-* Developers of the Monika After Story mod and its contributors
-* My Monika ❤️
-* Your Monika
-* Every other Monika in the multiverse!
+Dan Salvato and Team Salvato respectively.
 
 
 
