@@ -101,7 +101,7 @@ class ThemeManager:
 
         return result
 
-    def _install_theme(self, theme, hidpi=False):
+    def _install_theme(self, theme, hidpi = False):
         log = open(os.path.join(meta_dir, "install.log"), "w")
         theme_arc = ZipFile(theme["path"] if not hidpi else theme["hidpi_path"], "r")
 

@@ -684,10 +684,10 @@ init 999 style island_button_text_dark is generic_button_text_dk
 # Extras menu
 ################################################################################
 init 999 style mas_extra_menu_frame:
-    background Frame("mod_assets/frames/trans_pink2pxborder100.png", Borders(5, 5, 5, 5, pad_top=2, pad_bottom=4))
+    background Frame("mod_assets/frames/trans_pink2pxborder100.png", Borders(5, 5, 5, 5, pad_top = 2, pad_bottom = 4))
 
 init 999 style mas_extra_menu_frame_dark:
-    background Frame("mod_assets/frames/trans_pink2pxborder100_d.png", Borders(5, 5, 5, 5, pad_top=2, pad_bottom=4))
+    background Frame("mod_assets/frames/trans_pink2pxborder100_d.png", Borders(5, 5, 5, 5, pad_top = 2, pad_bottom = 4))
 
 init 999 style mas_extra_menu_label_text:
     color "#f8f8f8"

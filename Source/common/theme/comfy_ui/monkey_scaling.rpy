@@ -13,7 +13,7 @@ init -999 python in comfy_ui:
     from renpy.display.im import Image
     from renpy.display.transform import Transform
 
-    def monkey_new(cls, filename, **properties):
+    def monkey_new(cls, filename = "", **properties):
         has_replacement = os.path.exists(os.path.join("game", "comfy_ui", "replacers", filename))
         is_comfy_asset = filename.startswith("comfy_ui") or has_replacement
 
@@ -24,7 +24,7 @@ init -999 python in comfy_ui:
         new_instance.__init__(filename, **properties)
 
         if is_comfy_asset:
-            return Transform(new_instance, zoom=CUI_SCALE_INV())
+            return Transform(new_instance, zoom = CUI_SCALE_INV())
 
         return new_instance
 
