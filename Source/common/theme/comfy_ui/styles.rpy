@@ -212,3 +212,17 @@ style poemgame_text:
     color          comfy_ui.poem_game_text.color
     outlines       comfy_ui.poem_game_text.outlines
     hover_outlines comfy_ui.poem_game_text.hover_outlines
+
+
+
+################################################################################
+# Input caret
+################################################################################
+image input_caret:
+    Solid("CUI_SCD_COLOR(187, 85, 153)")
+    size (2, 25)
+    subpixel True
+    block:
+        linear 0.35 alpha 0
+        linear 0.35 alpha 1
+        repeat

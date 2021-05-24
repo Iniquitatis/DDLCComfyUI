@@ -720,3 +720,17 @@ init 999 style mas_adjustable_button_text is generic_button_text_lt:
 
 init 999 style mas_adjustable_button_text_dark is generic_button_text_dk:
     clear
+
+
+
+################################################################################
+# Input caret
+################################################################################
+image input_caret:
+    Solid("CUI_SCD_COLOR(187, 85, 153)")
+    size (2, 25)
+    subpixel True
+    block:
+        linear 0.35 alpha 0
+        linear 0.35 alpha 1
+        repeat
