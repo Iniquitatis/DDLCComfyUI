@@ -69,12 +69,12 @@ screen comfy_ui_settings_pane():
                 textbutton _("Apply"):
                     style "navigation_button"
                     xsize 100
-                    action Jump("comfy_ui_apply")
+                    action Show(screen = "dialog", message = "The game will be restarted.", ok_action = Jump("comfy_ui_apply"))
 
                 textbutton _("Disable"):
                     style "navigation_button"
                     xsize 100
-                    action Jump("comfy_ui_disable")
+                    action Show(screen = "dialog", message = "The game will be restarted.", ok_action = Jump("comfy_ui_disable"))
         else:
             label _("No themes available.")
 
