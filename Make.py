@@ -147,17 +147,26 @@ def PreprocessTextFile(in_path, out_path, theme, scale):
         out_file.write(text)
 
 # Image rendering
+def ClearAlpha(p):
+    return (p[0], p[1], p[2], 0)
+
+def MixPixelGlitched(l, r):
+    a = min(max(int(l[3] * 0.25) + r[3],
+                int(r[3] * 0.25) + l[3]), 255)
+    return (r[0], r[1], r[2], a)
+
 def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
     region_data = [[pixel_data[x + i, y + j] for j in range(h)] for i in range(w)]
 
     for i in range(w):
         for j in range(h):
-            pixel_data[x + i, y + j] = (0, 0, 0, 0)
+            cx, cy = x + i, y + j
+            pixel_data[cx, cy] = ClearAlpha(pixel_data[cx, cy])
 
     for i in range(w):
         for j in range(h):
-            # FIXME: actually, the pixels should be mixed differently, but let's just overwrite them for now
-            pixel_data[x + dx + i, y + dy + j] = region_data[i][j]
+            cx, cy = x + dx + i, y + dy + j
+            pixel_data[cx, cy] = MixPixelGlitched(pixel_data[cx, cy], region_data[i][j])
 
 def Glitch(image_path, scale):
     regions = [
@@ -169,6 +178,7 @@ def Glitch(image_path, scale):
         [  42, 108,  30,   4,  25,   0 ],
         [ 123, 115, 183,  20,  25,   0 ],
         [ 183,  77, 129,  22, -26,   0 ],
+        [ 215,  86,  50,   1,   1,   0 ],
         [ 225,  40,  99,  20, -25,   0 ],
         [ 273,  15, 136,  11,  25,   0 ],
         [ 309,  86,  58,   1, -25,   0 ],
@@ -177,9 +187,8 @@ def Glitch(image_path, scale):
         [ 408,  20,  80,   3, -26,   0 ],
         [ 444,  72, 159,   6, -25,   0 ],
         [ 448, 127,  83,   9, -25,   0 ],
-        [ 516,  35, 116,   6, -33,   0 ],
+        [ 516,  35, 116,   6, -26,   0 ],
         [ 564,  93, 128,   3, -26,   0 ],
-        [ 575, 103,  95,   1,  25,   0 ],
         [ 625,  36, 108,   8, -25,   0 ],
         [ 670, 101, 156,  12, -25,   0 ],
         [ 675,  67, 135,   9, -26,   0 ],
@@ -188,6 +197,7 @@ def Glitch(image_path, scale):
         [ 817,  19,  41,   2, -25,   0 ],
         [ 827,  43,  31,   6, -25,   0 ],
         [ 834, 122,  24,   7,  25,   0 ],
+        [ 575, 103,  95,   1,  25,   0 ],
     ]
 
     with Image.open(image_path) as image:
