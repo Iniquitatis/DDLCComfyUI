@@ -134,6 +134,7 @@ def preprocess_text_file(in_path, out_path, theme, scale):
         [ "CUI_MAIN_FONT_KERNING"    , stringize      , (theme["main_font_kerning"])                             ],
         [ "CUI_DLG_VERT_OFFSET"      , stringize      , (theme["dialogue_vertical_offset"])                      ],
         [ "CUI_DLG_LINE_SPACING"     , stringize      , (theme["dialogue_line_spacing"])                         ],
+        [ "CUI_BTN_HEIGHT_ADJUSTMENT", stringize      , (theme["button_height_adjustment"])                      ],
         [ "CUI_PRM_COLOR"            , modulate_colors, (prm_color["h"], prm_color["s"], prm_color["l"])         ],
         [ "CUI_SCD_COLOR"            , modulate_colors, (scd_color["h"], scd_color["s"], scd_color["l"])         ],
         [ "CUI_SCALE"                , stringize      , (scale)                                                  ],

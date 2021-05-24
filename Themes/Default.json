@@ -18,6 +18,7 @@
     "main_font_kerning": 0.0,
     "dialogue_vertical_offset": -3,
     "dialogue_line_spacing": -1,
+    "button_height_adjustment": -4,
     "primary_color": { "h": null, "s": null, "l": null },
     "secondary_color": { "h": null, "s": null, "l": null }
 }

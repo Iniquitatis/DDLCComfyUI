@@ -39,6 +39,8 @@ define comfy_ui.option_button_text.font         = "CUI_OPTION_FONT()"
 define comfy_ui.option_button_text.font_kerning = 0.0
 define comfy_ui.option_button_text.font_size    = 24
 
+define comfy_ui.button_height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
+
 define comfy_ui.choice_button_spacing = 22
 
 
@@ -211,7 +213,9 @@ init 999 style choice_vbox:
 init 999 style choice_button:
     clear
     xysize         (420, None)
-    padding        (25, 5, 25, 5)
+    xpadding       25
+    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
     hover_sound    gui.hover_sound
     activate_sound gui.activate_sound
 
