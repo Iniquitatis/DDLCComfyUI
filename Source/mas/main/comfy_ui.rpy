@@ -28,6 +28,8 @@ init -1 python in comfy_ui:
 
     theme_mgr = ThemeManager()
 
+default presistent.comfy_ui_show_preview = False
+
 ################################################################################
 # Settings pane
 ################################################################################
@@ -54,36 +56,50 @@ screen comfy_ui_settings_pane():
 
         if theme_count > 0:
             $ theme_name = comfy_ui.theme_mgr.get_current_theme_name()
-
-            vbox:
-                xmaximum 300
-
-                label _("Theme: [theme_name]"):
-                    style "slider_label"
-
-                bar:
-                    style "slider_slider"
-                    value DictValue(
-                        comfy_ui.theme_mgr.settings,
-                        "selected_theme_index",
-                        range = theme_count - 1
-                    )
-
-                textbutton _("HiDPI"):
-                    style "check_button"
-                    action ToggleDict(comfy_ui.theme_mgr.settings, "hidpi")
-
-            null height 10
+            $ theme_preview = comfy_ui.theme_mgr.get_current_theme_preview()
 
             hbox:
-                textbutton _("Apply"):
-                    style "navigation_button"
-                    xsize 100
-                    action Jump("comfy_ui_apply")
+                vbox:
+                    xmaximum 300
 
-                textbutton _("Disable"):
-                    style "navigation_button"
-                    xsize 100
-                    action Jump("comfy_ui_disable")
+                    label _("Theme: [theme_name]"):
+                        style "slider_label"
+
+                    bar:
+                        style "slider_slider"
+                        value DictValue(
+                            comfy_ui.theme_mgr.settings,
+                            "selected_theme_index",
+                            range = theme_count - 1
+                        )
+
+                    hbox:
+                        textbutton _("HiDPI"):
+                            style "check_button"
+                            action ToggleDict(comfy_ui.theme_mgr.settings, "hidpi")
+
+                        null width 10
+
+                        textbutton _("Preview"):
+                            style "check_button"
+                            action ToggleField(persistent, "comfy_ui_show_preview")
+
+                    null height 10
+
+                    hbox:
+                        textbutton _("Apply"):
+                            style "navigation_button"
+                            xsize 100
+                            action Jump("comfy_ui_apply")
+
+                        textbutton _("Disable"):
+                            style "navigation_button"
+                            xsize 100
+                            action Jump("comfy_ui_disable")
+
+                if persistent.comfy_ui_show_preview:
+                    null width 10
+
+                    add theme_preview ypos 20
         else:
             label _("No themes available.")

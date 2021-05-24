@@ -17,7 +17,9 @@ build_dir  = "Build"
 
 mod_dirs = [
     "common",
-    "mas",
+
+    # NOTE: uncomment for MAS support
+    #"mas",
 ]
 
 glitched_boxes = [
@@ -116,6 +118,7 @@ def preprocess_text_file(in_path, out_path, theme, scale):
 
     macros = [
         # Name                       | Method         | Arguments
+        [ "CUI_THEME_ID"             , stringize      , (("%s" if scale == 1 else "%s_hidpi") % theme["id"])     ],
         [ "CUI_THEME_NAME"           , stringize      , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
         [ "CUI_BTN_ROUNDING"         , stringize      , (theme["button_rounding"])                               ],
         [ "CUI_FRM_ROUNDING"         , stringize      , (theme["frame_rounding"])                                ],
@@ -226,6 +229,11 @@ def render_image(in_path, out_path, scale, glitched):
     if glitched:
         glitch(out_path, scale)
 
+# Preview generation
+def generate_preview(image_path, dst_path):
+    with Image.open(image_path) as image:
+        image.crop((0, 0, 128, 128)).save(dst_path)
+
 # Theme loading
 def preload_themes():
     result = []
@@ -322,6 +330,10 @@ def build():
                         log(f"Copying file {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         shutil.copyfile(file_path, dst_path)
+
+            textbox_path = os.path.join(target_dir, "comfy_ui", "replacers", "gui", "textbox.png")
+            preview_path = os.path.join(target_dir, "preview.png")
+            generate_preview(textbox_path, preview_path)
 
             # Pack assets
             log(f"Creating archive for {target_id}...")

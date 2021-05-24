@@ -39,6 +39,9 @@ class ThemeManager:
     def get_current_theme_name(self):
         return self.get_current_theme()["name"]
 
+    def get_current_theme_preview(self):
+        return self.get_current_theme()["preview"]
+
     def get_theme_count(self):
         return len(self.themes)
 
@@ -83,6 +86,18 @@ class ThemeManager:
         with ZipFile(file_path, "r") as theme_arc:
             with theme_arc.open("info.json", "r") as info_json:
                 result.update(json.load(info_json))
+
+            preview_path = theme_arc.extract("preview.png", meta_dir)
+
+            theme_preview_file_name = "%s_preview.png" % result["id"]
+            theme_preview_path = os.path.join(meta_dir, theme_preview_file_name)
+
+            if os.path.exists(theme_preview_path):
+                os.remove(theme_preview_path)
+
+            os.rename(preview_path, theme_preview_path)
+
+            result["preview"] = "comfy_meta/%s" % theme_preview_file_name
 
         return result
 
