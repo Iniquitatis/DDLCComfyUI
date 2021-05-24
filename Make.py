@@ -37,65 +37,65 @@ from PIL import Image
 from hsluv import *
 
 # Text file preprocessing
-def Clamp(value, lower, upper):
+def clamp(value, lower, upper):
     return min(max(value, lower), upper)
 
-def FormatRGBHexString(r, g, b):
+def format_rgb_hex_string(r, g, b):
     return f"#{int(r):02x}{int(g):02x}{int(b):02x}"
 
-def FormatRGBAHexString(r, g, b, a):
+def format_rgba_hex_string(r, g, b, a):
     return f"#{int(r):02x}{int(g):02x}{int(b):02x}{int(a):02x}"
 
-def ModulateRGBColor(r, g, b, h, s, l):
+def modulate_rgb_color(r, g, b, h, s, l):
     r = float(r) / 255.0
     g = float(g) / 255.0
     b = float(b) / 255.0
 
     ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([Clamp(h, 0.0, 360.0),
-                            Clamp(cs * s, 0.0, 100.0),
-                            Clamp(cl + l * 100.0, 0.0, 100.0)])
+    r, g, b = hsluv_to_rgb([clamp(h, 0.0, 360.0),
+                            clamp(cs * s, 0.0, 100.0),
+                            clamp(cl + l * 100.0, 0.0, 100.0)])
 
     return (int(r * 255.0),
             int(g * 255.0),
             int(b * 255.0))
 
-def ModulateRGBAColor(r, g, b, a, h, s, l):
+def modulate_rgba_color(r, g, b, a, h, s, l):
     r = float(r) / 255.0
     g = float(b) / 255.0
     b = float(b) / 255.0
     a = float(a) / 255.0
 
     ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([Clamp(h, 0.0, 360.0),
-                            Clamp(cs * s, 0.0, 100.0),
-                            Clamp(cl + l * 100.0, 0.0, 100.0)])
+    r, g, b = hsluv_to_rgb([clamp(h, 0.0, 360.0),
+                            clamp(cs * s, 0.0, 100.0),
+                            clamp(cl + l * 100.0, 0.0, 100.0)])
 
     return (int(r * 255.0),
             int(g * 255.0),
             int(b * 255.0),
             int(a * 255.0))
 
-def ModulateColors(macro_args, method_args):
+def modulate_colors(macro_args, method_args):
     h, s, l = method_args
 
     if len(macro_args) == 3:
         r, g, b = macro_args
         if h != None and s != None and l != None:
-            r, g, b = ModulateRGBColor(int(r), int(g), int(b), float(h), float(s), float(l))
-        return FormatRGBHexString(r, g, b)
+            r, g, b = modulate_rgb_color(int(r), int(g), int(b), float(h), float(s), float(l))
+        return format_rgb_hex_string(r, g, b)
     elif len(macro_args) == 4:
         r, g, b, a = macro_args
         if h != None and s != None and l != None:
-            r, g, b, a = ModulateRGBAColor(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
-        return FormatRGBAHexString(r, g, b, a)
+            r, g, b, a = modulate_rgba_color(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
+        return format_rgba_hex_string(r, g, b, a)
 
     return "#baadf00d"
 
-def Stringize(macro_args, method_args):
+def stringize(macro_args, method_args):
     return str(method_args)
 
-def ParseMacroArguments(match):
+def parse_macro_args(match):
     if match.lastindex == None or match.lastindex == 0:
         # No arguments have been passed to the macro
         return []
@@ -110,31 +110,31 @@ def ParseMacroArguments(match):
             return result
         query += r","
 
-def PreprocessTextFile(in_path, out_path, theme, scale):
+def preprocess_text_file(in_path, out_path, theme, scale):
     prm_color = theme["primary_color"]
     scd_color = theme["secondary_color"]
 
     macros = [
-        # Name                       | Method        | Arguments
-        [ "CUI_THEME_NAME"           , Stringize     , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
-        [ "CUI_BTN_ROUNDING"         , Stringize     , (theme["button_rounding"])                               ],
-        [ "CUI_FRM_ROUNDING"         , Stringize     , (theme["frame_rounding"])                                ],
-        [ "CUI_DLG_ROUNDING"         , Stringize     , (theme["dialogue_rounding"])                             ],
-        [ "CUI_MNU_PTSHAPE"          , Stringize     , (theme["menu_pattern_shape"])                            ],
-        [ "CUI_DLG_PTSHAPE"          , Stringize     , (theme["dialogue_pattern_shape"])                        ],
-        [ "CUI_MAIN_FONT_REGULAR"    , Stringize     , (theme["main_font"]["regular"])                          ],
-        [ "CUI_MAIN_FONT_ITALIC"     , Stringize     , (theme["main_font"]["italic"])                           ],
-        [ "CUI_MAIN_FONT_BOLD"       , Stringize     , (theme["main_font"]["bold"])                             ],
-        [ "CUI_MAIN_FONT_BOLD_ITALIC", Stringize     , (theme["main_font"]["bold_italic"])                      ],
-        [ "CUI_MENU_FONT"            , Stringize     , (theme["menu_font"])                                     ],
-        [ "CUI_OPTION_FONT"          , Stringize     , (theme["option_font"])                                   ],
-        [ "CUI_MAIN_FONT_KERNING"    , Stringize     , (theme["main_font_kerning"])                             ],
-        [ "CUI_DLG_VERT_OFFSET"      , Stringize     , (theme["dialogue_vertical_offset"])                      ],
-        [ "CUI_DLG_LINE_SPACING"     , Stringize     , (theme["dialogue_line_spacing"])                         ],
-        [ "CUI_PRM_COLOR"            , ModulateColors, (prm_color["h"], prm_color["s"], prm_color["l"])         ],
-        [ "CUI_SCD_COLOR"            , ModulateColors, (scd_color["h"], scd_color["s"], scd_color["l"])         ],
-        [ "CUI_SCALE"                , Stringize     , (scale)                                                  ],
-        [ "CUI_SCALE_INV"            , Stringize     , (1.0 / scale)                                            ],
+        # Name                       | Method         | Arguments
+        [ "CUI_THEME_NAME"           , stringize      , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
+        [ "CUI_BTN_ROUNDING"         , stringize      , (theme["button_rounding"])                               ],
+        [ "CUI_FRM_ROUNDING"         , stringize      , (theme["frame_rounding"])                                ],
+        [ "CUI_DLG_ROUNDING"         , stringize      , (theme["dialogue_rounding"])                             ],
+        [ "CUI_MNU_PTSHAPE"          , stringize      , (theme["menu_pattern_shape"])                            ],
+        [ "CUI_DLG_PTSHAPE"          , stringize      , (theme["dialogue_pattern_shape"])                        ],
+        [ "CUI_MAIN_FONT_REGULAR"    , stringize      , (theme["main_font"]["regular"])                          ],
+        [ "CUI_MAIN_FONT_ITALIC"     , stringize      , (theme["main_font"]["italic"])                           ],
+        [ "CUI_MAIN_FONT_BOLD"       , stringize      , (theme["main_font"]["bold"])                             ],
+        [ "CUI_MAIN_FONT_BOLD_ITALIC", stringize      , (theme["main_font"]["bold_italic"])                      ],
+        [ "CUI_MENU_FONT"            , stringize      , (theme["menu_font"])                                     ],
+        [ "CUI_OPTION_FONT"          , stringize      , (theme["option_font"])                                   ],
+        [ "CUI_MAIN_FONT_KERNING"    , stringize      , (theme["main_font_kerning"])                             ],
+        [ "CUI_DLG_VERT_OFFSET"      , stringize      , (theme["dialogue_vertical_offset"])                      ],
+        [ "CUI_DLG_LINE_SPACING"     , stringize      , (theme["dialogue_line_spacing"])                         ],
+        [ "CUI_PRM_COLOR"            , modulate_colors, (prm_color["h"], prm_color["s"], prm_color["l"])         ],
+        [ "CUI_SCD_COLOR"            , modulate_colors, (scd_color["h"], scd_color["s"], scd_color["l"])         ],
+        [ "CUI_SCALE"                , stringize      , (scale)                                                  ],
+        [ "CUI_SCALE_INV"            , stringize      , (1.0 / scale)                                            ],
     ]
 
     with open(in_path, "r") as in_file, open(out_path, "w") as out_file:
@@ -142,33 +142,33 @@ def PreprocessTextFile(in_path, out_path, theme, scale):
 
         for macro_name, method, method_args in macros:
             query = macro_name + r"\(([\w\s\-.,]*)\)"
-            text = re.sub(query, lambda match: method(ParseMacroArguments(match), method_args), text)
+            text = re.sub(query, lambda match: method(parse_macro_args(match), method_args), text)
 
         out_file.write(text)
 
 # Image rendering
-def ClearAlpha(p):
+def clear_alpha(p):
     return (p[0], p[1], p[2], 0)
 
-def MixPixelGlitched(l, r):
+def mix_pixel_glitched(l, r):
     a = min(max(int(l[3] * 0.25) + r[3],
                 int(r[3] * 0.25) + l[3]), 255)
     return (r[0], r[1], r[2], a)
 
-def ShiftRegion(pixel_data, x, y, w, h, dx, dy):
+def shift_region(pixel_data, x, y, w, h, dx, dy):
     region_data = [[pixel_data[x + i, y + j] for j in range(h)] for i in range(w)]
 
     for i in range(w):
         for j in range(h):
             cx, cy = x + i, y + j
-            pixel_data[cx, cy] = ClearAlpha(pixel_data[cx, cy])
+            pixel_data[cx, cy] = clear_alpha(pixel_data[cx, cy])
 
     for i in range(w):
         for j in range(h):
             cx, cy = x + dx + i, y + dy + j
-            pixel_data[cx, cy] = MixPixelGlitched(pixel_data[cx, cy], region_data[i][j])
+            pixel_data[cx, cy] = mix_pixel_glitched(pixel_data[cx, cy], region_data[i][j])
 
-def Glitch(image_path, scale):
+def glitch(image_path, scale):
     regions = [
         # X  | Y  | W  | H  | DX | DY
         [  42,   5, 144,  15, -25,   0 ],
@@ -204,10 +204,10 @@ def Glitch(image_path, scale):
         pixel_data = image.load()
         for region in regions:
             [x, y, w, h, dx, dy] = [i * scale for i in region]
-            ShiftRegion(pixel_data, x, y, w, h, dx, dy)
+            shift_region(pixel_data, x, y, w, h, dx, dy)
         image.save(image_path)
 
-def RenderImage(in_path, out_path, scale, glitched):
+def render_image(in_path, out_path, scale, glitched):
     if release_mode:
         os.system(f"inkscape "
                   f"--batch-process "
@@ -224,10 +224,10 @@ def RenderImage(in_path, out_path, scale, glitched):
                   f"\"{out_path}\"")
 
     if glitched:
-        Glitch(out_path, scale)
+        glitch(out_path, scale)
 
 # Theme loading
-def PreloadThemes():
+def preload_themes():
     result = []
 
     for base_path, dirs, files in os.walk(theme_dir):
@@ -239,18 +239,18 @@ def PreloadThemes():
     return result
 
 # Build chain
-def Log(message):
+def log(message):
     print(f"BUILD: {message}")
 
-def ReplicateDirStructure(file_path, dst_path):
+def replicate_dir_structure(file_path, dst_path):
     dir_path = os.path.dirname(file_path)
     dir_full_path = os.path.join(dst_path, dir_path)
 
     if not os.path.exists(dir_full_path):
-        Log(f"Creating directory {dir_full_path}...")
+        log(f"Creating directory {dir_full_path}...")
         os.makedirs(dir_full_path)
 
-def ListFilesRecursive(dir):
+def list_files_recursive(dir):
     result = []
 
     for base_path, dirs, files in os.walk(dir):
@@ -260,37 +260,37 @@ def ListFilesRecursive(dir):
 
     return result
 
-def Build():
+def build():
     # Clear previous build
     if os.path.exists(build_dir):
-        Log("Cleaning up previous build...")
+        log("Cleaning up previous build...")
         shutil.rmtree(build_dir)
 
     # Create build directory
-    Log("Creating build directory...")
+    log("Creating build directory...")
     os.mkdir(build_dir)
 
     # Replicate directory structure
     for mod_dir in mod_dirs:
         main_src_dir = os.path.join(source_dir, mod_dir, "main")
-        main_files = ListFilesRecursive(main_src_dir)
+        main_files = list_files_recursive(main_src_dir)
 
         # Copy common files
         for file_path in main_files:
-            Log(f"Copying file {file_path}...")
+            log(f"Copying file {file_path}...")
             rel_path = os.path.relpath(file_path, main_src_dir)
             dst_path = os.path.join(build_dir, rel_path)
-            ReplicateDirStructure(rel_path, build_dir)
+            replicate_dir_structure(rel_path, build_dir)
             shutil.copyfile(file_path, dst_path)
 
     # Make themes
-    themes = PreloadThemes()
+    themes = preload_themes()
 
     for theme in themes:
         for scale in range(1, 3):
             for mod_dir in mod_dirs:
                 theme_src_dir = os.path.join(source_dir, mod_dir, "theme")
-                theme_files = ListFilesRecursive(theme_src_dir)
+                theme_files = list_files_recursive(theme_src_dir)
 
                 target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
                 target_dir = os.path.join(build_dir, "comfy_meta", target_id)
@@ -300,42 +300,42 @@ def Build():
                     rel_path = os.path.relpath(file_path, theme_src_dir)
                     (file_name, file_ext) = os.path.splitext(rel_path)
 
-                    ReplicateDirStructure(rel_path, target_dir)
+                    replicate_dir_structure(rel_path, target_dir)
 
                     if file_ext == ".svg":
-                        Log(f"Rendering image {file_path}...")
+                        log(f"Rendering image {file_path}...")
                         png_path = f"{file_name}.png"
                         tmp_path = os.path.join(build_dir, "Temporary.svg")
                         dst_path = os.path.join(target_dir, png_path)
-                        PreprocessTextFile(file_path, tmp_path, theme, scale)
-                        RenderImage(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
+                        preprocess_text_file(file_path, tmp_path, theme, scale)
+                        render_image(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
                         os.remove(tmp_path)
                     elif file_ext == ".rpy":
-                        Log(f"Processing script {file_path}...")
+                        log(f"Processing script {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
-                        PreprocessTextFile(file_path, dst_path, theme, scale)
+                        preprocess_text_file(file_path, dst_path, theme, scale)
                     elif file_ext == ".json":
-                        Log(f"Processing JSON {file_path}...")
+                        log(f"Processing JSON {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
-                        PreprocessTextFile(file_path, dst_path, theme, scale)
+                        preprocess_text_file(file_path, dst_path, theme, scale)
                     else:
-                        Log(f"Copying file {file_path}...")
+                        log(f"Copying file {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         shutil.copyfile(file_path, dst_path)
 
             # Pack assets
-            Log(f"Creating archive for {target_id}...")
+            log(f"Creating archive for {target_id}...")
             shutil.make_archive(target_dir, "zip", target_dir)
             os.rename(f"{target_dir}.zip", f"{target_dir}.arc")
             shutil.rmtree(target_dir)
 
     # Create release archive if needed
     if release_mode:
-        Log("Creating release archive...")
+        log("Creating release archive...")
         shutil.make_archive("Release", "zip", build_dir)
         shutil.rmtree(build_dir)
 
-    Log("Finished!")
+    log("Finished!")
 
-PreloadThemes()
-Build()
+preload_themes()
+build()
