@@ -52,6 +52,10 @@ define comfy_ui.option_button_text.hover_color       = "CUI_SCD_COLOR(204, 102, 
 define comfy_ui.option_button_text.selected_color    = "CUI_SCD_COLOR(187, 85, 136)"
 define comfy_ui.option_button_text.insensitive_color = "CUI_SCD_COLOR(170, 170, 170, 127)"
 
+define comfy_ui.poem_game_text.color          = "CUI_PRM_COLOR(56, 56, 56)"
+define comfy_ui.poem_game_text.outlines       = []
+define comfy_ui.poem_game_text.hover_outlines = [(3, "CUI_PRM_COLOR(255, 238, 255)", 0, 0), (2, "CUI_PRM_COLOR(255, 204, 255)", 0, 0), (1, "CUI_PRM_COLOR(255, 170, 255)", 0, 0)]
+
 
 
 ################################################################################
@@ -198,3 +202,13 @@ init 999 style choice_button_text:
     selected_color    comfy_ui.button_text.selected_color
     insensitive_color comfy_ui.button_text.insensitive_color
     outlines          comfy_ui.button_text.outlines
+
+
+
+################################################################################
+# Poem game
+################################################################################
+style poemgame_text:
+    color          comfy_ui.poem_game_text.color
+    outlines       comfy_ui.poem_game_text.outlines
+    hover_outlines comfy_ui.poem_game_text.hover_outlines

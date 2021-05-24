@@ -210,8 +210,10 @@ init 999 style choice_vbox:
 
 init 999 style choice_button:
     clear
-    xysize  (420, None)
-    padding (25, 5, 25, 5)
+    xysize         (420, None)
+    padding        (25, 5, 25, 5)
+    hover_sound    gui.hover_sound
+    activate_sound gui.activate_sound
 
 init 999 style choice_button_text:
     clear
