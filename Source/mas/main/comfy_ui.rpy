@@ -60,7 +60,7 @@ screen comfy_ui_settings_pane():
 
             hbox:
                 vbox:
-                    xmaximum 300
+                    xmaximum 350
 
                     label _("Theme: [theme_name]"):
                         style "slider_label"
@@ -98,8 +98,8 @@ screen comfy_ui_settings_pane():
                             action Jump("comfy_ui_disable")
 
                 if persistent.comfy_ui_show_preview:
-                    null width 10
-
-                    add theme_preview ypos 20
+                    add theme_preview:
+                        xpos 10
+                        ypos 20
         else:
             label _("No themes available.")

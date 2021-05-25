@@ -45,10 +45,19 @@ screen comfy_ui_settings_pane():
 
             hbox:
                 vbox:
-                    xmaximum 300
+                    xmaximum 350
 
-                    label _("Theme: [theme_name]"):
-                        style "slider_label"
+                    hbox:
+                        xfill True
+
+                        label _("Theme: [theme_name]"):
+                            style "slider_label"
+
+                        textbutton _("Preview"):
+                            style "check_button"
+                            xalign 1.0
+                            ypos 15
+                            action ToggleField(persistent, "comfy_ui_show_preview")
 
                     bar:
                         style "slider_slider"
@@ -58,7 +67,9 @@ screen comfy_ui_settings_pane():
                             range = theme_count - 1
                         )
 
-                    hbox:
+                    grid 3 1:
+                        xfill True
+
                         textbutton _("Fonts"):
                             style "check_button"
                             action ToggleDict(comfy_ui.theme_mgr.settings, "use_fonts")
@@ -70,12 +81,6 @@ screen comfy_ui_settings_pane():
                         textbutton _("HiDPI"):
                             style "check_button"
                             action ToggleDict(comfy_ui.theme_mgr.settings, "use_hidpi")
-
-                        null width 10
-
-                        textbutton _("Preview"):
-                            style "check_button"
-                            action ToggleField(persistent, "comfy_ui_show_preview")
 
                     null height 10
 
@@ -91,9 +96,9 @@ screen comfy_ui_settings_pane():
                             action Show(screen = "dialog", message = "The game will be restarted.", ok_action = Jump("comfy_ui_disable"))
 
                 if persistent.comfy_ui_show_preview:
-                    null width 10
-
-                    add theme_preview ypos 20
+                    add theme_preview:
+                        xpos 10
+                        ypos 20
         else:
             label _("No themes available.")
 
