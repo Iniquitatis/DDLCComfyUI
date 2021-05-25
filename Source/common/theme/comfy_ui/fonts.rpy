@@ -28,25 +28,13 @@ define gui.default_font = comfy_ui.common.font
 ################################################################################
 
 # Check button
-init 999 style check_button:
-    clear
-    foreground "gui/button/check_[prefix_]foreground.png"
-    padding    (28, 4, 4, 4)
-
 init 999 style check_button_text:
-    clear
     font    comfy_ui.option_button_text.font
     kerning comfy_ui.option_button_text.font_kerning
     size    comfy_ui.option_button_text.font_size
 
 # Radio button
-init 999 style radio_button:
-    clear
-    foreground "gui/button/check_[prefix_]foreground.png"
-    padding    (28, 4, 4, 4)
-
 init 999 style radio_button_text:
-    clear
     font    comfy_ui.option_button_text.font
     kerning comfy_ui.option_button_text.font_kerning
     size    comfy_ui.option_button_text.font_size
@@ -163,16 +151,11 @@ init 999 style confirm_prompt_text:
 # Choice menu/button
 ################################################################################
 init 999 style choice_button:
-    clear
     xpadding       25
     top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
     bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
-    hover_sound    gui.hover_sound
-    activate_sound gui.activate_sound
 
 init 999 style choice_button_text:
-    clear
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
-    align   (0.5, 0.5)
