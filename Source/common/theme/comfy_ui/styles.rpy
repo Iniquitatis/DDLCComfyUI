@@ -167,7 +167,7 @@ style poemgame_text:
 # Input caret
 ################################################################################
 image input_caret:
-    Solid("CUI_SCD_COLOR(187, 85, 153)")
+    Solid(comfy_ui.input_caret_color)
     size (2, 25)
     subpixel True
     block:

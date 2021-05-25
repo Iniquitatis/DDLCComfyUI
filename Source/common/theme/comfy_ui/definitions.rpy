@@ -78,3 +78,5 @@ define comfy_ui.poem_game_text.hover_outlines = [(3, "CUI_PRM_COLOR(255, 238, 25
 define comfy_ui.button_height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
 
 define comfy_ui.choice_button_spacing = 22
+
+define comfy_ui.input_caret_color = "CUI_SCD_COLOR(187, 85, 153)"

@@ -116,3 +116,5 @@ define comfy_ui.scrollable_menu_button_spacing = 6
 define comfy_ui.choice_button_spacing          = 12
 define comfy_ui.talk_button_spacing            = 16
 define comfy_ui.hotkey_button_spacing          = 5
+
+define comfy_ui.input_caret_color = "CUI_SCD_COLOR(187, 85, 153)"
