@@ -76,7 +76,7 @@ screen comfy_ui_settings_pane():
                     hbox:
                         textbutton _("HiDPI"):
                             style "check_button"
-                            action ToggleDict(comfy_ui.theme_mgr.settings, "hidpi")
+                            action ToggleDict(comfy_ui.theme_mgr.settings, "use_hidpi")
 
                         null width 10
 

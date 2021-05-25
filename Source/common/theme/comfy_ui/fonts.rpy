@@ -7,45 +7,6 @@
 ################################################################################
 
 ################################################################################
-# Configuration variables
-################################################################################
-define comfy_ui.common.font_regular     = "CUI_MAIN_FONT_REGULAR()"
-define comfy_ui.common.font_italic      = "CUI_MAIN_FONT_ITALIC()"
-define comfy_ui.common.font_bold        = "CUI_MAIN_FONT_BOLD()"
-define comfy_ui.common.font_bold_italic = "CUI_MAIN_FONT_BOLD_ITALIC()"
-define comfy_ui.common.font             = FontGroup().add(
-    comfy_ui.common.font_regular, 0x0020, 0x00ff).add( # Main
-    "gui/font/Aller_Rg.ttf"     , 0x0000, 0xffff)      # Fallback
-define comfy_ui.common.font_kerning     = CUI_MAIN_FONT_KERNING()
-define comfy_ui.common.font_size        = 24
-
-define comfy_ui.menu_font         = "CUI_MENU_FONT()"
-define comfy_ui.menu_font_kerning = 0.0
-
-define comfy_ui.menu_title.font_size = 38
-
-define comfy_ui.menu_label.font_size = 24
-
-define comfy_ui.menu_text.font_size = 16
-
-define comfy_ui.menu_button_text.font_size = 24
-
-define comfy_ui.dialogue_text.vertical_offset = CUI_DLG_VERT_OFFSET()
-define comfy_ui.dialogue_text.line_spacing    = CUI_DLG_LINE_SPACING()
-
-define comfy_ui.quick_button_text.font_size = 14
-
-define comfy_ui.option_button_text.font         = "CUI_OPTION_FONT()"
-define comfy_ui.option_button_text.font_kerning = 0.0
-define comfy_ui.option_button_text.font_size    = 24
-
-define comfy_ui.button_height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
-
-define comfy_ui.choice_button_spacing = 22
-
-
-
-################################################################################
 # Init
 ################################################################################
 init python:

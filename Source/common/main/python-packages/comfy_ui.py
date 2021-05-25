@@ -10,31 +10,32 @@ import os
 
 from zipfile import ZipFile
 
-game_dir = "game"
-meta_dir = os.path.join(game_dir, "comfy_meta")
-config_path = os.path.join(meta_dir, "settings.json")
+_game_dir = "game"
+_meta_dir = os.path.join(_game_dir, "comfy_meta")
+_config_path = os.path.join(_meta_dir, "settings.json")
 
-default_settings = {
+_default_settings = {
     "selected_theme_index": 0,
-    "layout": True,
-    "hidpi": False,
+    "use_fonts": True,
+    "use_layout": True,
+    "use_hidpi": False,
     "installed_files": []
 }
 
 class ThemeManager:
     def __init__(self):
+        self._log_file = open(os.path.join(_meta_dir, "logfile.txt"), "w")
         self.settings = {}
-        self.settings.update(default_settings)
-        self.themes = []
+        self.settings.update(_default_settings)
+        self._themes = []
         self._fetch_themes()
         self.load_settings()
 
     def disable(self):
         self._remove_current_theme()
-        self.settings.update(default_settings)
 
     def get_current_theme(self):
-        return self.themes[self.settings["selected_theme_index"]]
+        return self._themes[self.settings["selected_theme_index"]]
 
     def get_current_theme_name(self):
         return self.get_current_theme()["name"]
@@ -43,39 +44,47 @@ class ThemeManager:
         return self.get_current_theme()["preview"]
 
     def get_theme_count(self):
-        return len(self.themes)
+        return len(self._themes)
 
     def install(self):
-        self._install_theme(self.get_current_theme(), self.settings["hidpi"])
+        self._remove_current_theme()
+        self._install_theme(self.get_current_theme())
 
     def load_settings(self):
-        if not os.path.exists(config_path):
+        if not os.path.exists(_config_path):
             return
 
-        with open(config_path, "r") as file:
+        with open(_config_path, "r") as file:
             self.settings.update(json.load(file))
 
     def save_settings(self):
-        with open(config_path, "w") as file:
+        with open(_config_path, "w") as file:
             json.dump(self.settings, file, indent = 4, sort_keys = False)
 
+    def _log(self, msg):
+        self._log_file.write("%s\n" % str(msg))
+
     def _fetch_themes(self):
-        for file_path in os.listdir(meta_dir):
-            file_name, extension = os.path.splitext(file_path)
-            if extension == ".arc" and not file_name.endswith("_hidpi"):
-                self.themes.append(self._get_theme_info(os.path.join(meta_dir, file_path),
-                                                        os.path.join(meta_dir, "%s_hidpi.arc" % file_name)))
+        for file_path in os.listdir(_meta_dir):
+            file_name, file_ext = os.path.splitext(file_path)
+
+            if file_ext == ".arc" and not file_name.endswith("_hidpi"):
+                theme_info = self._get_theme_info(os.path.join(_meta_dir, file_path),
+                                                  os.path.join(_meta_dir, "%s_hidpi.arc" % file_name))
+                self._themes.append(theme_info)
 
         # FIXME: there should be a better way to put the Default theme above the others
-        def comparator(key):
-            name = key["name"]
+        def comparator(x):
+            name = x["name"]
+
             if name == "Default":
                 return "  %s" % name
             elif name == "Classic":
                 return " %s" % name
+
             return name
 
-        self.themes.sort(key = comparator)
+        self._themes.sort(key = comparator)
 
     def _get_theme_info(self, file_path, hidpi_path):
         result = {
@@ -87,10 +96,10 @@ class ThemeManager:
             with theme_arc.open("info.json", "r") as info_json:
                 result.update(json.load(info_json))
 
-            preview_path = theme_arc.extract("preview.png", meta_dir)
+            preview_path = theme_arc.extract("preview.png", _meta_dir)
 
             theme_preview_file_name = "%s_preview.png" % result["id"]
-            theme_preview_path = os.path.join(meta_dir, theme_preview_file_name)
+            theme_preview_path = os.path.join(_meta_dir, theme_preview_file_name)
 
             if os.path.exists(theme_preview_path):
                 os.remove(theme_preview_path)
@@ -101,44 +110,49 @@ class ThemeManager:
 
         return result
 
-    def _install_theme(self, theme, hidpi = False):
-        log = open(os.path.join(meta_dir, "install.log"), "w")
-        theme_arc = ZipFile(theme["path"] if not hidpi else theme["hidpi_path"], "r")
+    def _install_theme(self, theme):
+        ignored_files = [
+            "info.json",
+            "preview.png"
+        ]
+
+        if not self.settings["use_fonts"]:
+            ignored_files.append("fonts.rpy")
+
+        if not self.settings["use_layout"]:
+            ignored_files.append("layout.rpy")
 
         self.settings["installed_files"] = []
 
-        for file_path in theme_arc.namelist():
-            if os.path.basename(file_path) == "info.json":
-                continue
-            log.write("Installing %s...\n" % file_path)
-            theme_arc.extract(file_path, game_dir)
-            self.settings["installed_files"].append(file_path)
+        theme_path = theme["path"] if not self.settings["use_hidpi"] else theme["hidpi_path"]
 
-        if not self.settings["layout"]:
-            layout_rpy = os.path.join(game_dir, "comfy_ui", "layout.rpy")
-            layout_rpyc = os.path.join(game_dir, "comfy_ui", "layout.rpyc")
+        with ZipFile(theme_path, "r") as theme_arc:
+            for file_path in theme_arc.namelist():
+                if os.path.basename(file_path) in ignored_files:
+                    self._log("Skipping %s..." % file_path)
+                    continue
 
-            if os.path.exists(layout_rpy):
-                log.write("Removing %s...\n" % layout_rpy)
-                os.remove(layout_rpy)
+                self._log("Installing %s..." % file_path)
+                theme_arc.extract(file_path, _game_dir)
 
-                if layout_rpy in self.settings["installed_files"]:
-                    self.settings["installed_files"].remove(layout_rpy)
+                self.settings["installed_files"].append(file_path)
 
-            if os.path.exists(layout_rpyc):
-                log.write("Removing %s...\n" % layout_rpyc)
-                os.remove(layout_rpyc)
-
-        log.write("Done.\n")
-
-        theme_arc.close()
-        log.close()
+        self._log("Theme installed.")
 
     def _remove_current_theme(self):
-        for file_path in self.settings["installed_files"]:
-            full_path = os.path.join(game_dir, file_path)
+        for file_path in reversed(self.settings["installed_files"]):
+            full_path = os.path.join(_game_dir, file_path)
+
             if os.path.exists(full_path) and not os.path.isdir(full_path):
-                file_name, extension = os.path.splitext(full_path)
+                file_name, file_ext = os.path.splitext(full_path)
+
+                self._log("Removing %s..." % full_path)
                 os.remove(full_path)
-                if extension == ".rpy":
+
+                if file_ext == ".rpy":
+                    self._log("Removing %s.rpyc..." % file_name)
                     os.remove("%s.rpyc" % file_name)
+
+        self.settings["installed_files"] = []
+
+        self._log("Theme removed.")
