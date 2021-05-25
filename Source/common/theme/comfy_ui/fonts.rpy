@@ -137,21 +137,15 @@ init 999 style quick_button_text:
 
 # Name
 init 999 style history_name_text:
-    xpos    0
-    ypos    5
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
-    bold    True
 
 # Text
 init 999 style history_text:
-    xpos    165
-    ypos    5
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
-    bold    False
 
 
 
@@ -168,12 +162,8 @@ init 999 style confirm_prompt_text:
 ################################################################################
 # Choice menu/button
 ################################################################################
-init 999 style choice_vbox:
-    spacing comfy_ui.choice_button_spacing
-
 init 999 style choice_button:
     clear
-    xysize         (420, None)
     xpadding       25
     top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
     bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
