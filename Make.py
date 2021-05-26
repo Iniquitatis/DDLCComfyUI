@@ -83,13 +83,18 @@ def modulate_colors(macro_args, method_args):
 
     if len(macro_args) == 3:
         r, g, b = macro_args
+
         if h != None and s != None and l != None:
             r, g, b = modulate_rgb_color(int(r), int(g), int(b), float(h), float(s), float(l))
+
         return format_rgb_hex_string(r, g, b)
+
     elif len(macro_args) == 4:
         r, g, b, a = macro_args
+
         if h != None and s != None and l != None:
             r, g, b, a = modulate_rgba_color(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
+
         return format_rgba_hex_string(r, g, b, a)
 
     return "#baadf00d"
@@ -105,11 +110,14 @@ def parse_macro_args(match):
     args_string = match.group(1)
 
     query = r""
+
     for i in range(4):
         query += r"\s*([\w\-.]+)\s*"
         result = re.findall(query, args_string)
+
         if len(result) > 0:
             return result
+
         query += r","
 
 def preprocess_text_file(in_path, out_path, theme, scale):
@@ -206,9 +214,11 @@ def glitch(image_path, scale):
 
     with Image.open(image_path) as image:
         pixel_data = image.load()
+
         for region in regions:
             [x, y, w, h, dx, dy] = [i * scale for i in region]
             shift_region(pixel_data, x, y, w, h, dx, dy)
+
         image.save(image_path)
 
 def render_image(in_path, out_path, scale, glitched):
@@ -319,14 +329,17 @@ def build():
                         preprocess_text_file(file_path, tmp_path, theme, scale)
                         render_image(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
                         os.remove(tmp_path)
+
                     elif file_ext == ".rpy":
                         log(f"Processing script {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         preprocess_text_file(file_path, dst_path, theme, scale)
+
                     elif file_ext == ".json":
                         log(f"Processing JSON {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         preprocess_text_file(file_path, dst_path, theme, scale)
+
                     else:
                         log(f"Copying file {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
