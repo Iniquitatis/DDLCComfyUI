@@ -154,25 +154,32 @@ init 999 style radio_button_text is generic_option_button_text_lt:
 init 999 style radio_button_text_dark is generic_option_button_text_dk:
     clear
 
-# Outfit check button
-# NOTE: its text has different color from the standard check button
-init 999 style outfit_check_button is generic_option_button_lt:
-    clear
+# Fancy check button
+init 999 style generic_fancy_check_button:
+    idle_background     Solid(comfy_ui.fancy_check_button.light.idle_background_color)
+    hover_background    Solid(comfy_ui.fancy_check_button.light.hover_background_color)
+    selected_background Solid(comfy_ui.fancy_check_button.light.selected_background_color)
 
-init 999 style outfit_check_button_dark is generic_option_button_dk:
-    clear
+init 999 style generic_fancy_check_button_dark:
+    idle_background     Solid(comfy_ui.fancy_check_button.dark.idle_background_color)
+    hover_background    Solid(comfy_ui.fancy_check_button.dark.hover_background_color)
+    selected_background Solid(comfy_ui.fancy_check_button.dark.selected_background_color)
 
-init 999 style outfit_check_button_text is generic_option_button_text_lt:
-    clear
-    color          "#bfbfbf"
-    hover_color    "#ffaa99"
-    selected_color "#ffeeeb"
+init 999 style generic_fancy_check_button_text:
+    font           comfy_ui.fancy_check_button_text.font
+    kerning        comfy_ui.fancy_check_button_text.font_kerning
+    size           comfy_ui.fancy_check_button_text.font_size
+    color          comfy_ui.fancy_check_button_text.light.idle_color
+    hover_color    comfy_ui.fancy_check_button_text.light.hover_color
+    selected_color comfy_ui.fancy_check_button_text.light.selected_color
 
-init 999 style outfit_check_button_text_dark is generic_option_button_text_dk:
-    clear
-    color          "#bfbfbf"
-    hover_color    "#ffaa99"
-    selected_color "#ffeeeb"
+init 999 style generic_fancy_check_button_text_dark:
+    font           comfy_ui.fancy_check_button_text.font
+    kerning        comfy_ui.fancy_check_button_text.font_kerning
+    size           comfy_ui.fancy_check_button_text.font_size
+    color          comfy_ui.fancy_check_button_text.dark.idle_color
+    hover_color    comfy_ui.fancy_check_button_text.dark.hover_color
+    selected_color comfy_ui.fancy_check_button_text.dark.selected_color
 
 
 
@@ -468,11 +475,13 @@ init 999 style scrollable_menu_button_dark is generic_button_dk:
 
 init 999 style scrollable_menu_button_text is generic_button_text_lt:
     clear
-    align (0.0, 0.0)
+    align      (0.0, 0.0)
+    text_align 0.0
 
 init 999 style scrollable_menu_button_text_dark is generic_button_text_dk:
     clear
-    align (0.0, 0.0)
+    align      (0.0, 0.0)
+    text_align 0.0
 
 
 
