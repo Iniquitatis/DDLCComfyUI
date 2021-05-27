@@ -285,21 +285,27 @@ init 999 style page_label_text_dark:
     color    comfy_ui.menu_text.dark.color
     outlines comfy_ui.menu_text.dark.outlines
 
-init 999 style slot_time_text is generic_button_text_lt:
+init 999 style slot_button:
+    background "gui/button/slot_[prefix_]background.png"
+
+init 999 style slot_button_dark:
+    background "gui/button/slot_[prefix_]background_d.png"
+
+init 999 style slot_time_text is generic_option_button_text_lt:
     size 16
 
-init 999 style slot_time_text_dark is generic_button_text_dk:
+init 999 style slot_time_text_dark is generic_option_button_text_dk:
     size 16
 
-init 999 style slot_name_text is generic_button_text_lt:
+init 999 style slot_name_text is generic_option_button_text_lt:
     size 16
 
-init 999 style slot_name_text_dark is generic_button_text_dk:
+init 999 style slot_name_text_dark is generic_option_button_text_dk:
     size 16
 
-init 999 style page_button_text is generic_button_text_lt
+init 999 style page_button_text is generic_option_button_text_lt
 
-init 999 style page_button_text_dark is generic_button_text_dk
+init 999 style page_button_text_dark is generic_option_button_text_dk
 
 
 
