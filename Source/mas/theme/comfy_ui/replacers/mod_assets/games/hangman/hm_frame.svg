@@ -23,16 +23,24 @@
             <feDisplacementMap in="SourceGraphic" in2="turbulenceCoarse" result="displaceCoarse" scale="1.5" xChannelSelector="R" yChannelSelector="A" />
             <feDisplacementMap in="displaceCoarse" in2="turbulenceFine" result="displaceFine" scale="1.5" xChannelSelector="R" yChannelSelector="A" />
         </filter>
+        <filter id="paperTornEdges" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse" style="color-interpolation-filters: sRGB;">
+            <feTurbulence baseFrequency="0.2" numOctaves="4" result="turbulence" />
+            <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="3.0" xChannelSelector="R" yChannelSelector="A" />
+        </filter>
+        <mask id="paperMask">
+            <rect x=" 0" y="0.0" width="600" height="438" fill="black" />
+            <rect x="-8" y="0.5" width="616" height="436" fill="white" filter="url(#paperTornEdges)" />
+        </mask>
         <pattern id="lines" x="0" y="0" width="600" height="25" patternUnits="userSpaceOnUse">
             <g stroke="rgb(128, 128, 255)" stroke-opacity="0.25" stroke-width="1">
                 <line x1="0" y1="0.5" x2="600" y2="0.5" />
             </g>
         </pattern>
     </defs>
-    <g filter="url(#paper)">
+    <g filter="url(#paper)" mask="url(#paperMask)">
         <rect x="0" y="0" width="600" height="438" rx="2" />
     </g>
-    <g fill="url(#lines)" filter="url(#lineShape)">
+    <g fill="url(#lines)" filter="url(#lineShape)" mask="url(#paperMask)">
         <rect x="0" y="0" width="600" height="438" rx="2" />
     </g>
 </svg>
