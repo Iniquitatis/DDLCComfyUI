@@ -9,3 +9,7 @@ Source/gui/Unused
 Temporary.svg
 Unused
 VSCode
+ddlc/**
+renpy/**
+renpy_project/**
+rpatool.py

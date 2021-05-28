@@ -20,6 +20,11 @@ from hsluv import *
 theme_dir  = Path("Themes")
 source_dir = Path("Source")
 build_dir  = Path("Build")
+ddlc_dir   = Path("ddlc")
+
+rpa_name = "comfy_ui.rpa"
+
+rpatool_path = Path("rpatool.py")
 
 # Text file preprocessing
 def clamp(value, lower, upper):
@@ -333,6 +338,43 @@ def make_archive(dir, archive_path, remove_dir = False):
     if remove_dir:
         shutil.rmtree(dir)
 
+def make_rpa(build_dir, ddlc_dir):
+    import os
+    import time
+
+    files = [path.relative_to(build_dir) for path in build_dir.rglob("*.*")]
+
+    base_dir = Path.cwd()
+    ddlc_game_dir = ddlc_dir / "game"
+
+    for path in files:
+        src = build_dir / path
+        dst = ddlc_game_dir / path
+        dst.parent.mkdir(parents = True, exist_ok = True)
+        shutil.copyfile(src, dst)
+
+    # HACK: arguments will prevent the game from starting, but it will still compile the scripts
+    os.system(str(ddlc_dir / "DDLC") + " --blah")
+    time.sleep(10)
+
+    for path in files:
+        if path.suffix == ".rpy":
+            rpyc_src = (ddlc_game_dir / path).with_suffix(".rpyc")
+            rpyc_dst = (build_dir / path).with_suffix(".rpyc")
+            shutil.copyfile(rpyc_src, rpyc_dst)
+            rpyc_src.unlink()
+
+        (ddlc_game_dir / path).unlink()
+
+    rpatool_rel_path = os.path.relpath(rpatool_path, build_dir)
+
+    os.chdir(build_dir)
+
+    os.system(f"python {rpatool_rel_path} -v -c {rpa_name} " + " ".join(os.listdir(".")))
+    os.system(f"python {rpatool_rel_path} -l {rpa_name}")
+
+    os.chdir(base_dir)
+
 def build(mod_dirs, release_mode):
     # Clear previous build
     if build_dir.exists():
@@ -359,9 +401,7 @@ def build(mod_dirs, release_mode):
             theme_src_dir = source_dir / mod_dir / "theme"
             copy_dir_contents(theme_src_dir, target_dir, theme, scale)
 
-        # Pack assets
-        log(f"Creating archive for {target_id}...")
-        make_archive(target_dir, target_dir.with_suffix(".arc"), True)
+    make_rpa(build_dir, ddlc_dir)
 
     # Create release archive if needed
     if release_mode:
