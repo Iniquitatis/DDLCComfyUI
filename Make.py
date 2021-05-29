@@ -28,6 +28,59 @@ glitched_boxes = [
 ]
 
 ################################################################################
+# Multiprocessing stuff
+################################################################################
+import subprocess
+import time
+
+max_processes = 8
+processes = [None] * max_processes
+callbacks = [None] * max_processes
+
+def add_process(*args):
+    elapsed = 0.0
+    timeout = 180.0
+
+    while elapsed < timeout:
+        poll_processes()
+
+        for i in range(max_processes):
+            if not processes[i]:
+                processes[i] = subprocess.Popen(args)
+                return processes[i]
+
+        time.sleep(0.1)
+        elapsed += 0.1
+
+    print(f"ERROR: cannot run process with args: {args}")
+
+def poll_processes():
+    for i in range(max_processes):
+        if processes[i] != None and processes[i].poll() != None:
+            if callbacks[i]:
+                callbacks[i]()
+                callbacks[i] = None
+
+            processes[i] = None
+
+def wait_processes():
+    for i in range(max_processes):
+        if processes[i] != None:
+            processes[i].wait()
+
+            if callbacks[i]:
+                callbacks[i]()
+                callbacks[i] = None
+
+            processes[i] = None
+
+def hook_callback(proc, cb):
+    for i in range(max_processes):
+        if processes[i] == proc:
+            callbacks[i] = cb
+            break
+
+################################################################################
 # Script itself
 ################################################################################
 import json
@@ -223,22 +276,30 @@ def glitch(image_path, scale):
 
 def render_image(in_path, out_path, scale, glitched):
     if release_mode:
-        os.system(f"inkscape "
-                  f"--batch-process "
-                  f"--export-dpi=\"{96 * scale}\" "
-                  f"--export-filename=\"{out_path}\" "
-                  f"--export-overwrite "
-                  f"--export-type=\"png\" "
-                  f"\"{in_path}\"")
+        proc = add_process(f"inkscape",
+                           f"--batch-process",
+                           f"--export-dpi={96 * scale}",
+                           f"--export-filename={out_path}",
+                           f"--export-overwrite",
+                           f"--export-type=png",
+                           f"{in_path}")
+
     else:
-        os.system(f"magick "
-                  f"-background \"none\" "
-                  f"-density \"{96 * scale}\" "
-                  f"\"{in_path}\" "
-                  f"\"{out_path}\"")
+        proc = add_process(f"magick",
+                           f"-background none",
+                           f"-density {96 * scale}",
+                           f"{in_path}",
+                           f"{out_path}")
 
     if glitched:
-        glitch(out_path, scale)
+        def cb():
+            glitch(out_path, scale)
+            os.remove(in_path)
+    else:
+        def cb():
+            os.remove(in_path)
+
+    hook_callback(proc, cb)
 
 # Preview generation
 def generate_preview(image_path, dst_path):
@@ -328,7 +389,6 @@ def build():
                         dst_path = os.path.join(target_dir, png_path)
                         preprocess_text_file(file_path, tmp_path, theme, scale)
                         render_image(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
-                        os.remove(tmp_path)
 
                     elif file_ext == ".rpy":
                         log(f"Processing script {file_path}...")
@@ -344,6 +404,8 @@ def build():
                         log(f"Copying file {file_path}...")
                         dst_path = os.path.join(target_dir, rel_path)
                         shutil.copyfile(file_path, dst_path)
+
+            wait_processes()
 
             textbox_path = os.path.join(target_dir, "comfy_ui", "replacers", "gui", "textbox.png")
             preview_path = os.path.join(target_dir, "preview.png")
