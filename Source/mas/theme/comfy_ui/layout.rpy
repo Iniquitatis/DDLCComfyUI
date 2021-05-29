@@ -59,3 +59,11 @@ init 999 style twopane_scrollable_menu_vbox:
 ################################################################################
 init 999 style talk_choice_vbox:
     spacing comfy_ui.scrollable_menu_button_spacing
+
+
+
+################################################################################
+# Hotkey button menu
+################################################################################
+init 999 style hkb_vbox:
+    spacing comfy_ui.hotkey_button_spacing
