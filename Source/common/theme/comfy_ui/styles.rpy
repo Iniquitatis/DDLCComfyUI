@@ -139,7 +139,7 @@ init 999 style confirm_prompt_text:
 
 
 ################################################################################
-# Choice button
+# Choice menu
 ################################################################################
 init 999 style choice_button:
     background Frame("gui/button/choice_[prefix_]background.png", Borders(5, 5, 5, 5))

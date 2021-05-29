@@ -229,3 +229,28 @@ init 999 style confirm_prompt_text_dark:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
+
+
+
+################################################################################
+# Choice menu
+################################################################################
+init 999 style choice_button:
+    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+
+init 999 style choice_button_dark:
+    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+
+init 999 style choice_button_text:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
+    align   (0.5, 0.5)
+
+init 999 style choice_button_text_dark:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
+    align   (0.5, 0.5)

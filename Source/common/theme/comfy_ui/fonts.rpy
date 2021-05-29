@@ -148,10 +148,9 @@ init 999 style confirm_prompt_text:
 
 
 ################################################################################
-# Choice menu/button
+# Choice menu
 ################################################################################
 init 999 style choice_button:
-    xpadding       25
     top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
     bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
 

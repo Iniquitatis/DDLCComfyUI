@@ -21,3 +21,17 @@ init 999 style history_text:
     xpos 165
     ypos 5
     bold False
+
+
+
+################################################################################
+# Choice menu
+################################################################################
+init 999 style choice_vbox:
+    spacing comfy_ui.choice_button_spacing
+
+init 999 style choice_button:
+    xpadding 25
+
+init 999 style choice_button_dark:
+    xpadding 25
