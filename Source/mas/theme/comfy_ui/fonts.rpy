@@ -214,3 +214,18 @@ init 999 style history_text:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
+
+
+
+################################################################################
+# Frames
+################################################################################
+init 999 style confirm_prompt_text:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
+
+init 999 style confirm_prompt_text_dark:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size

@@ -328,16 +328,10 @@ define gui.frame_borders = Borders(5, 5, 5, 5, -1, -1, -1, -1)
 define gui.confirm_frame_borders = Borders(40, 40, 40, 40)
 
 init 999 style confirm_prompt_text:
-    font     comfy_ui.common.font
-    kerning  comfy_ui.common.font_kerning
-    size     comfy_ui.common.font_size
     color    comfy_ui.confirm_prompt_text.light.color
     outlines comfy_ui.confirm_prompt_text.light.outlines
 
 init 999 style confirm_prompt_text_dark:
-    font     comfy_ui.common.font
-    kerning  comfy_ui.common.font_kerning
-    size     comfy_ui.common.font_size
     color    comfy_ui.confirm_prompt_text.dark.color
     outlines comfy_ui.confirm_prompt_text.dark.outlines
 
