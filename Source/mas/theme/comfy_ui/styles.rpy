@@ -272,33 +272,20 @@ init 999 style music_menu_button_text_dark:
 
 # Name
 init 999 style say_label:
-    font     comfy_ui.menu_font
-    kerning  comfy_ui.menu_font_kerning
-    size     comfy_ui.menu_label.font_size
     color    comfy_ui.menu_label.light.color
     outlines comfy_ui.menu_label.light.outlines
 
 init 999 style say_label_dark:
-    font     comfy_ui.menu_font
-    kerning  comfy_ui.menu_font_kerning
-    size     comfy_ui.menu_label.font_size
     color    comfy_ui.menu_label.dark.color
     outlines comfy_ui.menu_label.dark.outlines
 
 # Text
 init 999 style normal:
-    font         comfy_ui.common.font
-    kerning      comfy_ui.common.font_kerning
-    yoffset      comfy_ui.dialogue_text.vertical_offset
-    line_spacing comfy_ui.dialogue_text.line_spacing
-    color        comfy_ui.dialogue_text.color
-    outlines     comfy_ui.dialogue_text.outlines
+    color    comfy_ui.dialogue_text.color
+    outlines comfy_ui.dialogue_text.outlines
 
 # Quick button
 init 999 style quick_button_text:
-    font              comfy_ui.common.font
-    kerning           comfy_ui.common.font_kerning
-    size              comfy_ui.quick_button_text.font_size
     idle_color        comfy_ui.quick_button_text.light.idle_color
     hover_color       comfy_ui.quick_button_text.light.hover_color
     selected_color    comfy_ui.quick_button_text.light.selected_color
@@ -306,9 +293,6 @@ init 999 style quick_button_text:
     outlines          comfy_ui.quick_button_text.light.outlines
 
 init 999 style quick_button_text_dark:
-    font              comfy_ui.common.font
-    kerning           comfy_ui.common.font_kerning
-    size              comfy_ui.quick_button_text.font_size
     idle_color        comfy_ui.quick_button_text.dark.idle_color
     hover_color       comfy_ui.quick_button_text.dark.hover_color
     selected_color    comfy_ui.quick_button_text.dark.selected_color

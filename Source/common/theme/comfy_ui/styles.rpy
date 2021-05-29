@@ -93,8 +93,8 @@ init 999 style say_label:
 
 # Text
 init 999 style normal:
-    color        comfy_ui.dialogue_text.color
-    outlines     comfy_ui.dialogue_text.outlines
+    color    comfy_ui.dialogue_text.color
+    outlines comfy_ui.dialogue_text.outlines
 
 # Quick button
 init 999 style quick_button_text:

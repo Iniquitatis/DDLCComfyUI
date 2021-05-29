@@ -161,3 +161,38 @@ init 999 style music_menu_button_text_dark:
     font    comfy_ui.music_menu_button_text.font
     kerning comfy_ui.music_menu_button_text.font_kerning
     size    comfy_ui.music_menu_button_text.font_size
+
+
+
+################################################################################
+# Dialogue
+################################################################################
+
+# Name
+init 999 style say_label:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_label.font_size
+
+init 999 style say_label_dark:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_label.font_size
+
+# Text
+init 999 style normal:
+    font         comfy_ui.common.font
+    kerning      comfy_ui.common.font_kerning
+    yoffset      comfy_ui.dialogue_text.vertical_offset
+    line_spacing comfy_ui.dialogue_text.line_spacing
+
+# Quick button
+init 999 style quick_button_text:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.quick_button_text.font_size
+
+init 999 style quick_button_text_dark:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.quick_button_text.font_size
