@@ -144,3 +144,20 @@ init 999 style page_button_text_dark:
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
     align   (0.5, 0.5)
+
+
+
+################################################################################
+# Music menu
+################################################################################
+
+# Music menu button
+init 999 style music_menu_button_text:
+    font    comfy_ui.music_menu_button_text.font
+    kerning comfy_ui.music_menu_button_text.font_kerning
+    size    comfy_ui.music_menu_button_text.font_size
+
+init 999 style music_menu_button_text_dark:
+    font    comfy_ui.music_menu_button_text.font
+    kerning comfy_ui.music_menu_button_text.font_kerning
+    size    comfy_ui.music_menu_button_text.font_size

@@ -253,18 +253,12 @@ init 999 style page_button_text_dark:
 
 # Music menu button
 init 999 style music_menu_button_text:
-    font                 comfy_ui.music_menu_button_text.font
-    kerning              comfy_ui.music_menu_button_text.font_kerning
-    size                 comfy_ui.music_menu_button_text.font_size
     color                comfy_ui.music_menu_button_text.light.color
     outlines             comfy_ui.music_menu_button_text.light.idle_outlines
     hover_outlines       comfy_ui.music_menu_button_text.light.hover_outlines
     insensitive_outlines comfy_ui.music_menu_button_text.light.insensitive_outlines
 
 init 999 style music_menu_button_text_dark:
-    font                 comfy_ui.music_menu_button_text.font
-    kerning              comfy_ui.music_menu_button_text.font_kerning
-    size                 comfy_ui.music_menu_button_text.font_size
     color                comfy_ui.music_menu_button_text.dark.color
     outlines             comfy_ui.music_menu_button_text.dark.idle_outlines
     hover_outlines       comfy_ui.music_menu_button_text.dark.hover_outlines
