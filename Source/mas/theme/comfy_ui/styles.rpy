@@ -7,19 +7,8 @@
 ################################################################################
 
 ################################################################################
-# Init
-################################################################################
-init python:
-    config.font_replacement_map[comfy_ui.common.font_regular, False, True] = (comfy_ui.common.font_italic, False, False)
-    config.font_replacement_map[comfy_ui.common.font_regular, True, False] = (comfy_ui.common.font_bold, False, False)
-    config.font_replacement_map[comfy_ui.common.font_regular, True, True] = (comfy_ui.common.font_bold_italic, False, False)
-
-
-
-################################################################################
 # Definitions
 ################################################################################
-define gui.default_font                           = comfy_ui.common.font
 define mas_ui.light_button_text_idle_color        = comfy_ui.button_text.light.idle_color
 define mas_ui.light_button_text_hover_color       = comfy_ui.button_text.light.hover_color
 define mas_ui.light_button_text_insensitive_color = comfy_ui.button_text.light.insensitive_color
