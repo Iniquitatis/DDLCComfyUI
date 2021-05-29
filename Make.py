@@ -324,7 +324,7 @@ def build():
                     if file_ext == ".svg":
                         log(f"Rendering image {file_path}...")
                         png_path = f"{file_name}.png"
-                        tmp_path = os.path.join(build_dir, "Temporary.svg")
+                        tmp_path = os.path.join(target_dir, rel_path)
                         dst_path = os.path.join(target_dir, png_path)
                         preprocess_text_file(file_path, tmp_path, theme, scale)
                         render_image(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
