@@ -390,26 +390,25 @@ init 999 style scrollable_menu_button_text_dark:
 ################################################################################
 # Two-pane scrollable menu
 ################################################################################
-init 999 style twopane_scrollable_menu_vbox:
-    spacing comfy_ui.scrollable_menu_button_spacing
+init 999 style twopane_scrollable_menu_button:
+    background Frame("comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
 
-init 999 style twopane_scrollable_menu_button is generic_button_lt:
-    clear
-    xysize  (250, None)
-    padding (20, 5, 20, 5)
+init 999 style twopane_scrollable_menu_button_dark:
+    background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
 
-init 999 style twopane_scrollable_menu_button_dark is generic_button_dk:
-    clear
-    xysize  (250, None)
-    padding (20, 5, 20, 5)
+init 999 style twopane_scrollable_menu_button_text:
+    idle_color        comfy_ui.button_text.light.idle_color
+    hover_color       comfy_ui.button_text.light.hover_color
+    selected_color    comfy_ui.button_text.light.selected_color
+    insensitive_color comfy_ui.button_text.light.insensitive_color
+    outlines          comfy_ui.button_text.light.outlines
 
-init 999 style twopane_scrollable_menu_button_text is generic_button_text_lt:
-    clear
-    align (0.0, 0.0)
-
-init 999 style twopane_scrollable_menu_button_text_dark is generic_button_text_dk:
-    clear
-    align (0.0, 0.0)
+init 999 style twopane_scrollable_menu_button_text_dark:
+    idle_color        comfy_ui.button_text.dark.idle_color
+    hover_color       comfy_ui.button_text.dark.hover_color
+    selected_color    comfy_ui.button_text.dark.selected_color
+    insensitive_color comfy_ui.button_text.dark.insensitive_color
+    outlines          comfy_ui.button_text.dark.outlines
 
 
 

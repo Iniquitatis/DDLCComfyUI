@@ -43,3 +43,11 @@ init 999 style choice_button_dark:
 ################################################################################
 init 999 style scrollable_menu_vbox:
     spacing comfy_ui.scrollable_menu_button_spacing
+
+
+
+################################################################################
+# Two-pane scrollable menu
+################################################################################
+init 999 style twopane_scrollable_menu_vbox:
+    spacing comfy_ui.scrollable_menu_button_spacing
