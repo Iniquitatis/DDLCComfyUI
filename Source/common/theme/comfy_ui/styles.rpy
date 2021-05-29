@@ -93,8 +93,8 @@ init 999 style say_label:
 
 # Text
 init 999 style normal:
-    color        comfy_ui.dialogue_text.color
-    outlines     comfy_ui.dialogue_text.outlines
+    color    comfy_ui.dialogue_text.color
+    outlines comfy_ui.dialogue_text.outlines
 
 # Quick button
 init 999 style quick_button_text:
@@ -139,7 +139,7 @@ init 999 style confirm_prompt_text:
 
 
 ################################################################################
-# Choice button
+# Choice menu
 ################################################################################
 init 999 style choice_button:
     background Frame("gui/button/choice_[prefix_]background.png", Borders(5, 5, 5, 5))
@@ -166,7 +166,7 @@ style poemgame_text:
 ################################################################################
 # Input caret
 ################################################################################
-image input_caret:
+init 999 image input_caret:
     Solid(comfy_ui.input_caret_color)
     size (2, 25)
     subpixel True
