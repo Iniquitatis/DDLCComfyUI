@@ -54,34 +54,6 @@ init 999 style generic_button_text_dk is generic_button_text_base:
     insensitive_color comfy_ui.button_text.dark.insensitive_color
     outlines          comfy_ui.button_text.dark.outlines
 
-# Scrollbars
-init 999 style generic_horizontal_scrollbar_base:
-    ysize        18
-    unscrollable "hide"
-    bar_invert   True
-
-init 999 style generic_horizontal_scrollbar_lt is generic_horizontal_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/horizontal_bar_lt.png")
-    thumb    Frame("comfy_ui/scrollbar/horizontal_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
-
-init 999 style generic_horizontal_scrollbar_dk is generic_horizontal_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/horizontal_bar_dk.png")
-    thumb    Frame("comfy_ui/scrollbar/horizontal_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
-
-init 999 style generic_vertical_scrollbar_base:
-    xsize        18
-    unscrollable "hide"
-    bar_vertical True
-    bar_invert   True
-
-init 999 style generic_vertical_scrollbar_lt is generic_vertical_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/vertical_bar_lt.png")
-    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
-
-init 999 style generic_vertical_scrollbar_dk is generic_vertical_scrollbar_base:
-    base_bar Frame("comfy_ui/scrollbar/vertical_bar_dk.png")
-    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
-
 
 
 ################################################################################
@@ -152,18 +124,22 @@ init 999 style generic_fancy_check_button_text_dark:
 ################################################################################
 
 # Classroom vertical scrollbar
-init 999 style classroom_vscrollbar is generic_vertical_scrollbar_lt:
-    clear
+init 999 style classroom_vscrollbar:
+    base_bar Frame("comfy_ui/scrollbar/vertical_bar_lt.png")
+    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
 
-init 999 style classroom_vscrollbar_dark is generic_vertical_scrollbar_dk:
-    clear
+init 999 style classroom_vscrollbar_dark:
+    base_bar Frame("comfy_ui/scrollbar/vertical_bar_dk.png")
+    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
 
 # Selector vertical scrollbar
-init 999 style mas_selector_sidebar_vbar is generic_vertical_scrollbar_lt:
-    clear
+init 999 style mas_selector_sidebar_vbar:
+    base_bar Frame("comfy_ui/scrollbar/vertical_bar_lt.png")
+    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
 
-init 999 style mas_selector_sidebar_vbar_dark is generic_vertical_scrollbar_dk:
-    clear
+init 999 style mas_selector_sidebar_vbar_dark:
+    base_bar Frame("comfy_ui/scrollbar/vertical_bar_dk.png")
+    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
 
 
 
