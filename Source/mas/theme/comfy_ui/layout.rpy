@@ -35,3 +35,11 @@ init 999 style choice_button:
 
 init 999 style choice_button_dark:
     xpadding 25
+
+
+
+################################################################################
+# Scrollable menu
+################################################################################
+init 999 style scrollable_menu_vbox:
+    spacing comfy_ui.scrollable_menu_button_spacing
