@@ -367,3 +367,26 @@ init 999 style island_button_text_dark:
     font       comfy_ui.common.font
     kerning    comfy_ui.common.font_kerning
     size       comfy_ui.common.font_size
+
+
+
+################################################################################
+# Extras menu
+################################################################################
+init 999 style mas_adjustable_button:
+    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+
+init 999 style mas_adjustable_button_dark:
+    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+
+init 999 style mas_adjustable_button_text:
+    font       comfy_ui.common.font
+    kerning    comfy_ui.common.font_kerning
+    size       comfy_ui.common.font_size
+
+init 999 style mas_adjustable_button_text_dark:
+    font       comfy_ui.common.font
+    kerning    comfy_ui.common.font_kerning
+    size       comfy_ui.common.font_size
