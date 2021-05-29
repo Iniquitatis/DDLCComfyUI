@@ -6,7 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="278" height="355">
-    <g fill="rgb(40, 40, 40)" font-family="Nunito" font-size="46px" text-anchor="middle">
+    <g fill="rgb(40, 40, 40)" font-family="Journal" font-size="46px" letter-spacing="2px" text-anchor="middle">
         <text x="139" y="165">REMAINING</text>
         <text x="139" y="225">GUESSES: 3</text>
     </g>
