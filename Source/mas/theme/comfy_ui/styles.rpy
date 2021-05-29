@@ -307,23 +307,11 @@ init 999 style quick_button_text_dark:
 
 # Name
 init 999 style history_name_text:
-    xpos     0
-    ypos     5
-    font     comfy_ui.common.font
-    kerning  comfy_ui.common.font_kerning
-    size     comfy_ui.common.font_size
-    bold     True
     color    comfy_ui.history_name.color
     outlines comfy_ui.history_name.outlines
 
 # Text
 init 999 style history_text:
-    xpos     165
-    ypos     5
-    font     comfy_ui.common.font
-    kerning  comfy_ui.common.font_kerning
-    size     comfy_ui.common.font_size
-    bold     False
     color    comfy_ui.history_text.color
     outlines comfy_ui.history_text.outlines
 

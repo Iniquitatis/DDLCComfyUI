@@ -196,3 +196,21 @@ init 999 style quick_button_text_dark:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.quick_button_text.font_size
+
+
+
+################################################################################
+# History
+################################################################################
+
+# Name
+init 999 style history_name_text:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
+
+# Text
+init 999 style history_text:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
