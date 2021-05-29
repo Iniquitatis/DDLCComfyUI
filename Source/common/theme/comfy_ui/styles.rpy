@@ -166,7 +166,7 @@ style poemgame_text:
 ################################################################################
 # Input caret
 ################################################################################
-image input_caret:
+init 999 image input_caret:
     Solid(comfy_ui.input_caret_color)
     size (2, 25)
     subpixel True
