@@ -95,13 +95,20 @@ init 999 style classroom_vscrollbar_dark:
     thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
 
 # Selector vertical scrollbar
+# NOTE: complete definitions are needed because dark style is not defined in MAS yet
 init 999 style mas_selector_sidebar_vbar:
-    base_bar Frame("comfy_ui/scrollbar/vertical_bar_lt.png")
-    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
+    xsize        18
+    base_bar     Frame("comfy_ui/scrollbar/vertical_bar_lt.png")
+    thumb        Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_lt.png", Borders(6, 6, 6, 6))
+    bar_vertical True
+    bar_invert   True
 
 init 999 style mas_selector_sidebar_vbar_dark:
-    base_bar Frame("comfy_ui/scrollbar/vertical_bar_dk.png")
-    thumb    Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
+    xsize        18
+    base_bar     Frame("comfy_ui/scrollbar/vertical_bar_dk.png")
+    thumb        Frame("comfy_ui/scrollbar/vertical_[prefix_]thumb_dk.png", Borders(6, 6, 6, 6))
+    bar_vertical True
+    bar_invert   True
 
 
 
