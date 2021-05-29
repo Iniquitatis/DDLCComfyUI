@@ -20,3 +20,31 @@ init python:
 # Definitions
 ################################################################################
 define gui.default_font = comfy_ui.common.font
+
+
+
+################################################################################
+# Option buttons
+################################################################################
+
+# Check button
+init 999 style check_button_text:
+    font    comfy_ui.option_button_text.font
+    kerning comfy_ui.option_button_text.font_kerning
+    size    comfy_ui.option_button_text.font_size
+
+init 999 style check_button_text_dark:
+    font    comfy_ui.option_button_text.font
+    kerning comfy_ui.option_button_text.font_kerning
+    size    comfy_ui.option_button_text.font_size
+
+# Radio button
+init 999 style radio_button_text:
+    font    comfy_ui.option_button_text.font
+    kerning comfy_ui.option_button_text.font_kerning
+    size    comfy_ui.option_button_text.font_size
+
+init 999 style radio_button_text_dark:
+    font    comfy_ui.option_button_text.font
+    kerning comfy_ui.option_button_text.font_kerning
+    size    comfy_ui.option_button_text.font_size

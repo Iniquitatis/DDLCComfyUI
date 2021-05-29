@@ -54,35 +54,6 @@ init 999 style generic_button_text_dk is generic_button_text_base:
     insensitive_color comfy_ui.button_text.dark.insensitive_color
     outlines          comfy_ui.button_text.dark.outlines
 
-# Option button
-init 999 style generic_option_button_base
-
-init 999 style generic_option_button_lt is generic_option_button_base:
-    foreground "gui/button/check_[prefix_]foreground.png"
-    padding    (28, 4, 4, 4)
-
-init 999 style generic_option_button_dk is generic_option_button_base:
-    foreground "gui/button/check_[prefix_]foreground_d.png"
-    padding    (28, 4, 4, 4)
-
-init 999 style generic_option_button_text_base:
-    font     comfy_ui.option_button_text.font
-    kerning  comfy_ui.option_button_text.font_kerning
-    size     comfy_ui.option_button_text.font_size
-    outlines []
-
-init 999 style generic_option_button_text_lt is generic_option_button_text_base:
-    idle_color        comfy_ui.option_button_text.light.idle_color
-    hover_color       comfy_ui.option_button_text.light.hover_color
-    selected_color    comfy_ui.option_button_text.light.selected_color
-    insensitive_color comfy_ui.option_button_text.light.insensitive_color
-
-init 999 style generic_option_button_text_dk is generic_option_button_text_base:
-    idle_color        comfy_ui.option_button_text.dark.idle_color
-    hover_color       comfy_ui.option_button_text.dark.hover_color
-    selected_color    comfy_ui.option_button_text.dark.selected_color
-    insensitive_color comfy_ui.option_button_text.dark.insensitive_color
-
 # Scrollbars
 init 999 style generic_horizontal_scrollbar_base:
     ysize        18
@@ -118,30 +89,34 @@ init 999 style generic_vertical_scrollbar_dk is generic_vertical_scrollbar_base:
 ################################################################################
 
 # Check button
-init 999 style check_button is generic_option_button_lt:
-    clear
+init 999 style check_button_text:
+    idle_color        comfy_ui.option_button_text.light.idle_color
+    hover_color       comfy_ui.option_button_text.light.hover_color
+    selected_color    comfy_ui.option_button_text.light.selected_color
+    insensitive_color comfy_ui.option_button_text.light.insensitive_color
+    outlines          []
 
-init 999 style check_button_dark is generic_option_button_dk:
-    clear
-
-init 999 style check_button_text is generic_option_button_text_lt:
-    clear
-
-init 999 style check_button_text_dark is generic_option_button_text_dk:
-    clear
+init 999 style check_button_text_dark:
+    idle_color        comfy_ui.option_button_text.dark.idle_color
+    hover_color       comfy_ui.option_button_text.dark.hover_color
+    selected_color    comfy_ui.option_button_text.dark.selected_color
+    insensitive_color comfy_ui.option_button_text.dark.insensitive_color
+    outlines          []
 
 # Radio button
-init 999 style radio_button is generic_option_button_lt:
-    clear
+init 999 style radio_button_text:
+    idle_color        comfy_ui.option_button_text.light.idle_color
+    hover_color       comfy_ui.option_button_text.light.hover_color
+    selected_color    comfy_ui.option_button_text.light.selected_color
+    insensitive_color comfy_ui.option_button_text.light.insensitive_color
+    outlines          []
 
-init 999 style radio_button_dark is generic_option_button_dk:
-    clear
-
-init 999 style radio_button_text is generic_option_button_text_lt:
-    clear
-
-init 999 style radio_button_text_dark is generic_option_button_text_dk:
-    clear
+init 999 style radio_button_text_dark:
+    idle_color        comfy_ui.option_button_text.dark.idle_color
+    hover_color       comfy_ui.option_button_text.dark.hover_color
+    selected_color    comfy_ui.option_button_text.dark.selected_color
+    insensitive_color comfy_ui.option_button_text.dark.insensitive_color
+    outlines          []
 
 # Fancy check button
 init 999 style generic_fancy_check_button:
