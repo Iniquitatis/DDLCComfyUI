@@ -149,64 +149,40 @@ init 999 style mas_selector_sidebar_vbar_dark:
 
 # Title
 init 999 style game_menu_label_text:
-    font     comfy_ui.menu_font
-    kerning  comfy_ui.menu_font_kerning
-    size     comfy_ui.menu_title.font_size
     color    comfy_ui.menu_title.light.color
     outlines comfy_ui.menu_title.light.outlines
 
 init 999 style game_menu_label_text_dark:
-    font     comfy_ui.menu_font
-    kerning  comfy_ui.menu_font_kerning
-    size     comfy_ui.menu_title.font_size
     color    comfy_ui.menu_title.dark.color
     outlines comfy_ui.menu_title.dark.outlines
 
 # Preference label
 init 999 style pref_label_text:
-    font     comfy_ui.menu_font
-    kerning  comfy_ui.menu_font_kerning
-    size     comfy_ui.menu_label.font_size
     color    comfy_ui.menu_label.light.color
     outlines comfy_ui.menu_label.light.outlines
 
 init 999 style pref_label_text_dark:
-    font     comfy_ui.menu_font
-    kerning  comfy_ui.menu_font_kerning
-    size     comfy_ui.menu_label.font_size
     color    comfy_ui.menu_label.dark.color
     outlines comfy_ui.menu_label.dark.outlines
 
 # Version text
 # NOTE: this style is also used for the tooltips at the bottom of the menu screen
 init 999 style main_menu_version:
-    font     comfy_ui.common.font
-    kerning  comfy_ui.common.font_kerning
-    size     comfy_ui.menu_text.font_size
     color    comfy_ui.menu_text.light.color
     outlines comfy_ui.menu_text.light.outlines
 
 init 999 style main_menu_version_dark:
-    font     comfy_ui.common.font
-    kerning  comfy_ui.common.font_kerning
-    size     comfy_ui.menu_text.font_size
     color    comfy_ui.menu_text.dark.color
     outlines comfy_ui.menu_text.dark.outlines
 
 # Menu button
 init 999 style navigation_button_text:
-    font                 comfy_ui.menu_font
-    kerning              comfy_ui.menu_font_kerning
-    size                 comfy_ui.menu_button_text.font_size
     color                comfy_ui.menu_button_text.light.color
     outlines             comfy_ui.menu_button_text.light.idle_outlines
     hover_outlines       comfy_ui.menu_button_text.light.hover_outlines
     insensitive_outlines comfy_ui.menu_button_text.light.insensitive_outlines
 
 init 999 style navigation_button_text_dark:
-    font                 comfy_ui.menu_font
-    kerning              comfy_ui.menu_font_kerning
-    size                 comfy_ui.menu_button_text.font_size
     color                comfy_ui.menu_button_text.dark.color
     outlines             comfy_ui.menu_button_text.dark.idle_outlines
     hover_outlines       comfy_ui.menu_button_text.dark.hover_outlines

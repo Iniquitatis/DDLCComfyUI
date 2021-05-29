@@ -48,3 +48,54 @@ init 999 style radio_button_text_dark:
     font    comfy_ui.option_button_text.font
     kerning comfy_ui.option_button_text.font_kerning
     size    comfy_ui.option_button_text.font_size
+
+
+
+################################################################################
+# Game menu
+################################################################################
+
+# Title
+init 999 style game_menu_label_text:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_title.font_size
+
+init 999 style game_menu_label_text_dark:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_title.font_size
+
+# Preference label
+init 999 style pref_label_text:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_label.font_size
+
+init 999 style pref_label_text_dark:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_label.font_size
+
+# Version text
+# NOTE: this style is also used for the tooltips at the bottom of the menu screen
+init 999 style main_menu_version:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.menu_text.font_size
+
+init 999 style main_menu_version_dark:
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.menu_text.font_size
+
+# Menu button
+init 999 style navigation_button_text:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_button_text.font_size
+
+init 999 style navigation_button_text_dark:
+    font    comfy_ui.menu_font
+    kerning comfy_ui.menu_font_kerning
+    size    comfy_ui.menu_button_text.font_size
