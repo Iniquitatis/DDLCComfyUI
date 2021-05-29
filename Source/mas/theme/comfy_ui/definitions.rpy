@@ -129,6 +129,8 @@ define comfy_ui.fancy_check_button_text.dark.idle_color         = "CUI_PRM_COLOR
 define comfy_ui.fancy_check_button_text.dark.hover_color        = "CUI_PRM_COLOR(255, 170, 153)"
 define comfy_ui.fancy_check_button_text.dark.selected_color     = "CUI_PRM_COLOR(255, 170, 153)"
 
+define comfy_ui.button_height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
+
 define comfy_ui.scrollable_menu_button_spacing = 6
 define comfy_ui.choice_button_spacing          = 12
 define comfy_ui.talk_button_spacing            = 16

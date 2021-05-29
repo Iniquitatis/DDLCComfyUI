@@ -409,6 +409,8 @@ init 999 style hkb_button_dark:
     background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
 
 init 999 style hkb_button_text:
+    align             (0.5, 0.5)
+    text_align        0.5
     idle_color        comfy_ui.button_text.light.idle_color
     hover_color       comfy_ui.button_text.light.hover_color
     selected_color    comfy_ui.button_text.light.selected_color
@@ -416,6 +418,8 @@ init 999 style hkb_button_text:
     outlines          comfy_ui.button_text.light.outlines
 
 init 999 style hkb_button_text_dark:
+    align             (0.5, 0.5)
+    text_align        0.5
     idle_color        comfy_ui.button_text.dark.idle_color
     hover_color       comfy_ui.button_text.dark.hover_color
     selected_color    comfy_ui.button_text.dark.selected_color
@@ -434,6 +438,8 @@ init 999 style island_button_dark:
     background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
 
 init 999 style island_button_text:
+    align             (0.5, 0.5)
+    text_align        0.5
     idle_color        comfy_ui.button_text.light.idle_color
     hover_color       comfy_ui.button_text.light.hover_color
     selected_color    comfy_ui.button_text.light.selected_color
@@ -441,6 +447,8 @@ init 999 style island_button_text:
     outlines          comfy_ui.button_text.light.outlines
 
 init 999 style island_button_text_dark:
+    align             (0.5, 0.5)
+    text_align        0.5
     idle_color        comfy_ui.button_text.dark.idle_color
     hover_color       comfy_ui.button_text.dark.hover_color
     selected_color    comfy_ui.button_text.dark.selected_color
@@ -484,6 +492,8 @@ init 999 style mas_adjustable_button_dark:
     background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
 
 init 999 style mas_adjustable_button_text:
+    align             (0.5, 0.5)
+    text_align        0.5
     idle_color        comfy_ui.button_text.light.idle_color
     hover_color       comfy_ui.button_text.light.hover_color
     selected_color    comfy_ui.button_text.light.selected_color
@@ -491,6 +501,8 @@ init 999 style mas_adjustable_button_text:
     outlines          comfy_ui.button_text.light.outlines
 
 init 999 style mas_adjustable_button_text_dark:
+    align             (0.5, 0.5)
+    text_align        0.5
     idle_color        comfy_ui.button_text.dark.idle_color
     hover_color       comfy_ui.button_text.dark.hover_color
     selected_color    comfy_ui.button_text.dark.selected_color
