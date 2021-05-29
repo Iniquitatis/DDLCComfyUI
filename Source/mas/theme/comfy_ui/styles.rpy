@@ -19,44 +19,6 @@ define mas_ui.dark_button_text_insensitive_color  = comfy_ui.button_text.dark.in
 
 
 ################################################################################
-# Generic styles
-################################################################################
-
-# Button
-init 999 style generic_button_base:
-    padding        (5, 5, 5, 5)
-    hover_sound    gui.hover_sound
-    activate_sound gui.activate_sound
-
-init 999 style generic_button_lt is generic_button_base:
-    background Frame("comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
-
-init 999 style generic_button_dk is generic_button_base:
-    background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
-
-init 999 style generic_button_text_base:
-    font    comfy_ui.common.font
-    kerning comfy_ui.common.font_kerning
-    size    comfy_ui.common.font_size
-    align   (0.5, 0.5)
-
-init 999 style generic_button_text_lt is generic_button_text_base:
-    idle_color        comfy_ui.button_text.light.idle_color
-    hover_color       comfy_ui.button_text.light.hover_color
-    selected_color    comfy_ui.button_text.light.selected_color
-    insensitive_color comfy_ui.button_text.light.insensitive_color
-    outlines          comfy_ui.button_text.light.outlines
-
-init 999 style generic_button_text_dk is generic_button_text_base:
-    idle_color        comfy_ui.button_text.dark.idle_color
-    hover_color       comfy_ui.button_text.dark.hover_color
-    selected_color    comfy_ui.button_text.dark.selected_color
-    insensitive_color comfy_ui.button_text.dark.insensitive_color
-    outlines          comfy_ui.button_text.dark.outlines
-
-
-
-################################################################################
 # Option buttons
 ################################################################################
 
