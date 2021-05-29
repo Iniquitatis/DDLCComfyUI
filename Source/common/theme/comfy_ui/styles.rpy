@@ -145,6 +145,7 @@ init 999 style choice_button:
     background Frame("gui/button/choice_[prefix_]background.png", Borders(5, 5, 5, 5))
 
 init 999 style choice_button_text:
+    xpadding          25
     idle_color        comfy_ui.button_text.idle_color
     hover_color       comfy_ui.button_text.hover_color
     selected_color    comfy_ui.button_text.selected_color
