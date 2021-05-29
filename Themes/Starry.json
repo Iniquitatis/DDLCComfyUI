@@ -19,6 +19,6 @@
     "dialogue_vertical_offset": -3,
     "dialogue_line_spacing": -1,
     "button_height_adjustment": -4,
-    "primary_color": { "h": 60, "s": 0.82, "l": 0.03 },
-    "secondary_color": { "h": 60, "s": 1.05, "l": 0.02 }
+    "primary_color": { "h": 60, "s": 0.8, "l": 0.0 },
+    "secondary_color": { "h": 60, "s": 1.0, "l": 0.0 }
 }
