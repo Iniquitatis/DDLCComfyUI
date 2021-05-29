@@ -112,38 +112,28 @@ init 999 style page_label_text_dark:
 init 999 style slot_time_text:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
-    size    16
-    align   (0.5, 0.5)
 
 init 999 style slot_time_text_dark:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
-    size    16
-    align   (0.5, 0.5)
 
 init 999 style slot_name_text:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
-    size    16
-    align   (0.5, 0.5)
 
 init 999 style slot_name_text_dark:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
-    size    16
-    align   (0.5, 0.5)
 
 init 999 style page_button_text:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
-    align   (0.5, 0.5)
 
 init 999 style page_button_text_dark:
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
-    align   (0.5, 0.5)
 
 
 
