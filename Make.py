@@ -47,7 +47,7 @@ def add_process(*args):
 
         for i in range(max_processes):
             if not processes[i]:
-                processes[i] = subprocess.Popen(args)
+                processes[i] = subprocess.Popen(" ".join(args))
                 return processes[i]
 
         time.sleep(0.1)
