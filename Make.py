@@ -30,10 +30,11 @@ glitched_boxes = [
 ################################################################################
 # Multiprocessing stuff
 ################################################################################
+import os
 import subprocess
 import time
 
-max_processes = 8
+max_processes = os.cpu_count()
 processes = [None] * max_processes
 callbacks = [None] * max_processes
 
