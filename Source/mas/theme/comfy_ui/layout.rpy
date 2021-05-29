@@ -67,3 +67,17 @@ init 999 style talk_choice_vbox:
 ################################################################################
 init 999 style hkb_vbox:
     spacing comfy_ui.hotkey_button_spacing
+
+
+
+################################################################################
+# Island buttons
+################################################################################
+init 999 style island_hbox:
+    spacing 5
+
+init 999 style island_button:
+    ysize 35
+
+init 999 style island_button_dark:
+    ysize 35

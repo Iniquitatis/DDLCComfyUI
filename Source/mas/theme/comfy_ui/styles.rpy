@@ -465,18 +465,25 @@ init 999 style hkb_button_text_dark:
 ################################################################################
 # Island buttons
 ################################################################################
-init 999 style island_hbox:
-    spacing 5
+init 999 style island_button:
+    background Frame("comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
 
-init 999 style island_button is generic_button_lt:
-    xysize (205, 35)
+init 999 style island_button_dark:
+    background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
 
-init 999 style island_button_dark is generic_button_dk:
-    xysize (205, 35)
+init 999 style island_button_text:
+    idle_color        comfy_ui.button_text.light.idle_color
+    hover_color       comfy_ui.button_text.light.hover_color
+    selected_color    comfy_ui.button_text.light.selected_color
+    insensitive_color comfy_ui.button_text.light.insensitive_color
+    outlines          comfy_ui.button_text.light.outlines
 
-init 999 style island_button_text is generic_button_text_lt
-
-init 999 style island_button_text_dark is generic_button_text_dk
+init 999 style island_button_text_dark:
+    idle_color        comfy_ui.button_text.dark.idle_color
+    hover_color       comfy_ui.button_text.dark.hover_color
+    selected_color    comfy_ui.button_text.dark.selected_color
+    insensitive_color comfy_ui.button_text.dark.insensitive_color
+    outlines          comfy_ui.button_text.dark.outlines
 
 
 
