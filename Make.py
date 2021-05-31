@@ -28,66 +28,13 @@ glitched_boxes = [
 ]
 
 ################################################################################
-# Multiprocessing stuff
-################################################################################
-import os
-import subprocess
-import time
-
-max_processes = os.cpu_count()
-processes = [None] * max_processes
-callbacks = [None] * max_processes
-
-def add_process(*args):
-    elapsed = 0.0
-    timeout = 180.0
-
-    while elapsed < timeout:
-        poll_processes()
-
-        for i in range(max_processes):
-            if not processes[i]:
-                processes[i] = subprocess.Popen(" ".join(args))
-                return processes[i]
-
-        time.sleep(0.1)
-        elapsed += 0.1
-
-    print(f"ERROR: cannot run process with args: {args}")
-
-def poll_processes():
-    for i in range(max_processes):
-        if processes[i] != None and processes[i].poll() != None:
-            if callbacks[i]:
-                callbacks[i]()
-                callbacks[i] = None
-
-            processes[i] = None
-
-def wait_processes():
-    for i in range(max_processes):
-        if processes[i] != None:
-            processes[i].wait()
-
-            if callbacks[i]:
-                callbacks[i]()
-                callbacks[i] = None
-
-            processes[i] = None
-
-def hook_callback(proc, cb):
-    for i in range(max_processes):
-        if processes[i] == proc:
-            callbacks[i] = cb
-            break
-
-################################################################################
 # Script itself
 ################################################################################
 import json
 import os
 import re
 import shutil
+import subprocess
 
 from PIL import Image
 from hsluv import *
@@ -270,37 +217,37 @@ def glitch(image_path, scale):
         pixel_data = image.load()
 
         for region in regions:
-            [x, y, w, h, dx, dy] = [i * scale for i in region]
+            x, y, w, h, dx, dy = [i * scale for i in region]
             shift_region(pixel_data, x, y, w, h, dx, dy)
 
         image.save(image_path)
 
-def render_image(in_path, out_path, scale, glitched):
-    if release_mode:
-        proc = add_process(f"inkscape",
-                           f"--batch-process",
-                           f"--export-dpi={96 * scale}",
-                           f"--export-filename={out_path}",
-                           f"--export-overwrite",
-                           f"--export-type=png",
-                           f"{in_path}")
+def batch_render(image_batch):
+    proc = subprocess.Popen("inkscape --shell",
+                            stdin = subprocess.PIPE,
+                            stdout = subprocess.PIPE,
+                            stderr = subprocess.STDOUT,
+                            shell = True)
 
-    else:
-        proc = add_process(f"magick",
-                           f"-background none",
-                           f"-density {96 * scale}",
-                           f"{in_path}",
-                           f"{out_path}")
+    cmd = ""
 
-    if glitched:
-        def cb():
+    for in_path, out_path, scale, glitched in image_batch:
+        cmd += f"file-open:{in_path};"
+        cmd += f"export-dpi:{96 * scale};"
+        cmd += f"export-filename:{out_path};"
+        cmd += f"export-overwrite;"
+        cmd += f"export-type:png;"
+        cmd += f"export-do;"
+        cmd += "\n"
+
+    proc.communicate(input = cmd.encode(), timeout = 600)
+    proc.wait()
+
+    for in_path, out_path, scale, glitched in image_batch:
+        if glitched:
             glitch(out_path, scale)
-            os.remove(in_path)
-    else:
-        def cb():
-            os.remove(in_path)
 
-    hook_callback(proc, cb)
+        os.remove(in_path)
 
 # Preview generation
 def generate_preview(image_path, dst_path):
@@ -369,6 +316,8 @@ def build():
 
     for theme in themes:
         for scale in range(1, 3):
+            image_batch = []
+
             for mod_dir in mod_dirs:
                 theme_src_dir = os.path.join(source_dir, mod_dir, "theme")
                 theme_files = list_files_recursive(theme_src_dir)
@@ -379,17 +328,17 @@ def build():
                 # Process source files
                 for file_path in theme_files:
                     rel_path = os.path.relpath(file_path, theme_src_dir)
-                    (file_name, file_ext) = os.path.splitext(rel_path)
+                    file_name, file_ext = os.path.splitext(rel_path)
 
                     replicate_dir_structure(rel_path, target_dir)
 
                     if file_ext == ".svg":
-                        log(f"Rendering image {file_path}...")
+                        log(f"Processing image {file_path}...")
                         png_path = f"{file_name}.png"
                         tmp_path = os.path.join(target_dir, rel_path)
                         dst_path = os.path.join(target_dir, png_path)
                         preprocess_text_file(file_path, tmp_path, theme, scale)
-                        render_image(tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes)
+                        image_batch.append((tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes))
 
                     elif file_ext == ".rpy":
                         log(f"Processing script {file_path}...")
@@ -406,8 +355,10 @@ def build():
                         dst_path = os.path.join(target_dir, rel_path)
                         shutil.copyfile(file_path, dst_path)
 
-            wait_processes()
+            log("Rendering images...")
+            batch_render(image_batch)
 
+            log("Generating theme preview...")
             textbox_path = os.path.join(target_dir, "comfy_ui", "replacers", "gui", "textbox.png")
             preview_path = os.path.join(target_dir, "preview.png")
             generate_preview(textbox_path, preview_path)
