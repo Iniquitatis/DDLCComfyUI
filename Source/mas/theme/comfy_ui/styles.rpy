@@ -310,13 +310,14 @@ init 999 style confirm_prompt_text_dark:
 # Choice menu
 ################################################################################
 init 999 style choice_button:
+    xpadding   25
     background Frame("comfy_ui/button/[prefix_]bg_lt.png", Borders(5, 5, 5, 5))
 
 init 999 style choice_button_dark:
+    xpadding   25
     background Frame("comfy_ui/button/[prefix_]bg_dk.png", Borders(5, 5, 5, 5))
 
 init 999 style choice_button_text:
-    xpadding          25
     idle_color        comfy_ui.button_text.light.idle_color
     hover_color       comfy_ui.button_text.light.hover_color
     selected_color    comfy_ui.button_text.light.selected_color
@@ -324,7 +325,6 @@ init 999 style choice_button_text:
     outlines          comfy_ui.button_text.light.outlines
 
 init 999 style choice_button_text_dark:
-    xpadding          25
     idle_color        comfy_ui.button_text.dark.idle_color
     hover_color       comfy_ui.button_text.dark.hover_color
     selected_color    comfy_ui.button_text.dark.selected_color
