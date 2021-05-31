@@ -222,6 +222,17 @@ def glitch(image_path, scale):
 
         image.save(image_path)
 
+def install_fonts(fonts):
+    proc = subprocess.Popen("inkscape --actions=\"user-data-directory;\"", stdout = subprocess.PIPE)
+    stdout, _ = proc.communicate()
+    proc.wait()
+
+    inkscape_dir = stdout.decode().strip()
+    inkscape_fonts_dir = os.path.join(inkscape_dir, "fonts")
+
+    for font_path in fonts:
+        shutil.copy2(font_path, inkscape_fonts_dir)
+
 def batch_render(image_batch):
     proc = subprocess.Popen("inkscape --shell",
                             stdin = subprocess.PIPE,
@@ -298,18 +309,33 @@ def build():
     log("Creating build directory...")
     os.mkdir(build_dir)
 
-    # Replicate directory structure
+    # Copy main files
+    fonts = []
+
     for mod_dir in mod_dirs:
         main_src_dir = os.path.join(source_dir, mod_dir, "main")
         main_files = list_files_recursive(main_src_dir)
 
-        # Copy common files
         for file_path in main_files:
-            log(f"Copying file {file_path}...")
             rel_path = os.path.relpath(file_path, main_src_dir)
-            dst_path = os.path.join(build_dir, rel_path)
+            _, file_ext = os.path.splitext(rel_path)
+
             replicate_dir_structure(rel_path, build_dir)
-            shutil.copyfile(file_path, dst_path)
+
+            if file_ext in [".otf", ".ttf"]:
+                log(f"Copying font {file_path}...")
+                dst_path = os.path.join(build_dir, rel_path)
+                shutil.copyfile(file_path, dst_path)
+                fonts.append(dst_path)
+
+            else:
+                log(f"Copying file {file_path}...")
+                dst_path = os.path.join(build_dir, rel_path)
+                shutil.copyfile(file_path, dst_path)
+
+    # Install fonts for SVG rendering
+    log("Installing fonts...")
+    install_fonts(fonts)
 
     # Make themes
     themes = preload_themes()
