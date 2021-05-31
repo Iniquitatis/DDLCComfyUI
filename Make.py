@@ -34,7 +34,7 @@ import json
 import os
 import re
 import shutil
-import subprocess
+from subprocess import Popen, PIPE, STDOUT
 
 from PIL import Image
 from hsluv import *
@@ -223,7 +223,7 @@ def glitch(image_path, scale):
         image.save(image_path)
 
 def install_fonts(fonts):
-    proc = subprocess.Popen("inkscape --actions=\"user-data-directory;\"", stdout = subprocess.PIPE)
+    proc = Popen("inkscape --actions=\"user-data-directory;\"", stdout = PIPE)
     stdout, _ = proc.communicate()
     proc.wait()
 
@@ -234,11 +234,7 @@ def install_fonts(fonts):
         shutil.copy2(font_path, inkscape_fonts_dir)
 
 def batch_render(image_batch):
-    proc = subprocess.Popen("inkscape --shell",
-                            stdin = subprocess.PIPE,
-                            stdout = subprocess.PIPE,
-                            stderr = subprocess.STDOUT,
-                            shell = True)
+    proc = Popen("inkscape --shell", stdin = PIPE, stdout = PIPE, stderr = STDOUT, shell = True)
 
     cmd = ""
 
