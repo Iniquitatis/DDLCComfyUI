@@ -7,7 +7,7 @@
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="278" height="355">
     <defs>
-        <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse" style="color-interpolation-filters: sRGB;">
+        <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
             <feTurbulence baseFrequency="0.008" numOctaves="3" result="turbulenceCoarse" />
             <feTurbulence baseFrequency="0.8" numOctaves="6" result="turbulenceFine" />
             <feDisplacementMap in="SourceGraphic" in2="turbulenceCoarse" result="displaceCoarse" scale="4.0" xChannelSelector="R" yChannelSelector="A" />
