@@ -103,6 +103,12 @@ def modulate_colors(macro_args, method_args):
 def stringize(macro_args, method_args):
     return str(method_args)
 
+def get_font_name(macro_args, method_args):
+    # NOTE: it will work _only_ for fonts with file names matching "Name-Style.ext" pattern
+    file_name = os.path.basename(method_args)
+    font_name = re.match(r"(\w+)-\w+\.[ot]tf", file_name).group(1)
+    return font_name
+
 def parse_macro_args(match):
     if match.lastindex == None or match.lastindex == 0:
         # No arguments have been passed to the macro
@@ -134,6 +140,7 @@ def preprocess_text_file(in_path, out_path, theme, scale):
         [ "CUI_DLG_ROUNDING"         , stringize      , (theme["dialogue_rounding"])                             ],
         [ "CUI_MNU_PTSHAPE"          , stringize      , (theme["menu_pattern_shape"])                            ],
         [ "CUI_DLG_PTSHAPE"          , stringize      , (theme["dialogue_pattern_shape"])                        ],
+        [ "CUI_MAIN_FONT_NAME"       , get_font_name  , (theme["main_font"]["regular"])                          ],
         [ "CUI_MAIN_FONT_REGULAR"    , stringize      , (theme["main_font"]["regular"])                          ],
         [ "CUI_MAIN_FONT_ITALIC"     , stringize      , (theme["main_font"]["italic"])                           ],
         [ "CUI_MAIN_FONT_BOLD"       , stringize      , (theme["main_font"]["bold"])                             ],
@@ -256,11 +263,6 @@ def batch_render(image_batch):
 
         os.remove(in_path)
 
-# Preview generation
-def generate_preview(image_path, dst_path):
-    with Image.open(image_path) as image:
-        image.crop((0, 0, 128, 128)).save(dst_path)
-
 # Theme loading
 def preload_themes():
     result = []
@@ -379,11 +381,6 @@ def build():
 
             log("Rendering images...")
             batch_render(image_batch)
-
-            log("Generating theme preview...")
-            textbox_path = os.path.join(target_dir, "comfy_ui", "replacers", "gui", "textbox.png")
-            preview_path = os.path.join(target_dir, "preview.png")
-            generate_preview(textbox_path, preview_path)
 
             # Pack assets
             log(f"Creating archive for {target_id}...")
