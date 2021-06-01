@@ -1,4 +1,7 @@
 # DDLC Comfy UI
+<img src="Logo.png?raw=true">
+
+---
 Hey, I'm no writer, so just skip to the **Features** section, okay?
 
 
