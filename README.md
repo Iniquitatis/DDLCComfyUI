@@ -27,36 +27,58 @@ The verified ones are:
 ## Screenshots
 <table>
   <tr>
+    <th></th>
+    <th>Normal</th>
+    <th>Dark</th>
+  <tr>
     <td>Unmodded</td>
-    <td><img src="Screenshots/Unmodded.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Unmodded.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/UnmoddedDark.png?raw=true" width="320"></td>
   </tr>
   <tr>
     <td>Default</td>
-    <td><img src="Screenshots/Default.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Default.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/DefaultDark.png?raw=true" width="320"></td>
   </tr>
   <tr>
     <td>Cold</td>
-    <td><img src="Screenshots/Cold.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Cold.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/ColdDark.png?raw=true" width="320"></td>
   </tr>
   <tr>
     <td>Mint</td>
-    <td><img src="Screenshots/Mint.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Mint.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/MintDark.png?raw=true" width="320"></td>
   </tr>
   <tr>
     <td>Peach</td>
-    <td><img src="Screenshots/Peach.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Peach.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/PeachDark.png?raw=true" width="320"></td>
   </tr>
   <tr>
     <td>Strawberry</td>
-    <td><img src="Screenshots/Strawberry.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Strawberry.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/StrawberryDark.png?raw=true" width="320"></td>
   </tr>
   <tr>
     <td>Classic</td>
-    <td><img src="Screenshots/Classic.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Classic.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/ClassicDark.png?raw=true" width="320"></td>
   </tr>
   <tr>
     <td>Mystique</td>
-    <td><img src="Screenshots/Mystique.png?raw=true" width="640"></td>
+    <td><img src="Screenshots/Mystique.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/MystiqueDark.png?raw=true" width="320"></td>
+  </tr>
+  <tr>
+    <td>Chocolate</td>
+    <td><img src="Screenshots/Chocolate.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/ChocolateDark.png?raw=true" width="320"></td>
+  </tr>
+  <tr>
+    <td>Starry</td>
+    <td><img src="Screenshots/Starry.png?raw=true" width="320"></td>
+    <td><img src="Screenshots/StarryDark.png?raw=true" width="320"></td>
   </tr>
 </table>
 
