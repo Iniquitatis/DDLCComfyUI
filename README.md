@@ -95,6 +95,8 @@ The verified ones are:
 2. Go to the **Settings** screen (**Submods** in MAS)
 3. Navigate to the mod section
 4. Select a theme by moving a slider underneath the **Theme** label
+    * Uncheck the **Fonts** checkbox to disable the new fonts
+    * Uncheck the **Layout** checkbox to disable the layout changes
     * Check the **HiDPI** checkbox if the high resolution UI assets are needed
 5. Press **Apply** and restart the game
 
