@@ -23,12 +23,12 @@
             <path d="M 0.5 0.05 l 0.1469463 0.29774575 l 0.32858195 0.0477458 l -0.23776413 0.23176273 l 0.0561285 0.32725426 l -0.29389262 -0.15450851 l -0.29389264 0.15450849 l 0.0561285 -0.32725424 l -0.23776412 -0.23176276 l 0.32858194 -0.0477457 Z" />
         </svg>
         <pattern id="pattern" x="-40" y="-140" width="200" height="200" patternUnits="userSpaceOnUse">
-            <g fill="CUI_PRM_COLOR(206, 74, 126)" stroke-linejoin="round">
+            <g fill="CUI_PRM_COLOR(58, 39, 47)" stroke-linejoin="round">
                 <use xlink:href="#CUI_MNU_PTSHAPE()" transform="translate(0 0) scale(80)" />
                 <use xlink:href="#CUI_MNU_PTSHAPE()" transform="translate(100 100) scale(80)" />
             </g>
         </pattern>
     </defs>
-    <rect x="0" y="0" width="1380" height="1320" fill="CUI_PRM_COLOR(27, 27, 27)" />
+    <rect x="0" y="0" width="1380" height="1320" fill="CUI_PRM_COLOR(31, 31, 31)" />
     <rect x="0" y="0" width="1680" height="1620" fill="url(#pattern)" />
 </svg>
