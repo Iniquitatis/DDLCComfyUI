@@ -22,11 +22,6 @@ mod_dirs = [
     #"mas",
 ]
 
-glitched_boxes = [
-    "textbox_monika.png",
-    "textbox_monika_d.png",
-]
-
 ################################################################################
 # Script itself
 ################################################################################
@@ -80,35 +75,67 @@ def modulate_rgba_color(r, g, b, a, h, s, l):
             int(b * 255.0),
             int(a * 255.0))
 
-def modulate_colors(macro_args, method_args):
-    h, s, l = method_args
+def modulate_colors(h, s, l):
+    is_modulated = (h != None and s != None and l != None)
 
-    if len(macro_args) == 3:
-        r, g, b = macro_args
+    def macro(args, _):
+        if len(args) == 3:
+            r, g, b = args
 
-        if h != None and s != None and l != None:
-            r, g, b = modulate_rgb_color(int(r), int(g), int(b), float(h), float(s), float(l))
+            if is_modulated:
+                r, g, b = modulate_rgb_color(int(r), int(g), int(b), float(h), float(s), float(l))
 
-        return format_rgb_hex_string(r, g, b)
+            return format_rgb_hex_string(r, g, b)
 
-    elif len(macro_args) == 4:
-        r, g, b, a = macro_args
+        elif len(args) == 4:
+            r, g, b, a = args
 
-        if h != None and s != None and l != None:
-            r, g, b, a = modulate_rgba_color(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
+            if is_modulated:
+                r, g, b, a = modulate_rgba_color(int(r), int(g), int(b), int(a), float(h), float(s), float(l))
 
-        return format_rgba_hex_string(r, g, b, a)
+            return format_rgba_hex_string(r, g, b, a)
 
-    return "#baadf00d"
+        return "#baadf00d"
 
-def stringize(macro_args, method_args):
-    return str(method_args)
+    return macro
 
-def get_font_name(macro_args, method_args):
+def include_text():
+    def macro(args, file_meta):
+        file_path, line, column = file_meta
+        inc_path = os.path.join(os.path.dirname(file_path), args[0])
+
+        result = ""
+
+        with open(inc_path, "r") as inc_file:
+            indentation = " " * column
+
+            for i, inc_line in enumerate(inc_file):
+                if i == 0 or inc_line == "\n":
+                    result += inc_line
+                else:
+                    result += indentation + inc_line
+
+        return result
+
+    return macro
+
+def stringize(value):
+    string = str(value)
+
+    def macro(args, _):
+        return string
+
+    return macro
+
+def get_font_name(path):
     # NOTE: it will work _only_ for fonts with file names matching "Name-Style.ext" pattern
-    file_name = os.path.basename(method_args)
+    file_name = os.path.basename(path)
     font_name = re.match(r"(\w+)-\w+\.[ot]tf", file_name).group(1)
-    return font_name
+
+    def macro(args, _):
+        return font_name
+
+    return macro
 
 def parse_macro_args(match):
     if match.lastindex == None or match.lastindex == 0:
@@ -120,7 +147,7 @@ def parse_macro_args(match):
     query = r""
 
     for i in range(4):
-        query += r"\s*([\w\-.]+)\s*"
+        query += r"\s*([\w\-./]+)\s*"
         result = re.findall(query, args_string)
 
         if len(result) > 0:
@@ -132,40 +159,39 @@ def preprocess_text_file(in_path, out_path, theme, scale):
     prm_color = theme["primary_color"]
     scd_color = theme["secondary_color"]
 
-    macros = [
-        # Name                       | Method         | Arguments
-        [ "CUI_THEME_ID"             , stringize      , (("%s" if scale == 1 else "%s_hidpi") % theme["id"])     ],
-        [ "CUI_THEME_NAME"           , stringize      , (("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]) ],
-        [ "CUI_BTN_ROUNDING"         , stringize      , (theme["button_rounding"])                               ],
-        [ "CUI_FRM_ROUNDING"         , stringize      , (theme["frame_rounding"])                                ],
-        [ "CUI_DLG_ROUNDING"         , stringize      , (theme["dialogue_rounding"])                             ],
-        [ "CUI_MNU_PTSHAPE"          , stringize      , (theme["menu_pattern_shape"])                            ],
-        [ "CUI_DLG_PTSHAPE"          , stringize      , (theme["dialogue_pattern_shape"])                        ],
-        [ "CUI_MAIN_FONT_NAME"       , get_font_name  , (theme["main_font"]["regular"])                          ],
-        [ "CUI_MAIN_FONT_REGULAR"    , stringize      , (theme["main_font"]["regular"])                          ],
-        [ "CUI_MAIN_FONT_ITALIC"     , stringize      , (theme["main_font"]["italic"])                           ],
-        [ "CUI_MAIN_FONT_BOLD"       , stringize      , (theme["main_font"]["bold"])                             ],
-        [ "CUI_MAIN_FONT_BOLD_ITALIC", stringize      , (theme["main_font"]["bold_italic"])                      ],
-        [ "CUI_MENU_FONT"            , stringize      , (theme["menu_font"])                                     ],
-        [ "CUI_OPTION_FONT"          , stringize      , (theme["option_font"])                                   ],
-        [ "CUI_MAIN_FONT_KERNING"    , stringize      , (theme["main_font_kerning"])                             ],
-        [ "CUI_DLG_VERT_OFFSET"      , stringize      , (theme["dialogue_vertical_offset"])                      ],
-        [ "CUI_DLG_LINE_SPACING"     , stringize      , (theme["dialogue_line_spacing"])                         ],
-        [ "CUI_BTN_HEIGHT_ADJUSTMENT", stringize      , (theme["button_height_adjustment"])                      ],
-        [ "CUI_PRM_COLOR"            , modulate_colors, (prm_color["h"], prm_color["s"], prm_color["l"])         ],
-        [ "CUI_SCD_COLOR"            , modulate_colors, (scd_color["h"], scd_color["s"], scd_color["l"])         ],
-        [ "CUI_SCALE"                , stringize      , (scale)                                                  ],
-        [ "CUI_SCALE_INV"            , stringize      , (1.0 / scale)                                            ],
-    ]
+    macros = {
+        "CUI_INCLUDE":               include_text(),
+        "CUI_THEME_ID":              stringize(("%s" if scale == 1 else "%s_hidpi") % theme["id"]),
+        "CUI_THEME_NAME":            stringize(("%s" if scale == 1 else "%s (HiDPI)") % theme["name"]),
+        "CUI_BTN_ROUNDING":          stringize(theme["button_rounding"]),
+        "CUI_FRM_ROUNDING":          stringize(theme["frame_rounding"]),
+        "CUI_DLG_ROUNDING":          stringize(theme["dialogue_rounding"]),
+        "CUI_MNU_PTSHAPE":           stringize(theme["menu_pattern_shape"]),
+        "CUI_DLG_PTSHAPE":           stringize(theme["dialogue_pattern_shape"]),
+        "CUI_MAIN_FONT_NAME":        get_font_name(theme["main_font"]["regular"]),
+        "CUI_MAIN_FONT_REGULAR":     stringize(theme["main_font"]["regular"]),
+        "CUI_MAIN_FONT_ITALIC":      stringize(theme["main_font"]["italic"]),
+        "CUI_MAIN_FONT_BOLD":        stringize(theme["main_font"]["bold"]),
+        "CUI_MAIN_FONT_BOLD_ITALIC": stringize(theme["main_font"]["bold_italic"]),
+        "CUI_MENU_FONT":             stringize(theme["menu_font"]),
+        "CUI_OPTION_FONT":           stringize(theme["option_font"]),
+        "CUI_MAIN_FONT_KERNING":     stringize(theme["main_font_kerning"]),
+        "CUI_DLG_VERT_OFFSET":       stringize(theme["dialogue_vertical_offset"]),
+        "CUI_DLG_LINE_SPACING":      stringize(theme["dialogue_line_spacing"]),
+        "CUI_BTN_HEIGHT_ADJUSTMENT": stringize(theme["button_height_adjustment"]),
+        "CUI_PRM_COLOR":             modulate_colors(prm_color["h"], prm_color["s"], prm_color["l"]),
+        "CUI_SCD_COLOR":             modulate_colors(scd_color["h"], scd_color["s"], scd_color["l"]),
+        "CUI_SCALE":                 stringize(scale),
+        "CUI_SCALE_INV":             stringize(1.0 / scale),
+    }
 
     with open(in_path, "r") as in_file, open(out_path, "w") as out_file:
-        text = in_file.read()
+        for i, line in enumerate(in_file):
+            for macro_name, macro in macros.items():
+                query = macro_name + r"\(([\w\s\-.,/]*)\)"
+                line = re.sub(query, lambda match: macro(parse_macro_args(match), (in_path, i, match.start())), line)
 
-        for macro_name, method, method_args in macros:
-            query = macro_name + r"\(([\w\s\-.,]*)\)"
-            text = re.sub(query, lambda match: method(parse_macro_args(match), method_args), text)
-
-        out_file.write(text)
+            out_file.write(line)
 
 # Image rendering
 def clear_alpha(p):
@@ -191,34 +217,34 @@ def shift_region(pixel_data, x, y, w, h, dx, dy):
 
 def glitch(image_path, scale):
     regions = [
-        # X  | Y  | W  | H  | DX | DY
-        [  42,   5, 144,  15, -25,   0 ],
-        [  42,  36,  41,  10,  25,   0 ],
-        [  42,  62,  91,   5, -25,   0 ],
-        [  42,  92,  87,   7, -25,   0 ],
-        [  42, 108,  30,   4,  25,   0 ],
-        [ 123, 115, 183,  20,  25,   0 ],
-        [ 183,  77, 129,  22, -26,   0 ],
-        [ 215,  86,  50,   1,   1,   0 ],
-        [ 225,  40,  99,  20, -25,   0 ],
-        [ 273,  15, 136,  11,  25,   0 ],
-        [ 309,  86,  58,   1, -25,   0 ],
-        [ 336,  87, 147,  28, -26,   0 ],
-        [ 372,  54, 213,   4,  25,   0 ],
-        [ 408,  20,  80,   3, -26,   0 ],
-        [ 444,  72, 159,   6, -25,   0 ],
-        [ 448, 127,  83,   9, -25,   0 ],
-        [ 516,  35, 116,   6, -26,   0 ],
-        [ 564,  93, 128,   3, -26,   0 ],
-        [ 625,  36, 108,   8, -25,   0 ],
-        [ 670, 101, 156,  12, -25,   0 ],
-        [ 675,  67, 135,   9, -26,   0 ],
-        [ 802,  45,  56,   2,  25,   0 ],
-        [ 810,  64,  48,  15,  25,   0 ],
-        [ 817,  19,  41,   2, -25,   0 ],
-        [ 827,  43,  31,   6, -25,   0 ],
-        [ 834, 122,  24,   7,  25,   0 ],
-        [ 575, 103,  95,   1,  25,   0 ],
+        #  X|   Y|   W|   H|  DX|  DY
+        ( 42,   5, 144,  15, -25,   0),
+        ( 42,  36,  41,  10,  25,   0),
+        ( 42,  62,  91,   5, -25,   0),
+        ( 42,  92,  87,   7, -25,   0),
+        ( 42, 108,  30,   4,  25,   0),
+        (123, 115, 183,  20,  25,   0),
+        (183,  77, 129,  22, -26,   0),
+        (215,  86,  50,   1,   1,   0),
+        (225,  40,  99,  20, -25,   0),
+        (273,  15, 136,  11,  25,   0),
+        (309,  86,  58,   1, -25,   0),
+        (336,  87, 147,  28, -26,   0),
+        (372,  54, 213,   4,  25,   0),
+        (408,  20,  80,   3, -26,   0),
+        (444,  72, 159,   6, -25,   0),
+        (448, 127,  83,   9, -25,   0),
+        (516,  35, 116,   6, -26,   0),
+        (564,  93, 128,   3, -26,   0),
+        (625,  36, 108,   8, -25,   0),
+        (670, 101, 156,  12, -25,   0),
+        (675,  67, 135,   9, -26,   0),
+        (802,  45,  56,   2,  25,   0),
+        (810,  64,  48,  15,  25,   0),
+        (817,  19,  41,   2, -25,   0),
+        (827,  43,  31,   6, -25,   0),
+        (834, 122,  24,   7,  25,   0),
+        (575, 103,  95,   1,  25,   0),
     ]
 
     with Image.open(image_path) as image:
@@ -259,6 +285,8 @@ def batch_render(images, scale):
 
     proc.communicate(input = cmd.encode(), timeout = 600)
     proc.wait()
+
+    glitched_boxes = ["textbox_monika.png", "textbox_monika_d.png"]
 
     for svg_path in images:
         png_path = f"{os.path.splitext(svg_path)[0]}.png"
