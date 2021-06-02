@@ -31,6 +31,7 @@ glitched_boxes = [
 # Script itself
 ################################################################################
 import json
+import itertools
 import os
 import re
 import shutil
@@ -54,10 +55,10 @@ def modulate_rgb_color(r, g, b, h, s, l):
     g = float(g) / 255.0
     b = float(b) / 255.0
 
-    ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([clamp(h, 0.0, 360.0),
+    ch, cs, cl = rgb_to_hsluv((r, g, b))
+    r, g, b = hsluv_to_rgb((clamp(h, 0.0, 360.0),
                             clamp(cs * s, 0.0, 100.0),
-                            clamp(cl + l * 100.0, 0.0, 100.0)])
+                            clamp(cl + l * 100.0, 0.0, 100.0)))
 
     return (int(r * 255.0),
             int(g * 255.0),
@@ -69,10 +70,10 @@ def modulate_rgba_color(r, g, b, a, h, s, l):
     b = float(b) / 255.0
     a = float(a) / 255.0
 
-    ch, cs, cl = rgb_to_hsluv([r, g, b])
-    r, g, b = hsluv_to_rgb([clamp(h, 0.0, 360.0),
+    ch, cs, cl = rgb_to_hsluv((r, g, b))
+    r, g, b = hsluv_to_rgb((clamp(h, 0.0, 360.0),
                             clamp(cs * s, 0.0, 100.0),
-                            clamp(cl + l * 100.0, 0.0, 100.0)])
+                            clamp(cl + l * 100.0, 0.0, 100.0)))
 
     return (int(r * 255.0),
             int(g * 255.0),
@@ -240,15 +241,17 @@ def install_fonts(fonts):
     for font_path in fonts:
         shutil.copy2(font_path, inkscape_fonts_dir)
 
-def batch_render(image_batch):
+def batch_render(images, scale):
     proc = Popen("inkscape --shell", stdin = PIPE, stdout = PIPE, stderr = STDOUT, shell = True)
 
     cmd = ""
 
-    for in_path, out_path, scale, glitched in image_batch:
-        cmd += f"file-open:{in_path};"
+    for svg_path in images:
+        png_path = f"{os.path.splitext(svg_path)[0]}.png"
+
+        cmd += f"file-open:{svg_path};"
         cmd += f"export-dpi:{96 * scale};"
-        cmd += f"export-filename:{out_path};"
+        cmd += f"export-filename:{png_path};"
         cmd += f"export-overwrite;"
         cmd += f"export-type:png;"
         cmd += f"export-do;"
@@ -257,21 +260,22 @@ def batch_render(image_batch):
     proc.communicate(input = cmd.encode(), timeout = 600)
     proc.wait()
 
-    for in_path, out_path, scale, glitched in image_batch:
-        if glitched:
-            glitch(out_path, scale)
+    for svg_path in images:
+        png_path = f"{os.path.splitext(svg_path)[0]}.png"
 
-        os.remove(in_path)
+        if os.path.basename(png_path) in glitched_boxes:
+            glitch(png_path, scale)
+
+        os.remove(svg_path)
 
 # Theme loading
 def preload_themes():
     result = []
 
-    for base_path, dirs, files in os.walk(theme_dir):
-        for file_path in files:
-            with open(os.path.join(base_path, file_path), "r") as theme_file:
-                theme = json.load(theme_file)
-                result.append(theme)
+    for file_path in os.listdir(theme_dir):
+        with open(os.path.join(theme_dir, file_path), "r") as theme_file:
+            theme = json.load(theme_file)
+            result.append(theme)
 
     return result
 
@@ -280,22 +284,66 @@ def log(message):
     print(f"BUILD: {message}")
 
 def replicate_dir_structure(file_path, dst_path):
-    dir_path = os.path.dirname(file_path)
-    dir_full_path = os.path.join(dst_path, dir_path)
+    file_dir = os.path.dirname(file_path)
+    file_abs_dir = os.path.join(dst_path, file_dir)
 
-    if not os.path.exists(dir_full_path):
-        log(f"Creating directory {dir_full_path}...")
-        os.makedirs(dir_full_path)
+    if not os.path.exists(file_abs_dir):
+        log(f"Creating directory {file_abs_dir}...")
+        os.makedirs(file_abs_dir)
 
-def list_files_recursive(dir):
-    result = []
-
+def iterate_files_recursive(dir):
     for base_path, dirs, files in os.walk(dir):
         for file_path in files:
-            full_path = os.path.join(base_path, file_path)
-            result.append(full_path)
+            yield os.path.join(base_path, file_path)
 
-    return result
+def copy_dir_contents(src_dir, dst_dir, theme = None, scale = None):
+    fonts, images = [], []
+
+    for file_path in iterate_files_recursive(src_dir):
+        src_path = os.path.relpath(file_path, src_dir)
+        dst_path = os.path.join(dst_dir, src_path)
+
+        _, file_ext = os.path.splitext(src_path)
+
+        replicate_dir_structure(src_path, dst_dir)
+
+        if file_ext == ".svg" and theme and scale:
+            log(f"Processing image {file_path}...")
+            preprocess_text_file(file_path, dst_path, theme, scale)
+            images.append(dst_path)
+
+        elif file_ext == ".rpy" and theme and scale:
+            log(f"Processing script {file_path}...")
+            preprocess_text_file(file_path, dst_path, theme, scale)
+
+        elif file_ext == ".json" and theme and scale:
+            log(f"Processing JSON {file_path}...")
+            preprocess_text_file(file_path, dst_path, theme, scale)
+
+        elif file_ext in [".otf", ".ttf"]:
+            log(f"Copying font {file_path}...")
+            shutil.copyfile(file_path, dst_path)
+            fonts.append(dst_path)
+
+        else:
+            log(f"Copying file {file_path}...")
+            shutil.copyfile(file_path, dst_path)
+
+    if len(fonts) > 0:
+        log("Installing fonts...")
+        install_fonts(fonts)
+
+    if len(images) > 0:
+        log("Rendering images...")
+        batch_render(images, scale)
+
+def make_archive(dir, archive_path, remove_dir = False):
+    archive_name, _ = os.path.splitext(archive_path)
+    shutil.make_archive(archive_name, "zip", dir)
+    os.rename(f"{archive_name}.zip", archive_path)
+
+    if remove_dir:
+        shutil.rmtree(dir)
 
 def build():
     # Clear previous build
@@ -308,91 +356,29 @@ def build():
     os.mkdir(build_dir)
 
     # Copy main files
-    fonts = []
-
     for mod_dir in mod_dirs:
         main_src_dir = os.path.join(source_dir, mod_dir, "main")
-        main_files = list_files_recursive(main_src_dir)
-
-        for file_path in main_files:
-            rel_path = os.path.relpath(file_path, main_src_dir)
-            _, file_ext = os.path.splitext(rel_path)
-
-            replicate_dir_structure(rel_path, build_dir)
-
-            if file_ext in [".otf", ".ttf"]:
-                log(f"Copying font {file_path}...")
-                dst_path = os.path.join(build_dir, rel_path)
-                shutil.copyfile(file_path, dst_path)
-                fonts.append(dst_path)
-
-            else:
-                log(f"Copying file {file_path}...")
-                dst_path = os.path.join(build_dir, rel_path)
-                shutil.copyfile(file_path, dst_path)
-
-    # Install fonts for SVG rendering
-    log("Installing fonts...")
-    install_fonts(fonts)
+        copy_dir_contents(main_src_dir, build_dir)
 
     # Make themes
     themes = preload_themes()
 
-    for theme in themes:
-        for scale in range(1, 3):
-            image_batch = []
+    for theme, scale in itertools.product(themes, range(1, 3)):
+        target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
+        target_dir = os.path.join(build_dir, "comfy_meta", target_id)
 
-            for mod_dir in mod_dirs:
-                theme_src_dir = os.path.join(source_dir, mod_dir, "theme")
-                theme_files = list_files_recursive(theme_src_dir)
+        for mod_dir in mod_dirs:
+            theme_src_dir = os.path.join(source_dir, mod_dir, "theme")
+            copy_dir_contents(theme_src_dir, target_dir, theme, scale)
 
-                target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
-                target_dir = os.path.join(build_dir, "comfy_meta", target_id)
-
-                # Process source files
-                for file_path in theme_files:
-                    rel_path = os.path.relpath(file_path, theme_src_dir)
-                    file_name, file_ext = os.path.splitext(rel_path)
-
-                    replicate_dir_structure(rel_path, target_dir)
-
-                    if file_ext == ".svg":
-                        log(f"Processing image {file_path}...")
-                        png_path = f"{file_name}.png"
-                        tmp_path = os.path.join(target_dir, rel_path)
-                        dst_path = os.path.join(target_dir, png_path)
-                        preprocess_text_file(file_path, tmp_path, theme, scale)
-                        image_batch.append((tmp_path, dst_path, scale, os.path.basename(png_path) in glitched_boxes))
-
-                    elif file_ext == ".rpy":
-                        log(f"Processing script {file_path}...")
-                        dst_path = os.path.join(target_dir, rel_path)
-                        preprocess_text_file(file_path, dst_path, theme, scale)
-
-                    elif file_ext == ".json":
-                        log(f"Processing JSON {file_path}...")
-                        dst_path = os.path.join(target_dir, rel_path)
-                        preprocess_text_file(file_path, dst_path, theme, scale)
-
-                    else:
-                        log(f"Copying file {file_path}...")
-                        dst_path = os.path.join(target_dir, rel_path)
-                        shutil.copyfile(file_path, dst_path)
-
-            log("Rendering images...")
-            batch_render(image_batch)
-
-            # Pack assets
-            log(f"Creating archive for {target_id}...")
-            shutil.make_archive(target_dir, "zip", target_dir)
-            os.rename(f"{target_dir}.zip", f"{target_dir}.arc")
-            shutil.rmtree(target_dir)
+        # Pack assets
+        log(f"Creating archive for {target_id}...")
+        make_archive(target_dir, f"{target_dir}.arc", True)
 
     # Create release archive if needed
     if release_mode:
         log("Creating release archive...")
-        shutil.make_archive("Release", "zip", build_dir)
-        shutil.rmtree(build_dir)
+        make_archive(build_dir, "Release.zip", True)
 
     log("Finished!")
 
