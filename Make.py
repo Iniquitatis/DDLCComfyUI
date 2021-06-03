@@ -55,9 +55,9 @@ def modulate_rgb_color(r, g, b, h, s, l):
                             clamp(cs * s, 0.0, 100.0),
                             clamp(cl + l * 100.0, 0.0, 100.0)))
 
-    return (int(r * 255.0),
-            int(g * 255.0),
-            int(b * 255.0))
+    return (int(round(r * 255.0)),
+            int(round(g * 255.0)),
+            int(round(b * 255.0)))
 
 def modulate_rgba_color(r, g, b, a, h, s, l):
     r = float(r) / 255.0
@@ -70,10 +70,10 @@ def modulate_rgba_color(r, g, b, a, h, s, l):
                             clamp(cs * s, 0.0, 100.0),
                             clamp(cl + l * 100.0, 0.0, 100.0)))
 
-    return (int(r * 255.0),
-            int(g * 255.0),
-            int(b * 255.0),
-            int(a * 255.0))
+    return (int(round(r * 255.0)),
+            int(round(g * 255.0)),
+            int(round(b * 255.0)),
+            int(round(a * 255.0)))
 
 def modulate_colors(h, s, l):
     is_modulated = (h != None and s != None and l != None)
