@@ -12,6 +12,13 @@ init -1 python in comfy_ui:
 
 default presistent.comfy_ui_show_preview = False
 
+label comfy_ui_glitch:
+    show screen tear(20, 0.1, 0.1, 0, 40)
+    play sound "sfx/s_kill_glitch1.ogg"
+    $ pause(0.25)
+    hide screen tear
+    stop sound
+
 screen comfy_ui_settings_pane(apply_label, disable_label):
     $ theme_count = comfy_ui.theme_mgr.get_theme_count()
 
@@ -61,15 +68,28 @@ screen comfy_ui_settings_pane(apply_label, disable_label):
                 null height 10
 
                 hbox:
-                    textbutton _("Apply"):
-                        style "navigation_button"
-                        xsize 100
-                        action Show(screen = "dialog", message = "The game will be restarted.", ok_action = Jump(apply_label))
+                    $ glitch_chance = 1.0 / 400.0
+                    $ glitch_action = Jump("comfy_ui_glitch")
 
-                    textbutton _("Disable"):
+                    $ apply_glitched = renpy.random.random() < glitch_chance
+                    $ apply_name = _("Apply") if not apply_glitched else glitchtext(10)
+                    $ apply_width = 100 if not apply_glitched else 150
+                    $ apply_action = Show(screen = "dialog", message = "The game will be restarted.", ok_action = Jump(apply_label))
+
+                    $ disable_glitched = renpy.random.random() < glitch_chance
+                    $ disable_name = _("Disable") if not disable_glitched else glitchtext(10)
+                    $ disable_width = 100 if not disable_glitched else 150
+                    $ disable_action = Show(screen = "dialog", message = "The game will be restarted.", ok_action = Jump(disable_label))
+
+                    textbutton apply_name:
                         style "navigation_button"
-                        xsize 100
-                        action Show(screen = "dialog", message = "The game will be restarted.", ok_action = Jump(disable_label))
+                        xsize apply_width
+                        action If(apply_glitched, glitch_action, apply_action)
+
+                    textbutton disable_name:
+                        style "navigation_button"
+                        xsize disable_width
+                        action If(disable_glitched, glitch_action, disable_action)
 
             if persistent.comfy_ui_show_preview:
                 add theme_preview:
