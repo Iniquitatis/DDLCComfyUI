@@ -281,17 +281,6 @@ def batch_render(images, scale):
 
         svg_path.unlink()
 
-# Theme loading
-def preload_themes():
-    result = []
-
-    for theme_path in theme_dir.iterdir():
-        with open(theme_path, "r") as theme_file:
-            theme = json.load(theme_file)
-            result.append(theme)
-
-    return result
-
 # Build chain
 def log(message):
     print(f"BUILD: {message}")
@@ -360,9 +349,9 @@ def build(mod_dirs, release_mode):
         copy_dir_contents(main_src_dir, build_dir)
 
     # Make themes
-    themes = preload_themes()
+    for theme_path, scale in itertools.product(theme_dir.iterdir(), range(1, 3)):
+        theme = json.load(theme_path.open("r"))
 
-    for theme, scale in itertools.product(themes, range(1, 3)):
         target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
         target_dir = build_dir / "comfy_meta" / target_id
 
