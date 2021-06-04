@@ -7,10 +7,11 @@
 ################################################################################
 import json
 import os
+import renpy
 
 from zipfile import ZipFile
 
-_game_dir = "game"
+_game_dir = os.path.join(renpy.config.basedir, "game")
 _meta_dir = os.path.join(_game_dir, "comfy_meta")
 _config_path = os.path.join(_meta_dir, "settings.json")
 
