@@ -5,43 +5,21 @@
 # See LICENSE file for the licensing information
 #
 ################################################################################
-
-################################################################################
-# Configuration variables
-################################################################################
-release_mode = False
-
-theme_dir  = "Themes"
-source_dir = "Source"
-build_dir  = "Build"
-
-mod_dirs = [
-    "common",
-
-    # NOTE: uncomment for MAS support
-    #"mas",
-]
-
-################################################################################
-# Script itself
-################################################################################
-import freetype
 import itertools
 import json
 import re
 import shutil
+from argparse import ArgumentParser
 from pathlib import Path
 from subprocess import Popen, PIPE, STDOUT
 
+import freetype
 from PIL import Image
 from hsluv import *
 
-# Convert strings to paths
-theme_dir = Path(theme_dir)
-source_dir = Path(source_dir)
-build_dir = Path(build_dir)
-
-mod_dirs = [Path(x) for x in mod_dirs]
+theme_dir  = Path("Themes")
+source_dir = Path("Source")
+build_dir  = Path("Build")
 
 # Text file preprocessing
 def clamp(value, lower, upper):
@@ -366,7 +344,7 @@ def make_archive(dir, archive_path, remove_dir = False):
     if remove_dir:
         shutil.rmtree(dir)
 
-def build():
+def build(mod_dirs, release_mode):
     # Clear previous build
     if build_dir.exists():
         log("Cleaning up previous build...")
@@ -403,5 +381,22 @@ def build():
 
     log("Finished!")
 
-preload_themes()
-build()
+if __name__ == "__main__":
+    ap = ArgumentParser()
+    ap.add_argument("-t", "--target",
+                    type = str,
+                    choices = ["ddlc", "mas"],
+                    default = "ddlc",
+                    help = "set target")
+    ap.add_argument("-r", "--release",
+                    action = "store_true",
+                    help = "enable release mode")
+
+    args = ap.parse_args()
+
+    mod_dirs = [Path("common")]
+
+    if args.target and args.target == "mas":
+        mod_dirs.append(Path("mas"))
+
+    build(mod_dirs, args.release)
