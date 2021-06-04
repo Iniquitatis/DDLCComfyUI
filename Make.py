@@ -25,8 +25,9 @@ mod_dirs = [
 ################################################################################
 # Script itself
 ################################################################################
-import json
+import freetype
 import itertools
+import json
 import os
 import re
 import shutil
@@ -128,9 +129,8 @@ def stringize(value):
     return macro
 
 def get_font_name(path):
-    # NOTE: it will work _only_ for fonts with file names matching "Name-Style.ext" pattern
-    file_name = os.path.basename(path)
-    font_name = re.match(r"(\w+)-\w+\.[ot]tf", file_name).group(1)
+    font = freetype.Face(os.path.join(build_dir, path))
+    font_name = font.family_name.decode()
 
     def macro(args, _):
         return font_name
