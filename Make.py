@@ -28,13 +28,20 @@ mod_dirs = [
 import freetype
 import itertools
 import json
-import os
 import re
 import shutil
+from pathlib import Path
 from subprocess import Popen, PIPE, STDOUT
 
 from PIL import Image
 from hsluv import *
+
+# Convert strings to paths
+theme_dir = Path(theme_dir)
+source_dir = Path(source_dir)
+build_dir = Path(build_dir)
+
+mod_dirs = [Path(x) for x in mod_dirs]
 
 # Text file preprocessing
 def clamp(value, lower, upper):
@@ -103,7 +110,7 @@ def modulate_colors(h, s, l):
 def include_text():
     def macro(args, file_meta):
         file_path, line, column = file_meta
-        inc_path = os.path.join(os.path.dirname(file_path), args[0])
+        inc_path = file_path.parent / args[0]
 
         result = ""
 
@@ -129,7 +136,7 @@ def stringize(value):
     return macro
 
 def get_font_name(path):
-    font = freetype.Face(os.path.join(build_dir, path))
+    font = freetype.Face(str(build_dir / path))
     font_name = font.family_name.decode()
 
     def macro(args, _):
@@ -261,8 +268,8 @@ def install_fonts(fonts):
     stdout, _ = proc.communicate()
     proc.wait()
 
-    inkscape_dir = stdout.decode().strip()
-    inkscape_fonts_dir = os.path.join(inkscape_dir, "fonts")
+    inkscape_dir = Path(stdout.decode().strip())
+    inkscape_fonts_dir = inkscape_dir / "fonts"
 
     for font_path in fonts:
         shutil.copy2(font_path, inkscape_fonts_dir)
@@ -273,7 +280,7 @@ def batch_render(images, scale):
     cmd = ""
 
     for svg_path in images:
-        png_path = f"{os.path.splitext(svg_path)[0]}.png"
+        png_path = svg_path.with_suffix(".png")
 
         cmd += f"file-open:{svg_path};"
         cmd += f"export-dpi:{96 * scale};"
@@ -289,19 +296,19 @@ def batch_render(images, scale):
     glitched_boxes = ["textbox_monika.png", "textbox_monika_d.png"]
 
     for svg_path in images:
-        png_path = f"{os.path.splitext(svg_path)[0]}.png"
+        png_path = svg_path.with_suffix(".png")
 
-        if os.path.basename(png_path) in glitched_boxes:
+        if png_path.name in glitched_boxes:
             glitch(png_path, scale)
 
-        os.remove(svg_path)
+        svg_path.unlink()
 
 # Theme loading
 def preload_themes():
     result = []
 
-    for file_path in os.listdir(theme_dir):
-        with open(os.path.join(theme_dir, file_path), "r") as theme_file:
+    for theme_path in theme_dir.iterdir():
+        with open(theme_path, "r") as theme_file:
             theme = json.load(theme_file)
             result.append(theme)
 
@@ -311,29 +318,16 @@ def preload_themes():
 def log(message):
     print(f"BUILD: {message}")
 
-def replicate_dir_structure(file_path, dst_path):
-    file_dir = os.path.dirname(file_path)
-    file_abs_dir = os.path.join(dst_path, file_dir)
-
-    if not os.path.exists(file_abs_dir):
-        log(f"Creating directory {file_abs_dir}...")
-        os.makedirs(file_abs_dir)
-
-def iterate_files_recursive(dir):
-    for base_path, dirs, files in os.walk(dir):
-        for file_path in files:
-            yield os.path.join(base_path, file_path)
-
 def copy_dir_contents(src_dir, dst_dir, theme = None, scale = None):
     fonts, images = [], []
 
-    for file_path in iterate_files_recursive(src_dir):
-        src_path = os.path.relpath(file_path, src_dir)
-        dst_path = os.path.join(dst_dir, src_path)
+    for file_path in src_dir.rglob("*.*"):
+        src_path = file_path.relative_to(src_dir)
+        dst_path = dst_dir / src_path
 
-        _, file_ext = os.path.splitext(src_path)
+        file_ext = src_path.suffix
 
-        replicate_dir_structure(src_path, dst_dir)
+        dst_path.parent.mkdir(parents = True, exist_ok = True)
 
         if file_ext == ".svg" and theme and scale:
             log(f"Processing image {file_path}...")
@@ -366,26 +360,25 @@ def copy_dir_contents(src_dir, dst_dir, theme = None, scale = None):
         batch_render(images, scale)
 
 def make_archive(dir, archive_path, remove_dir = False):
-    archive_name, _ = os.path.splitext(archive_path)
-    shutil.make_archive(archive_name, "zip", dir)
-    os.rename(f"{archive_name}.zip", archive_path)
+    shutil.make_archive(archive_path.with_suffix(""), "zip", dir)
+    archive_path.with_suffix(".zip").rename(archive_path)
 
     if remove_dir:
         shutil.rmtree(dir)
 
 def build():
     # Clear previous build
-    if os.path.exists(build_dir):
+    if build_dir.exists():
         log("Cleaning up previous build...")
         shutil.rmtree(build_dir)
 
     # Create build directory
     log("Creating build directory...")
-    os.mkdir(build_dir)
+    build_dir.mkdir()
 
     # Copy main files
     for mod_dir in mod_dirs:
-        main_src_dir = os.path.join(source_dir, mod_dir, "main")
+        main_src_dir = source_dir / mod_dir / "main"
         copy_dir_contents(main_src_dir, build_dir)
 
     # Make themes
@@ -393,15 +386,15 @@ def build():
 
     for theme, scale in itertools.product(themes, range(1, 3)):
         target_id = ("%s" if scale == 1 else "%s_hidpi") % theme["id"]
-        target_dir = os.path.join(build_dir, "comfy_meta", target_id)
+        target_dir = build_dir / "comfy_meta" / target_id
 
         for mod_dir in mod_dirs:
-            theme_src_dir = os.path.join(source_dir, mod_dir, "theme")
+            theme_src_dir = source_dir / mod_dir / "theme"
             copy_dir_contents(theme_src_dir, target_dir, theme, scale)
 
         # Pack assets
         log(f"Creating archive for {target_id}...")
-        make_archive(target_dir, f"{target_dir}.arc", True)
+        make_archive(target_dir, target_dir.with_suffix(".arc"), True)
 
     # Create release archive if needed
     if release_mode:
