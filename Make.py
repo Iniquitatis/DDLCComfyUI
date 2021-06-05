@@ -200,43 +200,17 @@ def shift_region(pixel_data, x, y, w, h, dx, dy):
             cx, cy = x + dx + i, y + dy + j
             pixel_data[cx, cy] = mix_pixel_glitched(pixel_data[cx, cy], region_data[i][j])
 
-def glitch(image_path, scale):
-    regions = [
-        #  X|   Y|   W|   H|  DX|  DY
-        ( 42,   5, 144,  15, -25,   0),
-        ( 42,  36,  41,  10,  25,   0),
-        ( 42,  62,  91,   5, -25,   0),
-        ( 42,  92,  87,   7, -25,   0),
-        ( 42, 108,  30,   4,  25,   0),
-        (123, 115, 183,  20,  25,   0),
-        (183,  77, 129,  22, -26,   0),
-        (215,  86,  50,   1,   1,   0),
-        (225,  40,  99,  20, -25,   0),
-        (273,  15, 136,  11,  25,   0),
-        (309,  86,  58,   1, -25,   0),
-        (336,  87, 147,  28, -26,   0),
-        (372,  54, 213,   4,  25,   0),
-        (408,  20,  80,   3, -26,   0),
-        (444,  72, 159,   6, -25,   0),
-        (448, 127,  83,   9, -25,   0),
-        (516,  35, 116,   6, -26,   0),
-        (564,  93, 128,   3, -26,   0),
-        (625,  36, 108,   8, -25,   0),
-        (670, 101, 156,  12, -25,   0),
-        (675,  67, 135,   9, -26,   0),
-        (802,  45,  56,   2,  25,   0),
-        (810,  64,  48,  15,  25,   0),
-        (817,  19,  41,   2, -25,   0),
-        (827,  43,  31,   6, -25,   0),
-        (834, 122,  24,   7,  25,   0),
-        (575, 103,  95,   1,  25,   0),
-    ]
-
-    with Image.open(image_path) as image:
+def glitch(image_path, glitch_path, scale):
+    with Image.open(image_path) as image, open(glitch_path) as glitch_file:
         pixel_data = image.load()
 
-        for region in regions:
-            x, y, w, h, dx, dy = [i * scale for i in region]
+        for line in glitch_file:
+            if line.startswith("#"):
+                continue
+
+            region = [int(v.strip()) * scale for v in line.split(",")]
+
+            x, y, w, h, dx, dy = region
             shift_region(pixel_data, x, y, w, h, dx, dy)
 
         image.save(image_path)
@@ -271,13 +245,13 @@ def batch_render(images, scale):
     proc.communicate(input = cmd.encode(), timeout = 600)
     proc.wait()
 
-    glitched_boxes = ["textbox_monika.png", "textbox_monika_d.png"]
-
     for svg_path in images:
         png_path = svg_path.with_suffix(".png")
+        glitch_path = svg_path.with_suffix(".glitch")
 
-        if png_path.name in glitched_boxes:
-            glitch(png_path, scale)
+        if glitch_path.exists():
+            glitch(png_path, glitch_path, scale)
+            glitch_path.unlink()
 
         svg_path.unlink()
 
