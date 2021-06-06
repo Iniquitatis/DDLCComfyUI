@@ -344,7 +344,7 @@ def build(mod_dirs, release_mode):
     # Create release archive if needed
     if release_mode:
         log("Creating release archive...")
-        make_archive(build_dir, "Release.zip", True)
+        make_archive(build_dir, Path("Release.zip"), True)
 
     log("Finished!")
 
