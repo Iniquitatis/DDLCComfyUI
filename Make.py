@@ -224,7 +224,11 @@ def install_fonts(fonts):
     inkscape_fonts_dir = inkscape_dir / "fonts"
 
     for font_path in fonts:
-        shutil.copy2(font_path, inkscape_fonts_dir)
+        try:
+            shutil.copy2(font_path, inkscape_fonts_dir)
+        except PermissionError:
+            print("Please close the Inkscape")
+            break
 
 def batch_render(images, scale):
     proc = Popen("inkscape --shell", stdin = PIPE, stdout = PIPE, stderr = STDOUT, shell = True)
