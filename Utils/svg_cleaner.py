@@ -17,6 +17,20 @@ xml_namespaces = {
     "xlink":    "http://www.w3.org/1999/xlink",
 }
 
+idless_tags = [
+    "feBlend",
+    "feColorMatrix",
+    "feComposite",
+    "feDisplacementMap",
+    "feDistantLight",
+    "feFlood",
+    "feGaussianBlur",
+    "feOffset",
+    "feSpecularLighting",
+    "feTurbulence",
+    "stop",
+]
+
 attr_order = [
     "version",
     "id",
@@ -184,6 +198,10 @@ def pack_style_props(node):
     else:
         node.attrib.pop("style")
 
+def remove_ids(node):
+    if re.sub(r"\{.+\}", "", node.tag) in idless_tags:
+        node.attrib.pop("id", None)
+
 def sanitize_attrs(node):
     def hex_replacer(m):
         r = int(m.group(1), 16)
@@ -212,6 +230,7 @@ def process_node(node, pack_style):
     else:
         extract_style_props(node)
 
+    remove_ids(node)
     sort_attrs(node)
     sort_style_props(node)
     sanitize_attrs(node)
