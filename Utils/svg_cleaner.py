@@ -224,6 +224,14 @@ def sanitize_attrs(node):
         a[k] = re.sub(re_hex, hex_replacer, a[k])
         a[k] = re.sub(re_rgb, rgb_replacer, a[k])
 
+def sanitize_path_points(node):
+    d = node.attrib.get("d", None)
+
+    if not d:
+        return
+
+    node.attrib["d"] = d.replace(",", " ")
+
 def process_node(node, pack_style):
     if pack_style:
         pack_style_props(node)
@@ -234,6 +242,7 @@ def process_node(node, pack_style):
     sort_attrs(node)
     sort_style_props(node)
     sanitize_attrs(node)
+    sanitize_path_points(node)
 
 def process_xmls(paths, suffix, pack_styles):
     for ns_name, ns_url in xml_namespaces.items():
