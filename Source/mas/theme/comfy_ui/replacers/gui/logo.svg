@@ -58,58 +58,51 @@
                         0.00 0.00 0.00 1.00 0" />
         </filter>
         <filter id="shadowTopD" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-            <feFlood result="flood" flood-color="rgb(128, 98, 129)" flood-opacity="1" />
+            <feFlood result="flood" flood-color="rgb(128, 98, 129)" />
             <feComposite in="flood" in2="SourceGraphic" result="composite1" operator="in" />
-            <feGaussianBlur in="composite1" result="blur" stdDeviation="0" />
             <feOffset result="offset" dx="1.5" dy="3" />
             <feComposite in="SourceGraphic" in2="offset" result="composite2" operator="over" />
         </filter>
         <filter id="shadowBottomD" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-            <feFlood result="flood" flood-color="rgb(126, 72, 72)" flood-opacity="1" />
+            <feFlood result="flood" flood-color="rgb(126, 72, 72)" />
             <feComposite in="flood" in2="SourceGraphic" result="composite1" operator="in" />
-            <feGaussianBlur in="composite1" result="blur" stdDeviation="0" />
             <feOffset result="offset" dx="1.5" dy="3" />
             <feComposite in="SourceGraphic" in2="offset" result="composite2" operator="over" />
         </filter>
         <filter id="shadowO" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-            <feFlood result="flood" flood-color="rgb(128, 106, 74)" flood-opacity="1" />
+            <feFlood result="flood" flood-color="rgb(128, 106, 74)" />
             <feComposite in="flood" in2="SourceGraphic" result="composite1" operator="in" />
-            <feGaussianBlur in="composite1" result="blur" stdDeviation="0" />
             <feOffset result="offset" dx="1.5" dy="3" />
             <feComposite in="SourceGraphic" in2="offset" result="composite2" operator="over" />
         </filter>
         <filter id="shadowTopK" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-            <feFlood result="flood" flood-color="rgb(86, 127, 85)" flood-opacity="1" />
+            <feFlood result="flood" flood-color="rgb(86, 127, 85)" />
             <feComposite in="flood" in2="SourceGraphic" result="composite1" operator="in" />
-            <feGaussianBlur in="composite1" result="blur" stdDeviation="0" />
             <feOffset result="offset" dx="1.5" dy="3" />
             <feComposite in="SourceGraphic" in2="offset" result="composite2" operator="over" />
         </filter>
         <filter id="shadowBottomK" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-            <feFlood result="flood" flood-color="rgb(91, 111, 116)" flood-opacity="1" />
+            <feFlood result="flood" flood-color="rgb(91, 111, 116)" />
             <feComposite in="flood" in2="SourceGraphic" result="composite1" operator="in" />
-            <feGaussianBlur in="composite1" result="blur" stdDeviation="0" />
             <feOffset result="offset" dx="1.5" dy="3" />
             <feComposite in="SourceGraphic" in2="offset" result="composite2" operator="over" />
         </filter>
         <filter id="shadowTopI" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-            <feFlood result="flood" flood-color="rgb(130, 73, 73)" flood-opacity="1" />
+            <feFlood result="flood" flood-color="rgb(130, 73, 73)" />
             <feComposite in="flood" in2="SourceGraphic" result="composite1" operator="in" />
-            <feGaussianBlur in="composite1" result="blur" stdDeviation="0" />
             <feOffset result="offset" dx="1.5" dy="3" />
             <feComposite in="SourceGraphic" in2="offset" result="composite2" operator="over" />
         </filter>
         <filter id="shadowBottomI" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-            <feFlood result="flood" flood-color="rgb(98, 72, 122)" flood-opacity="1" />
+            <feFlood result="flood" flood-color="rgb(98, 72, 122)" />
             <feComposite in="flood" in2="SourceGraphic" result="composite1" operator="in" />
-            <feGaussianBlur in="composite1" result="blur" stdDeviation="0" />
             <feOffset result="offset" dx="1.5" dy="3" />
             <feComposite in="SourceGraphic" in2="offset" result="composite2" operator="over" />
         </filter>
         <filter id="paperFilter" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
             <feTurbulence result="turbulence" type="turbulence" baseFrequency="0.12 0.02" numOctaves="5" />
             <feDisplacementMap in="SourceGraphic" in2="turbulence" result="displaced" scale="1.8" xChannelSelector="R" yChannelSelector="A" />
-            <feComposite in="SourceGraphic" in2="displaced" result="fbSourceGraphic" k1="0" k2="0" k3="0" k4="0" operator="atop" />
+            <feComposite in="SourceGraphic" in2="displaced" result="fbSourceGraphic" operator="atop" />
             <feColorMatrix in="fbSourceGraphic" result="fbSourceGraphicAlpha"
                 values="0 0 0 -1 0
                         0 0 0 -1 0
@@ -157,7 +150,7 @@
         <path d="M 127.85937 335.28602 L 412.30158 312.89993 L 415.77406 360.23338 C 415.77406 360.23338 391.15844 368.01958 378.82862 369.96438 C 366.80012 371.86164 346.08199 370.89122 346.08199 370.89122 C 346.08199 370.89122 330.61263 368.40527 312.88167 370.32715 L 307.03934 372.11159 L 298.13734 371.25051 C 279.30758 372.44307 264.07707 380.43176 258.89302 380.70988 C 257.597 380.77941 249.94463 379.06259 239.25298 379.89661 C 226.88356 380.86151 213.4486 383.25729 201.19168 383.89415 C 176.67783 385.16788 155.13433 387.07521 155.13433 387.07521 C 155.13433 387.07521 156.12466 382.75099 144.69854 383.18104 C 133.27242 383.61109 132.00322 386.69616 132.00322 386.69616 Z" fill="rgb(255, 255, 255)" filter="url(#paperFilter)" />
     </g>
     <g id="literatureClub">
-        <text x="116.31992" y="383.90274" transform="rotate(-4.5)" font-family="dearJoe 5 CASUAL" font-size="36px" letter-spacing="1.6px" line-height="1.25" rotate="3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 0">Literature Club</text>
+        <text x="116.31992" y="383.90274" transform="rotate(-4.5)" rotate="3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 0" font-family="dearJoe 5 CASUAL" font-size="36px" letter-spacing="1.6px">Literature Club</text>
         <circle cx="389.07178" cy="355.39832" r="1.5" fill="rgb(0, 0, 0)" />
         <circle cx="392.21744" cy="340.34714" r="1.5" fill="rgb(0, 0, 0)" />
     </g>
@@ -165,7 +158,7 @@
         <path d="M 72.188059 407.23406 L 469.79292 375.94187 L 475.06743 442.96088 L 77.462568 474.25306 Z" fill="rgb(255, 255, 255)" filter="url(#paperFilter)" />
     </g>
     <g id="monikaAfterStory">
-        <text x="87.400795" y="454.55743" transform="rotate(-4.5)" font-family="dearJoe 5 CASUAL" font-size="36px" letter-spacing="1.6px" line-height="1.25" rotate="3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 0">Monika After Story</text>
+        <text x="87.400795" y="454.55743" transform="rotate(-4.5)" rotate="3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 0" font-family="dearJoe 5 CASUAL" font-size="36px" letter-spacing="1.6px">Monika After Story</text>
         <path d="M 446.16913 412.54042 C 446.16913 412.54042 443.72451 411.26935 453.32506 411.31795 C 458.11614 411.3422 466.40381 409.95898 466.40381 409.95898" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="round" stroke-width="2" />
         <path d="M 87.130629 441.12701 C 87.130629 441.12701 84.686009 439.85594 94.286559 439.90454 C 99.077639 439.92879 107.36531 438.54557 107.36531 438.54557" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="round" stroke-width="2" />
     </g>
