@@ -121,7 +121,7 @@
         <linearGradient id="penTipGradient" x1="371.39731" y1="295.18723" x2="380.65723" y2="296.90344" gradientUnits="userSpaceOnUse" xlink:href="#penTipGradientTmpl" />
     </defs>
     <g id="circle">
-        <circle cx="256" cy="256" r="242" fill="rgb(255, 230, 244)" stroke="rgb(255, 189, 225)" stroke-width="28" />
+        <circle cx="256" cy="256" r="242" fill="CUI_PRM_COLOR(255, 230, 244)" stroke="CUI_PRM_COLOR(255, 189, 225)" stroke-width="28" />
     </g>
     <g id="heartBig">
         <path d="M 256 437.49999 C 242.6847 437.91567 45.853872 325.96382 63.500001 221.99999 C 68.831167 190.59092 84.300998 142.29661 151.50001 140.50001 C 186.12274 139.57435 254.50001 174.00001 254.50001 174.00001 C 254.50001 174.00001 326.43086 139.50381 361.50001 141 C 418.14076 143.41652 435.38879 177.20896 446.99999 212.50001 C 482.37599 320.02188 269.3153 437.08433 256 437.49999 Z" fill="url(#heartPattern)" filter="url(#blueHeartFilter)" />
