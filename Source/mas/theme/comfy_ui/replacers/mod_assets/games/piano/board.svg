@@ -13,7 +13,7 @@
         <rect x="51" y="50" width="443" height="214" fill="rgb(128, 128, 128)" />
         <rect x="51" y="47" width="443" height="3" fill="rgb(20, 0, 30)" />
     </g>
-    <g fill="rgb(20, 0, 30)" font-family="Halogen" font-size="24px" style="text-anchor: middle">
+    <g fill="rgb(20, 0, 30)" font-family="Halogen" font-size="24px" text-anchor="middle">
         <text x="87.19141" y="35.08594">2</text>
         <text x="124.19141" y="35.08594">3</text>
         <text x="161.19141" y="35.08594">4</text>
@@ -23,7 +23,7 @@
         <text x="383.19141" y="35.08594">0</text>
         <text x="420.19141" y="35.08594">-</text>
     </g>
-    <g fill="rgb(77, 65, 84)" font-family="Halogen" font-size="24px" style="text-anchor: middle">
+    <g fill="rgb(77, 65, 84)" font-family="Halogen" font-size="24px" text-anchor="middle">
         <text x="69.94531" y="308.08594">Q</text>
         <text x="106.94531" y="308.08594">W</text>
         <text x="143.94531" y="308.08594">E</text>
