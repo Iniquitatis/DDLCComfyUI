@@ -110,6 +110,7 @@ presentation_attrs = [
     "stroke-linejoin",
     "stroke-opacity",
     "stroke-width",
+    "text-anchor",
 ]
 
 def make_comparator(key_order):
