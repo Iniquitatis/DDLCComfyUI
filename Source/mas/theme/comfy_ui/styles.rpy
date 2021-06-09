@@ -54,16 +54,21 @@ init 999 style radio_button_text_dark:
 
 # Fancy check button
 init 999 style generic_fancy_check_button:
+    ysize               36
+    foreground          Transform("mod_assets/buttons/checkbox/[prefix_]fancy_check.png", yalign = 0.5)
     idle_background     Solid(comfy_ui.fancy_check_button.light.idle_background_color)
     hover_background    Solid(comfy_ui.fancy_check_button.light.hover_background_color)
     selected_background Solid(comfy_ui.fancy_check_button.light.selected_background_color)
 
 init 999 style generic_fancy_check_button_dark:
+    ysize               36
+    foreground          Transform("mod_assets/buttons/checkbox/[prefix_]fancy_check.png", yalign = 0.5)
     idle_background     Solid(comfy_ui.fancy_check_button.dark.idle_background_color)
     hover_background    Solid(comfy_ui.fancy_check_button.dark.hover_background_color)
     selected_background Solid(comfy_ui.fancy_check_button.dark.selected_background_color)
 
 init 999 style generic_fancy_check_button_text:
+    yalign         0.5
     font           comfy_ui.fancy_check_button_text.font
     kerning        comfy_ui.fancy_check_button_text.font_kerning
     size           comfy_ui.fancy_check_button_text.font_size
@@ -72,6 +77,7 @@ init 999 style generic_fancy_check_button_text:
     selected_color comfy_ui.fancy_check_button_text.light.selected_color
 
 init 999 style generic_fancy_check_button_text_dark:
+    yalign         0.5
     font           comfy_ui.fancy_check_button_text.font
     kerning        comfy_ui.fancy_check_button_text.font_kerning
     size           comfy_ui.fancy_check_button_text.font_size
