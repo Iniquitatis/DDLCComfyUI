@@ -226,19 +226,21 @@ init 999 style confirm_prompt_text_dark:
 # Choice menu
 ################################################################################
 init 999 style choice_button:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style choice_button_dark:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style choice_button_text:
+    yoffset comfy_ui.button_text.vertical_offset
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
 
 init 999 style choice_button_text_dark:
+    yoffset comfy_ui.button_text.vertical_offset
     font    comfy_ui.common.font
     kerning comfy_ui.common.font_kerning
     size    comfy_ui.common.font_size
@@ -249,22 +251,24 @@ init 999 style choice_button_text_dark:
 # Scrollable menu
 ################################################################################
 init 999 style scrollable_menu_button:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style scrollable_menu_button_dark:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style scrollable_menu_button_text:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 init 999 style scrollable_menu_button_text_dark:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 
 
@@ -272,22 +276,24 @@ init 999 style scrollable_menu_button_text_dark:
 # Two-pane scrollable menu
 ################################################################################
 init 999 style twopane_scrollable_menu_button:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style twopane_scrollable_menu_button_dark:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style twopane_scrollable_menu_button_text:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 init 999 style twopane_scrollable_menu_button_text_dark:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 
 
@@ -295,22 +301,24 @@ init 999 style twopane_scrollable_menu_button_text_dark:
 # Talk choice menu
 ################################################################################
 init 999 style talk_choice_button:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style talk_choice_button_dark:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style talk_choice_button_text:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 init 999 style talk_choice_button_text_dark:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 
 
@@ -318,22 +326,24 @@ init 999 style talk_choice_button_text_dark:
 # Hotkey button menu
 ################################################################################
 init 999 style hkb_button:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style hkb_button_dark:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style hkb_button_text:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 init 999 style hkb_button_text_dark:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 
 
@@ -341,22 +351,24 @@ init 999 style hkb_button_text_dark:
 # Island buttons
 ################################################################################
 init 999 style island_button:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style island_button_dark:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style island_button_text:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 init 999 style island_button_text_dark:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 
 
@@ -364,19 +376,21 @@ init 999 style island_button_text_dark:
 # Extras menu
 ################################################################################
 init 999 style mas_adjustable_button:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style mas_adjustable_button_dark:
-    top_padding    (5 + int(math.floor(float(comfy_ui.button_height_adjustment) / 2.0)))
-    bottom_padding (5 + int(math.ceil (float(comfy_ui.button_height_adjustment) / 2.0)))
+    top_padding    (5 + int(math.floor(float(comfy_ui.button.height_adjustment) / 2.0)))
+    bottom_padding (5 + int(math.ceil (float(comfy_ui.button.height_adjustment) / 2.0)))
 
 init 999 style mas_adjustable_button_text:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 init 999 style mas_adjustable_button_text_dark:
-    font       comfy_ui.common.font
-    kerning    comfy_ui.common.font_kerning
-    size       comfy_ui.common.font_size
+    yoffset comfy_ui.button_text.vertical_offset
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size

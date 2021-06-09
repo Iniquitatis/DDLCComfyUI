@@ -57,6 +57,9 @@ define comfy_ui.quick_button_text.selected_color    = "CUI_SCD_COLOR(255, 255, 2
 define comfy_ui.quick_button_text.insensitive_color = "CUI_SCD_COLOR(170, 102, 102)"
 define comfy_ui.quick_button_text.outlines          = []
 
+define comfy_ui.button.height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
+
+define comfy_ui.button_text.vertical_offset   = CUI_BTN_TEXT_VERT_OFFSET()
 define comfy_ui.button_text.idle_color        = "CUI_PRM_COLOR(56, 56, 56)"
 define comfy_ui.button_text.hover_color       = "CUI_PRM_COLOR(255, 170, 153)"
 define comfy_ui.button_text.selected_color    = "CUI_PRM_COLOR(187, 85, 136)"
@@ -74,8 +77,6 @@ define comfy_ui.option_button_text.insensitive_color = "CUI_SCD_COLOR(170, 170, 
 define comfy_ui.poem_game_text.color          = "CUI_PRM_COLOR(56, 56, 56)"
 define comfy_ui.poem_game_text.outlines       = []
 define comfy_ui.poem_game_text.hover_outlines = [(3, "CUI_PRM_COLOR(255, 238, 255)", 0, 0), (2, "CUI_PRM_COLOR(255, 204, 255)", 0, 0), (1, "CUI_PRM_COLOR(255, 170, 255)", 0, 0)]
-
-define comfy_ui.button_height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
 
 define comfy_ui.choice_button_spacing = 22
 

@@ -89,6 +89,9 @@ define comfy_ui.quick_button_text.dark.selected_color     = "CUI_SCD_COLOR(255, 
 define comfy_ui.quick_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(170, 102, 102)"
 define comfy_ui.quick_button_text.dark.outlines           = []
 
+define comfy_ui.button.height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
+
+define comfy_ui.button_text.vertical_offset         = CUI_BTN_TEXT_VERT_OFFSET()
 define comfy_ui.button_text.light.idle_color        = "CUI_PRM_COLOR(56, 56, 56)"
 define comfy_ui.button_text.light.hover_color       = "CUI_PRM_COLOR(255, 170, 153)"
 define comfy_ui.button_text.light.selected_color    = "CUI_PRM_COLOR(187, 85, 136)"
@@ -128,8 +131,6 @@ define comfy_ui.fancy_check_button_text.light.selected_color    = "CUI_PRM_COLOR
 define comfy_ui.fancy_check_button_text.dark.idle_color         = "CUI_PRM_COLOR(191, 191, 191)"
 define comfy_ui.fancy_check_button_text.dark.hover_color        = "CUI_PRM_COLOR(235, 173, 185)"
 define comfy_ui.fancy_check_button_text.dark.selected_color     = "CUI_PRM_COLOR(235, 173, 185)"
-
-define comfy_ui.button_height_adjustment = CUI_BTN_HEIGHT_ADJUSTMENT()
 
 define comfy_ui.scrollable_menu_button_spacing = 6
 define comfy_ui.choice_button_spacing          = 12
