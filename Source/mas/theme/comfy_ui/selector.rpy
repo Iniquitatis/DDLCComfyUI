@@ -6,6 +6,42 @@
 #
 ################################################################################
 
+# MASFIX: monkey patch for selector image buttons
+init 999 python in comfy_ui.selector:
+    from renpy.display.im import Image
+    from renpy.display.imagelike import Borders, Frame
+    from renpy.display.transform import Transform
+    from store import MASSelectableImageButtonDisplayable, mas_getTimeFile
+
+    old_init = MASSelectableImageButtonDisplayable.__init__
+
+    def monkey_init(self, *args, **kwargs):
+        old_init(self, *args, **kwargs)
+
+        self.thumb_overlay = Image(mas_getTimeFile("mod_assets/frames/selector_overlay.png"))
+        self.thumb_overlay_locked = Image(mas_getTimeFile("mod_assets/frames/selector_overlay_disabled.png"))
+        self.hover_overlay = Image(mas_getTimeFile("mod_assets/frames/selector_overlay_hover.png"))
+        self.top_frame = Frame(mas_getTimeFile("mod_assets/frames/selector_top_frame.png"), Borders(10, 10, 10, 10))
+        self.top_frame_selected = Frame(mas_getTimeFile("mod_assets/frames/selector_top_frame_selected.png"), Borders(10, 10, 10, 10))
+        self.top_frame_locked = Frame(mas_getTimeFile("mod_assets/frames/selector_top_frame_disabled.png"), Borders(10, 10, 10, 10))
+
+    def monkey_render_bottom_frame(self, hover, st, at):
+        thumb = Transform(self.thumb, pos = (3, 3), crop = (3, 3, self.WIDTH - 6, self.SELECTOR_HEIGHT - 6))
+        thumb_render = renpy.Render(self.WIDTH, self.SELECTOR_HEIGHT)
+        thumb_render.place(thumb)
+
+        renders = [thumb_render]
+
+        if hover:
+            renders.append(self._render_bottom_frame_piece(self.hover_overlay, st, at))
+        else:
+            renders.append(self._render_bottom_frame_piece(self.thumb_overlay, st, at))
+
+        return renders
+
+    MASSelectableImageButtonDisplayable.__init__ = monkey_init
+    MASSelectableImageButtonDisplayable._render_bottom_frame = monkey_render_bottom_frame
+
 # MASFIX: broken layout in the clothing/hairstyle selector
 init 999 screen mas_selector_sidebar(items, mailbox, confirm, cancel, restore, remover = None):
     zorder 50
