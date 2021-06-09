@@ -56,16 +56,16 @@ init 999 style radio_button_text_dark:
 init 999 style generic_fancy_check_button:
     ysize               36
     foreground          Transform("mod_assets/buttons/checkbox/[prefix_]fancy_check.png", yalign = 0.5)
-    idle_background     Solid(comfy_ui.fancy_check_button.light.idle_background_color)
-    hover_background    Solid(comfy_ui.fancy_check_button.light.hover_background_color)
-    selected_background Solid(comfy_ui.fancy_check_button.light.selected_background_color)
+    idle_background     Null()
+    hover_background    Frame("mod_assets/buttons/checkbox/fancy_check_bg.png", Borders(5, 5, 5, 5))
+    selected_background Frame("mod_assets/buttons/checkbox/fancy_check_bg.png", Borders(5, 5, 5, 5))
 
 init 999 style generic_fancy_check_button_dark:
     ysize               36
     foreground          Transform("mod_assets/buttons/checkbox/[prefix_]fancy_check.png", yalign = 0.5)
-    idle_background     Solid(comfy_ui.fancy_check_button.dark.idle_background_color)
-    hover_background    Solid(comfy_ui.fancy_check_button.dark.hover_background_color)
-    selected_background Solid(comfy_ui.fancy_check_button.dark.selected_background_color)
+    idle_background     Null()
+    hover_background    Frame("mod_assets/buttons/checkbox/fancy_check_bg_d.png", Borders(5, 5, 5, 5))
+    selected_background Frame("mod_assets/buttons/checkbox/fancy_check_bg_d.png", Borders(5, 5, 5, 5))
 
 init 999 style generic_fancy_check_button_text:
     yalign         0.5
