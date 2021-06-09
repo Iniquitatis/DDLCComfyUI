@@ -1,0 +1,12 @@
+<!--============================================================================
+=
+= Copyright (c) 2020–2021 Dominus Iniquitatis <zerosaiko@gmail.com>
+=
+= See LICENSE file for the licensing information
+=
+=============================================================================-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="35" height="35">
+    <g fill="CUI_PRM_COLOR(206, 126, 160)">
+        <rect x="0" y="0" width="35" height="35" rx="CUI_BTN_ROUNDING()" />
+    </g>
+</svg>

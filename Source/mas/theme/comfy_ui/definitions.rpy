@@ -115,13 +115,6 @@ define comfy_ui.option_button_text.dark.hover_color        = "CUI_SCD_COLOR(230,
 define comfy_ui.option_button_text.dark.selected_color     = "CUI_SCD_COLOR(209, 123, 157)"
 define comfy_ui.option_button_text.dark.insensitive_color  = "CUI_SCD_COLOR(115, 115, 115, 127)"
 
-define comfy_ui.fancy_check_button.light.idle_background_color     = "CUI_PRM_COLOR(0, 0, 0, 0)"
-define comfy_ui.fancy_check_button.light.hover_background_color    = "CUI_PRM_COLOR(255, 189, 225)"
-define comfy_ui.fancy_check_button.light.selected_background_color = "CUI_PRM_COLOR(255, 189, 225)"
-define comfy_ui.fancy_check_button.dark.idle_background_color      = "CUI_PRM_COLOR(0, 0, 0, 0)"
-define comfy_ui.fancy_check_button.dark.hover_background_color     = "CUI_PRM_COLOR(206, 126, 160)"
-define comfy_ui.fancy_check_button.dark.selected_background_color  = "CUI_PRM_COLOR(206, 126, 160)"
-
 define comfy_ui.fancy_check_button_text.font                    = "CUI_MAIN_FONT_REGULAR()"
 define comfy_ui.fancy_check_button_text.font_kerning            = 0.0
 define comfy_ui.fancy_check_button_text.font_size               = 24
