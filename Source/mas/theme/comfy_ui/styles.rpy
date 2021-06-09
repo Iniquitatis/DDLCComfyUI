@@ -531,20 +531,3 @@ init 999 image input_caret:
         linear 0.35 alpha 0
         linear 0.35 alpha 1
         repeat
-
-
-
-################################################################################
-# Hangman game
-################################################################################
-init 999 transform hangman_board:
-    xanchor 0
-    yanchor 0
-    xpos 675
-    ypos 100
-    alpha 1.0
-
-init 999 python in mas_hangman:
-    WORD_FONT = "mod_assets/font/m1_fixed.ttf"
-    WORD_SIZE = 36
-    WORD_COLOR = "#202020"
