@@ -11,3 +11,6 @@ init 999 python:
     screens[("twopane_scrollable_menu", None)].ast.children[3].keyword[4] = (
         "background", "Frame('mod_assets/frames/search_bar.png', Borders(5, 5, 5, 5))"
     )
+    screens[("mas_selector_sidebar", None)].ast.children[2].keyword[4] = (
+        "background", "Frame('mod_assets/frames/search_bar.png', Borders(5, 5, 5, 5))"
+    )

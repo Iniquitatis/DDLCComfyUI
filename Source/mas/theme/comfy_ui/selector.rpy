@@ -115,8 +115,5 @@ screen comfy_ui_selector_fix:
 
 init 999 python:
     screens = renpy.display.screen.screens
-    screens[("mas_selector_sidebar", None)].ast.children[2].keyword[4] = (
-        "background", "Frame('mod_assets/frames/search_bar.png', Borders(5, 5, 5, 5))"
-    )
     screens[("mas_selector_sidebar", None)].ast.children[3] = screens[("comfy_ui_selector_fix", None)].ast.children[0]
     screens[("mas_selector_sidebar", None)].ast.children.append(screens[("comfy_ui_selector_fix", None)].ast.children[1])
