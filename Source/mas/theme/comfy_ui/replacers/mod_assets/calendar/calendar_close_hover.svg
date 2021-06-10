@@ -6,7 +6,9 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="74" height="74">
-    <g fill="rgb(255, 236, 247)" stroke="rgb(255, 189, 242)" stroke-width="3">
-        <circle cx="50%" cy="50%" r="35.5" />
+    <g fill="rgb(255, 236, 247)" stroke="rgb(255, 189, 242)" stroke-linecap="round">
+        <circle cx="50%" cy="50%" r="35.5" stroke-width="3" />
+        <line x1="24" y1="24" x2="50" y2="50" stroke-width="4" />
+        <line x1="24" y1="50" x2="50" y2="24" stroke-width="4" />
     </g>
 </svg>
