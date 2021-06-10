@@ -55,7 +55,8 @@ init 999 screen mas_selector_sidebar(items, mailbox, confirm, cancel, restore, r
         ypos 5
         xsize 200
         ysize 40
-        background Solid("#ffaa99aa")
+        # MASFIX: replace basic search bar Solid() by an actual image
+        background Frame("mod_assets/frames/search_bar.png", Borders(5, 5, 5, 5))
 
         viewport:
             draggable False
