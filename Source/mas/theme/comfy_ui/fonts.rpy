@@ -52,15 +52,15 @@ init 999 style radio_button_text_dark:
 # Fancy check button
 init 999 style generic_fancy_check_button_text:
     yoffset comfy_ui.button_text.vertical_offset
-    font    comfy_ui.fancy_check_button_text.font
-    kerning comfy_ui.fancy_check_button_text.font_kerning
-    size    comfy_ui.fancy_check_button_text.font_size
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 init 999 style generic_fancy_check_button_text_dark:
     yoffset comfy_ui.button_text.vertical_offset
-    font    comfy_ui.fancy_check_button_text.font
-    kerning comfy_ui.fancy_check_button_text.font_kerning
-    size    comfy_ui.fancy_check_button_text.font_size
+    font    comfy_ui.common.font
+    kerning comfy_ui.common.font_kerning
+    size    comfy_ui.common.font_size
 
 
 
