@@ -69,12 +69,14 @@ init 999 style generic_fancy_check_button_dark:
 
 init 999 style generic_fancy_check_button_text:
     yalign         0.5
+    font           gui.default_font
     color          comfy_ui.fancy_check_button_text.light.idle_color
     hover_color    comfy_ui.fancy_check_button_text.light.hover_color
     selected_color comfy_ui.fancy_check_button_text.light.selected_color
 
 init 999 style generic_fancy_check_button_text_dark:
     yalign         0.5
+    font           gui.default_font
     color          comfy_ui.fancy_check_button_text.dark.idle_color
     hover_color    comfy_ui.fancy_check_button_text.dark.hover_color
     selected_color comfy_ui.fancy_check_button_text.dark.selected_color
