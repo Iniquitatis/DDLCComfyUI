@@ -172,33 +172,24 @@ init 999 style slot_button:
 init 999 style slot_button_dark:
     background "gui/button/slot_[prefix_]background_d.png"
 
-init 999 style slot_time_text:
+init 999 style slot_button_text:
     idle_color        comfy_ui.button_text.light.idle_color
     hover_color       comfy_ui.button_text.light.hover_color
     selected_color    comfy_ui.button_text.light.selected_color
     insensitive_color comfy_ui.button_text.light.insensitive_color
     outlines          comfy_ui.button_text.light.outlines
 
-init 999 style slot_time_text_dark:
+init 999 style slot_button_text_dark:
     idle_color        comfy_ui.button_text.dark.idle_color
     hover_color       comfy_ui.button_text.dark.hover_color
     selected_color    comfy_ui.button_text.dark.selected_color
     insensitive_color comfy_ui.button_text.dark.insensitive_color
     outlines          comfy_ui.button_text.dark.outlines
 
-init 999 style slot_name_text:
-    idle_color        comfy_ui.button_text.light.idle_color
-    hover_color       comfy_ui.button_text.light.hover_color
-    selected_color    comfy_ui.button_text.light.selected_color
-    insensitive_color comfy_ui.button_text.light.insensitive_color
-    outlines          comfy_ui.button_text.light.outlines
-
-init 999 style slot_name_text_dark:
-    idle_color        comfy_ui.button_text.dark.idle_color
-    hover_color       comfy_ui.button_text.dark.hover_color
-    selected_color    comfy_ui.button_text.dark.selected_color
-    insensitive_color comfy_ui.button_text.dark.insensitive_color
-    outlines          comfy_ui.button_text.dark.outlines
+init 999 style slot_time_text is slot_button_text
+init 999 style slot_time_text_dark is slot_button_text_dark
+init 999 style slot_name_text is slot_button_text
+init 999 style slot_name_text_dark is slot_button_text_dark
 
 init 999 style page_button_text:
     idle_color        comfy_ui.button_text.light.idle_color
