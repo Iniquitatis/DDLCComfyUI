@@ -85,7 +85,7 @@ The verified ones are:
 
 
 ## Installation
-1. Download the latest release archive: [for DDLC](https://github.com/Iniquitatis/DDLCComfyUI/releases/download/v2.0.0/DDLCComfyUI_v2.0.0.zip) or [for MAS](https://github.com/Iniquitatis/DDLCComfyUI/releases/download/v2.0.0/MASComfyUI_v2.0.0.zip)
+1. Download the latest release archive: [for DDLC](https://github.com/Iniquitatis/DDLCComfyUI/releases/download/v2.0.1/DDLCComfyUI_v2.0.1.zip) or [for MAS](https://github.com/Iniquitatis/DDLCComfyUI/releases/download/v2.0.1/MASComfyUI_v2.0.1.zip)
 2. Extract the contents of the archive to the `game` subdirectory of the DDLC installation directory
 
 
