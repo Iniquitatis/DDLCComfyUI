@@ -1,0 +1,13 @@
+<!--============================================================================
+=
+= Copyright (c) 2020–2021 Dominus Iniquitatis <zerosaiko@gmail.com>
+=
+= See LICENSE file for the licensing information
+=
+=============================================================================-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="60" height="96">
+    <rect x="0" y="0" width="60" height="96" fill="rgb(160, 137, 98)" />
+    <rect x="10" y="10" width="40" height="76" fill="rgb(219, 181, 116)" />
+    <circle cx="30" cy="30" r="12" fill="rgb(255, 0, 255)" stroke="rgb(118, 93, 54)" stroke-width="5" />
+    <circle cx="30" cy="66" r="12" fill="rgb(0, 0, 0)" stroke="rgb(118, 93, 54)" stroke-width="5" />
+</svg>
