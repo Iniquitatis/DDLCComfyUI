@@ -6,7 +6,7 @@
 =
 =============================================================================-->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20">
-    <g fill="rgb(109, 42, 84)" stroke="rgb(119, 52, 94)" stroke-linejoin="round" stroke-width="2">
-        <polygon points="18,10 2,2 2,18" />
+    <g fill="none" stroke="rgb(119, 52, 94)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+        <path d="M2,2 L18,10 L2,18" />
     </g>
 </svg>
