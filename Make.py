@@ -217,7 +217,7 @@ def glitch(image_path, glitch_path, scale):
         image.save(image_path)
 
 def install_fonts(fonts):
-    proc = Popen("inkscape --actions=\"user-data-directory;\"", stdout = PIPE)
+    proc = Popen("inkscape --actions=\"user-data-directory\"", stdout = PIPE, shell = True)
     stdout, _ = proc.communicate()
     proc.wait()
 
