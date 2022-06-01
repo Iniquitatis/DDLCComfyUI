@@ -116,6 +116,34 @@ The verified ones are:
 
 
 
+## Troubleshooting
+If the mod doesn't work after the installation and gives you a traceback:
+1. Make sure you downloaded the correct archive (see [Installation](#installation) for links).
+    * The `MASComfyUI_vX.X.X.zip` archive won't work on a pure DDLC installation.
+    * The `DDLCComfyUI_vX.X.X.zip` archive won't work on a MAS-modded game.
+    * The archive should contain:
+        * `python-packages`
+        * `comfy_ui.rpy`
+        * ...
+    * The archive should **not** contain:
+        * `Source`
+        * `Make.py`
+        * ...
+2. Make sure you unpacked the archive into the correct directory.
+    * **IMPORTANT:** For MAS users, I have to emphasize that this mod should **not** be installed into the `Submods` directory.
+    * The simplest method to check if the mod is installed correctly is to see if the `game` directory contains:
+        * `comfy_meta`
+        * `comfy_ui`
+        * `comfy_ui.rpy`
+    * Example of file which will be present in the installed mod:
+        * **CORRECT:** `C:\Program Files (x86)\Steam\steamapps\Doki Doki Literature Club\game\comfy_ui.rpy`
+        * **INCORRECT:** `C:\Program Files (x86)\Steam\steamapps\Doki Doki Literature Club\game\Submods\MASComfyUI_v2.0.1\comfy_ui.rpy`
+3. Make sure you're using the latest version available (see the [Releases](https://github.com/Iniquitatis/DDLCComfyUI/releases) section on the GitHub project page).
+
+If none of the above works, feel free to open an issue ticket.
+
+
+
 ## FAQ
 Let's pretend that you've already asked a couple of questions.
 
