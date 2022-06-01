@@ -54,27 +54,29 @@ init 999 style radio_button_text_dark:
 
 # Fancy check button
 init 999 style generic_fancy_check_button:
-    idle_background     Solid(comfy_ui.fancy_check_button.light.idle_background_color)
-    hover_background    Solid(comfy_ui.fancy_check_button.light.hover_background_color)
-    selected_background Solid(comfy_ui.fancy_check_button.light.selected_background_color)
+    ysize               36
+    foreground          Transform("mod_assets/buttons/checkbox/[prefix_]fancy_check.png", yalign = 0.5)
+    idle_background     Null()
+    hover_background    Frame("mod_assets/buttons/checkbox/fancy_check_bg.png", Borders(5, 5, 5, 5))
+    selected_background Frame("mod_assets/buttons/checkbox/fancy_check_bg.png", Borders(5, 5, 5, 5))
 
 init 999 style generic_fancy_check_button_dark:
-    idle_background     Solid(comfy_ui.fancy_check_button.dark.idle_background_color)
-    hover_background    Solid(comfy_ui.fancy_check_button.dark.hover_background_color)
-    selected_background Solid(comfy_ui.fancy_check_button.dark.selected_background_color)
+    ysize               36
+    foreground          Transform("mod_assets/buttons/checkbox/[prefix_]fancy_check.png", yalign = 0.5)
+    idle_background     Null()
+    hover_background    Frame("mod_assets/buttons/checkbox/fancy_check_bg_d.png", Borders(5, 5, 5, 5))
+    selected_background Frame("mod_assets/buttons/checkbox/fancy_check_bg_d.png", Borders(5, 5, 5, 5))
 
 init 999 style generic_fancy_check_button_text:
-    font           comfy_ui.fancy_check_button_text.font
-    kerning        comfy_ui.fancy_check_button_text.font_kerning
-    size           comfy_ui.fancy_check_button_text.font_size
+    yalign         0.5
+    font           gui.default_font
     color          comfy_ui.fancy_check_button_text.light.idle_color
     hover_color    comfy_ui.fancy_check_button_text.light.hover_color
     selected_color comfy_ui.fancy_check_button_text.light.selected_color
 
 init 999 style generic_fancy_check_button_text_dark:
-    font           comfy_ui.fancy_check_button_text.font
-    kerning        comfy_ui.fancy_check_button_text.font_kerning
-    size           comfy_ui.fancy_check_button_text.font_size
+    yalign         0.5
+    font           gui.default_font
     color          comfy_ui.fancy_check_button_text.dark.idle_color
     hover_color    comfy_ui.fancy_check_button_text.dark.hover_color
     selected_color comfy_ui.fancy_check_button_text.dark.selected_color
@@ -522,20 +524,3 @@ init 999 image input_caret:
         linear 0.35 alpha 0
         linear 0.35 alpha 1
         repeat
-
-
-
-################################################################################
-# Hangman game
-################################################################################
-init 999 transform hangman_board:
-    xanchor 0
-    yanchor 0
-    xpos 675
-    ypos 100
-    alpha 1.0
-
-init 999 python in mas_hangman:
-    WORD_FONT = "mod_assets/font/m1_fixed.ttf"
-    WORD_SIZE = 36
-    WORD_COLOR = "#202020"
