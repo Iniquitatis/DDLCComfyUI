@@ -1,0 +1,40 @@
+<!--============================================================================
+=
+= Copyright (c) 2020–2021 Dominus Iniquitatis <zerosaiko@gmail.com>
+=
+= See LICENSE file for the licensing information
+=
+=============================================================================-->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="545" height="322">
+    <g>
+        <path d="M 7 0 C 3 0 0 3 0 7 V 315 C 0 319 3 322 7 322 H 538 C 542 322 545 319 545 315 V 7 C 545 3 542 0 538 0 Z M 51 47 H 494 V 264 H 51 Z" fill="rgb(77, 65, 84)" />
+        <path d="M 47 47 V 281 H 51 V 47 H 494 V 281 H 498 V 47 C 498 44 497 43 494 43 H 51 C 48 43 47 44 47 47 Z" fill="rgb(0, 0, 0)" fill-opacity="0.2" />
+        <path d="M 0 205 H 40 C 44 205 47 208 47 212 V 278 C 47 280 48 281 50 281 H 495 C 497 281 498 280 498 278 V 212 C 498 208 501 205 505 205 H 545 V 315 C 545 319 542 322 538 322 H 7 C 3 322 0 319 0 315 Z" fill="rgb(20, 0, 30)" />
+        <rect x="51" y="50" width="443" height="214" fill="rgb(128, 128, 128)" />
+        <rect x="51" y="47" width="443" height="3" fill="rgb(20, 0, 30)" />
+    </g>
+    <g fill="rgb(20, 0, 30)" font-family="Halogen" font-size="24px" text-anchor="middle">
+        <text x="87.19141" y="35.08594">2</text>
+        <text x="124.19141" y="35.08594">3</text>
+        <text x="161.19141" y="35.08594">4</text>
+        <text x="235.19141" y="35.08594">6</text>
+        <text x="272.19141" y="35.08594">7</text>
+        <text x="346.19141" y="35.08594">9</text>
+        <text x="383.19141" y="35.08594">0</text>
+        <text x="420.19141" y="35.08594">-</text>
+    </g>
+    <g fill="rgb(77, 65, 84)" font-family="Halogen" font-size="24px" text-anchor="middle">
+        <text x="69.94531" y="308.08594">Q</text>
+        <text x="106.94531" y="308.08594">W</text>
+        <text x="143.94531" y="308.08594">E</text>
+        <text x="180.94531" y="308.08594">R</text>
+        <text x="217.94531" y="308.08594">T</text>
+        <text x="254.94531" y="308.08594">Y</text>
+        <text x="291.94531" y="308.08594">U</text>
+        <text x="328.94531" y="308.08594">I</text>
+        <text x="365.94531" y="308.08594">O</text>
+        <text x="402.94531" y="308.08594">P</text>
+        <text x="439.94531" y="308.08594">[</text>
+        <text x="476.94531" y="308.08594">]</text>
+    </g>
+</svg>
